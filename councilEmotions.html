@@ -82,6 +82,9 @@ function outputToScreen(input){
             if(input[t] === undefined){
                 clearInterval(interval);
                 document.getElementById("n").innerHTML = `${output}`;
+                for(k = 0; k < 10; k++){
+                    setTimeout(function(){document.getElementById("n").innerHTML = "\n${output}"}, 100);
+                }
                 num++;
                 t = 0;
             }
