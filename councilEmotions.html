@@ -14,49 +14,74 @@
         font-family: typewriter;
         src: url(typewriter.ttf);
     }
+    *{
+        margin: 0;
+    }
     body{
         font-size: 50px;
         font-family: typewriter;
         background-color: rgb(252, 248, 241);
         color: #384d44;
-    };
+    }
     #bar{
-        width: 100px;
+        width: 170px;
         height: 100%;
-        background-color: black;
+       
+        position: absolute;
+        background-color: currentColor;
 
     }
     #n{
         text-align: left;
-        margin-top: 10%;
-        margin-left: 20%;
-        margin-right: 20%;
+        position: absolute;
+        top: 30%;
+        left: 20%;
+        padding-right: 15%;
         letter-spacing: 3px;
         line-height: 50px;
     }
 </style>
 <script>
+    let _l;
+    Object.defineProperty(window, "l", {
+        set: v => _l = v,
+        get: () => _l++
+    });
+
+
 let num = 0;
 function outputToScreen(input){
     //alert(1)
     let t = 0;
-    let output = "                             ";
+    let start = true;
+    let start2 = true;
+    let output = " ";
     let interval = setInterval(
         function(){
            // document.body.innerHTML += `<p id = "n"></p>`;
-            output += input[t];
-            t++;
-            //document.getElementById(`n${num}`).innerText = "";
-            if(t%3){
-                document.getElementById("n").innerText = `${output}▓`;
+            if(input[t] == "&"){
+                output += start ? "<i>" : "</i>";
+                start = !start;
+            }
+            else if(input[t] == "#"){
+                output += start2 ? "<b>" : "</b>";
+                start2 = !start2;
             }
             else{
-                document.getElementById("n").innerText = `${output}░`;
+                output += input[t];
             }
+            t++;
+            //document.getElementById(`n${num}`).innerText = "";
+            if(t%5){
+                document.getElementById("n").innerHTML = `${output}▓`;
+            }
+            else{
+                document.getElementById("n").innerHTML = `${output}░`;
+            };
            // alert(output);
             if(input[t] === undefined){
                 clearInterval(interval);
-                document.getElementById("n").innerText = `${output}`;
+                document.getElementById("n").innerHTML = `${output}`;
                 num++;
                 t = 0;
             }
@@ -86,7 +111,7 @@ let emotions = [
     ["Gad"],
     ["Fyrunge"],
     ["Carnalic", "About modern architecture", "For unknown reasons"],
-    ["<b>Dorceless</b>"],
+    ["#Dorceless#"],
     ["Dorceful"],
     ["Vengeant", "At the emotion fear"],
     ["Blissful"],
@@ -332,33 +357,33 @@ let ad = [
     "amorphous"
 ]
 let books = [
-    "<i>Studies on DBAO</i>",
-    "<i>The Stand</i>",
-    "<i>Warbreaker</i>",
-    "<i>Words of Radiance</i>",
-    "<i>The Book Thief</i>",
-    "<i>Mistborn</i>",
-    "<i>The Dark Tower</i>",
-    "<i>Symptoms of Being Human</i>",
-    "<i>The Qur'an</i>",
-    "<i>The Name of the Wind</i>",
-    "<i>The Hengine Documentation</i>",
-    "<i>The Rithmatist</i>",
-    "<i>The Help</i>",
-    "<i>The Communist Manifesto</i>",
-    "<i>Fahrenheit 451</i>",
-    "<i>The Lord of the Rings</i>",
-    "<i>To Kill a Mockingbird</i>",
-    "<i>How to Kill a Mockingbird (a definitive guide)</i>",
-    "<i>The Ending Story (its already done</i>)"
+    "&Studies on DBAO&",
+    "&The Stand&",
+    "&Warbreaker&",
+    "&Words of Radiance&",
+    "&The Book Thief&",
+    "&Mistborn&",
+    "&The Dark Tower&",
+    "&Symptoms of Being Human&",
+    "&The Qur'an&",
+    "&The Name of the Wind&",
+    "&The Hengine Documentation&",
+    "&The Rithmatist&",
+    "&The Help&",
+    "&The Communist Manifesto&",
+    "&Fahrenheit 451&",
+    "&The Lord of the Rings&",
+    "&To Kill a Mockingbird&",
+    "&How to Kill a Mockingbird (a definitive guide)&",
+    "&The Ending Story& (it's already done)"
 ]
 let formats = [
     "The Council is feeling [emotion].",
-    "The Council is feeling <i>[emotion]</i>.",
+    "The Council is feeling &[emotion]&.",
     "The Council is [adj] feeling [emotion], in its own way.",
     `The Council is feeling [emotion], in its own [special] way.`,
     "The Council is [adj] feeling [emotion].",
-    "The Council is <i>[adj]</i> feeling [emotion].",
+    "The Council is &[adj]& feeling [emotion].",
     "The Council doesn't want to feel [emotion], but it does.",
     "In this specific situation, the Council is feeling [emotion].",
     "In this specific situation, the Council is [adj] feeling [emotion].",
@@ -375,7 +400,7 @@ let formats = [
     "[soupling] is feeling [adj] [emotion].",
     "At this time, a [time] ago, the Council felt [emotion].",
     "It would be better if you didn't know the Council is feeling [emotion].",
-    "Do <i>you</i> think the Council is feeling [emotion]?",
+    "Do &you& think the Council is feeling [emotion]?",
     "You should've known the Council felt [emotion] a [time] ago.",
     "The Council is going to [adj] feel [emotion] in a [time].",
     "The Council is going to feel [emotion] in a [time].",
@@ -545,15 +570,17 @@ try{
 
     let f = 0;
   //  do{
-        f++
+        f++;
         //document.body.innerHTML += `<p>${acquireMood()}</p>`;
         outputToScreen(acquireMood());
         //document.getElementById("n").innerHTML = "";
-        let r = setInterval(function(){   
-            outputToScreen(acquireMood());
+        function run(){ 
+            let mood = acquireMood(); 
+            outputToScreen(mood);
             document.getElementById("n").innerHTML = "";
-        },
-        7000);     
+            setTimeout(run, (mood.length*50) + 3000); 
+        }  
+        run(); 
  //   }while(f < 10)
 
 }catch(e){alert(e.stack)}
