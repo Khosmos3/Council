@@ -1,12 +1,12 @@
 <html>
     <head>
         <title>
-            Council
+            (T) Council
         </title>
     </head>
     <body id="body">
         <div id="bar"></div>
-        <p id="n"></p>    
+        <div id="n"></div>    
     </body>
 </html>
 <style>
@@ -50,6 +50,7 @@
 
 
 let num = 0;
+const DISPLAY_TIME = 5000;
 function outputToScreen(input){
     //alert(1)
     let t = 0;
@@ -82,10 +83,16 @@ function outputToScreen(input){
             if(input[t] === undefined){
                 clearInterval(interval);
                 document.getElementById("n").innerHTML = `${output}`;
-                for(k = 0; k < 10; k++){
-                    setTimeout(function(){document.getElementById("n").innerHTML = "\n${output}"}, 100);
-                }
-                num++;
+          let br = "<br>";
+for(k = 1; k < 11; k++){
+		setTimeout(
+			() => {document.getElementById("n").innerHTML = br +`${output}`;
+				  	br += "<br>";
+}
+			,(DISPLAY_TIME-1100) + 100*k);
+}
+                
+				num++;
                 t = 0;
             }
         },
@@ -581,7 +588,7 @@ try{
             let mood = acquireMood(); 
             outputToScreen(mood);
             document.getElementById("n").innerHTML = "";
-            setTimeout(run, (mood.length*50) + 3000); 
+            setTimeout(run, (mood.length*50) + DISPLAY_TIME); 
         }  
         run(); 
  //   }while(f < 10)
