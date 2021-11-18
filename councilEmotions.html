@@ -1,47 +1,60 @@
 <html>
     <head>
+        <style>
+            @font-face{
+                font-family: typewriter;
+                src: url(typewriter.ttf);
+            }
+            *{
+                margin: 0;
+            }
+            body{
+                font-size: 50px;
+                font-family: typewriter;
+                background-color: rgb(252, 248, 241);
+                color: #384d44;
+            }
+            #bar{
+                width: 13%;
+                height: 100%;
+               
+                position: fixed;
+                background-color: currentColor;
+        
+            }
+            #n{
+                overflow: auto;
+                width: calc(100vw - 20% - 15%);
+                height: 100vh;
+                text-align: left;
+                position: absolute;
+                /* bottom: 54%; */
+                left: 20%;
+                padding-right: 15%;
+                letter-spacing: 3px;
+                line-height: 50px;
+            }
+
+            #paper {
+                padding-top: 20%;
+                padding-bottom: 44%;
+            }
+        </style>
+        
         <title>
-            (T) Council
+            Council
         </title>
     </head>
     <body id="body">
         <div id="bar"></div>
-        <div id="n"></div>    
+        <div id="n">
+            <div id = "paper"></div>
+            <div id="evil"></div>
+        </div>    
     </body>
 </html>
-<style>
-    @font-face{
-        font-family: typewriter;
-        src: url(typewriter.ttf);
-    }
-    *{
-        margin: 0;
-    }
-    body{
-        font-size: 50px;
-        font-family: typewriter;
-        background-color: rgb(252, 248, 241);
-        color: #384d44;
-    }
-    #bar{
-        width: 170px;
-        height: 100%;
-       
-        position: absolute;
-        background-color: currentColor;
-
-    }
-    #n{
-        text-align: left;
-        position: absolute;
-        top: 30%;
-        left: 20%;
-        padding-right: 15%;
-        letter-spacing: 3px;
-        line-height: 50px;
-    }
-</style>
 <script>
+    //the artifact
     let _l;
     Object.defineProperty(window, "l", {
         set: v => _l = v,
@@ -49,60 +62,70 @@
     });
 
 
-let num = 0;
 const DISPLAY_TIME = 5000;
-function outputToScreen(input){
+let output = " ";
+let start = true;
+let start2 = true;
+//a date <3
+const date = new Date();
+const SLEEP = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+function fix() {
+
+    document.getElementById("evil").scrollIntoView();
+}
+
+async function outputToScreen(input){
     //alert(1)
-    let t = 0;
-    let start = true;
-    let start2 = true;
-    let output = " ";
-    let interval = setInterval(
-        function(){
-           // document.body.innerHTML += `<p id = "n"></p>`;
-            if(input[t] == "&"){
-                output += start ? "<i>" : "</i>";
-                start = !start;
-            }
-            else if(input[t] == "#"){
-                output += start2 ? "<b>" : "</b>";
-                start2 = !start2;
-            }
-            else{
-                output += input[t];
-            }
-            t++;
-            //document.getElementById(`n${num}`).innerText = "";
-            if(t%5){
-                document.getElementById("n").innerHTML = `${output}▓`;
-            }
-            else{
-                document.getElementById("n").innerHTML = `${output}░`;
-            };
-           // alert(output);
-            if(input[t] === undefined){
-                clearInterval(interval);
-                document.getElementById("n").innerHTML = `${output}`;
-          let br = "<br>";
-for(k = 1; k < 11; k++){
-		setTimeout(
-			() => {document.getElementById("n").innerHTML = br +`${output}`;
-				  	br += "<br>";
-}
-			,(DISPLAY_TIME-1100) + 100*k);
-}
-                
-				num++;
-                t = 0;
-            }
-        },
-        50
-    );    
+
+    for(let p = 1; p < 2; p++){         
+        output += "<br>";
+        document.getElementById("paper").innerHTML = output;
+        fix();
+        await SLEEP(500);
+    }
+    let d = date.toString();
+    let format = d.slice(d.indexOf("(")+1, d.indexOf(")"));
+    format = format
+        .split(" ")
+        .map(word=>word[0])
+        .join("");
+    d = d.split(" ").slice(1, 5).join(" ");
+    input = `[${d} (${format})]<br>${input}`;
+
+    for(let t = 0; t < input.length; t++){
+        if(input[t] == "&"){
+            output += start ? "<i>" : "</i>";
+            start = !start;
+        }
+        else if(input[t] == "\n"){
+            output += "<br>";
+        }
+        else if(input[t] == "#"){
+            output += start2 ? "<b>" : "</b>";
+            start2 = !start2;
+        }
+        else{
+            output += input[t];
+        }
+        
+        if(t%5){
+            document.getElementById("paper").innerHTML = `${output}▓`;
+        }
+        else{
+            document.getElementById("paper").innerHTML = `${output}░`;
+        };
+        fix();
+        await SLEEP(50);
+    }  
+    output += "<br>";
+    document.getElementById("paper").innerHTML = `${output}`;        
+    fix();
+    //this line is my best fren i am keep it -->  let br = "<br>";     
 }
 //aquireMood for entire thingy
 const acquireMood = (function(){
-//a date <3
-const date = new Date();
+
 //functions, obviously
 function randInt(min, max){
     return Math.floor(Math.random()*(max-min+1)+min);
@@ -123,6 +146,8 @@ let emotions = [
     ["Carnalic", "About modern architecture", "For unknown reasons"],
     ["#Dorceless#"],
     ["Dorceful"],
+	["Exalted"],
+	["Animated"],
     ["Vengeant", "At the emotion fear"],
     ["Blissful"],
     ["Productive", "On its plan"],
@@ -167,6 +192,8 @@ let emotions = [
     ["Present"],
     ["Pleasant"],
     ["Noisy"],
+    ["Bespeckled"],
+    ["Defeated"],
     ["Sad"],
     ["Depressed"],
     ["Distrusting"],
@@ -328,7 +355,8 @@ let emotions = [
     ["Benevolent"],
     ["Malevolent"],
     ["Optimistic"],
-    ["Sarcastic"]
+    ["Sarcastic"],
+    ["Profound"]
 ];
 let modify = [
     "very", 
@@ -364,7 +392,10 @@ let ad = [
     "malleable",
     "shattered",
     "closed-off",
-    "amorphous"
+    "amorphous",
+    "tyrannical",
+    "inhuman",
+    "bottled-up"
 ]
 let books = [
     "&Studies on DBAO&",
@@ -416,8 +447,8 @@ let formats = [
     "The Council is going to feel [emotion] in a [time].",
     "The Council is going to feel [emotion] for a [time].",
     "The Council either feels [emotion] or [emotion2]. We don't know yet.",
-    "The Council's [special] activities lead it to feel [emotion]."
-
+    "The Council's [special] activities lead it to feel [emotion].",
+    "The Council is not making an effort to feel [emotion]"
 ];
 let times = [
     "day",
@@ -465,9 +496,7 @@ let regions = [
     ["the Ruins of Bariac", "tradegy", "former glory", "monolithic structures"],
     ["the Stronghold of the Gathered", "incredible strength", "assembled kingdom", "defiance against entropy"],
     ["the Pointed Groves", "aesthetic trees", "colorful leaves", "tall, white and black trees"],
-    ["the Spite Range", "adversity to life", "strange vegetation", "sunsets"],
-    ["the Indeclinable Groves", "mangrove marshes", "fertile soil", "wildflower clearings"],
-    ["the Twisted Groves", "old growth trees", "purple leaves", "dense canopy"]
+    ["the Spite Range", "adversity to life", "strange vegetation", "sunsets"]
 ];
 let souplers = [
     "Sovereign Henry", 
@@ -584,12 +613,11 @@ try{
   //  do{
         f++;
         //document.body.innerHTML += `<p>${acquireMood()}</p>`;
-        outputToScreen(acquireMood());
+        //outputToScreen(acquireMood());
         //document.getElementById("n").innerHTML = "";
         function run(){ 
             let mood = acquireMood(); 
             outputToScreen(mood);
-            document.getElementById("n").innerHTML = "";
             setTimeout(run, (mood.length*50) + DISPLAY_TIME); 
         }  
         run(); 
