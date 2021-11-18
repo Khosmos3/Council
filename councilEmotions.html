@@ -61,7 +61,7 @@
         get: () => _l++
     });
 
-
+//how long the text appears in place
 const DISPLAY_TIME = 5000;
 let output = " ";
 let start = true;
@@ -71,19 +71,17 @@ let date = new Date();
 const SLEEP = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 function fix() {
-
     document.getElementById("evil").scrollIntoView();
 }
 
 async function outputToScreen(input){
-    //alert(1)
-
     for(let p = 1; p < 2; p++){         
         output += "<br>";
         document.getElementById("paper").innerHTML = output;
         fix();
         await SLEEP(500);
     }
+    //get the date
 	date = new Date();
     let d = date.toString();
     let format = d.slice(d.indexOf("(")+1, d.indexOf(")"));
@@ -92,8 +90,9 @@ async function outputToScreen(input){
         .map(word=>word[0])
         .join("");
     d = d.split(" ").slice(1, 5).join(" ");
-    input = `[${d} (${format})]<br>${input}`;
+    input = `[${d} (${format})]\n${input}`;
 
+    //type it out
     for(let t = 0; t < input.length; t++){
         if(input[t] == "&"){
             output += start ? "<i>" : "</i>";
