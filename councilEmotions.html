@@ -84,6 +84,7 @@ async function outputToScreen(input){
         fix();
         await SLEEP(500);
     }
+	date = new Date();
     let d = date.toString();
     let format = d.slice(d.indexOf("(")+1, d.indexOf(")"));
     format = format
@@ -539,13 +540,10 @@ function generateEmotion(){
     if(e.length > 1){
         if(randInt(0, 100) < 60){
             let variant;
-            if((date.getDay() == 2) && (e[0] == "Like it is tuesday")){
-                variant = e[1];
-                
-            }
-            else if(e[0] == "Like it is tuesday"){
-                variant = e[2];
-            }
+            if(e[0] == "Like it is tuesday"){
+                date = new Date();
+				(date.getDay() == 2) ? variant = e[1] : variant = e[2];
+			}
             else{
                 variant = e[randInt(1, e.length-1)]
             }
