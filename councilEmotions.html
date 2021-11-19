@@ -448,7 +448,41 @@ let emotions = [
     ["Unsure"],
     ["an urge", "to live", "to die", "to win", "to lose"],
     ["a desire", "to see [region]", "to read [book]", "to see [soupling]"],
-    ["a dream", "of the [property]"]
+    ["a dream", "of the [property]"],
+    ["That which is not to be known", "by [soupling] specifically"],
+    ["like it has lost weight"],
+    ["like it has flown", "in a storm", "with its wings spread wide", "on the ground"],
+    ["like it has travelled", "across [region]"],
+    ["like it has passed", "through smoke from a large combustion furnace", "through water vapor", "by your house on its way home", "through snow-covered trees", "through air turbulence"],
+    ["like it will be written"],
+    ["like it will never be written"],
+    ["like it has been", "found", "discovered", "documented"],
+    ["Accepted"],
+    ["Verified"],
+    ["Longlasting"],
+    ["Understood"],
+    ["like it has been taught", "about the [property] of [region]"],
+    ["like it has changed"],
+    ["Shrewd"],
+    ["Timid"],
+    ["like it is the enemy"],
+    ["Consumed"],
+    ["Engulfed"],
+    ["like it is foolish", "as it brought its [coin outcome]"],
+    ["like it knows how to create a new object"],
+    ["like it is holding up traffic"],
+    ["like there is a timestamp right above this"],
+    ["like it is preventing an incident"],
+    ["out of line"],
+    ["in line"],
+    ["a hope"],
+    ["an idea", "about [soupling]"],
+    ["an itch"],
+    ["a fever"],
+    ["an impulse"],
+    ["a love", "for [soupling]", "for [region]", "for the continent"],
+    ["a temptation"],
+    ["a confusing set of emotions"]
 ];
 let modify = [
     "very", 
@@ -464,7 +498,11 @@ let modify = [
     "critically",
     "remotely",
     "severely",
-    "regretfully"
+    "regretfully",
+    "expectedly",
+    "strangely",
+    "powerfully",
+    "weakly"
 ];
 let modify2 = [
     "very much", 
@@ -473,7 +511,11 @@ let modify2 = [
     "severely",
     "marginally",
     "kind of",
-    "slightly"
+    "slightly",
+    "strangely",
+    "expectedly",
+    "weakly",
+    "immensely",
 ];
 let modify3 = [
     "definite",
@@ -482,7 +524,19 @@ let modify3 = [
     "slight",
     "critical",
     "powerful",
-    "deep"
+    "deep",
+    "uncontrollable",
+    "small",
+    "nearly nonexistant",
+    "unknown",
+    "bedazzling",
+    "terrifying",
+    "awe-inspiring",
+    "unwelcome",
+    "warm",
+    "significant",
+    "another",
+    "sliver of a"
 ];
 let ad = [
     "twisted",
@@ -498,7 +552,8 @@ let ad = [
     "tyrannical",
     "inhuman",
     "bottled-up",
-    "studious"
+    "studious",
+    "unknowable"
 ]
 let books = [
     "&Studies on DBAO&",
@@ -639,7 +694,7 @@ let coin = [
 //the essence
 function generateEmotion(){
     let emotion;
-    let index = randInt(emotions.length-5, emotions.length-1);
+    let index = randInt(0, emotions.length-1);
     let e = emotions[index];
 
     //lower-case-ify and variants
