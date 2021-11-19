@@ -181,7 +181,6 @@ let emotions = [
     ["Dreading", "For you"],
     ["Pitiful", "For you"],
     ["Patient"],
-    ["Impatient"],
     ["Tubular"],
     ["Groovy"],
     ["Hip", "with the kids"],
@@ -261,6 +260,87 @@ let emotions = [
     ["Energetic"],
     ["Listless"],
     ["Submerged"],
+    ["Tense"],
+    ["Distressed"],
+    ["Enraptured"],
+    ["Zesty"],
+    ["Jovial"],
+    ["Sentimental"],
+    ["Enthralled"],
+    ["Tormented"],
+    ["Agitated"],
+    ["Grumpy"],
+    ["Irritated"],
+    ["Euphoric"],
+    ["Eager"],
+    ["Thrilled"],
+    ["Dismayed"],
+    ["Hurt", "by [soupling]"],
+    ["Woeful"],
+    ["Melancholy"],
+    ["Hopeful", "For a bright future for the continent"],
+    ["Homesick", "for [region]"],
+    ["Glum"],
+    ["Isolated", "in [region]"],
+    ["Neglected"],
+    ["Panicked"],
+    ["Bitter"],
+    ["Serene", "amidst the chaos"],
+    ["Apprehensive"],
+    ["Insightful"],
+    ["Loathing"],
+    ["Assertive"],
+    ["Miserly"],
+    ["Mortified"],
+    ["Baffled"],
+    ["Attractive"],
+    ["Brazen"],
+    ["Brooding"],
+    ["Carefree"],
+    ["Paranoid"],
+    ["Claustrophobic"],
+    ["Coercive"],
+    ["Numb", " in a comfortable way"],
+    ["Comfortable", "in a numb way"],
+    ["Perplexed"],
+    ["Courageous"],
+    ["Cowardly"],
+    ["Rash"],
+    ["Cynical"],
+    ["Remorseful"],
+    ["Disgruntled"],
+    ["Scornful"],
+    ["Schadenfreude", "about [soupling]'s misfortune"],
+    ["Dominant"],
+    ["Submissive"],
+    ["Driven"],
+    ["Dumbstruck"],
+    ["Switchy"],
+    ["Elated"],
+    ["Enchanted"],
+    ["Smug"],
+    ["Spiteful"],
+    ["Expectant"],
+    ["Sullen"],
+    ["Suspicious"],
+    ["Friendly"],
+    ["Sympathetic"],
+    ["Vigilant"],
+    ["Hospitable"],
+    ["Inhospitable"],
+    ["Humility"],
+    ["Vulnerable"],
+    ["Idle"],
+    ["Impatient"],
+    ["Indignant"],
+    ["like it is being gaslit", "by [soupling]"]
+    ["like it is a fraud"],
+    ["like it wants to disappear", "from [region]"],
+    ["like it wants to fly", "like they do in [book]"],
+    ["Risque"],
+    ["like it is holding the ace of [card suite]"],
+    ["Imlipitive"],
+    ["Lipitive"],
     ["Written in pen", "and ink"],
     ["Inspired", "by [soupling]", "by [book]"],
     ["Lost", "in [region]", "because of the [property] of [region]"],
@@ -268,6 +348,7 @@ let emotions = [
     ["like it must go to war", "with [region]", "with itself", "with [soupling]"],
     ["Enlisted", "By itself", "by the legion of the Static Void"],
     ["Deleted"],
+    ["Enlightened", "by [book]"]
     ["Employed", "By itself", "by the legion of the Static Void"],
     ["Decieved", "By itself", "By [soupling]"],
     ["Devious"],
@@ -327,12 +408,14 @@ let emotions = [
     ["Old"],
     ["Ancient"],
     ["Apathetic"],
+    ["Empathetic"]
     ["Gay"],
-    ["Frustrated"],
+    ["Frustrated", "by the doors"],
     ["Angsty"],
     ["Like a motley rabble", "of bees"],
     ["Saucy"],
     ["High"],
+    ["Uneasy", "after reading [book]"],
     ["Fractured", "infinitly", "singularly", "into six and a half unequal parts"],
     ["Aristocratic"],
     ["Justified", "In its actions"],
@@ -343,6 +426,8 @@ let emotions = [
     ["Nuclear"],
     ["Forbidden"],
     ["Foreboding"],
+    ["like it is having a dream", "about [property]", "about [book]"],
+    ["Wondering", "about [book]"],
     ["Like it lost a coin flip (the outcome was [coin outcome])"],
     ["Like it won a coin flip (the outcome was [coin outcome])"],
     ["Judgemental", "towards [soupling]"],
@@ -359,7 +444,11 @@ let emotions = [
     ["Optimistic"],
     ["Sarcastic"],
     ["Profound"],
-    ["Mocklified"]
+    ["Mocklified", "by [soupling]"],
+    ["Unsure"],
+    ["an urge", "to live", "to die", "to win", "to lose"],
+    ["a desire", "to see [region]", "to read [book]", "to see [soupling]"],
+    ["a dream", "of the [property]"]
 ];
 let modify = [
     "very", 
@@ -385,6 +474,15 @@ let modify2 = [
     "marginally",
     "kind of",
     "slightly"
+];
+let modify3 = [
+    "definite",
+    "strong",
+    "weak",
+    "slight",
+    "critical",
+    "powerful",
+    "deep"
 ];
 let ad = [
     "twisted",
@@ -541,7 +639,7 @@ let coin = [
 //the essence
 function generateEmotion(){
     let emotion;
-    let index = randInt(0, emotions.length-1);
+    let index = randInt(emotions.length-5, emotions.length-1);
     let e = emotions[index];
 
     //lower-case-ify and variants
@@ -577,7 +675,9 @@ function generateEmotion(){
         if(randInt(1, 100) < MOD_CHANCE){
             emotion = modify2[randInt(0, modify2.length-1)] + " " + emotion;
         }
-
+    }
+    else if(emotion.startsWith("a ") || emotion.startsWith("an ")){
+        emotion =  "a " + modify3[randInt(0, modify2.length-1)] + " " + emotion.slice(2);
     }
     else{
         if(randInt(1, 100) < MOD_CHANCE){
