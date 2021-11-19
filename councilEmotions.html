@@ -123,6 +123,7 @@ async function outputToScreen(input){
     fix();
     //this line is my best fren i am keep it -->  let br = "<br>";     
 }
+
 //aquireMood for entire thingy
 const acquireMood = (function(){
 
@@ -332,6 +333,7 @@ let emotions = [
     ["Like a motley rabble", "of bees"],
     ["Saucy"],
     ["High"],
+    ["Fractured", "infinitly", "singularly", "into six and a half unequal parts"],
     ["Aristocratic"],
     ["Justified", "In its actions"],
     ["like it has been knocked over", "by the adverbs"],
@@ -356,7 +358,8 @@ let emotions = [
     ["Malevolent"],
     ["Optimistic"],
     ["Sarcastic"],
-    ["Profound"]
+    ["Profound"],
+    ["Mocklified"]
 ];
 let modify = [
     "very", 
@@ -371,7 +374,8 @@ let modify = [
     "negligibily",
     "critically",
     "remotely",
-    "severely"
+    "severely",
+    "regretfully"
 ];
 let modify2 = [
     "very much", 
@@ -395,7 +399,8 @@ let ad = [
     "amorphous",
     "tyrannical",
     "inhuman",
-    "bottled-up"
+    "bottled-up",
+    "studious"
 ]
 let books = [
     "&Studies on DBAO&",
@@ -404,6 +409,8 @@ let books = [
     "&Words of Radiance&",
     "&The Book Thief&",
     "&Mistborn&",
+    "&The Unbearable Likeness of Being&",
+    "&The Book of Laughter and Forgetting&",
     "&The Dark Tower&",
     "&Symptoms of Being Human&",
     "&The Qur'an&",
@@ -448,7 +455,7 @@ let formats = [
     "The Council is going to feel [emotion] for a [time].",
     "The Council either feels [emotion] or [emotion2]. We don't know yet.",
     "The Council's [special] activities lead it to feel [emotion].",
-    "The Council is not making an effort to feel [emotion]"
+    "The Council is not making an effort to feel [emotion]."
 ];
 let times = [
     "day",
@@ -460,7 +467,8 @@ let times = [
     "long time",
     "short while",
     "moon",
-    "lil' bit"
+    "lil' bit",
+    "score"
 ];
 let adjEm = [
     "probably",
@@ -508,7 +516,8 @@ let souplers = [
     "Mystic Mayzie",
     "Lady Shannon",
     "Noble Wesley",
-    "Soup Priest Molly"
+    "Soup Priest Molly",
+    "Ryan, Esq."
 ];
 let formatting = [
     "left",
@@ -617,7 +626,8 @@ try{
             outputToScreen(mood);
             setTimeout(run, (mood.length*50) + DISPLAY_TIME); 
         }  
-        run(); 
+        run();
+
  //   }while(f < 10)
 
 }catch(e){alert(e.stack)}
