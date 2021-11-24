@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
     <head>
         <style>
@@ -360,7 +361,7 @@ let emotions = [
     ["Congratulated"],
     ["Conscious"],
     ["Pragmatic"],
-    ["Morally Ambiguous"],
+    ["Morally ambiguous"],
     ["Hot", "As fuck"],
     ["Debatable"],
     ["Like it is a factor of [number]"],
@@ -768,22 +769,17 @@ return format;
 })();
 
 //output
+(async function(){
+
+
 try{
-
-    let f = 0;
-  //  do{
-        f++;
-        //document.body.innerHTML += `<p>${acquireMood()}</p>`;
-        //outputToScreen(acquireMood());
-        //document.getElementById("n").innerHTML = "";
-        function run(){ 
-            let mood = acquireMood(); 
-            outputToScreen(mood);
-            setTimeout(run, (mood.length*50) + DISPLAY_TIME); 
+        
+        while(true){ 
+            
+            await outputToScreen(acquireMood());
+            await SLEEP(DISPLAY_TIME);
         }  
-        run();
-
- //   }while(f < 10)
 
 }catch(e){alert(e.stack)}
+})();
 </script>
