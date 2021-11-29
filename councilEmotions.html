@@ -129,8 +129,17 @@ async function outputToScreen(input){
 const acquireMood = (function(){
 
 //functions, obviously
+function getSeed(){
+    let seed = Date.now();
+    seed ^= seed << 5;
+    seed ^= seed >> 2;
+    seed ^= seed << 4;
+    seed ^= seed >> 7;
+    seed /= 0xFFFF;
+    return Math.abs(seed%1);
+}
 function randInt(min, max){
-    return Math.floor(Math.random()*(max-min+1)+min);
+    return Math.floor(getSeed()*(max-min+1)+min);
 }
 function replace(string, before, after){
     let placeOfWord = string.indexOf(before);

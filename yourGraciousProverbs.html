@@ -175,11 +175,17 @@ async function outputToScreen(input){
 }
 
 //function, obviously
+function getSeed(){
+    let seed = Date.now();
+    seed ^= seed << 5;
+    seed ^= seed >> 2;
+    seed ^= seed << 4;
+    seed ^= seed >> 7;
+    seed /= 0xFFFF;
+    return Math.abs(seed%1);
+}
     function randInt(min, max){
-        let date = new Date();
-        date.split(" ").map(number => number = parseInt(number));
-        alert(number);
-        return Math.floor(Math.random()*(max-min+1)+min);
+        return Math.floor(getSeed()*(max-min+1)+min);
     }
 
     function proverb(){
