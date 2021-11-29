@@ -176,6 +176,9 @@ async function outputToScreen(input){
 
 //function, obviously
     function randInt(min, max){
+        let date = new Date();
+        date.split(" ").map(number => number = parseInt(number));
+        alert(number);
         return Math.floor(Math.random()*(max-min+1)+min);
     }
 
@@ -437,7 +440,24 @@ async function outputToScreen(input){
             A glass of water for Zeus
             Control,  down-shift, now park the car
             A simple, everyday, all-consuming  life routine 
-     `.trim().split("\n").map((line) => (line.trim()));
+            When is a crab not a crustacean? Whenever the train reaches the station!
+            Good insanity is necessary as it will leave no room for bad insanity
+            Cynicism is futile
+            Intel... outside
+            So I've made up my mind now
+            You are now one of these two souls 
+            When is a dog not a bison? When a sheep not a horse? When a pig, a pig's tail, a pig's head
+            What the hell did I think I was gonna hear this on the radio?
+            A book is ㅋ
+            The difference is that a spoonful of sugar is not much
+            Molasses that should be eaten
+            They have all the same memories of the day
+            Cavehorses can't even walk around in mud
+            I am alive again. The sun has come full circle ... and now I am standing in a sun-flicker...
+            Our lives! Turned upside down in no time! Free warranty!
+            Despite all we'd done, the sun rose again
+            You don't know what the wizard does
+        `.trim().split("\n").map((line) => (line.trim()));
     return yourGraciousProverbs[randInt(0, yourGraciousProverbs.length-1)];;
 }
 
