@@ -109,7 +109,7 @@ async function outputToScreen(input){
         }
         else{
             output += input[t];
-            betterSeed++;
+            betterSeed+=7;
         }
         
         if(t%5){
@@ -770,11 +770,18 @@ function generateEmotion(){
 function format(){
     let selectedFormat = formats[randInt(0, formats.length-1)]
     selectedFormat = replace(selectedFormat, "[emotion]", generateEmotion());
+    betterSeed++;
     selectedFormat = replace(selectedFormat, "[emotion2]", generateEmotion());
+    betterSeed++;
     selectedFormat = replace(selectedFormat, "[special]", ad[randInt(0, ad.length-1)]);
+    betterSeed++;
     selectedFormat = replace(selectedFormat, "[time]", times[randInt(0, times.length-1)]);
+    betterSeed++;
     selectedFormat = replace(selectedFormat, "[adj]", adjEm[randInt(0, adjEm.length-1)]);
+    betterSeed++;
     selectedFormat = replace(selectedFormat, "[soupling]", souplers[randInt(0, souplers.length-1)]);
+    betterSeed++;
+    betterSeed = 0;
     return selectedFormat;
 }
 return format;
