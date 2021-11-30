@@ -183,6 +183,7 @@ function getSeed(){
     seed ^= seed << 4;
     seed ^= seed >> 7;
     seed /= 0xFFFF;
+    
     return Math.abs(seed%1);
 }
 function randInt(min, max){
