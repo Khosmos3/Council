@@ -132,7 +132,7 @@ const acquireMood = (function(){
 betterSeed = 0;
 //functions, obviously
 function getSeed(){
-    betterSeed++;
+    betterSeed+=71;
     let seed = Date.now() + betterSeed;
     seed ^= seed << 5;
     seed ^= seed >> 2;
