@@ -55,6 +55,23 @@
     </div>    
 </body>
 <script>
+
+//function, obviously
+let betterSeed = 0;
+function getSeed(){
+    betterSeed+=71;
+    let seed = Date.now() + betterSeed;
+    seed ^= seed << 5;
+    seed ^= seed >> 2;
+    seed ^= seed << 4;
+    seed ^= seed >> 7;
+    seed /= 0xFFFF;
+    
+    return Math.abs(seed%1);
+}
+function randInt(min, max){
+    return Math.floor(getSeed()*(max-min+1)+min);
+}
     //the artifact
     let _l;
     Object.defineProperty(window, "l", {
@@ -74,6 +91,7 @@ function fix() {
 }
 
 async function outputToScreen(input){
+    betterSeed = 0;
     for(let p = 1; p < 2; p++){         
         output += "<br>";
         document.getElementById("paper").innerHTML = output;
@@ -171,26 +189,13 @@ async function outputToScreen(input){
     output += "<br>";
     document.getElementById("paper").innerHTML = `${output}`;        
     fix();
+    betterSeed = 0;
     //this line is my best fren i am keep it -->  let br = "<br>";     
 }
 
-//function, obviously
-function getSeed(){
-    betterSeed+=71;
-    let seed = Date.now() + betterSeed;
-    seed ^= seed << 5;
-    seed ^= seed >> 2;
-    seed ^= seed << 4;
-    seed ^= seed >> 7;
-    seed /= 0xFFFF;
-    
-    return Math.abs(seed%1);
-}
-function randInt(min, max){
-    return Math.floor(getSeed()*(max-min+1)+min);
-}
 
     function proverb(){
+        betterSeed = 0;
         yourGraciousProverbs = `
             Do not give in to fear. It is chaos of the mind and must not be yielded to. Lose your fear and ability will stretch before you
             They are up in arms
