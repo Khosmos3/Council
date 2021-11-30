@@ -109,7 +109,6 @@ async function outputToScreen(input){
         }
         else{
             output += input[t];
-            betterSeed+=7;
         }
         
         if(t%5){
@@ -124,13 +123,12 @@ async function outputToScreen(input){
     output += "<br>";
     document.getElementById("paper").innerHTML = `${output}`;        
     fix();
-    betterSeed = 0;
     //this line is my best fren i am keep it -->  let br = "<br>";     
 }
 
 //aquireMood for entire thingy
 const acquireMood = (function(){
-
+betterSeed = 0;
 //functions, obviously
 function getSeed(){
     let seed = Date.now() + betterSeed;
@@ -712,6 +710,7 @@ function generateEmotion(){
 
     //lower-case-ify and variants
     if(e.length > 1){
+        betterSeed++;
         if(randInt(0, 100) < 60){
             let variant;
             if(e[0] == "Like it is tuesday"){
@@ -719,6 +718,7 @@ function generateEmotion(){
 				(date.getDay() == 2) ? variant = e[1] : variant = e[2];
 			}
             else{
+                betterSeed++;
                 variant = e[randInt(1, e.length-1)]
             }
             
@@ -739,38 +739,50 @@ function generateEmotion(){
  
     //add modifier
     const MOD_CHANCE = 35;
+    betterSeed++;
     if(emotion.startsWith("like")){
         if(randInt(1, 100) < MOD_CHANCE){
+            betterSeed++;
             emotion = modify2[randInt(0, modify2.length-1)] + " " + emotion;
         }
     }
     else if(emotion.startsWith("a ") || emotion.startsWith("an ")){
+        betterSeed++;
         emotion =  "a " + modify3[randInt(0, modify2.length-1)] + " " + emotion.slice(2);
     }
     else{
         if(randInt(1, 100) < MOD_CHANCE){
+            betterSeed++;
             emotion = modify[randInt(0, modify.length-1)] + " " + emotion;
         }
     }
 
     //do replacement
+    betterSeed++;
     emotion = replace(emotion, "[soupling]", souplers[randInt(0, souplers.length-1)]);
+    betterSeed++;
     emotion = replace(emotion, "[book]", books[randInt(0, books.length-1)]);
+    betterSeed++;
     emotion = replace(emotion, "[format-opt]", formatting[randInt(0, formatting.length-1)]);
+    betterSeed++;
     let choosenRegion = randInt(0, regions.length-1);
+    betterSeed++;
     emotion = replace(emotion, "[region]", regions[choosenRegion][0]);
     emotion = replace(emotion, "[property]", regions[choosenRegion][randInt(1, regions[choosenRegion].length-1)]);
+    betterSeed++;
     emotion = replace(emotion, "[number]", randInt(1,300).toString());
+    betterSeed++;
     emotion = replace(emotion, "[card suite]", suites[randInt(0, suites.length-1)]);
+    betterSeed++;
     emotion = replace(emotion, "[coin outcome]", coin[randInt(0, coin.length-1)]);
-
+    betterSeed = 0;
     return emotion;
 }
 //choose format and apply emotions to it
 function format(){
+    betterSeed++;
     let selectedFormat = formats[randInt(0, formats.length-1)]
     selectedFormat = replace(selectedFormat, "[emotion]", generateEmotion());
-    betterSeed++;
     selectedFormat = replace(selectedFormat, "[emotion2]", generateEmotion());
     betterSeed++;
     selectedFormat = replace(selectedFormat, "[special]", ad[randInt(0, ad.length-1)]);
