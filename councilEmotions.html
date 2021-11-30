@@ -38,16 +38,41 @@
 
             #paper {
                 padding-top: 20%;
-                padding-bottom: 44%;
+                padding-bottom: 30%;
             }
+			#side{
+				width: 7%;
+				height: 14%;
+				background-color: #182d24;
+				color: white;
+				position: fixed;
+				margin-top: 3%;
+				margin-left: 3%;
+				opacity: .2;
+				transition: opacity .6s
+			}
+			#side:hover{
+				opacity: 1;	
+				background-color: #182d24;
+				transition: opacity .6s, background-color .2s;
+			}
+			#side:active{
+				background-color: rgb(220, 210, 190);	
+				transition: background-color .2s;
+			}
         </style>
         
         <title>
-            Council
+            Council 1
         </title>
     </head>
     <body id="body">
-        <div id="bar"></div>
+        <div id="bar">
+			<a href="https://soupnight.space">
+			<div id="side">
+			</div>
+			</a>
+		</div>
         <div id="n">
             <div id = "paper"></div>
             <div id="evil"></div>
