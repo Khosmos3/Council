@@ -176,7 +176,8 @@ async function outputToScreen(input){
 
 //function, obviously
 function getSeed(){
-    let seed = Date.now();
+    betterSeed+=71;
+    let seed = Date.now() + betterSeed;
     seed ^= seed << 5;
     seed ^= seed >> 2;
     seed ^= seed << 4;
@@ -184,9 +185,9 @@ function getSeed(){
     seed /= 0xFFFF;
     return Math.abs(seed%1);
 }
-    function randInt(min, max){
-        return Math.floor(getSeed()*(max-min+1)+min);
-    }
+function randInt(min, max){
+    return Math.floor(getSeed()*(max-min+1)+min);
+}
 
     function proverb(){
         yourGraciousProverbs = `
