@@ -188,7 +188,7 @@ async function outputToScreen(input){
         "Hubert",
         "Fools"
     ];
-    input = `&${book[randInt(0, book.length-1)]} ${set}& ${numeral[randInt(0, numeral.length-1)]} ${ch}:${verse}\n${input}`;
+    input = `&#${book[randInt(0, book.length-1)]} ${set}#& ${numeral[randInt(0, numeral.length-1)]} ${ch}:${verse}\n${input}`;
     //type it out
     for(let t = 0; t < input.length; t++){
         if(input[t] == "&"){
