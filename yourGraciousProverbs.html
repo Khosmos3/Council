@@ -189,6 +189,11 @@ async function outputToScreen(input){
         "Fools"
     ];
     input = `&#${book[randInt(0, book.length-1)]}# ${set}& ${numeral[randInt(0, numeral.length-1)]} ${ch}:${verse}\n${input}`;
+    
+    //boobs area
+    if (input.length==420000) {alert("boobs are cool and shit!!");}
+
+    
     //type it out
     for(let t = 0; t < input.length; t++){
         if(input[t] == "&"){
@@ -541,6 +546,19 @@ async function outputToScreen(input){
             Sometimes fits of arise
             Predictions are a thing of the past
             The stones hold memories and cradle them, softly but firmly
+            If the sky is original, the ground holds possibility
+            Black is the new black
+            Dog is lode
+            Do not consider the monotonality of the fungus
+            Late onset IQ deficiency
+            I think Rowan is dead
+            I came for aspirin but I wound up with chocolate
+            Pulled from the jaws of real life
+            Reality is objectively arguable
+            Gravity is objectively arguable
+            Your teacher had a nose like a damp washcloth and is in a gang with old people
+            We keep our gnomes around for the season
+            Look how long that hat is
         `.trim().split("\n").map((line) => (line.trim()));
     return yourGraciousProverbs[randInt(0, yourGraciousProverbs.length-1)];;
 }
