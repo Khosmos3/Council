@@ -9,6 +9,15 @@
     <hr>
     <a href = "https://soupnight.space/councilEmotions.html">Emotions</a>
     <a href = "https://soupnight.space/yourGraciousProverbs.html">Proverbs</a>
-    <img src = "souplogo.gif">
+    <img src = "SoupLogo1.svg" id="logo">
   </body>
+  <script>
+    frame = true;
+    setInterval(()=>{
+      frame ? getElementById("logo").src = "SoupLogo1.svg" : getElementById("logo").src = "SoupLogo2.svg";
+      frame = !frame;
+    },
+    2500)
+
+  </script>
 </html>
