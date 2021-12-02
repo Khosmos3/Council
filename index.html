@@ -13,7 +13,7 @@
   </body>
   <script>
     frame = true;
-    setInterval(()=>{
+    let anim = setInterval(()=>{
       frame ? getElementById("logo").src = "SoupLogo1.svg" : getElementById("logo").src = "SoupLogo2.svg";
       alert(frame);
       frame = !frame;
