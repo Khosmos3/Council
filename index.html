@@ -15,6 +15,7 @@
     frame = true;
     setInterval(()=>{
       frame ? getElementById("logo").src = "SoupLogo1.svg" : getElementById("logo").src = "SoupLogo2.svg";
+      alert(frame);
       frame = !frame;
     },
     2500)
