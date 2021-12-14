@@ -1,88 +1,113 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <style>
-            @font-face{
-                font-family: typewriter;
-                src: url(typewriter.ttf);
-            }
-            *{
-                margin: 0;
-            }
-            body{
-                font-size: 50px;
-                font-family: typewriter;
-                background-color: rgb(250, 245, 237);
-                color: #384d44;
-            }
-            #bar{
-                width: 13%;
-                height: 100%;
-               
-                position: fixed;
-                background-color: currentColor;
-        
-            }
-            #n{
-                overflow: auto;
-                width: calc(100vw - 20% - 15%);
-                height: 100vh;
-                text-align: left;
-                position: absolute;
-                /* bottom: 54%; */
-                left: 20%;
-                padding-right: 15%;
-                letter-spacing: 3px;
-                line-height: 50px;
-            }
 
-            #paper {
-                padding-top: 20%;
-                padding-bottom: 30%;
-            }
-			#side{
-				width: 7%;
-				background-color: #182d24;
-				color: white;
-				position: fixed;
-				margin-top: 3%;
-				margin-left: 3%;
-				opacity: .2;
-				transition: opacity .6s
-			}
-			#side:hover{
-				opacity: 1;	
-				background-color: #182d24;
-				transition: opacity .6s, background-color .2s;
-			}
-			#side:active{
-				background-color: rgb(250, 245, 237);	
-				transition: background-color .2s;
-			}
-            #side:after {
-                content: "";
-				display: block;
-                padding-bottom: 100%;
-            }
-        </style>
-        
-        <title>
-            Council 1
-        </title>
-        <link rel="shortcut icon" type="image/jpg" href="favicon_soup.png"/>
-    </head>
-    <body id="body">
-        <div id="bar">
-			<a href="https://soupnight.space">
-			<div id="side">
-			</div>
-			</a>
-		</div>
-        <div id="n">
-            <div id = "paper"></div>
-            <div id="evil"></div>
-        </div>    
-    </body>
+<head>
+    <style>
+        @font-face {
+            font-family: typewriter;
+            src: url(typewriter.ttf);
+        }
+
+        * {
+            margin: 0;
+        }
+
+        body {
+            font-size: 7.5vmin;
+            font-family: typewriter;
+            background-color: rgb(250, 245, 237);
+            color: #384d44;
+        }
+
+        #bar {
+            width: 13%;
+            height: 100%;
+
+            position: fixed;
+            background-color: currentColor;
+
+        }
+
+        #n {
+            overflow: auto;
+            width: calc(100vw - 20% - 15%);
+            height: 100vh;
+            text-align: left;
+            position: absolute;
+            /* bottom: 54%; */
+            left: 20%;
+            padding-right: 15%;
+            letter-spacing: 3px;
+            line-height: 50px;
+        }
+
+        #paper {
+            padding-top: 20%;
+            padding-bottom: 30%;
+        }
+
+        #side {
+            width: 7vw;
+            height: 7vw;
+            background-color: #182d24;
+            position: absolute;
+            color: rgba(24, 45, 36, 0);
+            margin-top: 3vw;
+            margin-left: 3vw;
+            opacity: .2;
+            transition: opacity .6s, width .6s;
+            border: 3px solid #182d24;
+            text-align: center;
+            font-size: 3vw;
+            font-family: Taviraj, serif;
+        }
+
+        #side #span {
+            display: none;
+        }
+
+        #side:hover:after {
+            display: block;
+            margin-top: 1.1vw;
+            content: "Home";
+            white-space: nowrap;
+        }
+
+        #side:hover {
+            opacity: 1;
+            background-color: #182d24;
+            width: 17vw;
+            color: rgb(250, 245, 237);
+            transition: opacity .6s, background-color .2s, width .6s, color 1s;
+        }
+
+        #side:active {
+            background-color: rgb(250, 245, 237);
+            color: #182d24;
+            transition: opacity .6s, background-color .2s, width .6s, color .2s;
+        }
+    </style>
+
+    <title>
+        Council 1
+    </title>
+    <link rel="shortcut icon" type="image/jpg" href="favicon_soup.png" />
+</head>
+
+<body id="body">
+    <div id="bar">
+        <a href="https://soupnight.space">
+            <div id="side">
+                <span id="span">s</span>
+            </div>
+        </a>
+    </div>
+    <div id="n">
+        <div id="paper"></div>
+        <div id="evil"></div>
+    </div>
+</body>
+
 </html>
 <script>
     //the artifact
@@ -92,745 +117,762 @@
         get: () => _l++
     });
 
-let betterSeed = 0;
-//how long the text appears in place
-const DISPLAY_TIME = 5000;
-let output = " ";
-let start = true;
-let start2 = true;
-//a date <3
-let date = new Date();
-const SLEEP = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+    let betterSeed = 0;
+    //how long the text appears in place
+    const DISPLAY_TIME = 5000;
+    let output = " ";
+    let start = true;
+    let start2 = true;
+    //a date <3
+    let date = new Date();
+    const SLEEP = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-function fix() {
-    document.getElementById("evil").scrollIntoView();
-}
-
-async function outputToScreen(input){
-    for(let p = 1; p < 2; p++){         
-        output += "<br>";
-        document.getElementById("paper").innerHTML = output;
-        fix();
-        await SLEEP(500);
+    function fix() {
+        document.getElementById("evil").scrollIntoView();
     }
-    //get the date
-	date = new Date();
-    let d = date.toString();
-    let format = d.slice(d.indexOf("(")+1, d.indexOf(")"));
-    format = format
-        .split(" ")
-        .map(word=>word[0])
-        .join("");
-    d = d.split(" ").slice(1, 5).join(" ");
-    input = `[${d} (${format})]\n${input}`;
 
-    //type it out
-    for(let t = 0; t < input.length; t++){
-        if(input[t] == "&"){
-            output += start ? "<i>" : "</i>";
-            start = !start;
-        }
-        else if(input[t] == "\n"){
+    async function outputToScreen(input) {
+        for (let p = 1; p < 2; p++) {
             output += "<br>";
+            document.getElementById("paper").innerHTML = output;
+            fix();
+            await SLEEP(500);
         }
-        else if(input[t] == "#"){
-            output += start2 ? "<b>" : "</b>";
-            start2 = !start2;
-        }
-        else{
-            output += input[t];
-        }
-        
-        if(t%5){
-            document.getElementById("paper").innerHTML = `${output}▓`;
-        }
-        else{
-            document.getElementById("paper").innerHTML = `${output}░`;
-        };
-        fix();
-        await SLEEP(50);
-    }  
-    output += "<br>";
-    document.getElementById("paper").innerHTML = `${output}`;        
-    fix();
-    betterSeed = 0;
-    //this line is my best fren i am keep it -->  let br = "<br>";     
-}
+        //get the date
+        date = new Date();
+        let d = date.toString();
+        let format = d.slice(d.indexOf("(") + 1, d.indexOf(")"));
+        format = format
+            .split(" ")
+            .map(word => word[0])
+            .join("");
+        d = d.split(" ").slice(1, 5).join(" ");
+        input = `[${d} (${format})]\n${input}`;
 
-//aquireMood for entire thingy
-const acquireMood = (function(){
-betterSeed = 0;
-//functions, obviously
-function getSeed(){
-    betterSeed+=71;
-    let seed = Date.now() + betterSeed;
-    seed ^= seed << 5;
-    seed ^= seed >> 2;
-    seed ^= seed << 4;
-    seed ^= seed >> 7;
-    seed /= 0xFFFF;
-    return Math.abs(seed%1);
-}
-function randInt(min, max){
-    return Math.floor(getSeed()*(max-min+1)+min);
-}
-function replace(string, before, after){
-    let placeOfWord = string.indexOf(before);
-    if(placeOfWord != -1){
-        return string.slice(0, placeOfWord) + after + string.slice(placeOfWord+before.length);
-    }
-    else{
-        return string;//alert("Your string does not contain the word you are trying to find!");
-    }
-}
-//your gracious arrays
-let emotions = [
-    ["Gad"],
-    ["Fyrunge"],
-    ["Carnalic", "About modern architecture", "For unknown reasons"],
-    ["#Dorceless#"],
-    ["Dorceful"],
-	["Exalted"],
-	["Animated"],
-    ["Vengeant", "At the emotion fear"],
-    ["Blissful"],
-    ["Productive", "On its plan"],
-    ["Joyous", "For it is time", "For the time is soon", "about the [property] of [region]"],
-    ["Like it has been scammed"],
-    ["Like it is part of a sitcom", "Where they all die at the end"],
-    ["Like it is mortal", "Exactly in the way you are", "In a different way than you are"],
-    ["Disgusted"],
-    ["Insecure"],
-    ["Trusting"],
-    ["Adoring", "towards cat", "towards Finley", "Towards [soupling]"],
-    ["Anxious", "About [soupling]’s future"],
-    ["craving", "For consumption", "For souls", "For an answer"],
-    ["Obligatorily sorrowful"],
-    ["Entranced", "By the auroras", "By the stunning nature of the universe", "By [soupling]’s beauty and sheer intellect", "By the [property] of [region]"],
-    ["Calmed", "By the [property] of [region]"],
-    ["Awkward", "About you viewing its emotions like this"],
-    ["Envious", "Of your new sweater", "Of those who are currently drinking soup"],
-    ["Nostalgic", "Of a time before the Respite was known", "Of a time when it didn’t exist"],
-    ["Lustful"],
-    ["Triumphant"],
-    ["Proud", "Of [soupling]", "Of Your Gracious Proverbs"],
-    ["Loric"],
-    ["Confused", "On how you got here", "On how it got here", "About the length of time", "About the length of the wyrms", "By the [property] of [region]"],
-    ["Existentially Excited", "By you"],
-    ["Shy", "About you looking at its emotions like this"],
-    ["Guilty", "Of nothing", "Of something you shouldn’t know", "Of something you should know"],
-    ["Contemptuous"],
-    ["Anticipatory", "For something soon"],
-    ["Dreading", "For you"],
-    ["Pitiful", "For you"],
-    ["Patient"],
-    ["Tubular"],
-    ["Groovy"],
-    ["Hip", "with the kids"],
-    ["Radical"],
-    ["Helpless"],
-    ["Dejected"],
-    ["Determined", "To succeed", "To make them fail"],
-    ["Targeted"],
-    ["Present"],
-    ["Pleasant"],
-    ["Noisy"],
-    ["Bespeckled"],
-    ["Defeated"],
-    ["Sad"],
-    ["Depressed"],
-    ["Distrusting"],
-    ["Nosey", "Into its own business"],
-    ["Turing-complete"],
-    ["Powerful", "Because of its influence on the continent"],
-    ["Bullet-pointed"],
-    ["[format-opt]-formatted"],
-    ["Concerned", "by [soupling]", "by the king of [card suite]"],
-    ["Pained", "by [soupling]"],
-    ["Unclear", ", as it is currently only able to speak in riddles", ", as in, literally opaque", ", it will try and be more concise in the future for your benefit"],
-    ["Superfluous"],
-    ["Socially Invoking"],
-    ["Mild"],
-    ["Fervent"],
-    ["Displaced"],
-    ["Overwhelmed", "By its own plan", "By its own power"],
-    ["Underwhelmed", "By its own plan"],
-    ["Whelmed", "By its own plan"],
-    ["Wise", "Beyond its years", "about the [property] of [region]"],
-    ["Tender"],
-    ["Blunt"],
-    ["Appalled", "By its own plan"],
-    ["Affected by gravity"],
-    ["Unaffected by gravity"],
-    ["Fabulous"],
-    ["Fashionable"],
-    ["Stylish"],
-    ["Rimulent", "Towards the issue", "About life and death"],
-    ["Screechy"],
-    ["Alive"],
-    ["Dead"],
-    ["Undead"],
-    ["Grudging", "To let a new \"member\" into the Council"],
-    ["Crude"],
-    ["Stupendous"],
-    ["Hindered", "By the [property] of [region]"],
-    ["Warm"],
-    ["Cold"],
-    ["as dense", "As osmium", "As a pound of feathers", "As the king of hearts"],
-    ["Applied"],
-    ["Tough"],
-    ["Deterred", "By those who do not support the plan", "By the king of spades"],
-    ["Vague"],
-    ["Insulted"],
-    ["Predictably disappointed", "In [soupling]"],
-    ["Hilarious"],
-    ["Like it is overtime"],
-    ["Like it is undertime"],
-    ["Aided"],
-    ["Like it is wearing a hat ", "(it isn’t)", "(the gathering of the entire council, is, in fact, somehow wearing a singular hat)"],
-    ["Vicious"],
-    ["Viscous"],
-    ["Like it wants to press buttons"],
-    ["Like the world will explode"],
-    ["Easily influenced"],
-    ["Like it wants to be in control"],
-    ["Like it needs to be in control"],
-    ["Not in control"],
-    ["In control"],
-    ["Divisible", "By [number]", "By [card suite]", "By [coin outcome]"],
-    ["Like it has taken a long car ride", "To [region]", "To nowhere", "To everywhere"],
-    ["Fatigued"],
-    ["Energetic"],
-    ["Listless"],
-    ["Submerged"],
-    ["Tense"],
-    ["Distressed"],
-    ["Enraptured"],
-    ["Zesty"],
-    ["Jovial"],
-    ["Sentimental"],
-    ["Enthralled"],
-    ["Tormented"],
-    ["Agitated"],
-    ["Grumpy"],
-    ["Irritated"],
-    ["Euphoric"],
-    ["Eager"],
-    ["Thrilled"],
-    ["Dismayed"],
-    ["Hurt", "by [soupling]"],
-    ["Woeful"],
-    ["Melancholy"],
-    ["Hopeful", "For a bright future for the continent"],
-    ["Homesick", "for [region]"],
-    ["Glum"],
-    ["Isolated", "in [region]"],
-    ["Neglected"],
-    ["Panicked"],
-    ["Bitter"],
-    ["Serene", "amidst the chaos"],
-    ["Apprehensive"],
-    ["Insightful"],
-    ["Loathing"],
-    ["Assertive"],
-    ["Miserly"],
-    ["Mortified"],
-    ["Baffled"],
-    ["Attractive"],
-    ["Brazen"],
-    ["Brooding"],
-    ["Carefree"],
-    ["Paranoid"],
-    ["Claustrophobic"],
-    ["Coercive"],
-    ["Numb", " in a comfortable way"],
-    ["Comfortable", "in a numb way"],
-    ["Perplexed"],
-    ["Courageous"],
-    ["Cowardly"],
-    ["Rash"],
-    ["Cynical"],
-    ["Remorseful"],
-    ["Disgruntled"],
-    ["Scornful"],
-    ["Schadenfreude", "about [soupling]'s misfortune"],
-    ["Dominant"],
-    ["Submissive"],
-    ["Driven"],
-    ["Dumbstruck"],
-    ["Switchy"],
-    ["Elated"],
-    ["Enchanted"],
-    ["Smug"],
-    ["Spiteful"],
-    ["Expectant"],
-    ["Sullen"],
-    ["Suspicious"],
-    ["Friendly"],
-    ["Sympathetic"],
-    ["Vigilant"],
-    ["Hospitable"],
-    ["Inhospitable"],
-    ["Humility"],
-    ["Vulnerable"],
-    ["Idle"],
-    ["Impatient"],
-    ["Indignant"],
-    ["like it is being gaslit", "by [soupling]"],
-    ["like it is a fraud"],
-    ["like it wants to disappear", "from [region]"],
-    ["like it wants to fly", "like they do in [book]"],
-    ["Risque"],
-    ["like it is holding the ace of [card suite]"],
-    ["Imlipitive"],
-    ["Lipitive"],
-    ["Written in pen", "and ink"],
-    ["Inspired", "by [soupling]", "by [book]"],
-    ["Lost", "in [region]", "because of the [property] of [region]"],
-    ["Brilliant"],
-    ["like it must go to war", "with [region]", "with itself", "with [soupling]"],
-    ["Enlisted", "By itself", "by the legion of the Static Void"],
-    ["Deleted"],
-    ["Enlightened", "by [book]"],
-    ["Employed", "By itself", "by the legion of the Static Void"],
-    ["Decieved", "By itself", "By [soupling]"],
-    ["Devious"],
-    ["Deadly"],
-    ["Burnt-out"],
-    ["Unwanted", "by [soupling]", "by you (try donating some plasma)"],
-    ["Unconscious"],
-    ["Unconventional"],
-    ["Congratulated"],
-    ["Conscious"],
-    ["Pragmatic"],
-    ["Morally ambiguous"],
-    ["Hot", "As fuck"],
-    ["Debatable"],
-    ["Like it is a factor of [number]"],
-    ["Lit on fire", "(metaphorically)", "(literally)", "(spiritually)"],
-    ["Fervent"],
-    ["Nihilistic"],
-    ["Drunk", "(it isn’t)","(a single member of the council had a glass of wine)", "(the entire Council is literally black-out drunk)"],
-    ["Sober", "(it is)", "(the entire Council is literally black-out drunk)"],
-    ["Unable to perceive", "linear time", "Three dimensional time", "Quadratic time", "Special time", "Double time"],
-    ["Like it is actively repelling", "Fear", "The beast", "Its subconscious"],
-    ["Inconclusive"],
-    ["Decided"],
-    ["Dull"],
-    ["Diligent"],
-    ["Like it is tuesday", "(it is!)", "(it isn’t)"],
-    ["Impaled"],
-    ["Stapled into place"],
-    ["Exposed"],
-    ["Implicated", "Of murder", "Of existing", "Of not existing"],
-    ["Numerous", ", as the current number of entities composing the greater entity of the Council is-- *muffled screaming*"],
-    ["Agile"],
-    ["Sane"],
-    ["Hungry"],
-    ["Thirsty"],
-    ["Your eyelids right now"],
-    ["Unbounded"],
-    ["Deliberate"],
-    ["Suggestive"],
-    ["under the weather"],
-    ["Above the weather"],
-    ["Like it has conquered", "A place that is already in its control", "[region], even though it was already both independent and under the influence of the Council", "The weather (it hasn’t)", "The weather (it hasn't... yet)", "The weather (it has)"],
-    ["Monumental"],
-    ["Like it has too many tabs open"],
-    ["Like it has just finished a really good book", "(that book being [book])", "(when in reality, it hasn’t)", "(that was sarcasm)"],
-    ["Reverent"],
-    ["Awed", "By the [property] of [region]"],
-    ["Distressed", "by [book]"],
-    ["Shocked", "(as in, taken aback)", "(electrically)"],
-    ["Unpleasantly surprised"],
-    ["Surprised"],
-    ["Relaxed"],
-    ["Like it is barely hanging on"],
-    ["Pleasantly surprised"],
-    ["Young"],
-    ["Old"],
-    ["Ancient"],
-    ["Apathetic"],
-    ["Empathetic"],
-    ["Gay"],
-    ["Frustrated", "by the doors"],
-    ["Angsty"],
-    ["Like a motley rabble", "of bees"],
-    ["Saucy"],
-    ["High"],
-    ["Uneasy", "after reading [book]"],
-    ["Fractured", "infinitly", "singularly", "into six and a half unequal parts"],
-    ["Aristocratic"],
-    ["Justified", "In its actions"],
-    ["like it has been knocked over", "by the adverbs"],
-    ["loyal", "to [region]"],
-    ["Suboptimal"],
-    ["Optimal"],
-    ["Nuclear"],
-    ["Forbidden"],
-    ["Foreboding"],
-    ["like it is having a dream", "about [property]", "about [book]"],
-    ["Wondering", "about [book]"],
-    ["Like it lost a coin flip (the outcome was [coin outcome])"],
-    ["Like it won a coin flip (the outcome was [coin outcome])"],
-    ["Judgemental", "towards [soupling]"],
-    ["Bipolar"],
-    ["Emotional"],
-    ["Rapid"],
-    ["like its having a mental breakdown"],
-    ["Sexual"],
-    ["Asexual"],
-    ["Loving"],
-    ["Pessimistic"],
-    ["Benevolent"],
-    ["Malevolent"],
-    ["Optimistic"],
-    ["Sarcastic"],
-    ["Profound"],
-    ["Mocklified", "by [soupling]"],
-    ["Unsure"],
-    ["an urge", "to live", "to die", "to win", "to lose"],
-    ["a desire", "to see [region]", "to read [book]", "to see [soupling]"],
-    ["a dream", "of the [property]"],
-    ["That which is not to be known", "by [soupling] specifically"],
-    ["like it has lost weight"],
-    ["like it has flown", "in a storm", "with its wings spread wide", "on the ground"],
-    ["like it has travelled", "across [region]"],
-    ["like it has passed", "through smoke from a large combustion furnace", "through water vapor", "by your house on its way home", "through snow-covered trees", "through air turbulence"],
-    ["like it will be written"],
-    ["like it will never be written"],
-    ["like it has been", "found", "discovered", "documented"],
-    ["Accepted"],
-    ["Verified"],
-    ["Longlasting"],
-    ["Understood"],
-    ["like it has been taught", "about the [property] of [region]"],
-    ["like it has changed"],
-    ["Shrewd"],
-    ["Timid"],
-    ["like it is the enemy"],
-    ["Consumed"],
-    ["Engulfed"],
-    ["like it is foolish", "as it brought its [coin outcome]"],
-    ["like it knows how to create a new object"],
-    ["like it is holding up traffic"],
-    ["like there is a timestamp right above this"],
-    ["like it is preventing an incident"],
-    ["out of line"],
-    ["in line"],
-    ["a hope"],
-    ["an idea", "about [soupling]"],
-    ["an itch"],
-    ["a fever"],
-    ["an impulse"],
-    ["a love", "for [soupling]", "for [region]", "for the continent"],
-    ["a temptation"],
-    ["a confusing set of emotions"],
-    ["Shortsighted"],
-    ["Foresightful"],
-    ["a longing"],
-    ["sharp"],
-    ["festive"],
-    ["sugary"],
-    ["salty"]
-];
-let modify = [
-    "very", 
-    "moderately", 
-    "slightly", 
-    "mildly", 
-    "extremely", 
-    "kind of", 
-    "discernably", 
-    "marginally",
-    "catastrophically",
-    "negligibily",
-    "critically",
-    "remotely",
-    "severely",
-    "regretfully",
-    "expectedly",
-    "strangely",
-    "powerfully",
-    "weakly"
-];
-let modify2 = [
-    "very much", 
-    "moderately", 
-    "a bit",
-    "severely",
-    "marginally",
-    "kind of",
-    "slightly",
-    "strangely",
-    "expectedly",
-    "weakly",
-    "immensely",
-];
-let modify3 = [
-    "definite",
-    "strong",
-    "weak",
-    "slight",
-    "critical",
-    "powerful",
-    "deep",
-    "uncontrollable",
-    "small",
-    "nearly nonexistant",
-    "unknown",
-    "bedazzling",
-    "terrifying",
-    "awe-inspiring",
-    "unwelcome",
-    "warm",
-    "significant",
-    "another",
-    "sliver of a"
-];
-let ad = [
-    "twisted",
-    "nonsensical",
-    "heroic",
-    "righteous",
-    "tragic",
-    "meandering",
-    "malleable",
-    "shattered",
-    "closed-off",
-    "amorphous",
-    "tyrannical",
-    "inhuman",
-    "bottled-up",
-    "studious",
-    "unknowable"
-]
-let books = [
-    "&Studies on DBAO&",
-    "&The Stand&",
-    "&Warbreaker&",
-    "&Words of Radiance&",
-    "&The Book Thief&",
-    "&Mistborn&",
-    "&The Unbearable Likeness of Being&",
-    "&The Book of Laughter and Forgetting&",
-    "&The Dark Tower&",
-    "&Symptoms of Being Human&",
-    "&The Qur'an&",
-    "&The Name of the Wind&",
-    "&The Hengine Documentation&",
-    "&The Rithmatist&",
-    "&The Help&",
-    "&The Communist Manifesto&",
-    "&Fahrenheit 451&",
-    "&The Lord of the Rings&",
-    "&To Kill a Mockingbird&",
-    "&How to Kill a Mockingbird (a definitive guide)&",
-    "&The Ending Story& (it's already done)"
-]
-let formats = [
-    "The Council is feeling [emotion].",
-    "The Council is feeling &[emotion]&.",
-    "The Council is [adj] feeling [emotion], in its own way.",
-    `The Council is feeling [emotion], in its own [special] way.`,
-    "The Council is [adj] feeling [emotion].",
-    "The Council is &[adj]& feeling [emotion].",
-    "The Council doesn't want to feel [emotion], but it does.",
-    "In this specific situation, the Council is feeling [emotion].",
-    "In this specific situation, the Council is [adj] feeling [emotion].",
-    "The Council is feeling both [emotion] and [emotion2].",
-    "The Council is [adj] feeling both [emotion] and [emotion2].",
-    "The Council was feeling [emotion], but now it is not so sure.",
-    "The Council was feeling [emotion], but now it is feeling [emotion2].",
-    "A [time] ago, the Council was [adj] feeling [emotion].",
-    "The Council is ignoring the fact that it is feeling [emotion].",
-    "The Council isn't feeling today. Not even [emotion].",
-    "The Council hasn't felt [emotion] since a [time] ago.",
-    "Because of [soupling], the Council is feeling [emotion].",
-    "Because of [soupling], the Council is [adj] feeling [emotion].",
-    "[soupling] is [adj] feeling [emotion].",
-    "At this time, a [time] ago, the Council felt [emotion].",
-    "It would be better if you didn't know the Council is feeling [emotion].",
-    "Do &you& think the Council is feeling [emotion]?",
-    "You should've known the Council felt [emotion] a [time] ago.",
-    "The Council is going to [adj] feel [emotion] in a [time].",
-    "The Council is going to feel [emotion] in a [time].",
-    "The Council is going to feel [emotion] for a [time].",
-    "The Council either feels [emotion] or [emotion2]. We don't know yet.",
-    "The Council's [special] activities lead it to feel [emotion].",
-    "The Council is not making an effort to feel [emotion]."
-];
-let times = [
-    "day",
-    "month",
-    "week",
-    "hour",
-    "year",
-    "minute",
-    "long time",
-    "short while",
-    "moon",
-    "lil' bit",
-    "score",
-    "moment"
-];
-let adjEm = [
-    "probably",
-    "expressively",
-    "definitely not",
-    "not",
-    "likely",
-    "definitely",
-    "totally",
-    "totally not",
-    "actually",
-    "earnestly",
-    "in all odds",
-    "occasionally",
-    "frequently",
-    "surprisingly",
-    "unsurprisingly",
-    "forcefully",
-    "passionately"
-];
-let regions = [
-    ["the Apex of Midnight", "auroras", "stunning vistas", "powerful rivers"],
-    ["the Respite", "quantum properties", "surreal landscapes", "terrifying implications"],
-    ["the Static Void", "motes", "unknown length of the wyrms", "indefinite distances"],
-    ["the Cresting Rings", "majestic formations", "jade crystals", "powerful storms"],
-    ["the Coast", "crashing waves", "salty mist", "towering seastacks"],
-    ["Iceforest", "freezing temperatures", "cold-dwelling plants", "frozen spires"],
-    ["the Luminance Groves", "mystery", "thick tree growth", "sublime ponds"],
-    ["the Pillars of Steel", "sheer size", "unknown origins", "sky-searing heights"],
-    ["Ri'ay", "hardiness of the humans", "existance of a kingdom such as that", "bustling, seaside economy"],
-    ["Ki'of Citadel", "florishing plant life", "architecture", "beauty and wealth"],
-    ["the subeastern isles", "impenetrability", "mysteries", "remoteness"],
-    ["the Ruins of Bariac", "tradegy", "former glory", "monolithic structures"],
-    ["the Stronghold of the Gathered", "incredible strength", "assembled kingdom", "defiance against entropy"],
-    ["the Pointed Groves", "aesthetic trees", "colorful leaves", "tall, white and black trees"],
-    ["the Spite Range", "adversity to life", "strange vegetation", "sunsets"]
-];
-let souplers = [
-    "Sovereign Henry", 
-    "Captain Henry",
-    "Majesty Sofia", 
-    "Madam Sofia",
-    "Sir Tom",
-    "Monsieur Rowan",
-    "Mystic Mayzie",
-    "Lady Shannon",
-    "Noble Wesley",
-    "Soup Priest Molly",
-    "Ryan, Esq."
-];
-let formatting = [
-    "left",
-    "right",
-    "center",
-    "letter",
-    "well",
-    "poorly"
-]
-let suites = [
-    "clubs",
-    "diamonds",
-    "spades",
-    "hearts",
-    "squares"
-];
-let coin = [
-    "heads",
-    "tails",
-]
-//the essence
-function generateEmotion(){
-    let emotion;
-    let index = randInt(0, emotions.length-1);
-    let e = emotions[index];
-
-    //lower-case-ify and variants
-    if(e.length > 1){
-        if(randInt(0, 100) < 60){
-            let variant;
-            if(e[0] == "Like it is tuesday"){
-                date = new Date();
-				(date.getDay() == 2) ? variant = e[1] : variant = e[2];
-			}
-            else{
-                variant = e[randInt(1, e.length-1)]
+        //type it out
+        for (let t = 0; t < input.length; t++) {
+            if (input[t] == "&") {
+                output += start ? "<i>" : "</i>";
+                start = !start;
             }
-            
-            variant = variant[0].toLowerCase() + variant.slice(1);
-            emotion = e[0].toLowerCase() + " " + variant;
+            else if (input[t] == "\n") {
+                output += "<br>";
+            }
+            else if (input[t] == "#") {
+                output += start2 ? "<b>" : "</b>";
+                start2 = !start2;
+            }
+            else {
+                output += input[t];
+            }
+
+            if (t % 5) {
+                document.getElementById("paper").innerHTML = `${output}▓`;
+            }
+            else {
+                document.getElementById("paper").innerHTML = `${output}░`;
+            };
+            fix();
+            await SLEEP(50);
         }
-        else{
-            emotion = e[0].toLowerCase();
+        output += "<br>";
+        document.getElementById("paper").innerHTML = `${output}`;
+        fix();
+        betterSeed = 0;
+        //this line is my best fren i am keep it -->  let br = "<br>";     
+    }
+
+    //aquireMood for entire thingy
+    const acquireMood = (function () {
+        betterSeed = 0;
+        //functions, obviously
+        function getSeed() {
+            betterSeed += 71;
+            let seed = Date.now() + betterSeed;
+            seed ^= seed << 5;
+            seed ^= seed >> 2;
+            seed ^= seed << 4;
+            seed ^= seed >> 7;
+            seed /= 0xFFFF;
+            return Math.abs(seed % 1);
         }
-    }
-    else{
-        emotion = e[0].toLowerCase(); 
-    }
-    //edge cases
-    if(emotion == "as dense"){
-        emotion = emotion.slice(3);
-    }
- 
-    //add modifier
-    const MOD_CHANCE = 35;
-    if(emotion.startsWith("like")){
-        if(randInt(1, 100) < MOD_CHANCE){
-            emotion = modify2[randInt(0, modify2.length-1)] + " " + emotion;
+        function randInt(min, max) {
+            return Math.floor(getSeed() * (max - min + 1) + min);
         }
-    }
-    else if(emotion.startsWith("a ") || emotion.startsWith("an ")){
-        emotion =  "a " + modify3[randInt(0, modify2.length-1)] + " " + emotion.slice(2);
-    }
-    else{
-        if(randInt(1, 100) < MOD_CHANCE){
-            emotion = modify[randInt(0, modify.length-1)] + " " + emotion;
+        function replace(string, before, after) {
+            let placeOfWord = string.indexOf(before);
+            if (placeOfWord != -1) {
+                return string.slice(0, placeOfWord) + after + string.slice(placeOfWord + before.length);
+            }
+            else {
+                return string;//alert("Your string does not contain the word you are trying to find!");
+            }
         }
-    }
+        //your gracious arrays
+        let emotions = [
+            ["Gad"],
+            ["Fyrunge"],
+            ["Carnalic", "About modern architecture", "For unknown reasons"],
+            ["#Dorceless#"],
+            ["Dorceful"],
+            ["Exalted"],
+            ["Animated"],
+            ["Vengeant", "At the emotion fear"],
+            ["Blissful"],
+            ["Productive", "On its plan"],
+            ["Joyous", "For it is time", "For the time is soon", "about the [property] of [region]"],
+            ["Like it has been scammed"],
+            ["Like it is part of a sitcom", "Where they all die at the end"],
+            ["Like it is mortal", "Exactly in the way you are", "In a different way than you are"],
+            ["Disgusted"],
+            ["Insecure"],
+            ["Trusting"],
+            ["Adoring", "towards cat", "towards Finley", "Towards [soupling]"],
+            ["Anxious", "About [soupling]'s future"],
+            ["craving", "For consumption", "For souls", "For an answer"],
+            ["Obligatorily sorrowful"],
+            ["Entranced", "By the auroras", "By the stunning nature of the universe", "By [soupling]'s beauty and sheer intellect", "By the [property] of [region]"],
+            ["Calmed", "By the [property] of [region]"],
+            ["Awkward", "About you viewing its emotions like this"],
+            ["Envious", "Of your new sweater", "Of those who are currently drinking soup"],
+            ["Nostalgic", "Of a time before the Respite was known", "Of a time when it didn't exist"],
+            ["Lustful"],
+            ["Triumphant"],
+            ["Proud", "Of [soupling]", "Of Your Gracious Proverbs"],
+            ["Loric"],
+            ["Confused", "On how you got here", "On how it got here", "About the length of time", "About the length of the wyrms", "By the [property] of [region]"],
+            ["Existentially Excited", "By you"],
+            ["Shy", "About you looking at its emotions like this"],
+            ["Guilty", "Of nothing", "Of something you shouldn't know", "Of something you should know"],
+            ["Contemptuous"],
+            ["Anticipatory", "For something soon"],
+            ["Dreading", "For you"],
+            ["Pitiful", "For you"],
+            ["Patient"],
+            ["Tubular"],
+            ["Groovy"],
+            ["Hip", "with the kids"],
+            ["Radical"],
+            ["Helpless"],
+            ["Dejected"],
+            ["Determined", "To succeed", "To make them fail"],
+            ["Targeted"],
+            ["Present"],
+            ["Pleasant"],
+            ["Noisy"],
+            ["Bespeckled"],
+            ["Defeated"],
+            ["Sad"],
+            ["Depressed"],
+            ["Distrusting"],
+            ["Nosey", "Into its own business"],
+            ["Turing-complete"],
+            ["Powerful", "Because of its influence on the continent"],
+            ["Bullet-pointed"],
+            ["[format-opt]-formatted"],
+            ["Concerned", "by [soupling]", "by the king of [card suite]"],
+            ["Pained", "by [soupling]"],
+            ["Unclear", ", as it is currently only able to speak in riddles", ", as in, literally opaque", ", it will try and be more concise in the future for your benefit"],
+            ["Superfluous"],
+            ["Socially Invoking"],
+            ["Mild"],
+            ["Fervent"],
+            ["Displaced"],
+            ["Overwhelmed", "By its own plan", "By its own power"],
+            ["Underwhelmed", "By its own plan"],
+            ["Whelmed", "By its own plan"],
+            ["Wise", "Beyond its years", "about the [property] of [region]"],
+            ["Tender"],
+            ["Blunt"],
+            ["Appalled", "By its own plan"],
+            ["Affected by gravity"],
+            ["Unaffected by gravity"],
+            ["Fabulous"],
+            ["Fashionable"],
+            ["Stylish"],
+            ["Rimulent", "Towards the issue", "About life and death"],
+            ["Screechy"],
+            ["Alive"],
+            ["Dead"],
+            ["Undead"],
+            ["Grudging", "To let a new \"member\" into the Council"],
+            ["Crude"],
+            ["Stupendous"],
+            ["Hindered", "By the [property] of [region]"],
+            ["Warm"],
+            ["Cold"],
+            ["as dense", "As osmium", "As a pound of feathers", "As the king of hearts"],
+            ["Applied"],
+            ["Tough"],
+            ["Deterred", "By those who do not support the plan", "By the king of spades"],
+            ["Vague"],
+            ["Insulted"],
+            ["Predictably disappointed", "In [soupling]"],
+            ["Hilarious"],
+            ["Vain"],
+            ["Like it is overtime"],
+            ["Like it is undertime"],
+            ["Aided"],
+            ["Like it is wearing a hat ", "(it isn't)", "(the gathering of the entire council, is, in fact, somehow wearing a singular hat)"],
+            ["Vicious"],
+            ["Viscous"],
+            ["Like it wants to press buttons"],
+            ["Like the world will explode"],
+            ["Easily influenced"],
+            ["Like it wants to be in control"],
+            ["Like it needs to be in control"],
+            ["Not in control"],
+            ["In control"],
+            ["Divisible", "By [number]", "By [card suite]", "By [coin outcome]"],
+            ["Like it has taken a long car ride", "To [region]", "To nowhere", "To everywhere"],
+            ["Fatigued"],
+            ["Energetic"],
+            ["Listless"],
+            ["Submerged"],
+            ["Tense"],
+            ["Distressed"],
+            ["Enraptured"],
+            ["Zesty"],
+            ["Jovial"],
+            ["Sentimental"],
+            ["Enthralled"],
+            ["Tormented"],
+            ["Agitated"],
+            ["Grumpy"],
+            ["Irritated"],
+            ["Euphoric"],
+            ["Eager"],
+            ["Thrilled"],
+            ["Dismayed"],
+            ["Hurt", "by [soupling]"],
+            ["Woeful"],
+            ["Melancholy"],
+            ["Hopeful", "For a bright future for the continent"],
+            ["Homesick", "for [region]"],
+            ["Glum"],
+            ["Isolated", "in [region]"],
+            ["Neglected"],
+            ["Panicked"],
+            ["Bitter"],
+            ["Serene", "amidst the chaos"],
+            ["Apprehensive"],
+            ["Insightful"],
+            ["Loathing"],
+            ["Assertive"],
+            ["Miserly"],
+            ["Mortified"],
+            ["Baffled"],
+            ["Attractive"],
+            ["Brazen"],
+            ["Brooding"],
+            ["Carefree"],
+            ["Paranoid"],
+            ["Claustrophobic"],
+            ["Coercive"],
+            ["Numb", " in a comfortable way"],
+            ["Comfortable", "in a numb way"],
+            ["Perplexed"],
+            ["Courageous"],
+            ["Cowardly"],
+            ["Rash"],
+            ["Cynical"],
+            ["Remorseful"],
+            ["Disgruntled"],
+            ["Scornful"],
+            ["Schadenfreude", "about [soupling]'s misfortune"],
+            ["Dominant"],
+            ["Submissive"],
+            ["Driven"],
+            ["Dumbstruck"],
+            ["Switchy"],
+            ["Elated"],
+            ["Enchanted"],
+            ["Smug"],
+            ["Spiteful"],
+            ["Expectant"],
+            ["Sullen"],
+            ["Suspicious"],
+            ["Friendly"],
+            ["Sympathetic"],
+            ["Vigilant"],
+            ["Hospitable"],
+            ["Inhospitable"],
+            ["Humility"],
+            ["Vulnerable"],
+            ["Idle"],
+            ["Impatient"],
+            ["Indignant"],
+            ["like it is being gaslit", "by [soupling]"],
+            ["like it is a fraud"],
+            ["like it wants to disappear", "from [region]"],
+            ["like it wants to fly", "like they do in [book]"],
+            ["Risque"],
+            ["like it is holding the ace of [card suite]"],
+            ["Imlipitive"],
+            ["Lipitive"],
+            ["Written in pen", "and ink"],
+            ["Inspired", "by [soupling]", "by [book]"],
+            ["Lost", "in [region]", "because of the [property] of [region]"],
+            ["Brilliant"],
+            ["like it must go to war", "with [region]", "with itself", "with [soupling]"],
+            ["Enlisted", "By itself", "by the legion of the Static Void"],
+            ["Deleted"],
+            ["Enlightened", "by [book]"],
+            ["Employed", "By itself", "by the legion of the Static Void"],
+            ["Decieved", "By itself", "By [soupling]"],
+            ["Devious"],
+            ["Deadly"],
+            ["Burnt-out"],
+            ["Unwanted", "by [soupling]", "by you (try donating some plasma)"],
+            ["Unconscious"],
+            ["Unconventional"],
+            ["Congratulated"],
+            ["Conscious"],
+            ["Pragmatic"],
+            ["Morally ambiguous"],
+            ["Hot", "As fuck"],
+            ["Debatable"],
+            ["Like it is a factor of [number]"],
+            ["Lit on fire", "(metaphorically)", "(literally)", "(spiritually)"],
+            ["Fervent"],
+            ["Nihilistic"],
+            ["Drunk", "(it isn't)", "(a single member of the council had a glass of wine)", "(the entire Council is literally black-out drunk)"],
+            ["Sober", "(it is)", "(the entire Council is literally black-out drunk)"],
+            ["Unable to perceive", "linear time", "Three dimensional time", "Quadratic time", "Special time", "Double time"],
+            ["Like it is actively repelling", "Fear", "The beast", "Its subconscious"],
+            ["Inconclusive"],
+            ["Decided"],
+            ["Dull"],
+            ["Diligent"],
+            ["Like it is tuesday", "(it is!)", "(it isn't)"],
+            ["Impaled"],
+            ["Stapled into place"],
+            ["Exposed"],
+            ["Implicated", "Of murder", "Of existing", "Of not existing"],
+            ["Numerous", ", as the current number of entities composing the greater entity of the Council is-- *muffled screaming*"],
+            ["Agile"],
+            ["Sane"],
+            ["Hungry"],
+            ["Thirsty"],
+            ["Your eyelids right now"],
+            ["Unbounded"],
+            ["Deliberate"],
+            ["Suggestive"],
+            ["under the weather"],
+            ["Above the weather"],
+            ["Like it has conquered", "A place that is already in its control", "[region], even though it was already both independent and under the influence of the Council", "The weather (it hasn't)", "The weather (it hasn't... yet)", "The weather (it has)"],
+            ["Monumental"],
+            ["Like it has too many tabs open"],
+            ["Like it has just finished a really good book", "(that book being [book])", "(when in reality, it hasn't)", "(that was sarcasm)"],
+            ["Reverent"],
+            ["Awed", "By the [property] of [region]"],
+            ["Distressed", "by [book]"],
+            ["Shocked", "(as in, taken aback)", "(electrically)"],
+            ["Unpleasantly surprised"],
+            ["Surprised"],
+            ["Relaxed"],
+            ["Like it is barely hanging on"],
+            ["Pleasantly surprised"],
+            ["Young"],
+            ["Old"],
+            ["Ancient"],
+            ["Apathetic"],
+            ["Empathetic"],
+            ["Gay"],
+            ["Frustrated", "by the doors"],
+            ["Angsty"],
+            ["Like a motley rabble", "of bees"],
+            ["Saucy"],
+            ["High"],
+            ["Uneasy", "after reading [book]"],
+            ["Fractured", "infinitly", "singularly", "into six and a half unequal parts"],
+            ["Aristocratic"],
+            ["Justified", "In its actions"],
+            ["like it has been knocked over", "by the adverbs"],
+            ["loyal", "to [region]"],
+            ["Suboptimal"],
+            ["Optimal"],
+            ["Nuclear"],
+            ["Forbidden"],
+            ["Foreboding"],
+            ["like it is having a dream", "about [property]", "about [book]"],
+            ["Wondering", "about [book]"],
+            ["Like it lost a coin flip (the outcome was [coin outcome])"],
+            ["Like it won a coin flip (the outcome was [coin outcome])"],
+            ["Judgemental", "towards [soupling]"],
+            ["Bipolar"],
+            ["Emotional"],
+            ["Rapid"],
+            ["like its having a mental breakdown"],
+            ["Sexual"],
+            ["Asexual"],
+            ["Loving"],
+            ["Pessimistic"],
+            ["Benevolent"],
+            ["Malevolent"],
+            ["Optimistic"],
+            ["Sarcastic"],
+            ["Profound"],
+            ["Mocklified", "by [soupling]"],
+            ["Unsure"],
+            ["an urge", "to live", "to die", "to win", "to lose"],
+            ["a desire", "to see [region]", "to read [book]", "to see [soupling]"],
+            ["a dream", "of the [property]"],
+            ["That which is not to be known", "by [soupling] specifically"],
+            ["like it has lost weight"],
+            ["like it has flown", "in a storm", "with its wings spread wide", "on the ground"],
+            ["like it has travelled", "across [region]"],
+            ["like it has passed", "through smoke from a large combustion furnace", "through water vapor", "by your house on its way home", "through snow-covered trees", "through air turbulence"],
+            ["like it will be written"],
+            ["like it will never be written"],
+            ["like it has been", "found", "discovered", "documented"],
+            ["Accepted"],
+            ["Verified"],
+            ["Longlasting"],
+            ["Understood"],
+            ["like it has been taught", "about the [property] of [region]"],
+            ["like it has changed"],
+            ["Shrewd"],
+            ["Timid"],
+            ["like it is the enemy"],
+            ["Consumed"],
+            ["Engulfed"],
+            ["like it is foolish", "as it brought its [coin outcome]"],
+            ["like it knows how to create a new object"],
+            ["like it is holding up traffic"],
+            ["like there is a timestamp right above this"],
+            ["like it is preventing an incident"],
+            ["out of line"],
+            ["in line"],
+            ["a hope"],
+            ["an idea", "about [soupling]"],
+            ["an itch"],
+            ["a fever"],
+            ["an impulse"],
+            ["a love", "for [soupling]", "for [region]", "for the continent"],
+            ["a temptation"],
+            ["a confusing set of emotions"],
+            ["Shortsighted"],
+            ["Foresightful"],
+            ["a longing"],
+            ["sharp"],
+            ["festive"],
+            ["sugary"],
+            ["salty"],
+            ["aplosiatic"],
+            ["colorful"],
+            ["a change", "in the weather"],
+            ["swollen"],
+            ["pulchritudinous"],
+            ["drafty"],
+            ["tripped out"],
+            ["bloody", "with [soupling]'s blood", "with your blood"],
+            ["cleansed"],
+            ["cloudy"],
+            ["exceptional"],
+            ["fuzzy"],
+            ["a bit of your hair"],
+            ["flumoxxed"],
+            ["anatomically", "correct", "incorrect"],
+        ];
+        let modify = [
+            "very",
+            "moderately",
+            "slightly",
+            "mildly",
+            "extremely",
+            "kind of",
+            "discernably",
+            "marginally",
+            "catastrophically",
+            "negligibily",
+            "critically",
+            "remotely",
+            "severely",
+            "regretfully",
+            "expectedly",
+            "strangely",
+            "powerfully",
+            "weakly"
+        ];
+        let modify2 = [
+            "very much",
+            "moderately",
+            "a bit",
+            "severely",
+            "marginally",
+            "kind of",
+            "slightly",
+            "strangely",
+            "expectedly",
+            "weakly",
+            "immensely",
+        ];
+        let modify3 = [
+            "definite",
+            "strong",
+            "weak",
+            "slight",
+            "critical",
+            "powerful",
+            "deep",
+            "uncontrollable",
+            "small",
+            "nearly nonexistant",
+            "unknown",
+            "bedazzling",
+            "terrifying",
+            "awe-inspiring",
+            "unwelcome",
+            "warm",
+            "significant",
+            "another",
+            "sliver of a"
+        ];
+        let ad = [
+            "twisted",
+            "nonsensical",
+            "heroic",
+            "righteous",
+            "tragic",
+            "meandering",
+            "malleable",
+            "shattered",
+            "closed-off",
+            "amorphous",
+            "tyrannical",
+            "inhuman",
+            "bottled-up",
+            "studious",
+            "unknowable"
+        ]
+        let books = [
+            "&Studies on DBAO&",
+            "&The Stand&",
+            "&Warbreaker&",
+            "&Words of Radiance&",
+            "&The Book Thief&",
+            "&Mistborn&",
+            "&The Unbearable Likeness of Being&",
+            "&The Book of Laughter and Forgetting&",
+            "&The Dark Tower&",
+            "&Symptoms of Being Human&",
+            "&The Qur'an&",
+            "&The Name of the Wind&",
+            "&The Hengine Documentation&",
+            "&The Rithmatist&",
+            "&The Help&",
+            "&The Communist Manifesto&",
+            "&Fahrenheit 451&",
+            "&The Lord of the Rings&",
+            "&To Kill a Mockingbird&",
+            "&How to Kill a Mockingbird (a definitive guide)&",
+            "&The Ending Story& (it's already done)"
+        ]
+        let formats = [
+            "The Council is feeling [emotion].",
+            "The Council is feeling &[emotion]&.",
+            "The Council is [adj] feeling [emotion], in its own way.",
+            `The Council is feeling [emotion], in its own [special] way.`,
+            "The Council is [adj] feeling [emotion].",
+            "The Council is &[adj]& feeling [emotion].",
+            "The Council doesn't want to feel [emotion], but it does.",
+            "In this specific situation, the Council is feeling [emotion].",
+            "In this specific situation, the Council is [adj] feeling [emotion].",
+            "The Council is feeling both [emotion] and [emotion2].",
+            "The Council is [adj] feeling both [emotion] and [emotion2].",
+            "The Council was feeling [emotion], but now it is not so sure.",
+            "The Council was feeling [emotion], but now it is feeling [emotion2].",
+            "A [time] ago, the Council was [adj] feeling [emotion].",
+            "The Council is ignoring the fact that it is feeling [emotion].",
+            "The Council isn't feeling today. Not even [emotion].",
+            "The Council hasn't felt [emotion] since a [time] ago.",
+            "Because of [soupling], the Council is feeling [emotion].",
+            "Because of [soupling], the Council is [adj] feeling [emotion].",
+            "[soupling] is [adj] feeling [emotion].",
+            "At this time, a [time] ago, the Council felt [emotion].",
+            "It would be better if you didn't know the Council is feeling [emotion].",
+            "Do &you& think the Council is feeling [emotion]?",
+            "You should've known the Council felt [emotion] a [time] ago.",
+            "The Council is going to [adj] feel [emotion] in a [time].",
+            "The Council is going to feel [emotion] in a [time].",
+            "The Council is going to feel [emotion] for a [time].",
+            "The Council either feels [emotion] or [emotion2]. We don't know yet.",
+            "The Council's [special] activities lead it to feel [emotion].",
+            "The Council is not making an effort to feel [emotion].",
+            "The Council can and very much will feel [emotion]."
+        ];
+        let times = [
+            "day",
+            "month",
+            "week",
+            "hour",
+            "year",
+            "minute",
+            "long time",
+            "short while",
+            "moon",
+            "lil' bit",
+            "score",
+            "moment"
+        ];
+        let adjEm = [
+            "probably",
+            "expressively",
+            "definitely not",
+            "not",
+            "likely",
+            "definitely",
+            "totally",
+            "totally not",
+            "actually",
+            "earnestly",
+            "in all odds",
+            "occasionally",
+            "frequently",
+            "surprisingly",
+            "unsurprisingly",
+            "forcefully",
+            "passionately"
+        ];
+        let regions = [
+            ["the Apex of Midnight", "auroras", "stunning vistas", "powerful rivers"],
+            ["the Respite", "quantum properties", "surreal landscapes", "terrifying implications"],
+            ["the Static Void", "motes", "unknown length of the wyrms", "indefinite distances"],
+            ["the Cresting Rings", "majestic formations", "jade crystals", "powerful storms"],
+            ["the Coast", "crashing waves", "salty mist", "towering seastacks"],
+            ["Iceforest", "freezing temperatures", "cold-dwelling plants", "frozen spires"],
+            ["the Luminance Groves", "mystery", "thick tree growth", "sublime ponds"],
+            ["the Pillars of Steel", "sheer size", "unknown origins", "sky-searing heights"],
+            ["Ri'ay", "hardiness of the humans", "existance of a kingdom such as that", "bustling, seaside economy"],
+            ["Ki'of Citadel", "florishing plant life", "architecture", "beauty and wealth"],
+            ["the subeastern isles", "impenetrability", "mysteries", "remoteness"],
+            ["the Ruins of Bariac", "tradegy", "former glory", "monolithic structures"],
+            ["the Stronghold of the Gathered", "incredible strength", "assembled kingdom", "defiance against entropy"],
+            ["the Pointed Groves", "aesthetic trees", "colorful leaves", "tall, white and black trees"],
+            ["the Spite Range", "adversity to life", "strange vegetation", "sunsets"]
+        ];
+        let souplers = [
+            "Sovereign Henry",
+            "Captain Henry",
+            "Majesty Sofia",
+            "Madam Sofia",
+            "Sir Tom",
+            "Monsieur Rowan",
+            "Mystic Mayzie",
+            "Lady Shannon",
+            "Noble Wesley",
+            "Soup Priest Molly",
+            "Ryan, Esq."
+        ];
+        let formatting = [
+            "left",
+            "right",
+            "center",
+            "letter",
+            "well",
+            "poorly"
+        ]
+        let suites = [
+            "clubs",
+            "diamonds",
+            "spades",
+            "hearts",
+            "squares"
+        ];
+        let coin = [
+            "heads",
+            "tails",
+        ]
+        //the essence
+        function generateEmotion() {
+            let emotion;
+            let index = randInt(0, emotions.length - 1);
+            let e = emotions[index];
 
-    //do replacement
-    emotion = replace(emotion, "[soupling]", souplers[randInt(0, souplers.length-1)]);
-    emotion = replace(emotion, "[book]", books[randInt(0, books.length-1)]);
-    emotion = replace(emotion, "[format-opt]", formatting[randInt(0, formatting.length-1)]);
-    let choosenRegion = randInt(0, regions.length-1);
-    emotion = replace(emotion, "[region]", regions[choosenRegion][0]);
-    emotion = replace(emotion, "[property]", regions[choosenRegion][randInt(1, regions[choosenRegion].length-1)]);
-    emotion = replace(emotion, "[number]", randInt(1,300).toString());
-    emotion = replace(emotion, "[card suite]", suites[randInt(0, suites.length-1)]);
-    emotion = replace(emotion, "[coin outcome]", coin[randInt(0, coin.length-1)]);
+            //lower-case-ify and variants
+            if (e.length > 1) {
+                if (randInt(0, 100) < 60) {
+                    let variant;
+                    if (e[0] == "Like it is tuesday") {
+                        date = new Date();
+                        (date.getDay() == 2) ? variant = e[1] : variant = e[2];
+                    }
+                    else {
+                        variant = e[randInt(1, e.length - 1)]
+                    }
 
-    return emotion;
-}
-//choose format and apply emotions to it
-function format(){
-    let selectedFormat = formats[randInt(0, formats.length-1)]
-    selectedFormat = replace(selectedFormat, "[emotion]", generateEmotion());
-    selectedFormat = replace(selectedFormat, "[emotion2]", generateEmotion());
-    selectedFormat = replace(selectedFormat, "[special]", ad[randInt(0, ad.length-1)]);
-    selectedFormat = replace(selectedFormat, "[time]", times[randInt(0, times.length-1)]);
-    selectedFormat = replace(selectedFormat, "[adj]", adjEm[randInt(0, adjEm.length-1)]);
-    selectedFormat = replace(selectedFormat, "[soupling]", souplers[randInt(0, souplers.length-1)]);
-    return selectedFormat;
-}
-betterSeed = 0;
-return format;
-})();
+                    variant = variant[0].toLowerCase() + variant.slice(1);
+                    emotion = e[0].toLowerCase() + " " + variant;
+                }
+                else {
+                    emotion = e[0].toLowerCase();
+                }
+            }
+            else {
+                emotion = e[0].toLowerCase();
+            }
+            //edge cases
+            if (emotion == "as dense") {
+                emotion = emotion.slice(3);
+            }
 
-//output
-(async function(){
+            //add modifier
+            const MOD_CHANCE = 35;
+            if (emotion.startsWith("like")) {
+                if (randInt(1, 100) < MOD_CHANCE) {
+                    emotion = modify2[randInt(0, modify2.length - 1)] + " " + emotion;
+                }
+            }
+            else if (emotion.startsWith("a ") || emotion.startsWith("an ")) {
+                emotion = "a " + modify3[randInt(0, modify2.length - 1)] + " " + emotion.slice(2).trim();
+            }
+            else {
+                if (randInt(1, 100) < MOD_CHANCE) {
+                    emotion = modify[randInt(0, modify.length - 1)] + " " + emotion;
+                }
+            }
+
+            //do replacement
+            emotion = replace(emotion, "[soupling]", souplers[randInt(0, souplers.length - 1)]);
+            emotion = replace(emotion, "[book]", books[randInt(0, books.length - 1)]);
+            emotion = replace(emotion, "[format-opt]", formatting[randInt(0, formatting.length - 1)]);
+            let choosenRegion = randInt(0, regions.length - 1);
+            emotion = replace(emotion, "[region]", regions[choosenRegion][0]);
+            emotion = replace(emotion, "[property]", regions[choosenRegion][randInt(1, regions[choosenRegion].length - 1)]);
+            emotion = replace(emotion, "[number]", randInt(1, 300).toString());
+            emotion = replace(emotion, "[card suite]", suites[randInt(0, suites.length - 1)]);
+            emotion = replace(emotion, "[coin outcome]", coin[randInt(0, coin.length - 1)]);
+
+            return emotion;
+        }
+        //choose format and apply emotions to it
+        function format() {
+            let selectedFormat = formats[randInt(0, formats.length - 1)]
+            selectedFormat = replace(selectedFormat, "[emotion]", generateEmotion());
+            selectedFormat = replace(selectedFormat, "[emotion2]", generateEmotion());
+            selectedFormat = replace(selectedFormat, "[special]", ad[randInt(0, ad.length - 1)]);
+            selectedFormat = replace(selectedFormat, "[time]", times[randInt(0, times.length - 1)]);
+            selectedFormat = replace(selectedFormat, "[adj]", adjEm[randInt(0, adjEm.length - 1)]);
+            selectedFormat = replace(selectedFormat, "[soupling]", souplers[randInt(0, souplers.length - 1)]);
+            return selectedFormat;
+        }
+        betterSeed = 0;
+        return format;
+    })();
+
+    //output
+    (async function () {
 
 
-try{
-        
-        while(true){ 
-            
-            await outputToScreen(acquireMood());
-            await SLEEP(DISPLAY_TIME);
-        }  
+        try {
 
-}catch(e){alert(e.stack)}
-})();
+            while (true) {
+
+                await outputToScreen(acquireMood());
+                await SLEEP(DISPLAY_TIME);
+            }
+
+        } catch (e) { alert(e.stack) }
+    })();
 </script>

@@ -1,23 +1,222 @@
 <!DOCTYPE HTML>
 <html>
-  <head>
-    <title>Homepage</title>
-    <link rel="shortcut icon" type="image/jpg" href="favicon_soup.png"/>
-  </head>
-  <body>
-    <h1>Don't worry this is just a placeholder</h1>
-    <hr>
-    <a href = "https://soupnight.space/councilEmotions.html">Emotions</a>
-    <a href = "https://soupnight.space/yourGraciousProverbs.html">Proverbs</a>
-    <img src = "SoupLogo1.svg" id="logo">
-  </body>
-  <script>
-    frame = true;
-    setInterval(function(){
-      document.getElementById("logo").src = frame ? "SoupLogo1.svg" : "SoupLogo2.svg";
-      frame = !frame;
-    },
-    2500)
 
-  </script>
+<head>
+	<title id="title">Soup Night</title>
+	<link rel="shortcut icon" type="image/jpg" href="favicon_soup.png" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Amiri&family=Cinzel:wght@600&family=Libre+Baskerville&family=Lora&family=Redacted+Script&family=Taviraj:wght@500&family=Vollkorn&display=swap"
+		rel="stylesheet">
+	<style>
+		* {
+			margin: 0;
+		}
+
+		body {
+			background-color: #edbd66;
+			color: #8b3e24;
+		}
+
+		#bar {
+			width: 13vw;
+			height: 100vh;
+			position: absolute;
+			background-color: currentColor;
+		}
+
+		#logo {
+			position: absolute;
+			margin-left: 32vw;
+			margin-right: 32vw;
+			width: 36vw;
+			margin-top: 17vh;
+			filter: invert(15%) sepia(87%) saturate(1100%) hue-rotate(15deg) brightness(87%) contrast(98%);
+		}
+
+		#bar2 {
+			width: 13vw;
+			height: 100vh;
+			position: absolute;
+			margin-left: 87vw;
+			background-color: currentColor;
+		}
+
+		#a {
+			background-color: black;
+			width: 50px;
+			height: 50px;
+		}
+
+		#side {
+			width: 7vw;
+			height: 7vw;
+			background-color: #5b2e04;
+			position: absolute;
+			color: rgba(91, 46, 4, 0);
+			margin-top: 3vw;
+			margin-left: 3vw;
+			opacity: .2;
+			transition: opacity .6s, width .6s;
+			border: 3px solid #5b2e04;
+			text-align: center;
+			font-size: 3vw;
+			font-family: Taviraj, serif;
+		}
+		#side #span{
+			display: none;
+		}
+		#side:hover:after{
+			display: block;
+			margin-top: 1.1vw;
+			content: "Proverbs";
+			white-space: nowrap;
+		}
+		#side:hover {
+			opacity: 1;
+			background-color: #5b2e04;
+			width: 17vw;
+			color: #edbd66;
+			transition: opacity .6s, background-color .2s, width .6s, color 1s;
+		}
+
+		#side:active {
+			background-color: #edbd66;
+			color: #5b2e04;
+			transition: opacity .6s, background-color .2s, width .6s, color .2s;
+		}
+
+		#subtitle {
+			position: absolute;
+			font-size: 7vmin;
+			/* font-family: Redacted Script, serif; */
+			font-family: Taviraj, serif;
+			text-align: center;
+			line-height: 1.2;
+			margin-left: 27vw;
+			margin-right: 27vw;
+			width: 46vw;
+			margin-top: calc(17vh + 350px);
+			color: #5f4515;
+		}
+
+		#side2 {
+			width: 7vw;
+			height: 7vw;
+			background-color: #5b2e04;
+			position: absolute;
+			color: rgba(91, 46, 4, 0);
+			margin-top: calc(100vh - 10.7vw);
+			margin-left: 3vw;
+			opacity: .2;
+			transition: opacity .6s, width .6s;
+			border: 3px solid #5b2e04;
+			text-align: center;
+			font-size: 3vw;
+			font-family: Taviraj, serif;
+		}
+		#side2 #span2{
+			display: none;
+		}
+		#side2:hover:after{
+			display: block;
+			margin-top: 1.1vw;
+			content: "Emotions";
+			white-space: nowrap;
+		}
+		#side2:hover {
+			opacity: 1;
+			background-color: #5b2e04;
+			width: 17vw;
+			color: #edbd66;
+			transition: opacity .6s, background-color .2s, width .6s, color 1s;
+		}
+
+		#side2:active {
+			background-color: #edbd66;
+			color: #5b2e04;
+			transition: opacity .6s, background-color .2s, width .6s, color .2s;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="bar">
+		<a href="https://www.soupnight.space/yourGraciousProverbs.html">
+			<div id="side">
+				<span id="span">hello</span>
+			</div> 
+		</a>
+		<a href="https://www.soupnight.space/councilEmotions.html">
+			<div id="side2">
+				<span id="span2">hello</span>
+			</div> 
+		</a>
+	</div>
+	<img src="SoupLogo1.svg" id="logo" alt="soup logo">
+	<div id="bar2">
+		
+	</div>
+	<div id="subtitle">Praise the Council</div>
+</body>
+
+<script>
+	frame = true;
+	setInterval(function () {
+		document.getElementById("logo").src = frame ? "SoupLogo2.svg" : "SoupLogo1.svg";
+		frame = !frame;
+	},
+		3600)
+	let subtitlesCommon = [
+		"Soup Night",
+		"Festival of Soup",
+		"Soup Gathering",
+		"Welcome to the Soup",
+		"Greetings, Traveller",
+		"Warmth and Welcome"
+	];
+	let subtitlesUncommon = [
+		"Praise the Council",
+		"Do Not Fear",
+		"Donate to Your Local Soup Priest",
+		"Benevolence to You",
+		"Soup Night!"
+	];
+	let subtitlesRare = [
+		"Council Save Us",
+		"Council Save Us All",
+		"A Sharp Breeze Covers the Continent",
+		"An Illuminating is Near",
+		"Surrealist"
+	];
+
+	if (Math.random() > .4) {
+		get("subtitle").innerHTML = subtitlesCommon[randInt(0, subtitlesCommon.length - 1)];
+	}
+	else {
+		if (Math.random() > .27) {
+			get("subtitle").innerHTML = subtitlesUncommon[randInt(0, subtitlesUncommon.length - 1)];
+		}
+		else {
+			get("subtitle").innerHTML = subtitlesRare[randInt(0, subtitlesRare.length - 1)];
+		}
+	}
+	if (Math.random() > .9) {
+		get("title").innerHTML = "Soup Night!";
+	}
+	if (Math.random() > .99) {
+		get("title").innerHTML = "Praise the Council";
+	}
+
+	function randInt(min, max) {
+		return Math.floor(Math.random() * (max - min + 1) + min);
+	}
+	function get(id) {
+		return document.getElementById(id);
+	}
+// <a href = "https://soupnight.space/councilEmotions.html">Emotions</a>
+//<a href = "https://soupnight.space/yourGraciousProverbs.html">Proverbs</a>
+</script>
+
 </html>
