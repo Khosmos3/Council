@@ -384,11 +384,13 @@
             ["Submissive"],
             ["Driven"],
             ["Dumbstruck"],
-            ["Switchy"],
+            ["Switchy", "towards [soupling]"],
             ["Elated"],
             ["Enchanted"],
             ["Smug"],
+            ["Blessed"],
             ["Spiteful"],
+            ["conventional"],
             ["Expectant"],
             ["Sullen"],
             ["Suspicious"],
@@ -400,6 +402,7 @@
             ["Humility"],
             ["Vulnerable"],
             ["Idle"],
+            ["Autistic"],
             ["Impatient"],
             ["Indignant"],
             ["like it is being gaslit", "by [soupling]"],
@@ -423,6 +426,7 @@
             ["Devious"],
             ["Deadly"],
             ["Burnt-out"],
+            ["dislexiec"],
             ["Unwanted", "by [soupling]", "by you (try donating some plasma)"],
             ["Unconscious"],
             ["Unconventional"],
@@ -574,6 +578,12 @@
             ["a bit of your hair"],
             ["flumoxxed"],
             ["anatomically", "correct", "incorrect"],
+            ["subby", "towards [soupling]"],
+            ["dommy", "towards [soupling]"],
+            ["bloated"],
+            ["like it has chalk", "in its teeth", "under its fingernails", "it its many esophagi"],
+            ["hairy"],
+            []
         ];
         let modify = [
             "very",
@@ -763,7 +773,6 @@
             "Lady Shannon",
             "Noble Wesley",
             "Soup Priest Molly",
-            "Ryan, Esq."
         ];
         let formatting = [
             "left",
@@ -855,6 +864,13 @@
             selectedFormat = replace(selectedFormat, "[time]", times[randInt(0, times.length - 1)]);
             selectedFormat = replace(selectedFormat, "[adj]", adjEm[randInt(0, adjEm.length - 1)]);
             selectedFormat = replace(selectedFormat, "[soupling]", souplers[randInt(0, souplers.length - 1)]);
+            if(selectedFormat.toLowerCase().indexOf("dislexiec") > -1){
+                selectedFormat = selectedFormat.split(" ").map(
+                    (reginald) => reginald.toLowerCase().startsWith("dislexiec") ? reginald : (reginald.split("").map(
+                        (charle) => randInt(0, 100) < 12 ? String.fromCharCode(charle.charCodeAt(0)+randInt(-5, 5)) : charle
+                    ).join(""))
+                ).join(" ");
+            }
             return selectedFormat;
         }
         betterSeed = 0;
