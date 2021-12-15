@@ -6,10 +6,11 @@
 	<link rel="shortcut icon" type="image/jpg" href="favicon_soup.png" />
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link
-		href="https://fonts.googleapis.com/css2?family=Amiri&family=Cinzel:wght@600&family=Libre+Baskerville&family=Lora&family=Redacted+Script&family=Taviraj:wght@500&family=Vollkorn&display=swap"
-		rel="stylesheet">
+	
+	<link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cinzel:wght@600&family=Libre+Baskerville&family=Lora&family=Redacted+Script&family=Taviraj:wght@500&family=Vollkorn&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Runic&display=swap" rel="stylesheet">
 	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Runic&display=swap');
 		* {
 			margin: 0;
 		}
@@ -32,11 +33,12 @@
 			margin-right: 32vw;
 			width: 36vw;
 			margin-top: 17vh;
-      pointer-events: none;
-      user-select: none;
+			pointer-events: none;
+			user-select: none;
 			filter: invert(15%) sepia(87%) saturate(1100%) hue-rotate(15deg) brightness(87%) contrast(98%);
 		}
-    #subtitle {
+
+		#subtitle {
 			position: absolute;
 			font-size: 7vmin;
 			/* font-family: Redacted Script, serif; */
@@ -49,6 +51,24 @@
 			margin-top: calc(17vh + 24vw);
 			color: #5f4515;
 		}
+
+		.runes{
+			font-family: 'Noto Sans Runic', sans-serif;
+			position: absolute;
+			color: #5f4515;
+			font-size: 4.5vmin;
+			width: 100vw;
+			white-space: nowrap;
+			overflow: hidden;
+		}
+		#runes {
+			margin-top: 2vh;
+		}
+
+		#runes2 {
+			margin-top: calc(97vh - 4.5vmin)
+		}
+
 		#bar2 {
 			width: 13vw;
 			height: 100vh;
@@ -78,15 +98,18 @@
 			font-size: 3vw;
 			font-family: Taviraj, serif;
 		}
-		#side #span{
+
+		#side #span {
 			display: none;
 		}
-		#side:hover:after{
+
+		#side:hover:after {
 			display: block;
 			margin-top: 1.1vw;
 			content: "Proverbs";
 			white-space: nowrap;
 		}
+
 		#side:hover {
 			opacity: 1;
 			background-color: #5b2e04;
@@ -107,7 +130,7 @@
 			background-color: #5b2e04;
 			position: absolute;
 			color: rgba(91, 46, 4, 0);
-			margin-top: calc(100vh - 10.7vw);
+			margin-top: calc(100vh - 10vw);
 			margin-left: 3vw;
 			opacity: .2;
 			transition: opacity .6s, width .6s;
@@ -116,15 +139,18 @@
 			font-size: 3vw;
 			font-family: Taviraj, serif;
 		}
-		#side2 #span2{
+
+		#side2 #span2 {
 			display: none;
 		}
-		#side2:hover:after{
+
+		#side2:hover:after {
 			display: block;
 			margin-top: 1.1vw;
 			content: "Emotions";
 			white-space: nowrap;
 		}
+
 		#side2:hover {
 			opacity: 1;
 			background-color: #5b2e04;
@@ -142,23 +168,26 @@
 </head>
 
 <body>
+	<div id="runes" class="runes"></div>
+	<div id="runes2" class="runes"></div>
 	<div id="bar">
 		<a href="https://www.soupnight.space/yourGraciousProverbs.html">
 			<div id="side">
 				<span id="span">hello</span>
-			</div> 
+			</div>
 		</a>
 		<a href="https://www.soupnight.space/councilEmotions.html">
 			<div id="side2">
 				<span id="span2">hello</span>
-			</div> 
+			</div>
 		</a>
 	</div>
 	<img src="SoupLogo1.svg" id="logo" alt="soup logo" unselectable="on">
 	<div id="bar2">
-		
+
 	</div>
 	<div id="subtitle">Praise the Council</div>
+
 </body>
 
 <script>
@@ -190,6 +219,21 @@
 		"An Illuminating is Near",
 		"Surrealist"
 	];
+
+	let runeAlphabet = "ᚠᚡᚢᚤᚥᚦᚧᚨᚩᚬᚭᚮᛴᚯᚰᚱᚲᚳᚴᚵᚶ.ᛱᚷᚹᛩᚺᚻᚼᚽᚾᚿᛀᛁᛂᛵᛃᛄᛅᛆᛇᛈᛕᛉᛊᛋᛪᛍᛎᛲᛏᛐᛑᛒᛓᛔᛖᛶᛗᛘᛙᛚᛛᛜᛝᛞᛟᛳᚪᛷᚫᛸᚣᛠᛣᚸᛤᛡᛢᛥᛦᛧ                         ";
+	let r1;
+	let r2;
+
+	for(i = 0; i < 100; i++){
+		r1 += runeAlphabet.charAt(randInt(0, runeAlphabet.length));
+	}
+	for(i = 0; i < 100; i++){
+		r2 += runeAlphabet.charAt(randInt(0, runeAlphabet.length));
+	}
+
+	get("runes").innerHTML = r1
+	get("runes2").innerHTML = r2;
+
 
 	if (Math.random() > .4) {
 		get("subtitle").innerHTML = subtitlesCommon[randInt(0, subtitlesCommon.length - 1)];
