@@ -188,27 +188,28 @@
         input = `&#${title}# ${ ~~((index + 1) * 3.5)}& ${choose(numeral)} ${ch}:${verse}\n${input}`;
 
         //type it out
+        let escaped = false;
         for (let t = 0; t < input.length; t++) {
-            if (input[t] == "&") {
+            const char = input[t];
+        
+            if (char == "&" && !escaped) {
                 output += start ? "<i>" : "</i>";
                 start = !start;
-            }
-            else if (input[t] == "\n") {
-                output += "<br>";
-            }
-            else if (input[t] == "#") {
+            } else if (char == "#" && !escaped) {
                 output += start2 ? "<b>" : "</b>";
                 start2 = !start2;
-            }
-            else {
-                output += input[t];
-            }
+            } else if (char === "\n")
+                output += "<br>";
+            else if (char !== "\\" || escaped)
+                output += char;
+            
+            escaped = char === "\\" && !escaped;
 
             if (t % 5) {
-                document.getElementById("paper").innerHTML = `${output}`;
+                document.getElementById("paper").innerHTML = output;
             }
             else {
-                document.getElementById("paper").innerHTML = `${output}`;
+                document.getElementById("paper").innerHTML = output;
             };
             fix();
             await SLEEP(37);
@@ -454,6 +455,12 @@
                 Our priests work &round the clock&
                 You will not enter &#heaven.#&
                 Sitting in a counter, staring at the customers
+                We will be going into the restaurant \\& watching people talk when they sit down
+                There's one last great show for everyone
+                Happy TV viewing, happy family
+                I hope you enjoy, enjoy the show of the same name!
+                Please have fun with this world and get together with your children, lovers, and family in this life long journey
+
             `),
             new Scroll("Frill Optanal", `
                 Persimmons are sufficient to sustain life
@@ -479,8 +486,11 @@
                 The world is fastened directly to your abdomen. You don't need an oyster
                 The world is mine and mine alone. Go, get a new name, for it is mine
                 I am your only refuge, your only god
+                Feel the wrath of your only refuge
                 The people that speak is our minds and dreams
                 Half a rock, thrown across the bank. It's finally done
+                Don't let the devil give you a choice!
+                Saying "No thanks" to the devil only make you look bad!
             `),
             new Scroll("Auberations", `
                 Door locks are the career to good business
@@ -531,6 +541,7 @@
                 I feel I know everyone and nobody
                 Myopia is an inadequate foundation
                 The fibers have prevented your self-realization
+                Don't forget \\& don't remember!
             `),
             new Scroll("Splines", `
                 Scream, for they can hear you. Sing, for this is literally a recording studio
