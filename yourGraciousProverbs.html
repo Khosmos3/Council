@@ -1,35 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proverbs</title>
-    <link rel="shortcut icon" type="image/jpg" href="favicon_soup.png"/>
+    <link rel="shortcut icon" type="image/jpg" href="favicon_soup.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Quintessential&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quintessential&display=swap" rel="stylesheet">
     <style>
-        *{
+        * {
             margin: 0;
             font-family: "Quintessential";
         }
-        body{
+
+        body {
             font-size: 7.5vmin;
             font-family: typewriter;
             background-color: #F6E9D8;
             color: #6b1617;
             font-family: "Quintessential";
         }
-        #bar{
+
+        #bar {
             width: 13%;
             height: 100%;
-           
+
             position: fixed;
             background-color: currentColor;
-    
+
         }
-        #n{
+
+        #n {
             overflow: auto;
             width: calc(100vw - 20% - 15%);
             height: 100vh;
@@ -47,78 +51,102 @@
             padding-top: 20%;
             padding-bottom: 30%;
         }
-		#side {
-			width: 7vw;
-			height: 7vw;
-			background-color: #410304;
-			position: absolute;
-			color: rgba(65, 3, 4, 0);
-			margin-top: 3vw;
-			margin-left: 3vw;
-			opacity: .2;
-			transition: opacity .6s, width .6s;
-			border: 3px solid #410304;
-			text-align: center;
-			font-size: 3vw;
-			font-family: Quintessential, serif;
-		}
-		#side #span{
-			display: none;
-		}
-		#side:hover:after{
-			display: block;
-			margin-top: 1.1vw;
-			content: "Home";
-			white-space: nowrap;
-		}
-		#side:hover {
-			opacity: 1;
-			background-color: #410304;
-			width: 17vw;
-			color: #F6E9D8;
-			transition: opacity .6s, background-color .2s, width .6s, color 1s;
-		}
 
-		#side:active {
-			background-color: #F6E9D8;
-			color: #410304;
-			transition: opacity .6s, background-color .2s, width .6s, color .2s;
-		}
+        #side {
+            width: 7vw;
+            height: 7vw;
+            background-color: #410304;
+            position: absolute;
+            color: rgba(65, 3, 4, 0);
+            margin-top: 3vw;
+            margin-left: 3vw;
+            opacity: .2;
+            transition: opacity .6s, width .6s;
+            border: 3px solid #410304;
+            text-align: center;
+            font-size: 3vw;
+            font-family: Quintessential, serif;
+        }
+
+        #side #span {
+            display: none;
+        }
+
+        #side:hover:after {
+            display: block;
+            margin-top: 1.1vw;
+            content: "Home";
+            white-space: nowrap;
+        }
+
+        #side:hover {
+            opacity: 1;
+            background-color: #410304;
+            width: 17vw;
+            color: #F6E9D8;
+            transition: opacity .6s, background-color .2s, width .6s, color 1s;
+        }
+
+        #side:active {
+            background-color: #F6E9D8;
+            color: #410304;
+            transition: opacity .6s, background-color .2s, width .6s, color .2s;
+        }
     </style>
 </head>
 
 <body id="body">
     <div id="bar">
         <a href="https://soupnight.space">
-			<div id="side">
+            <div id="side">
                 <span id="span">s</span>
-			</div>
-		</a>
+            </div>
+        </a>
     </div>
     <div id="n">
-        <div id = "paper"></div>
+        <div id="paper"></div>
         <div id="evil"></div>
-    </div>    
+    </div>
 </body>
 <script>
 
 
-//function, obviously
-let betterSeed = 0;
-function getSeed(){
-    betterSeed+=71;
-    let seed = Date.now() + betterSeed;
-    seed ^= seed << 5;
-    seed ^= seed >> 2;
-    seed ^= seed << 4;
-    seed ^= seed >> 7;
-    seed /= 0xFFFF;
+    //function, obviously
+    let betterSeed = 0;
+    function getSeed() {
+        betterSeed += 71;
+        let seed = Date.now() + betterSeed;
+        return seed;
+    }
+    function random01() {
+        let seed = getSeed();
+        seed ^= seed << 5;
+        seed ^= seed >> 2;
+        seed ^= seed << 4;
+        seed ^= seed >> 7;
+        seed /= 0xFFFF;
+        return Math.abs(seed % 1);
     
-    return Math.abs(seed%1);
-}
-function randInt(min, max){
-    return Math.floor(getSeed()*(max-min+1)+min);
-}
+    }
+    function randInt(min, max) {
+        return Math.floor(random01() * (max - min + 1) + min);
+    }
+    function choose(arr) {
+        return arr[randInt(0, arr.length - 1)];
+    }
+
+    function chooseWeighted(scrolls) {
+        const t = random01();
+        let acc = 0;
+        for (let i = 0; i < scrolls.length; i++) {
+            const scroll = scrolls[i];
+            if (acc <= t && t < acc + scroll.weight)
+                return scroll;
+            acc += scroll.weight;
+        }
+        return scrolls[scrolls.length - 1];
+    }
+
     //the artifact
     let _l;
     Object.defineProperty(window, "l", {
@@ -126,551 +154,619 @@ function randInt(min, max){
         get: () => _l++
     });
 
-//how long the text appears in place
-const DISPLAY_TIME = 5000;
-let output = " ";
-let start = true;
-let start2 = true;
-const SLEEP = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+    //how long the text appears in place
+    const DISPLAY_TIME = 3200;
+    let output = " ";
+    let start = true;
+    let start2 = true;
+    const SLEEP = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-function fix() {
-    document.getElementById("evil").scrollIntoView();
-}
-
-async function outputToScreen(input){
-    betterSeed = 0;
-    for(let p = 1; p < 2; p++){         
-        output += "<br>";
-        document.getElementById("paper").innerHTML = output;
-        fix();
-        await SLEEP(500);
+    function fix() {
+        document.getElementById("evil").scrollIntoView();
     }
-    let ch = randInt(1, 40);
-    let verse = randInt(1, 100);
-    let set = randInt(1, 20);
-    let num = randInt(1, 25);
-    let numeral = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X",
-                   "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX",
-                   "XXI", "XXII", "XXIII", "XXIV", "XXV", "XXVI", "XXVII", "XXVIII", "XXIX",
-                   "XXXI", "XXXII", "XXXIII", "XXXIV", "XXXV", "XXXVI", "XXXVII", "XXXVIII", "XXXIX",
-                   "XLI", "XLII", "XLIII", "XLIV", "XLV", "XLVI", "XLVII", "XLVIII", "LXIX",
-                   "LI", "LII", "LIII", "LIV", "LV", "LVI", "LVII", "LVIII", "LIX", "LX"];
-
-    let book = [
-        "Illuminating",
-        "Suffering",
-        "Okrates",
-        "Isfaths",
-        "Hubris",
-        "Dilap",
-        "Praculae",
-        "Unpleasant Thoughts",
-        "Sputilations",
-        "Ti",
-        "Herculans",
-        "Leviathans",
-        "Gracit Alabu",
-        "Numerals",
-        "Circles of Polarity",
-        "Ectermine's Legacy",
-        "Spaoons",
-        "Philophics",
-        "Apathetium",
-        "Cilliations",
-        "Plagarized Optics",
-        "Konradism",
-        "Varying Elements",
-        "Vocaloid",
-        "Frill Optanal",
-        "Theophrastes's Legacy Pronunciation",
-        "Auberations",
-        "Boron's Toussaint",
-        "Kelp",
-        "Ceremonisms",
-        "Splines",
-        "Inhalation of Pleo-Jovian Artifacts",
-        "Liturgical Pots of Blood",
-        "Neptune's Quenches",
-        "Ossuary's Fingers",
-        "Apticality",
-        "Shifting Ties",
-        "Incorporations",
-        "Freud the Spinner",
-        "Aetherea",
-        "Tidescales",
-        "Carnalicy",
-        "Parsnip of the Avocado Proclamations",
-        "Geonosis",
-        "Hubert",
-        "Fools"
-    ];
-    input = `&#${book[randInt(0, book.length-1)]}# ${set}& ${numeral[randInt(0, numeral.length-1)]} ${ch}:${verse}\n${input}`;
-    
-    //boobs area
-    if (input.length==420000) {alert("boobs are cool and shit!!");}
-
-    
-    //type it out
-    for(let t = 0; t < input.length; t++){
-        if(input[t] == "&"){
-            output += start ? "<i>" : "</i>";
-            start = !start;
-        }
-        else if(input[t] == "\n"){
-            output += "<br>";
-        }
-        else if(input[t] == "#"){
-            output += start2 ? "<b>" : "</b>";
-            start2 = !start2;
-        }
-        else{
-            output += input[t];
-        }
-        
-        if(t%5){
-            document.getElementById("paper").innerHTML = `${output}▓`;
-        }
-        else{
-            document.getElementById("paper").innerHTML = `${output}░`;
-        };
-        fix();
-        await SLEEP(50);
-    }  
-    output += "<br>";
-    document.getElementById("paper").innerHTML = `${output}`;        
-    fix();
-    betterSeed = 0;
-    //this line is my best fren i am keep it -->  let br = "<br>";     
-}
-
-
-    function proverb(){
+    async function outputToScreen({
+        title,
+        index,
+        proverb: input
+    }) {
         betterSeed = 0;
-        yourGraciousProverbs = `
-            Do not give in to fear. It is chaos of the mind and must not be yielded to. Lose your fear and ability will stretch before you
-            They are up in arms
-            Humming and warring
-            It happened on a tuesday
-            You will cause chaos if you try and leave
-            That is normal
-            This is expected behavior
-            Sanctity is the mnemonic device
-            Anagrams: In order to get a deeper understanding of mathematics and to grasp the world of philosophy, here is a list of most important art
-            Oats in the machine
-            The moon is not our enemy (probably, it hasn't responded yet)
-            You do not remember the stones
-            We heard that it would end in a museum, but it hasn't yet
-            Five score, to the tenth. Business as usual
-            Reality is not about you
-            Reality is purely you
-            Reality is a lie
-            I've been adding cubes for about four minutes
-            There is the sun, there is moon, and there is something else
-            There is the soil, there is the stone, and there is something below
-            Rumbling in the soul
-            Peppers are toxic, perhaps
-            Bob is your uncle
-            There is no horse on the water
-            Pretend you are an aglet. Now stop, please. Tell us your experience
-            Fish on the land. Sky in the sea
-            You will be lucky. Turn to the sun and be fearless
-            You will be unlucky. Turn to the sun for its gracious mirth
-            Fugue in the deepest of nights
-            Many simply voted for a candidate they detest because they feared the other guy
-            Luminance and the ethereal, it flows beneath
-            Don't mask what you can't see
-            Take up a new hobby. You'll have to, eventually
-            Don't build an atom bomb with teeth
-            The fan companies have a plan
-            The are tunnels
-            Splines cannot have hurt you
-            Attic is towering
-            You must not be italicized
-            That is a proverb
-            Meteor, across the dimmed landscape
-            The music is ever present. Embrace it or perish
-            Surreal continents continue
-            Dreams are the reality and what seems is the dream
-            Edge on edge!
-            Moss is [emotion here]. Now, moss is a philosophy
-            I've been taking my new prescription. I really wish doc would've told me about the strings! &muffled laughter of a comedy routine, at a joke you can't seem to understand&
-            To see is to believe, to feel is to doubt, and to smell is to be thoroughly disenchanted
-            The patchwork is incomplete
-            Only you see it that way; this is good
-            If you're worried, then examine the glass, the grass, and the breeze
-            Ata khe ata!
-            It's fun to watch y'all manipulate others
-            Ankh per width the depth of ships, amidst the life and death there is
-            Parallax universe. Don't be so sure of existence
-            Loops upon loops
-            There's nothing but more humans and they're just as confused as I. Where is everyone else?
-            Am I dead?
-            Joy is a boundless restriction
-            Randomness is the salt
-            I value sleep with cities and gold
-            Playing cards should be worth more. You could try and collect a full deck
-            The king of spades is mad at you
-            You're far when it doesn't hurt anymore
-            Lock your doors, open your windows, and call upon your neighbors
-            You will go and I will follow, in my own twisted way
-            Identical depression and twins
-            The frugality of an onion is overrated
-            The ships that sail the sea defy the powers that be
-            The sheer mindfuck of a group of children in a circle throwing rocks
-            We don't believe in death
-            The growing ball of dirt is simply a distraction
-            Do not concern yourself with them
-            Persimmons are sufficient to sustain life
-            Persimmons are sufficient to sustain transportation
-            Persimmons are sufficient
-            Persimmons are
-            An onion is very much like the Earth, in the sense that it has many layers and can't do calculus
-            It is gone now, you won't need to fear for about another 38 months
-            An awful mess, you've created. Reincarnate please
-            The stars have aligned into the shape of your future! It's a clear day outside
-            You've brought about the end of days. Want a sandwich?
-            Zeus doesn't like the idea of your promotion
-            It's only Source Sans Pro? Always has been
-            The distinction between you and me is only 1% greater than ~99.099% of the distinction between you and me
-            Scream, for they can hear you. Sing, for this is literally a recording studio
-            The eyes which await you in the void only want your mangoes, nothing more
-            That may have been a deception
-            The cupboards contain boundless hope (bounded of course by the cupboards)
-            The grass is greener on the side closer to the chemical plant. Neon even
-            Endless fits of understanding
-            Silent nods of laughter
-            To sufficiently enjoy photons, take a break from them for a while
-            Chicken nuggets are probably a hoax
-            10-12 times a month, they hunt
-            Buying candles from a thrift store
-            Nothing compares to the excitement of opening a tree
-            We exist in the space between brain and mind
-            The horses are here, they wish fortune upon you
-            Roads are imaginary
-            They plead for toast
-            The birds will save you from yourself
-            The birds will be your downfall
-            I do not know from whence I speak
-            Bread was never an animal
-            We all scream for ice cream
-            The ice cream screams for salvation
-            Misanthrope? more like miso soup!
-            The ants are listening
-            The answer: listening…
-            Fun fact: doors are not guaranteed to be associative
-            You are lost
-            You are found
-            You are being searched for
-            Peanuts are likely to have tiny hats
-            A bearded man is present within the legumes, if only you choose to find him
-            Monster. Look at yourself, and despair
-            You have acquired salutations
-            Be careful, or your permanent record will go on you
-            A torrent of thoughts shall drown us all, in the end
-            To reach enlightenment, you must imbibe
-            Gaze upon the wasteland before you and know your place
-            The questions you ponder shall remain
-            Barely one of us left
-            A hundred and one thousand days, which they want to get rid of, but they do not
-            There will never again be a house
-            We're only doing this if we all die
-            You will need to wait a little longer
-            The stones welcome you into their ranks
-            The feelings are enumerable
-            The people that speak is our minds and dreams
-            Only place your faith in falsehoods
-            We hope that you find comfort in the fact that you have the capacity to move around and think
-            Improvement is inevitable
-            Sacrifice the bean
-            Your own mind always seems to bend
-            The world is an illusion and never will be. Everything is impossible
-            You are too big to live on a tiny island in any shape or form
-            The potatoes are watching, the corn is listening, and the grapes are feeling your skin. Right now
-            A rapid transmutation and a day off
-            And I was watching as it suddenly changed
-            You're a dream… A nightmare…
-            I need to stop the madness and start putting my mind to rest
-            You're so happy! You're so relieved you're not dead
-            The habitat is no longer safe. Maybe it never was
-            You are tired, tired of having to wait 20 minutes to go in front of a big tv show
-            The feeling of being able to feel your voice in the woods is lovely
-            Just keep doing this forever and you'll feel awfully mediocre
-            The choice of being me over you is one that I will choose
-            The greatest thing is that you are now a human being
-            Your identity is only as strong as your willingness to leave
-            The future you've seen is real. It has been there since after all
-            They let you come here. Don't mess up
-            Even though everything is so well planned, you're going to be the next one
-            I“ʘ I don“x“? Yes
-            Ankh per size but not a length
-            There is always time for flexibility at the end of cattle
-            The air was filled with silence as I stood in the middle
-            The vacuum followed me as I ran
-            (This post will not be written with any intention of making you work at the post as I am an ex-gale worker)
-            Mackenzie: good gods, good humans, good stories, good people, good music
-            There's also a little part in this episode where Liz points out why you shouldn't get rid of all the gods at once, so how does that make people unhappy?
-            Agreed much, i just thought it would be fun for a few
-            They seek friendship, why would they be so foolish
-            The dappled light upon the ground reminds me of the distance
-            If every event in a collection were a result of an enumeration to which it is not a result, and that enumeration is only a sum of numbers where some element does not exist on it, and that the enumeration of the elements is only a sum (or sum) of numbers where some element exist on the collection, we will have all the general forms of functions from which there is no natural law (unless the particular form is logically equivalent to the general form) and the natural laws will be determined as the natural law of the universe would be
-            Cofusation
-            Home is where you play open handed
-            Grim, the peddler, amongst the Lorician
-            I see... you've seen. You've seen what it feels like to be an asshole
-            We're being watched and that's why our lives are so much happier
-            Salted is thy bread, beholden of the tides that bind
-            I feel i know everyone and nobody
-            The undulations feed your despair
-            Myopia is an inadequate foundation
-            The fibers have prevented your self-realization
-            Moderation: an effective anti-productivity mechanism
-            They are right, for they come from below
-            They are left, for they come for above
-            The length of the nasal cavity can be unexpected, and not for the faint of heart
-            Accurate predictions strain the system
-            You shalln't see anything of significance if you look
-            We don't leave any more
-            The ability to distinguish between smoke and mirrors will be invaluable
-            Oh dear! I'm so sorry you had to see that! View it again
-            Things are, in fact, as they seem
-            No one among you can understand the gravity of what you've done
-            Wicker lanterns, dancing 'till there is nothing left but light
-            The fruit smiles, your time has come
-            Avenge the risen, for the fallen have come too far
-            Half a rock, thrown across the bank. It's finally done
-            The seashells are strewn across the counter. If only this could last
-            Why must they anger us so
-            The trees are but daughter nature's haphazard attempts at drawing a triangle
-            Nothing amidst the fluid carries the answer
-            The road doesn't work ahead. Stop hoping
-            ♪ Bouncing on down to New Orleans ♪
-            As you fall, look behind you
-            There is a certain level of chaos that is subjective
-            Nothing you say can or will be used against you in a court of law
-            You keep forgetting that you are confused
-            Olive trees, despite their beauty, do not
-            Why can't I understand clocks?
-            You're viewing it in the wrong dimension, you goofball
-            We are there yet. What now?
-            The butterflies are dropping from the sky
-            Face the enemy, find the enemy, dispel the enemy
-            I will be with you the day you die, that day is now
-            I had a dream where all my dreams came true
-            It's almost funny how many there are, if it wasn't so searing
-            The air is warm for almost 30 minutes
-            There are a few moments of truth. Five have passed but you've only realized one
-            A small fraction of you may end up happy. Although it means no harm to you, many of you want to leave
-            To be free from any external and internal suffering is very, very difficult
-            To go on living life like this is as impossible as dying is
-            Nobody except you knows your location, geographically and possibly in some other way if you see the metaphor in this
-            Typing, typing. They've been typing for the longest time and I can't wait any longer
-            The belldrum is full of all the things we won't have time to know
-            Strike by the cover of the book
-            Sitcom idea where it goes on for nine season and everybody loves the amicable characters, goofy gimmicks, and adorable romances. After a few years of this, end the show with all the characters dying in tragic manners and watch the chaos unfold
-            Become the anvil
-            Tied up in holiday ribbons!
-            Wait. How many ribs did you say I have currently inside me?!
-            Visual mode engaged
-            The rurals are the main source of the urbs
-            Suburban, urban, hypourban
-            You've been deal a hand of a king of spades and an ace. That would be great for blackjack but this is five card draw and you seem to somehow have lost three cards already
-            A word is worth exactly three sevenths of a length of string, as determined by the latest census
-            Sleep well. Nothing foreboding, it's not like you have only this last chance. Just… a good idea
-            Don't tap the keyboard twice
-            The houses are only separated by colorful banners enscripted with avant garde medieval symbols
-            &nearly incomprehensible farmer accent& Goddam spots in the harvesters again &spits& Get the blowtorch and lure
-            Carpeted windows
-            Mass production companies of tether cords are being overrun by small scale, local businesses producing tether cords
-            An amber lamp for you in this paling room
-            The cooks are in the kitchen
-            The cooks are in your living room
-            The cooks are in the restroom currently. Give them sufficient time
-            Last edit was a bit ago and you don't know what it was
-            A new random object has been added to your living room aesthetic
-            A new random object has been removed from your living groom aesthetic
-            Rolling a coin 10 times will not result in 10% spades
-            Realer than should be possible
-            Guitar of vocal cords
-            The packing peanuts entice me
-            It's boring to be obvious
-            Being found guilty of counterfeiting settled an unmistakable aura of authority on a metallurgist
-            It's done. All the doctors are dead. Apples are no longer necessary
-            An apple a day keeps the doctor away. Ten will send them flying
-            Subavocado
-            Kanye's Game of Life
-            They approach
-            A glass of water for Zeus
-            Control,  down-shift, now park the car
-            A simple, everyday, all-consuming  life routine 
-            When is a crab not a crustacean? Whenever the train reaches the station!
-            Good insanity is necessary as it will leave no room for bad insanity
-            Cynicism is futile
-            Intel... outside
-            So I've made up my mind now
-            You are now one of these two souls 
-            When is a dog not a bison? When a sheep not a horse? When a pig, a pig's tail, a pig's head
-            What the hell did I think I was gonna hear this on the radio?
-            A book is ㅋ
-            The difference is that a spoonful of sugar is not much
-            Molasses that should be eaten
-            They have all the same memories of the day
-            Cavehorses can't even walk around in mud
-            I am alive again. The sun has come full circle ... and now I am standing in a sun-flicker...
-            Our lives! Turned upside down in no time! Free warranty!
-            Despite all we'd done, the sun rose again
-            You don't know what the wizard does
-            Live til you shouldn't
-            Splitten rope giveth the trope
-            Thy sun is not identical
-            Have you checked upon it recently?
-            The frugal will pay
-            A dark spot where the sun was shall fall into the dark
-            To live without being distracted
-            The world is mine and mine alone. Go, get a new name, for it is mine
-            Such an earthly world
-            I am your only refuge, your only god
-            Houses on the summit of a mountain
-            Behold upon the pit of ash and thou shall fall into luminance
-            A man is coming out of the oven
-            You &love& your coworkers
-            you must know ONE DAY YOU WILL BE HELD
-            You thought!!!
-            Absolute nothing! &echoes&
-            Scrolling past trees and breeze. Like, y'know...
-            Psst. You're missing a color
-            Sitting in a counter, staring at the customers
-            They watch and because of that you leave
-            Splitshop in the middle of the state
-            Left right in the middle
-            The limits of the tree are infinite, albeit two dimensional
-            But your mouth does not open
-            It never gets old. It doesn't need to
-            The stars will be caught up soon!
-            The weather must be treated carefully, its quite slippery
-            Door locks are the career to good business
-            I am not that type that can write scripts, I am just...
-            Come, join the show
-            There's a possibility the people from TV are from the best of both worlds
-            Achieve points every time!
-            The television is full of ""gala appels""
-            There's an old gentleman inside the house. Currently. The old woman is later, don't worry
-            The phone is out of range
-            Everything is being &ripped apart&! The best part is it was &hollow all along&!!!
-            Watches are the hands of eternity
-            For there shall come a time, when a time comes
-            Sometimes fits of arise
-            Predictions are a thing of the past
-            The stones hold memories and cradle them, softly but firmly
-            If the sky is original, the ground holds possibility
-            Black is the new black
-            Dog is lode
-            Do not consider the monotonality of the fungus
-            Late onset IQ deficiency
-            I think Rowan is dead
-            I came for aspirin but I wound up with chocolate
-            Pulled from the jaws of real life
-            Reality is objectively arguable
-            Gravity is objectively arguable
-            Your teacher had a nose like a damp washcloth and is in a gang with old people
-            We keep our gnomes around for the season
-            Look how long that hat is
-            Dinosaurs are a primary component of the industrial revolution
-            Heartbreak and insanity often coincide for crustaceans
-            You dad has all the appeal of a smacked backside and really wants to kiss sock puppets
-            Your father is kinky
-            Bird and primates sometimes have similar degrees of skill at aviation
-            The average height is recursive
-            That was an awful "place". I was there
-            The books within visible writing are the easiest to understand
-            Every action that you take counts towards your punishment
-            No one is ever sure
-            What a time to be Alice
-            There is nothing left - not even the truth
-            Keep fighting against the system
-            Stop voting at all, you're a fool
-            The countrypeople are quite picky
-            We will never become better, but we will do better
-            A dog is not a feather, but a brick
-            Fairy Tales and the Death of Humankind
-            The strong hand sends a heavy message
-            The blind man knows, the deaf man speaks, but the wise man can only hear
-            You would prefer to be cautious of death
-            Banish from our cradle the idea of violent unity
-            Salt in the sea brings you to your knees
-            Netches: A shallow corner, a human can only descend about six in a lifetime but others can do much more
-            The air feels thicker than the ground
-            A entirety of a bird egg is but a shell
-            The whole reality is a game of skill
-            A single grain of milk
-            An image is worth twice as much as a ten hundred words
-            Happy dreams keep you happy in a dream job
-            A soul is not a stone
-            There is no do but try
-            Our priests work &round the clock&
-            You will not enter &#heaven.#&
-            Try, there isn't a do
-            Lived you have not, until enveloped in the gourds you have become
-            You must speak before truth is possible
-            An impressive drift-catch
-            You must be swollen 
-            I'm going to become extremely ethical tomorrow
-            You have died of blunt edges
-            An eye for an eye makes the whole world able to hear better
-            The world is fastened directly to your abdomen. You don't need an oyster
-            You set down the weight and your shoulders feel heavier. You could have predicted this
-            The webs hold their corpses
-            Hues keep on rotating until they die
-            Chopped calcium: serves plenty
-            Cephalopods are particularily bad spies
-            Trees don't just grow on trees
-            I open my mouth and the continent surges through my esophagus
-            What? Did I think of something?
-            Your friend has a large bag of colored disks
-            The human eye can divide into multiple sectors, one for each color
-            Beams of light: the things which sneak within
-            Aplosery: Knowledge gained through metaphysical or spiritual extrasensory input
-            Aplosiatic: One who is detached from reality | One who gains experience/input from extrasensory sources
-            Lost in monotonality
-            Surges of unification
-            You are the entire vehicle of change
-            The vessel is open
-            Escape! Escape! &Escape!&
-            Running in threes 
-            Drifting with a single strand
-            Lelipatheim: The state of experiencing a large number of conflicting emotions at the same moment, typically in some balance
-            Ift's Day: The day when the sun created the Pillars
-            Kiplim: An easily snapping rope
-            Cytrusid: A very small, light-green fruit found in the Spite Range. Inedible, but has other uses
-            Orthomine: any one of the narrow, vertical, pre-Illuminating tunnels within the pillars
-            Nau: A medium sized, freshwater fish. Lives in alpine climates, such as the Apex
-            Cenosidian: One who cannot remember the past | One who lives within the Respite
-            Nepymil: The "soil" found in the Spite Range
-            Nipore: To be intentionally late
-            There's nothing here for you
-            A furious cocktail indeed
-            Don't do drugs, become absorbed in unreality instead
-            Aplurion: An impossibly large watermass
-            Orvis: A small to large plant with a thick-spined, spindly root structure and an orange-colored, thick, sticky trunk called 'the lily' that grows naturally within the Spite Range
-            Itzkahova: A deep, biodiverse crevasse
-            Pretend you aren't breathing
-            Need be has been
-            When there is silence, there is a lack of conversation
-        `.trim().split("\n").map((line) => (line.trim()));
-    return yourGraciousProverbs[randInt(0, yourGraciousProverbs.length-1)];;
-}
+        for (let p = 1; p < 2; p++) {
+            output += "<br>";
+            document.getElementById("paper").innerHTML = output;
+            fix();
+            await SLEEP(500);
+        }
+        let ch = randInt(1, 40);
+        let verse = randInt(1, 100);
+        let num = randInt(1, 25);
+        let numeral = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X",
+            "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX",
+            "XXI", "XXII", "XXIII", "XXIV", "XXV", "XXVI", "XXVII", "XXVIII", "XXIX",
+            "XXXI", "XXXII", "XXXIII", "XXXIV", "XXXV", "XXXVI", "XXXVII", "XXXVIII", "XXXIX",
+            "XLI", "XLII", "XLIII", "XLIV", "XLV", "XLVI", "XLVII", "XLVIII", "LXIX",
+            "LI", "LII", "LIII", "LIV", "LV", "LVI", "LVII", "LVIII", "LIX", "LX"];
+        input = `&#${title}# ${ ~~((index + 1) * 3.5)}& ${choose(numeral)} ${ch}:${verse}\n${input}`;
 
-//output
-(async function(){
-try{    
+        //type it out
+        for (let t = 0; t < input.length; t++) {
+            if (input[t] == "&") {
+                output += start ? "<i>" : "</i>";
+                start = !start;
+            }
+            else if (input[t] == "\n") {
+                output += "<br>";
+            }
+            else if (input[t] == "#") {
+                output += start2 ? "<b>" : "</b>";
+                start2 = !start2;
+            }
+            else {
+                output += input[t];
+            }
 
-        Date.now();
-        await SLEEP(1000)
-        while(true){     
-            await outputToScreen(proverb());
-            await SLEEP(DISPLAY_TIME);
-        }  
-}catch(e){alert(e.stack)}
-})();
+            if (t % 5) {
+                document.getElementById("paper").innerHTML = `${output}`;
+            }
+            else {
+                document.getElementById("paper").innerHTML = `${output}`;
+            };
+            fix();
+            await SLEEP(37);
+        }
+        output += "<br>";
+        document.getElementById("paper").innerHTML = `${output}`;
+        fix();
+        betterSeed = 0;
+        //this line is my best fren i am keep it -->  let br = "<br>";     
+    }
+
+
+    class Scroll {
+            constructor(title, proverbs) {
+                this.title = title;
+                this.proverbs = proverbs
+                    .trim()
+                    .split("\n")
+                    .map(line => line.trim());
+                this.size = this.proverbs.length;
+            }
+            computeWeight(totalSize) {
+                this.weight = this.size / totalSize;
+            }
+        }
+
+        const scrolls = [
+            new Scroll("Illuminating", `
+                Do not give in to fear. It is chaos of the mind and must not be yielded to. Lose your fear and ability will stretch before you
+                I need to stop the madness and start putting my mind to rest
+                You're a dream… A nightmare…
+                I am alive again. The sun has come full circle ... and now I am standing in a sun-flicker...
+                The dappled light upon the ground reminds me of the distance
+                It's boring to be obvious
+                There is a certain level of chaos that is subjective
+                A torrent of thoughts shall drown us all, in the end
+                Things are, in fact, as they seem
+            `),
+            new Scroll("Suffering", `
+                You're so happy! You're so relieved you're not dead
+                I will be with you the day you die, that day is now
+                We hope that you find comfort in the fact that you have the capacity to move around and think
+                Improvement is inevitable
+                We will never become better, but we will do better
+                Sacrifice the bean
+                It's almost funny how many there are, if it wasn't so searing
+                Every action that you take counts towards your punishment
+                Typing, typing. They've been typing for the longest time and I can't wait any longer
+
+            `),
+            new Scroll("Okrates", `
+                &nearly incomprehensible farmer accent& Goddam spots in the harvesters again &spits& Get the blowtorch and lure
+                Oats in the machine
+                Buying candles from a thrift store
+                Your friend has a large bag of colored disks
+                The human eye can divide into multiple sectors, one for each color
+                Beams of light: the things which sneak within
+                Lost in monotonality
+                Nothing compares to the excitement of opening a tree     
+                Surges of unification
+                You have acquired salutations
+                Despite all we'd done, the sun rose again
+                To be free from any external and internal suffering is very, very difficult
+            `),
+            new Scroll("Isfaths", `
+                You will be lucky. Turn to the sun and be fearless
+                You will be unlucky. Turn to the sun for its gracious mirth
+                You are lost
+                You are found
+                You are being searched for
+                You are the entire vehicle of change
+                The greatest thing is that you are now a human being
+                you must know ONE DAY YOU WILL BE HELD
+                There are a few moments of truth. Five have passed but you've only realized one
+            `),
+            new Scroll("Hubris", `
+                Sleep well. Nothing foreboding, it's not like you have only this last chance. Just… a good idea
+                The houses are only separated by colorful banners enscripted with avant garde medieval symbols
+                Control,  down-shift, now park the car
+                The frugality of an onion is overrated
+                The growing ball of dirt is simply a distraction
+                Do not concern yourself with them
+                To reach enlightenment, you must imbibe
+                To go on living life like this is as impossible as dying is
+                Weather predictors are false prophets, do not listen to their heresy
+                Happy dreams keep you happy in a dream job
+                An impressive drift-catch
+                You must be swollen 
+            `),
+            new Scroll("Dilap", `
+                Cavehorses can't even walk around in mud
+                Peppers are toxic, perhaps
+                Bread was never an animal
+                They plead for toast
+                The birds will save you from yourself
+                The birds will be your downfall
+                The horses are here, they wish fortune upon you
+                Bird and primates sometimes have similar degrees of skill at aviation
+            `),
+            new Scroll("Praculae", `
+                A simple, everyday, all-consuming  life routine 
+                Good insanity is necessary as it will leave no room for bad insanity
+                Cynicism is futile
+                So I've made up my mind now
+                We're only doing this if we all die
+                You will need to wait a little longer
+                The feelings are enumerable
+                It never gets old. It doesn't need to
+                There is nothing left - not even the truth
+                The books within visible writing are the easiest to understand
+                An image is worth twice as much as a ten hundred words
+            `),
+            new Scroll("Unpleasant Thoughts", `
+                Carpeted windows
+                Guitar of vocal cords
+                Don't build an atom bomb with teeth
+                The fan companies have a plan
+                No one is ever sure
+                Stop voting at all, you're a fool
+                The potatoes are watching, the corn is listening, and the grapes are feeling your skin. Right now
+                A hundred and one thousand days, which they want to get rid of, but they do not
+                There's an old gentleman inside the house. Currently. The old woman is later, don't worry
+                The phone is out of range
+            `),
+            new Scroll("Sputilations", `
+                Mass production companies of tether cords are being overrun by small scale, local businesses producing tether cords
+                Last edit was a bit ago and you don't know what it was
+                A new random object has been added to your living room aesthetic
+                A new random object has been removed from your living groom aesthetic
+                Your own mind always seems to bend
+                The world is an illusion and never will be. Everything is impossible
+                You are too big to live on a tiny island in any shape or form
+                There is no do but try 
+                Try, there isn't a do
+                The weather must be treated carefully, its quite slippery
+            `),
+            new Scroll("Ti", `
+                The blind man knows, the deaf man speaks, but the wise man can only hear
+                An eye for an eye makes the whole world able to hear better
+                Reality is not about you
+                Reality is purely you
+                Reality is a lie
+                Rumbling in the soul
+                Realer than should be possible
+                To live without being distracted
+                I do not know from whence I speak   
+                The future you've seen is real. It has been there since after all
+            `),
+            new Scroll("Circles of Polarity", `
+                Am I dead?
+                We don't believe in death
+                You would prefer to be cautious of death
+                Fairy Tales and the Death of Humankind
+                Run away, you won't end up where you started. Ever.
+                Running in threes 
+                What? Did I think of something?
+                Watches are the hands of eternity
+                Hues keep on rotating until they die
+                Nobody except you knows your location, geographically and possibly in some other way if you see the metaphor in this
+            `),
+            new Scroll("Ectermine's Legacy", `
+                It's done. All the doctors are dead. Apples are no longer necessary
+                An apple a day keeps the doctor away. Ten will send them flying
+                The apple counter is non zero. #&Panic&#
+                Misanthrope? more like miso soup!
+                There's nothing here for you
+                Need be has been
+                The eyes which await you in the void only want your mangoes, nothing more   
+                Molasses that should be eaten
+                Have you checked upon it recently?
+                I'm going to become extremely ethical tomorrow
+                There will never again be a house
+                (This post will not be written with any intention of making you work at the post as I am an ex-gale worker)
+            `),
+            new Scroll("Spaoons", `
+                Don't tap the keyboard twice
+                Suburban, urban, hypourban
+                The rurals are the main source of the urbs
+                The butterflies are dropping from the sky
+                Subavocado
+                Visual mode engaged
+                Kanye's Game of Life
+                They approach
+                You thought!!!
+                Chopped calcium: serves plenty
+                Fun fact: doors are not guaranteed to be associative
+            `),
+            new Scroll("Apathetium", `
+                Surreal continents continue
+                That is a proverb
+                Meteor, across the dimmed landscape
+                An amber lamp for you in this paling room
+                You &love& your coworkers
+                Absolute nothing! &echoes&
+                They have all the same memories of the day
+                Behold upon the pit of ash and thou shall fall into luminance
+            `),
+            new Scroll("Plagarized Optics", `
+                Tied up in holiday ribbons!
+                The cooks are in the kitchen
+                The cooks are in your living room
+                The cooks are in the restroom currently. Give them sufficient time
+                We all scream for ice cream
+                The ice cream screams for salvation
+                The ants are listening
+                The answer: listening... 
+                Many simply voted for a candidate they detest because they feared the other guy   
+            `),
+            new Scroll("Konradism", `
+                They are up in arms
+                The belldrum is full of all the things we won't have time to know
+                Strike by the cover of the book
+                Become the anvil
+                The strong hand sends a heavy message
+                Banish from our cradle the idea of violent unity
+                Houses on the summit of a mountain
+                We heard that it would end in a museum, but it hasn't yet
+                Keep fighting against the system
+                The webs hold their corpses
+            `),
+            new Scroll("Varying Elements", `
+                When is a crab not a crustacean? Whenever the train reaches the station!
+                Wait. How many ribs did you say I have currently inside me?!
+                The undulations feed your despair
+                Roads are imaginary
+                The frugal will pay
+                Agreed much, i just thought it would be fun for a few
+                They seek friendship, why would they be so foolish
+                When is a dog not a bison? When a sheep not a horse? When a pig, a pig's tail, a pig's head
+                I've been taking my new prescription. I really wish doc would've told me about the strings! &muffled laughter of a comedy routine, at a joke you can't seem to understand&
+            `),
+            new Scroll("Vocaloid", `
+                There's a possibility the people from TV are from the best of both worlds
+                Achieve points every time!
+                The television is full of ""gala appels""
+                Come, join the show
+                We're being watched and that's why our lives are so much happier
+                They watch and because of that you leave
+                Monster. Look at yourself, and despair
+                You are tired, tired of having to wait 20 minutes to go in front of a big tv show
+                Sitcom idea where it goes on for nine season and everybody loves the amicable characters, goofy gimmicks, and adorable romances. After a few years of this, end the show with all the characters dying in tragic manners and watch the chaos unfold
+                Our lives! Turned upside down in no time! Free warranty!
+                Our priests work &round the clock&
+                You will not enter &#heaven.#&
+                Sitting in a counter, staring at the customers
+            `),
+            new Scroll("Frill Optanal", `
+                Persimmons are sufficient to sustain life
+                Persimmons are sufficient to sustain transportation
+                Persimmons are sufficient
+                The distinction between you and me is only 1% greater than ~99.099% of the distinction between you and me
+                Rolling a coin 10 times will not result in 10% spades
+                It is gone now, you won't need to fear for about another 38 months
+                If every event in a collection were a result of an enumeration to which it is not a result, and that enumeration is only a sum of numbers where some element does not exist on it, and that the enumeration of the elements is only a sum (or sum) of numbers where some element exist on the collection, we will have all the general forms of functions from which there is no natural law (unless the particular form is logically equivalent to the general form) and the natural laws will be determined as the natural law of the universe would be
+                Five score, to the tenth. Business as usual
+                I've been adding cubes for about four minutes
+                The air is warm for almost 30 minutes
+                A dog is not a feather, but a brick 
+            `),
+            new Scroll("Theophrastes's Legacy Pronunciation", `
+                It happened on a tuesday
+                ♪ Bouncing on down to New Orleans ♪
+                To sufficiently enjoy photons, take a break from them for a while
+                An awful mess, you've created. Reincarnate please
+                A rapid transmutation and a day off
+                Salted is thy bread, beholden of the tides that bind
+                Only place your faith in falsehoods
+                The world is fastened directly to your abdomen. You don't need an oyster
+                The world is mine and mine alone. Go, get a new name, for it is mine
+                I am your only refuge, your only god
+                The people that speak is our minds and dreams
+                Half a rock, thrown across the bank. It's finally done
+            `),
+            new Scroll("Auberations", `
+                Door locks are the career to good business
+                The countrypeople are quite picky
+                Moss is [emotion here]. Now, moss is a philosophy
+                To see is to believe, to feel is to doubt, and to smell is to be thoroughly disenchanted
+                The feeling of being able to feel your voice in the woods is lovely
+                What the hell did I think I was gonna hear this on the radio?
+                It's fun to watch y'all manipulate others
+                The packing peanuts entice me
+                Being found guilty of counterfeiting settled an unmistakable aura of authority on a metallurgist
+                There's also a little part in this episode where Liz points out why you shouldn't get rid of all the gods at once, so how does that make people unhappy?
+            `),
+            new Scroll("Boron's Toussaint", `
+                The king of spades is mad at you
+                You've been deal a hand of a king of spades and an ace. That would be great for blackjack but this is five card draw and you seem to somehow have lost three cards already
+                A glass of water for Zeus
+                Zeus doesn't like the idea of your promotion
+                The stars have aligned into the shape of your future! It's a clear day outside
+                We exist in the space between brain and mind
+                You must speak before truth is possible
+                The ability to distinguish between smoke and mirrors will be invaluable
+                The trees are but daughter nature's haphazard attempts at drawing a triangle
+                The whole reality is a game of skill
+                Playing cards should be worth more. You could try and collect a full deck
+            `),
+            new Scroll("Kelp", `
+                Salt in the sea brings you to your knees
+                Loops upon loops
+                There's nothing but more humans and they're just as confused as I. Where is everyone else?
+                Joy is a boundless restriction
+                Randomness is the salt
+                I value sleep with cities and gold
+                The habitat is no longer safe. Maybe it never was
+                I came for aspirin but I wound up with chocolate
+            `),
+            new Scroll("Ceremonisms", `
+                Humming and warring
+                Take up a new hobby. You'll have to, eventually
+                Lock your doors, open your windows, and call upon your neighbors
+                You will go and I will follow, in my own twisted way
+                Identical depression and twins
+                It's nothing personal
+                Home is where you play open handed
+                Peanuts are likely to have tiny hats
+                A bearded man is present within the legumes, if only you choose to find him
+                A man is coming out of the oven
+                I feel I know everyone and nobody
+                Myopia is an inadequate foundation
+                The fibers have prevented your self-realization
+            `),
+            new Scroll("Splines", `
+                Scream, for they can hear you. Sing, for this is literally a recording studio
+                Splines cannot have hurt you
+                Attic is towering
+                You must not be italicized
+                Passages through the void, find nothing else
+                Accurate predictions strain the system
+                You shalln't see anything of significance if you look
+                We don't leave any more
+                But your mouth does not open
+                You set down the weight and your shoulders feel heavier. You could have predicted this
+            `),
+            new Scroll("Inhalation of Pleo-Jovian Artifacts", `
+                Luminance and the ethereal, it flows beneath
+                Don't mask what you can't see
+                The are tunnels
+                Pretend you aren't breathing
+                The seashells are strewn across the counter. If only this could last
+                Nothing amidst the fluid carries the answer
+                The road doesn't work ahead. Stop hoping
+                As you fall, look behind you
+                And I was watching as it suddenly changed
+                When there is silence, there is a lack of conversation
+            `),
+            new Scroll("Liturgical Pots of Blood", `
+                The patchwork is incomplete
+                Only you see it that way; this is good
+                If you're worried, then examine the glass, the grass, and the breeze
+                No one among you can understand the gravity of what you've done
+                Wicker lanterns, dancing 'till there is nothing left but light
+                The fruit smiles, your time has come
+                Why must they anger us so
+                There is always time for flexibility at the end of a candle
+                You're viewing it in the wrong dimension, you goofball    
+                For there shall come a time, when a time comes    
+                A small fraction of you may end up happy. Although it means no harm to you, many of you want to leave
+            `),
+            new Scroll("Neptune's Quenches", `
+                Endless fits of understanding
+                I had a dream where all my dreams came true
+                Silent nods of laughter
+                Sometimes fits of arise
+                Predictions are a thing of the past
+                If the sky is original, the ground holds possibility
+                That may have been a deception
+                Just keep doing this forever and you'll feel awfully mediocre
+                It is the event
+                The choice of being me over you is one that I will choose
+                Your identity is only as strong as your willingness to leave
+                Pretend you are an aglet. Now stop, please. Tell us your experience
+            `),
+            new Scroll("Ossuary's Fingers", `
+                A touch is not a stone
+                The last step is to bring the stone into the furnace
+                You do not remember the stones
+                The stones welcome you into their ranks
+                The stones hold memories and cradle them, softly but firmly
+                The stone keeps watch on you and your future
+                The stones guide you through the valley to a new life
+                Stones encrust your skin
+                Minerals amidst your veins
+            `),
+            new Scroll("Aplicality", `
+                A single grain of milk
+                An entirety of a bird egg is but a shell
+                They are right, for they come from below
+                They are left, for they come for above
+                A word is worth exactly three sevenths of a length of string, as determined by the latest census
+                Drifting with a single strand   
+                Barely one of us left
+                You are now one of these two souls 
+                Fugue in the deepest of nights
+            `),
+            new Scroll("Shifting Ties", `
+                We keep our gnomes around for the season
+                Look how long that hat is
+                Dinosaurs are a primary component of the industrial revolution
+                Heartbreak and insanity often coincide for crustaceans
+                Nothing you say can or will be used against you in a court of law
+                You keep forgetting that you are confused
+                Olive trees, despite their beauty, do not
+                The limits of the tree are infinite, albeit two dimensional
+                The stars will be caught up soon!
+                There is the soil, there is the stone, and there is something below
+                There is the sun, there is moon, and there is something else
+            `),
+            new Scroll("Freud the Spinner", `
+                A book is ㅋ
+                I“ʘ I don“x“? Yes
+                Ankh per size but not a length
+                Ankh per width the depth of ships, amidst the life and death there is
+                Ata khe ata!
+                Edge on edge!
+                Dog is lode
+                Intel... outside
+                Escape! Escape! &Escape!&
+                Scrolling past trees and breeze. Like, y'know...
+                I am not that type that can write scripts, I am just...
+            `),
+            new Scroll("Aetherea", `
+                That was an awful "place". I was there
+                Oh dear! I'm so sorry you had to see that! View it again
+                What a time to be Alice
+                The questions you ponder shall remain
+                Parallax universe. Don't be so sure of existence
+                Gaze upon the wasteland before you and know your place
+                Avenge the risen, for the fallen have come too far
+                They let you come here. Don't mess up
+            `),
+            new Scroll("Tidescales", `
+                Sanctity is the mnemonic device
+                Black is the new black
+                The music is ever present. Embrace it or perish
+                Dreams are the reality and what seems is the dream
+                The ships that sail the sea defy the powers that be
+                Fish on the land. Sky in the sea
+                Fish on the window
+                Bring them to me
+                There is no horse on the water
+                A furious cocktail indeed
+                Circles intersecting makes the dizziness go away
+            `),
+            new Scroll("Carnalicy", `
+                You will cause chaos if you try and leave
+                Pulled from the jaws of real life
+                Reality is objectively arguable
+                Gravity is objectively arguable
+                Face the enemy, find the enemy, dispel the enemy
+                You have died of blunt edges
+                The vessel is open
+                The air was filled with silence as I stood in the middle
+                Even though everything is so well planned, you're going to be the next one
+                You're far when it doesn't hurt anymore 
+                Be careful, or your permanent record will go on you
+                A rich lode of scandal and alleged crime
+                Everything is being &ripped apart&! The best part is it was &hollow all along&!!!
+            `),
+            new Scroll("Lunar Parchment", `
+                Cofusation
+                Do not consider the monotonality of the fungus
+                Late onset IQ deficiency
+                The vacuum followed me as I ran
+                The average height is recursive 
+                The moon is not our enemy (probably, it hasn't responded yet)  
+                You don't know what the wizard does
+                Live til you shouldn't
+                Splitten rope giveth the trope
+                Thy sun is not identical
+            `),
+            new Scroll("Geonosis", `
+                Chicken nuggets are probably a hoax
+                Lived you have not, until enveloped in the gourds you have become
+                The sheer mindfuck of a group of children in a circle throwing rocks
+                Such an earthly world
+                Bob is your uncle
+                An onion is very much like the Earth, in the sense that it has many layers and can't do calculus
+                The air feels thicker than the ground
+                A dark spot where the sun was shall fall into the dark
+                Don't do drugs, become absorbed in unreality instead
+                The difference is that a spoonful of sugar is not much
+            `),
+            new Scroll("Hyubert", `
+                The cupboards contain boundless hope (bounded of course by the cupboards)
+                The grass is greener on the side closer to the chemical plant. Neon even
+                It's only Source Sans Pro? Always has been
+                10-12 times a month, they hunt
+                I see... you've seen. You've seen what it feels like to be an asshole
+                We are there yet. What now?
+                Why can't I understand clocks?
+                Psst. You're missing a color
+                Splitshop in the middle of the state
+                Left right in the middle
+            `),
+            new Scroll("Fools", `
+                That is normal
+                This is expected behavior   
+                Mackenzie: good gods, good humans, good stories, good people, good music 
+                Grim, the peddler, amongst the Lorician
+                Cephalopods are particularily bad spies
+                Trees don't just grow on trees
+                I open my mouth and the continent surges through my esophagus
+                I think Rowan is dead
+                The length of the nasal cavity can be unexpected, and not for the faint of heart
+                Your teacher had a nose like a damp washcloth and is in a gang with old people   
+                You dad has all the appeal of a smacked backside and really wants to kiss sock puppets
+            `),
+            new Scroll("Dictatics", `
+                Anagrams: In order to get a deeper understanding of mathematics and to grasp the world of philosophy, here is a list of most important art
+                Moderation: an effective anti-productivity mechanism
+                Netches: A shallow corner, a human can only descend about six in a lifetime but others can do much more
+                Aplosery: Knowledge gained through metaphysical or spiritual extrasensory input
+                Aplosiatic: One who is detached from reality | One who gains experience/input from extrasensory sources
+                Lelipatheim: The state of experiencing a large number of conflicting emotions at the same moment, typically in some balance
+                Ift's Day: The day when the sun created the Pillars
+                Kiplim: An easily snapping rope
+                Cytrusid: A very small, light-green fruit found in the Spite Range. Inedible, but has other uses
+                Orthomine: any one of the narrow, vertical, pre-Illuminating tunnels within the pillars
+                Nau: A medium sized, freshwater fish. Lives in alpine climates, such as the Apex
+                Cenosidian: One who cannot remember the past | One who lives within the Respite
+                Nepymil: The "soil" found in the Spite Range
+                Nipore: To be intentionally late
+                Aplurion: An impossibly large watermass
+                Orvis: A small to large plant with a thick-spined, spindly root structure and an orange-colored, thick, sticky trunk called 'the lily' that grows naturally within the Spite Range
+                Itzkahova: A deep, biodiverse crevasse
+            `)
+        ];
+
+        { // compute weights
+            const totalSize = scrolls
+                .map(scroll => scroll.size)
+                .reduce((a, b) => a + b, 0);
+            for (let i = 0; i < scrolls.length; i++)
+                scrolls[i].computeWeight(totalSize);
+        };
+
+    //yourGraciousProverbs[choose(Object.keys(yourGraciousProverbs))]
+    function proverb() {
+        betterSeed = 0;
+        const { title, proverbs } = chooseWeighted(scrolls);
+        const index = randInt(0, proverbs.length - 1);
+        const proverb = proverbs[index];
+        return { title, index, proverb };
+    }
+    //output
+    (async function () {
+        try {
+
+            Date.now();
+            await SLEEP(1000)
+            while (true) {
+                await outputToScreen(proverb());
+                await SLEEP(DISPLAY_TIME);
+            }
+        } catch (e) { alert(e.stack) }
+    })(); 
 </script>
 
 </html>
