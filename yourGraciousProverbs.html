@@ -17,8 +17,7 @@
         }
 
         body {
-            font-size: 7.5vmin;
-            font-family: typewriter;
+            font-size: 5.3vmin;
             background-color: #F6E9D8;
             color: #6b1617;
             font-family: "Quintessential";
@@ -31,6 +30,10 @@
             position: fixed;
             background-color: currentColor;
 
+        }
+
+        #fix {
+            height: 20em;
         }
 
         #n {
@@ -126,7 +129,7 @@
         seed ^= seed >> 7;
         seed /= 0xFFFF;
         return Math.abs(seed % 1);
-    
+
     }
     function randInt(min, max) {
         return Math.floor(random01() * (max - min + 1) + min);
@@ -156,26 +159,152 @@
 
     //how long the text appears in place
     const DISPLAY_TIME = 3200;
-    let output = " ";
-    let start = true;
-    let start2 = true;
     const SLEEP = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
     function fix() {
         document.getElementById("evil").scrollIntoView();
     }
+
+    function canvasPrint({
+        parent,
+        text,
+        format = [],
+        padding = 3,
+        speed = 0.5,
+        fontSize = parseInt(getComputedStyle(parent).fontSize),
+        fontFamily = getComputedStyle(parent).fontFamily
+    }) {
+
+        function packText(str, getWidth, maxWidth) {
+            return str
+                .split("\n")
+                .map(line => {
+                    let lineStart = true;
+                    const words = line.split(" ");
+                    const lines = [];
+                    let acc = "";
+                    for (let i = 0; i < words.length; i++) {
+                        const word = words[i];
+                        if (getWidth(acc + (lineStart ? "" : " ") + word) > maxWidth) {
+                            lines.push(acc);
+                            acc = "";
+                            lineStart = true;
+                        }
+                        acc += (lineStart ? "" : " ") + word;
+                        lineStart = false;
+                    }
+                    if (acc) lines.push(acc);
+                    return lines.join("\n");
+                })
+                .join("\n");
+        }
+
+        function setState(c) {
+            c.font = `${fontSize}px ${fontFamily}`;
+            c.lineWidth = 1;
+            c.lineCap = "round";
+        }
+
+        return new Promise(resolve => {
+            const canvas = document.createElement("canvas");
+            parent.appendChild(canvas);
+
+            const c = canvas.getContext("2d");
+            setState(c);
+
+            const getWidth = t => c.measureText(t).width;
+
+            const MAX_WIDTH = parent.getBoundingClientRect().width - padding * 2;
+
+            text = packText(text, getWidth, MAX_WIDTH);
+
+            const TEXT_WIDTH = Math.max(
+                ...text.split("\n")
+                    .map(line => getWidth(line))
+            );
+
+            const TEXT_HEIGHT = text.split("\n").length * fontSize;
+
+            const CANVAS_WIDTH = TEXT_WIDTH + padding * 2;
+            const CANVAS_HEIGHT = TEXT_HEIGHT + padding * 2;
+
+            canvas.width = CANVAS_WIDTH * devicePixelRatio;
+            canvas.height = CANVAS_HEIGHT * devicePixelRatio;
+            canvas.style.width = CANVAS_WIDTH + "px";
+            canvas.style.height = CANVAS_HEIGHT + "px";
+
+            setState(c);
+            c.scale(devicePixelRatio, devicePixelRatio);
+
+            let renderedText = text;
+
+            const PIXELS_PER_CHAR = fontSize;
+            const Y_OFFSET = fontSize * 0.9;
+
+            const startTime = performance.now();
+
+            function animate(now) {
+                c.clearRect(0, 0, canvas.width, canvas.height);
+
+                const offset = (performance.now() - startTime) * speed;
+
+                let X = padding;
+                let Y = padding;
+
+                c.setLineDash([PIXELS_PER_CHAR * 2 * renderedText.length]);
+
+                for (let i = 0; i < renderedText.length; i++) {
+                    const char = renderedText[i];
+                    const fmt = format[i] ? format[i]
+                        .split("")
+                        .map(v => ({
+                            b: "bold",
+                            i: "italic"
+                        }[v]))
+                        .join(" ") : "";
+
+                    const font = `${fmt} ${fontSize}px ${fontFamily}`;
+
+                    if (font !== c.font) c.font = font;
+
+                    const alpha = Math.max(0, Math.min(1, 0.5 * (offset / PIXELS_PER_CHAR - i)));
+
+                    c.fillStyle = `rgba(0, 0, 0, ${alpha})`;
+                    c.strokeStyle = `rgba(0, 0, 0, ${1 - alpha})`;
+
+                    c.lineDashOffset = offset - i * PIXELS_PER_CHAR;
+                    c.strokeText(char, X, Y + Y_OFFSET);
+                    c.fillText(char, X, Y + Y_OFFSET);
+
+                    if (char === "\n") {
+                        X = padding;
+                        Y += fontSize;
+                    } else {
+                        X += getWidth(char);
+                    }
+                }
+
+                if (offset < PIXELS_PER_CHAR * (renderedText.length + 1 /* fade buffer */)) {
+                    requestAnimationFrame(animate);
+                } else resolve();
+            }
+
+            requestAnimationFrame(animate);
+
+        });
+        // for (let i = 0; i < text.length; i++) {
+        // 	svgText.innerHTML += text[i];
+        // 	await sleep(50);
+        // }
+    }
+
     async function outputToScreen({
         title,
         index,
         proverb: input
     }) {
         betterSeed = 0;
-        for (let p = 1; p < 2; p++) {
-            output += "<br>";
-            document.getElementById("paper").innerHTML = output;
-            fix();
-            await SLEEP(500);
-        }
+
         let ch = randInt(1, 40);
         let verse = randInt(1, 100);
         let num = randInt(1, 25);
@@ -185,37 +314,40 @@
             "XXXI", "XXXII", "XXXIII", "XXXIV", "XXXV", "XXXVI", "XXXVII", "XXXVIII", "XXXIX",
             "XLI", "XLII", "XLIII", "XLIV", "XLV", "XLVI", "XLVII", "XLVIII", "LXIX",
             "LI", "LII", "LIII", "LIV", "LV", "LVI", "LVII", "LVIII", "LIX", "LX"];
-        input = `&#${title}# ${ ~~((index + 1) * 3.5)}& ${choose(numeral)} ${ch}:${verse}\n${input}`;
+        input = `&#${title}# ${~~((index + 1) * 3.5)}& ${choose(numeral)} ${ch}:${verse}\n${input}`;
 
-        //type it out
+        let bold = false;
+        let italic = false;
+
+        const format = new Array(input.length).fill("");
+        
+        let output = "";
+
         let escaped = false;
         for (let t = 0; t < input.length; t++) {
             const char = input[t];
-        
-            if (char == "&" && !escaped) {
-                output += start ? "<i>" : "</i>";
-                start = !start;
-            } else if (char == "#" && !escaped) {
-                output += start2 ? "<b>" : "</b>";
-                start2 = !start2;
-            } else if (char === "\n")
-                output += "<br>";
+
+            if (char == "&" && !escaped)
+                italic = !italic;
+            else if (char == "#" && !escaped)
+                bold = !bold;
             else if (char !== "\\" || escaped)
                 output += char;
-            
+
             escaped = char === "\\" && !escaped;
 
-            if (t % 5) {
-                document.getElementById("paper").innerHTML = output;
-            }
-            else {
-                document.getElementById("paper").innerHTML = output;
-            };
-            fix();
-            await SLEEP(37);
+            const fInx = output.length - 1;
+            if (bold) format[fInx] += "i";
+            if (italic) format[fInx] += "b";    
         }
-        output += "<br>";
-        document.getElementById("paper").innerHTML = `${output}`;
+
+        await canvasPrint({
+            parent: document.getElementById("paper"),
+            text: output,
+            format,
+            padding: 30
+        });
+        
         fix();
         betterSeed = 0;
         //this line is my best fren i am keep it -->  let br = "<br>";     
@@ -223,21 +355,21 @@
 
 
     class Scroll {
-            constructor(title, proverbs) {
-                this.title = title;
-                this.proverbs = proverbs
-                    .trim()
-                    .split("\n")
-                    .map(line => line.trim());
-                this.size = this.proverbs.length;
-            }
-            computeWeight(totalSize) {
-                this.weight = this.size / totalSize;
-            }
+        constructor(title, proverbs) {
+            this.title = title;
+            this.proverbs = proverbs
+                .trim()
+                .split("\n")
+                .map(line => line.trim());
+            this.size = this.proverbs.length;
         }
+        computeWeight(totalSize) {
+            this.weight = this.size / totalSize;
+        }
+    }
 
-        const scrolls = [
-            new Scroll("Illuminating", `
+    const scrolls = [
+        new Scroll("Illuminating", `
                 Do not give in to fear. It is chaos of the mind and must not be yielded to. Lose your fear and ability will stretch before you
                 I need to stop the madness and start putting my mind to rest
                 You're a dream… A nightmare…
@@ -248,7 +380,7 @@
                 A torrent of thoughts shall drown us all, in the end
                 Things are, in fact, as they seem
             `),
-            new Scroll("Suffering", `
+        new Scroll("Suffering", `
                 You're so happy! You're so relieved you're not dead
                 I will be with you the day you die, that day is now
                 We hope that you find comfort in the fact that you have the capacity to move around and think
@@ -260,7 +392,7 @@
                 Typing, typing. They've been typing for the longest time and I can't wait any longer
 
             `),
-            new Scroll("Okrates", `
+        new Scroll("Okrates", `
                 &nearly incomprehensible farmer accent& Goddam spots in the harvesters again &spits& Get the blowtorch and lure
                 Oats in the machine
                 Buying candles from a thrift store
@@ -274,7 +406,7 @@
                 Despite all we'd done, the sun rose again
                 To be free from any external and internal suffering is very, very difficult
             `),
-            new Scroll("Isfaths", `
+        new Scroll("Isfaths", `
                 You will be lucky. Turn to the sun and be fearless
                 You will be unlucky. Turn to the sun for its gracious mirth
                 You are lost
@@ -285,7 +417,7 @@
                 you must know ONE DAY YOU WILL BE HELD
                 There are a few moments of truth. Five have passed but you've only realized one
             `),
-            new Scroll("Hubris", `
+        new Scroll("Hubris", `
                 Sleep well. Nothing foreboding, it's not like you have only this last chance. Just… a good idea
                 The houses are only separated by colorful banners enscripted with avant garde medieval symbols
                 Control,  down-shift, now park the car
@@ -299,7 +431,7 @@
                 An impressive drift-catch
                 You must be swollen 
             `),
-            new Scroll("Dilap", `
+        new Scroll("Dilap", `
                 Cavehorses can't even walk around in mud
                 Peppers are toxic, perhaps
                 Bread was never an animal
@@ -309,7 +441,7 @@
                 The horses are here, they wish fortune upon you
                 Bird and primates sometimes have similar degrees of skill at aviation
             `),
-            new Scroll("Praculae", `
+        new Scroll("Praculae", `
                 A simple, everyday, all-consuming  life routine 
                 Good insanity is necessary as it will leave no room for bad insanity
                 Cynicism is futile
@@ -322,7 +454,7 @@
                 The books within visible writing are the easiest to understand
                 An image is worth twice as much as a ten hundred words
             `),
-            new Scroll("Unpleasant Thoughts", `
+        new Scroll("Unpleasant Thoughts", `
                 Carpeted windows
                 Guitar of vocal cords
                 Don't build an atom bomb with teeth
@@ -334,7 +466,7 @@
                 There's an old gentleman inside the house. Currently. The old woman is later, don't worry
                 The phone is out of range
             `),
-            new Scroll("Sputilations", `
+        new Scroll("Sputilations", `
                 Mass production companies of tether cords are being overrun by small scale, local businesses producing tether cords
                 Last edit was a bit ago and you don't know what it was
                 A new random object has been added to your living room aesthetic
@@ -346,7 +478,7 @@
                 Try, there isn't a do
                 The weather must be treated carefully, its quite slippery
             `),
-            new Scroll("Ti", `
+        new Scroll("Ti", `
                 The blind man knows, the deaf man speaks, but the wise man can only hear
                 An eye for an eye makes the whole world able to hear better
                 Reality is not about you
@@ -358,7 +490,7 @@
                 I do not know from whence I speak   
                 The future you've seen is real. It has been there since after all
             `),
-            new Scroll("Circles of Polarity", `
+        new Scroll("Circles of Polarity", `
                 Am I dead?
                 We don't believe in death
                 You would prefer to be cautious of death
@@ -370,7 +502,7 @@
                 Hues keep on rotating until they die
                 Nobody except you knows your location, geographically and possibly in some other way if you see the metaphor in this
             `),
-            new Scroll("Ectermine's Legacy", `
+        new Scroll("Ectermine's Legacy", `
                 It's done. All the doctors are dead. Apples are no longer necessary
                 An apple a day keeps the doctor away. Ten will send them flying
                 The apple counter is non zero. #&Panic&#
@@ -384,7 +516,7 @@
                 There will never again be a house
                 (This post will not be written with any intention of making you work at the post as I am an ex-gale worker)
             `),
-            new Scroll("Spaoons", `
+        new Scroll("Spaoons", `
                 Don't tap the keyboard twice
                 Suburban, urban, hypourban
                 The rurals are the main source of the urbs
@@ -397,7 +529,7 @@
                 Chopped calcium: serves plenty
                 Fun fact: doors are not guaranteed to be associative
             `),
-            new Scroll("Apathetium", `
+        new Scroll("Apathetium", `
                 Surreal continents continue
                 That is a proverb
                 Meteor, across the dimmed landscape
@@ -407,7 +539,7 @@
                 They have all the same memories of the day
                 Behold upon the pit of ash and thou shall fall into luminance
             `),
-            new Scroll("Plagarized Optics", `
+        new Scroll("Plagarized Optics", `
                 Tied up in holiday ribbons!
                 The cooks are in the kitchen
                 The cooks are in your living room
@@ -418,7 +550,7 @@
                 The answer: listening... 
                 Many simply voted for a candidate they detest because they feared the other guy   
             `),
-            new Scroll("Konradism", `
+        new Scroll("Konradism", `
                 They are up in arms
                 The belldrum is full of all the things we won't have time to know
                 Strike by the cover of the book
@@ -430,7 +562,7 @@
                 Keep fighting against the system
                 The webs hold their corpses
             `),
-            new Scroll("Varying Elements", `
+        new Scroll("Varying Elements", `
                 When is a crab not a crustacean? Whenever the train reaches the station!
                 Wait. How many ribs did you say I have currently inside me?!
                 The undulations feed your despair
@@ -441,7 +573,7 @@
                 When is a dog not a bison? When a sheep not a horse? When a pig, a pig's tail, a pig's head
                 I've been taking my new prescription. I really wish doc would've told me about the strings! &muffled laughter of a comedy routine, at a joke you can't seem to understand&
             `),
-            new Scroll("Vocaloid", `
+        new Scroll("Vocaloid", `
                 There's a possibility the people from TV are from the best of both worlds
                 Achieve points every time!
                 The television is full of ""gala appels""
@@ -462,7 +594,7 @@
                 Please have fun with this world and get together with your children, lovers, and family in this life long journey
 
             `),
-            new Scroll("Frill Optanal", `
+        new Scroll("Frill Optanal", `
                 Persimmons are sufficient to sustain life
                 Persimmons are sufficient to sustain transportation
                 Persimmons are sufficient
@@ -475,7 +607,7 @@
                 The air is warm for almost 30 minutes
                 A dog is not a feather, but a brick 
             `),
-            new Scroll("Theophrastes's Legacy Pronunciation", `
+        new Scroll("Theophrastes's Legacy Pronunciation", `
                 It happened on a tuesday
                 ♪ Bouncing on down to New Orleans ♪
                 To sufficiently enjoy photons, take a break from them for a while
@@ -492,7 +624,7 @@
                 Don't let the devil give you a choice!
                 Saying "No thanks" to the devil only make you look bad!
             `),
-            new Scroll("Auberations", `
+        new Scroll("Auberations", `
                 Door locks are the career to good business
                 The countrypeople are quite picky
                 Moss is [emotion here]. Now, moss is a philosophy
@@ -504,7 +636,7 @@
                 Being found guilty of counterfeiting settled an unmistakable aura of authority on a metallurgist
                 There's also a little part in this episode where Liz points out why you shouldn't get rid of all the gods at once, so how does that make people unhappy?
             `),
-            new Scroll("Boron's Toussaint", `
+        new Scroll("Boron's Toussaint", `
                 The king of spades is mad at you
                 You've been deal a hand of a king of spades and an ace. That would be great for blackjack but this is five card draw and you seem to somehow have lost three cards already
                 A glass of water for Zeus
@@ -517,7 +649,7 @@
                 The whole reality is a game of skill
                 Playing cards should be worth more. You could try and collect a full deck
             `),
-            new Scroll("Kelp", `
+        new Scroll("Kelp", `
                 Salt in the sea brings you to your knees
                 Loops upon loops
                 There's nothing but more humans and they're just as confused as I. Where is everyone else?
@@ -527,7 +659,7 @@
                 The habitat is no longer safe. Maybe it never was
                 I came for aspirin but I wound up with chocolate
             `),
-            new Scroll("Ceremonisms", `
+        new Scroll("Ceremonisms", `
                 Humming and warring
                 Take up a new hobby. You'll have to, eventually
                 Lock your doors, open your windows, and call upon your neighbors
@@ -543,7 +675,7 @@
                 The fibers have prevented your self-realization
                 Don't forget \\& don't remember!
             `),
-            new Scroll("Splines", `
+        new Scroll("Splines", `
                 Scream, for they can hear you. Sing, for this is literally a recording studio
                 Splines cannot have hurt you
                 Attic is towering
@@ -555,7 +687,7 @@
                 But your mouth does not open
                 You set down the weight and your shoulders feel heavier. You could have predicted this
             `),
-            new Scroll("Inhalation of Pleo-Jovian Artifacts", `
+        new Scroll("Inhalation of Pleo-Jovian Artifacts", `
                 Luminance and the ethereal, it flows beneath
                 Don't mask what you can't see
                 The are tunnels
@@ -567,7 +699,7 @@
                 And I was watching as it suddenly changed
                 When there is silence, there is a lack of conversation
             `),
-            new Scroll("Liturgical Pots of Blood", `
+        new Scroll("Liturgical Pots of Blood", `
                 The patchwork is incomplete
                 Only you see it that way; this is good
                 If you're worried, then examine the glass, the grass, and the breeze
@@ -580,7 +712,7 @@
                 For there shall come a time, when a time comes    
                 A small fraction of you may end up happy. Although it means no harm to you, many of you want to leave
             `),
-            new Scroll("Neptune's Quenches", `
+        new Scroll("Neptune's Quenches", `
                 Endless fits of understanding
                 I had a dream where all my dreams came true
                 Silent nods of laughter
@@ -594,7 +726,7 @@
                 Your identity is only as strong as your willingness to leave
                 Pretend you are an aglet. Now stop, please. Tell us your experience
             `),
-            new Scroll("Ossuary's Fingers", `
+        new Scroll("Ossuary's Fingers", `
                 A touch is not a stone
                 The last step is to bring the stone into the furnace
                 You do not remember the stones
@@ -605,7 +737,7 @@
                 Stones encrust your skin
                 Minerals amidst your veins
             `),
-            new Scroll("Aplicality", `
+        new Scroll("Aplicality", `
                 A single grain of milk
                 An entirety of a bird egg is but a shell
                 They are right, for they come from below
@@ -616,7 +748,7 @@
                 You are now one of these two souls 
                 Fugue in the deepest of nights
             `),
-            new Scroll("Shifting Ties", `
+        new Scroll("Shifting Ties", `
                 We keep our gnomes around for the season
                 Look how long that hat is
                 Dinosaurs are a primary component of the industrial revolution
@@ -629,7 +761,7 @@
                 There is the soil, there is the stone, and there is something below
                 There is the sun, there is moon, and there is something else
             `),
-            new Scroll("Freud the Spinner", `
+        new Scroll("Freud the Spinner", `
                 A book is ㅋ
                 I“ʘ I don“x“? Yes
                 Ankh per size but not a length
@@ -642,7 +774,7 @@
                 Scrolling past trees and breeze. Like, y'know...
                 I am not that type that can write scripts, I am just...
             `),
-            new Scroll("Aetherea", `
+        new Scroll("Aetherea", `
                 That was an awful "place". I was there
                 Oh dear! I'm so sorry you had to see that! View it again
                 What a time to be Alice
@@ -652,7 +784,7 @@
                 Avenge the risen, for the fallen have come too far
                 They let you come here. Don't mess up
             `),
-            new Scroll("Tidescales", `
+        new Scroll("Tidescales", `
                 Sanctity is the mnemonic device
                 Black is the new black
                 The music is ever present. Embrace it or perish
@@ -665,7 +797,7 @@
                 A furious cocktail indeed
                 Circles intersecting makes the dizziness go away
             `),
-            new Scroll("Carnalicy", `
+        new Scroll("Carnalicy", `
                 You will cause chaos if you try and leave
                 Pulled from the jaws of real life
                 Reality is objectively arguable
@@ -680,7 +812,7 @@
                 A rich lode of scandal and alleged crime
                 Everything is being &ripped apart&! The best part is it was &hollow all along&!!!
             `),
-            new Scroll("Lunar Parchment", `
+        new Scroll("Lunar Parchment", `
                 Cofusation
                 Do not consider the monotonality of the fungus
                 Late onset IQ deficiency
@@ -692,7 +824,7 @@
                 Splitten rope giveth the trope
                 Thy sun is not identical
             `),
-            new Scroll("Geonosis", `
+        new Scroll("Geonosis", `
                 Chicken nuggets are probably a hoax
                 Lived you have not, until enveloped in the gourds you have become
                 The sheer mindfuck of a group of children in a circle throwing rocks
@@ -704,7 +836,7 @@
                 Don't do drugs, become absorbed in unreality instead
                 The difference is that a spoonful of sugar is not much
             `),
-            new Scroll("Hyubert", `
+        new Scroll("Hyubert", `
                 The cupboards contain boundless hope (bounded of course by the cupboards)
                 The grass is greener on the side closer to the chemical plant. Neon even
                 It's only Source Sans Pro? Always has been
@@ -716,7 +848,7 @@
                 Splitshop in the middle of the state
                 Left right in the middle
             `),
-            new Scroll("Fools", `
+        new Scroll("Fools", `
                 That is normal
                 This is expected behavior   
                 Mackenzie: good gods, good humans, good stories, good people, good music 
@@ -729,7 +861,7 @@
                 Your teacher had a nose like a damp washcloth and is in a gang with old people   
                 You dad has all the appeal of a smacked backside and really wants to kiss sock puppets
             `),
-            new Scroll("Dictatics", `
+        new Scroll("Dictatics", `
                 Anagrams: In order to get a deeper understanding of mathematics and to grasp the world of philosophy, here is a list of most important art
                 Moderation: an effective anti-productivity mechanism
                 Netches: A shallow corner, a human can only descend about six in a lifetime but others can do much more
@@ -748,15 +880,15 @@
                 Orvis: A small to large plant with a thick-spined, spindly root structure and an orange-colored, thick, sticky trunk called 'the lily' that grows naturally within the Spite Range
                 Itzkahova: A deep, biodiverse crevasse
             `)
-        ];
+    ];
 
-        { // compute weights
-            const totalSize = scrolls
-                .map(scroll => scroll.size)
-                .reduce((a, b) => a + b, 0);
-            for (let i = 0; i < scrolls.length; i++)
-                scrolls[i].computeWeight(totalSize);
-        };
+    { // compute weights
+        const totalSize = scrolls
+            .map(scroll => scroll.size)
+            .reduce((a, b) => a + b, 0);
+        for (let i = 0; i < scrolls.length; i++)
+            scrolls[i].computeWeight(totalSize);
+    };
 
     //yourGraciousProverbs[choose(Object.keys(yourGraciousProverbs))]
     function proverb() {
