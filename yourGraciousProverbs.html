@@ -214,7 +214,7 @@
 
         const getWidth = t => c.measureText(t).width;
 
-        const MAX_WIDTH = parent.getBoundingClientRect().width - padding * 2;
+        const MAX_WIDTH = canvas.getBoundingClientRect().width - padding * 2;
 
         text = packText(text, getWidth, MAX_WIDTH);
 
@@ -343,7 +343,7 @@
             parent: document.getElementById("paper"),
             text: output,
             format,
-            padding: 30
+            padding: 2
         });
         fix();
         await donePrinting;
