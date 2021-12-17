@@ -272,9 +272,8 @@
 				if (font !== c.font) c.font = font;
 
 				const alpha = Math.max(0, Math.min(1, 0.5 * (offset / PIXELS_PER_CHAR - i)));
-
-				c.fillStyle = `rgba(0, 0, 0, ${alpha})`;
-				c.strokeStyle = `rgba(0, 0, 0, ${1 - alpha})`;
+				c.fillStyle = `rgba(107, 22, 23, ${alpha})`;
+				c.strokeStyle = `rgba(107, 22, 23, ${1 - alpha})`;
 
 				c.lineDashOffset = offset - i * PIXELS_PER_CHAR;
 				c.strokeText(char, X, Y + Y_OFFSET);
