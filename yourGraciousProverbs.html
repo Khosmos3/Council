@@ -218,6 +218,7 @@
 
         const getWidth = t => c.measureText(t).width;
 
+        canvas.style.width = "100%";
         const MAX_WIDTH = canvas.getBoundingClientRect().width - padding * 2;
 
         text = packText(text, getWidth, MAX_WIDTH);
