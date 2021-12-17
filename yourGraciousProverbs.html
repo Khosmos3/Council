@@ -14,6 +14,7 @@
         * {
             margin: 0;
             font-family: "Quintessential";
+            scroll-behavior: smooth;
         }
 
         body {
@@ -205,43 +206,45 @@
             c.lineCap = "round";
         }
 
+        // setup
+        const canvas = document.createElement("canvas");
+        parent.appendChild(canvas);
+
+        const c = canvas.getContext("2d");
+        setState(c);
+
+        const getWidth = t => c.measureText(t).width;
+
+        const MAX_WIDTH = parent.getBoundingClientRect().width - padding * 2;
+
+        text = packText(text, getWidth, MAX_WIDTH);
+
+        const TEXT_WIDTH = Math.max(
+            ...text.split("\n")
+                .map(line => getWidth(line))
+        );
+
+        const TEXT_HEIGHT = text.split("\n").length * fontSize;
+
+        const CANVAS_WIDTH = TEXT_WIDTH + padding * 2;
+        const CANVAS_HEIGHT = TEXT_HEIGHT + padding * 2;
+
+        canvas.width = CANVAS_WIDTH * devicePixelRatio;
+        canvas.height = CANVAS_HEIGHT * devicePixelRatio;
+        canvas.style.width = CANVAS_WIDTH + "px";
+        canvas.style.height = CANVAS_HEIGHT + "px";
+
+        setState(c);
+        c.scale(devicePixelRatio, devicePixelRatio);
+
+        let renderedText = text;
+
+        const PIXELS_PER_CHAR = fontSize;
+        const Y_OFFSET = fontSize * 0.9;
+
+        const startTime = performance.now();
+
         return new Promise(resolve => {
-            const canvas = document.createElement("canvas");
-            parent.appendChild(canvas);
-
-            const c = canvas.getContext("2d");
-            setState(c);
-
-            const getWidth = t => c.measureText(t).width;
-
-            const MAX_WIDTH = parent.getBoundingClientRect().width - padding * 2;
-
-            text = packText(text, getWidth, MAX_WIDTH);
-
-            const TEXT_WIDTH = Math.max(
-                ...text.split("\n")
-                    .map(line => getWidth(line))
-            );
-
-            const TEXT_HEIGHT = text.split("\n").length * fontSize;
-
-            const CANVAS_WIDTH = TEXT_WIDTH + padding * 2;
-            const CANVAS_HEIGHT = TEXT_HEIGHT + padding * 2;
-
-            canvas.width = CANVAS_WIDTH * devicePixelRatio;
-            canvas.height = CANVAS_HEIGHT * devicePixelRatio;
-            canvas.style.width = CANVAS_WIDTH + "px";
-            canvas.style.height = CANVAS_HEIGHT + "px";
-
-            setState(c);
-            c.scale(devicePixelRatio, devicePixelRatio);
-
-            let renderedText = text;
-
-            const PIXELS_PER_CHAR = fontSize;
-            const Y_OFFSET = fontSize * 0.9;
-
-            const startTime = performance.now();
 
             function animate(now) {
                 c.clearRect(0, 0, canvas.width, canvas.height);
@@ -292,10 +295,6 @@
             requestAnimationFrame(animate);
 
         });
-        // for (let i = 0; i < text.length; i++) {
-        // 	svgText.innerHTML += text[i];
-        // 	await sleep(50);
-        // }
     }
 
     async function outputToScreen({
@@ -320,7 +319,7 @@
         let italic = false;
 
         const format = new Array(input.length).fill("");
-        
+
         let output = "";
 
         let escaped = false;
@@ -338,17 +337,18 @@
 
             const fInx = output.length - 1;
             if (bold) format[fInx] += "i";
-            if (italic) format[fInx] += "b";    
+            if (italic) format[fInx] += "b";
         }
 
-        await canvasPrint({
+        const donePrinting = canvasPrint({
             parent: document.getElementById("paper"),
             text: output,
             format,
             padding: 30
         });
-        
         fix();
+        await donePrinting;
+
         betterSeed = 0;
         //this line is my best fren i am keep it -->  let br = "<br>";     
     }
