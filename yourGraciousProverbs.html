@@ -300,8 +300,10 @@
 	async function outputToScreen({
 		title,
 		index,
-		proverb: input
+		proverb
 	}) {
+		let input = `${proverb.text}\n-${proverb.author}`;
+
 		betterSeed = 0;
 
 		let ch = randInt(1, 40);
@@ -353,6 +355,24 @@
 		//this line is my best fren i am keep it -->  let br = "<br>";     
 	}
 
+	class Proverb {
+		constructor(line) {
+			line = line.trim();
+			const index = line.lastIndexOf("|");
+			if (index === -1) {
+				this.text = line;
+				this.author = "unknown";
+			} else {
+				this.text = line
+					.slice(0, index)
+					.trim();
+				this.author = line
+					.slice(index + 1)
+					.trim();
+			}
+		}
+	}
+
 
 	class Scroll {
 		constructor(title, proverbs) {
@@ -360,7 +380,7 @@
 			this.proverbs = proverbs
 			.trim()
 			.split("\n")
-			.map(line => line.trim());
+			.map(line => new Proverb(line));
 			this.size = this.proverbs.length;
 		}
 		computeWeight(totalSize) {
@@ -371,647 +391,672 @@
 	const scrolls = [
 	//uncatergorized proverbs	
 	new Scroll("Onter", `
-			The distinct lack of emptiness is jarring
-			Several pieces of advice for you and mine
-			As long as you're off the premises, we can't stop you 
-			Only look down
-			The shards on the walls make it feel claustrophobic
-			You only get two first impressions
-			Reality tears aren't two dimensional, despite what the authorities say
-			There is something inside of out
-			Leaves crumbing to sand in the clenched fist
-			We only sell #solid# plinths
-			Gambling away across the entire range (it's about 40 or so meters)
-			And Mackenzie said the terms arent negotiable, but we’d continue regardless
-			Neptune stretched their cloaked fingers and it was done
-			They bathed in the new light of the illuminating 
-			Ifcara reached past her domain, idle minds breed reaching fingers
-			And they suffered past twelve storms and the sharpenings of the Illuminating
-			The sturdy are walls for the strong
-			The end of the world at the doorstep and Ij'o wept tears of posterity to be alive and selected
-			Knocking on clocks
-			Home invitation and a sharp decline
-			Nothing left but ash and real life
-			The desire to imitate beauty is &grasping&
-			Intangibility in the palm of your hand
-			Living vexatiously
-			Pulling through the dark zone is… unadvisable, though definitely encouraged extracurricularily
-			The shortport is
-			Climb the pole
-			There have always been a couple rogue linguists
-			Make staying-alive-style choices
-			What's on the counter
-			Consider the distance you must fall to reach the sky
-			My consciousness glints in the autumn light
-			Tattered paper documents, drifting over the road at night
-			Do your very best to make the first good action you take not be your last
-			Media in your lymph nodes
-			The past is substantially more relevant to this recipe
-			All hope is lost
-			The metal helps more than it hurts 
-			Throw open the earth and free those below
-			Draw the curtains on the sky to let the powers that be sleep
-			Do your best before it's gone
-			Alight from your fingers
-			Lie to them
-			Visit them every once and a while
-			Run away, as slowly as you can bear
-			Refumigate your house on the full moon 
-			Who would have thought?! 
-			Killing them won't help your condition
-			Helping your condition won't kill them 
-			A crescendo on conscious always precedes madness
-			Insanity is just the eye of the storm
-			The load you bear is not yours to release
-			The end of the road away from confusion is where you break
-			The weight of emotioal release will be passed on to someone else
-			You can’t tread far from home
-			We didn't know you could be this awake
-			You’ll never be awake
-			Feelings of another supercede feelings for another 
-			All light is simply a byproduct of your own twisted constructions
-			You are encompassed
-			What's it like to be &alive& alive?
+			The distinct lack of emptiness is jarring | henry
+			Several pieces of advice for you and mine | henry
+			As long as you're off the premises, we can't stop you | henry 
+			Only look down | henry
+			The shards on the walls make it feel claustrophobic | henry
+			You only get two first impressions | henry
+			Reality tears aren't two dimensional, despite what the authorities say | tom
+			There is something inside of out | tom
+			Leaves crumbing to sand in the clenched fist | tom
+			We only sell #solid# plinths | tom
+			Gambling away across the entire range (it's about 40 or so meters) | tom
+			And Mackenzie said the terms arent negotiable, but we'd continue regardless | tom
+			Neptune stretched their cloaked fingers and it was done | tom
+			They bathed in the new light of the illuminating | tom
+			Ifcara reached past her domain, idle minds breed reaching fingers | tom
+			And they suffered past twelve storms and the sharpenings of the Illuminating | tom
+			The sturdy are walls for the strong | tom
+			The end of the world at the doorstep and Ij'o wept tears of posterity to be alive and selected | tom
+			Knocking on clocks | tom
+			Home invitation and a sharp decline | tom
+			Nothing left but ash and real life | tom
+			The desire to imitate beauty is &grasping& | tom
+			Intangibility in the palm of your hand | tom
+			Living vexatiously | tom
+			Pulling through the dark zone is… unadvisable, though definitely encouraged extracurricularily | tom
+			The shortport is | tom
+			Climb the pole | tom
+			There have always been a couple rogue linguists | henry
+			Make staying-alive-style choices | henry
+			What's on the counter | henry
+			Consider the distance you must fall to reach the sky | henry
+			My consciousness glints in the autumn light | henry
+			Tattered paper documents, drifting over the road at night | henry
+			Do your very best to make the first good action you take not be your last | henry
+			Media in your lymph nodes | henry
+			The past is substantially more relevant to this recipe | henry
+			All hope is lost | henry
+			The metal helps more than it hurts | henry
+			Throw open the earth and free those below | henry
+			Draw the curtains on the sky to let the powers that be sleep | henry
+			Do your best before it's gone | tom
+			Alight from your fingers | tom
+			Lie to them | tom
+			Visit them every once and a while | henry
+			Run away, as slowly as you can bear | henry
+			Refumigate your house on the full moon | tom
+			#Who# would have thought?! | henry
+			Killing them won't help your condition | tom
+			Helping your condition won't kill them  | henry
+			A crescendo on conscious always precedes madness | tom
+			Insanity is just the eye of the storm | tom
+			The load you bear is not yours to release | henry
+			The end of the road away from confusion is where you break | henry
+			The weight of emotional release will be passed on to someone else | tom
+			You can't tread far from home | tom
+			We didn't know you could be this awake | henry
+			You'll never be awake | tom
+			Feelings of another supercede feelings for another | henry
+			All light is simply a byproduct of your own twisted constructions | tom
+			You are encompassed | henry
+			What's it like to be &alive& alive? | wes
+			Would you like to experience having your limbs removed? | henry
+			It's markedly unpleasant to spend this much time out there | henry
+			The pulverized seeds glisten in the flourescent light | henry
+			The void wishes for your company (the feeling isn't mutual) | henry
+			It's getting uncomfortably close | henry
+			Don't fear the immediate | henry
+			Only worry about what &won't& happen | henry
+			No soul, no service | henry
+			The height of the earth mostly influences the red channel | henry
+			The powdered joy too often comes out in clumps | henry
+			My brain has been clogged with hair and the seratonin won't drain | henry
+			Help! It's asleep! | henry
+			The lil' guy is all wound up | henry
+			Some regions of the brain are likely to be burgled | henry
+			We don't know because we crossed it substantially | henry
+			You might want to stay out of sight for a while | henry
+			It is not certain that we'll find anyone there | henry
+			Do your best to stay outside | henry
+			If you wish, we could &all& call instead | henry
+			I can't feel the extremities of my conciousness anymore | henry
+			Give back what you took, so I don't lose them both | henry
+			Droplets of heaven spill into the cave | henry
+			Do even think about it! | henry
+			Your will to live contains a remarkable amount of embroidery | henry
+			Human arms: part of a balanced breakfast! | henry
+			From little acorns large octopi grow! | molly
+			The handles of one-way doors are dusted with regret | henry
+			*aerates quartz* hmm, yes... a hint of walnut | henry
 		`),
 		//actual kinda philosophy thats more clear and just very high tier stuff
 		new Scroll("Illuminating", `
-			Do not give in to fear. It is chaos of the mind and must not be yielded to. Lose your fear and ability will stretch before you
-			I need to stop the madness and start putting my mind to rest
-			You're a dream… A nightmare…
-			I am alive again. The sun has come full circle ... and now I am standing in a sun-flicker...
-			The dappled light upon the ground reminds me of the distance
-			It's boring to be obvious
-			There is a certain level of chaos that is subjective
-			A torrent of thoughts shall drown us all, in the end
-			Things are, in fact, as they seem
+			Do not give in to fear. It is chaos of the mind and must not be yielded to. Lose your fear and ability will stretch before you | tom
+			I need to stop the madness and start putting my mind to rest | tom
+			You're a dream… A nightmare… | tom
+			I am alive again. The sun has come full circle ... and now I am standing in a sun-flicker... | tom
+			The dappled light upon the ground reminds me of the distance | tom
+			It's boring to be obvious | henry
+			There is a certain level of chaos that is subjective | henry
+			A torrent of thoughts shall drown us all, in the end | henry
+			Things are, in fact, as they seem | henry
 		`),
 		//suffering
 		new Scroll("Suffering", `
-			You're so happy! You're so relieved you're not dead
-			I will be with you the day you die, that day is now
-			We hope that you find comfort in the fact that you have the capacity to move around and think
-			Improvement is inevitable
-			We will never become better, but we will do better
-			Sacrifice the bean
-			It's almost funny how many there are, if it wasn't so searing
-			Every action that you take counts towards your punishment
-			Typing, typing. They've been typing for the longest time and I can't wait any longer
+			You're so happy! You're so relieved you're not dead | tom
+			I will be with you the day you die, that day is now | tom
+			We hope that you find comfort in the fact that you have the capacity to move around and think | tom
+			Improvement is inevitable | henry
+			We will never become better, but we will do better | tom
+			Sacrifice the bean | sofia
+			It's almost funny how many there are, if it wasn't so searing | tom
+			Every action that you take counts towards your punishment | tom
+			Typing, typing. They've been typing for the longest time and I can't wait any longer | tom
 		`),
 		//a good book, high tier proverbs, sun
 		new Scroll("Okrates", `
-			&nearly incomprehensible farmer accent& Goddam spots in the harvesters again &spits& Get the blowtorch and lure
-			Oats in the machine
-			Buying candles from a thrift store
-			Your friend has a large bag of colored disks
-			The human eye can divide into multiple sectors, one for each color
-			Beams of light: the things which sneak within
-			Lost in monotonality
-			Nothing compares to the excitement of opening a tree     
-			Surges of unification
+			&nearly incomprehensible farmer accent& Goddam spots in the harvesters again &spits& Get the blowtorch and lure | tom
+			Oats in the machine | tom
+			Buying candles from a thrift store | tom
+			Your friend has a large bag of colored disks | henry
+			The human eye can divide into multiple sectors, one for each color | tom
+			Beams of light: the things which sneak within | tom
+			Lost in monotonality | tom
+			Nothing compares to the excitement of opening a tree | henry
+			Surges of unification | tom
 			You have acquired salutations
-			Despite all we'd done, the sun rose again
-			To be free from any external and internal suffering is very, very difficult
-			If you hear them, do not touch 'em when you are hungry. Even if you touch them when the sun sets, this may seem strange.
+			Despite all we'd done, the sun rose again | tom
+			To be free from any external and internal suffering is very, very difficult | tom
+			If you hear them, do not touch 'em when you are hungry. Even if you touch them when the sun sets, this may seem strange. | tom
 		`),
 		//you
 		new Scroll("Isfaths", `
-			You will be lucky. Turn to the sun and be fearless
-			You will be unlucky. Turn to the sun for its gracious mirth
-			You are lost
-			You are found
-			You are being searched for
+			You will be lucky. Turn to the sun and be fearless | tom
+			You will be unlucky. Turn to the sun for its gracious mirth | tom
+			You are lost | henry
+			You are found | henry
+			You are being searched for | henry
 			You are the entire vehicle of change
-			The greatest thing is that you are now a human being
-			you must know ONE DAY YOU WILL BE HELD
-			There are a few moments of truth. Five have passed but you've only realized one
+			The greatest thing is that you are now a human being | tom
+			you must know ONE DAY YOU WILL BE HELD | tom
+			There are a few moments of truth. Five have passed but you've only realized one | tom
 			You do not hear evil
 		`),
 		// its the title. its just hubris
 		new Scroll("Hubris", `
-			Sleep well. Nothing foreboding, it's not like you have only this last chance. Just… a good idea
-			The houses are only separated by colorful banners enscripted with avant garde medieval symbols
-			Control,  down-shift, now park the car
-			The frugality of an onion is overrated
-			The growing ball of dirt is simply a distraction
-			Do not concern yourself with them
-			To reach enlightenment, you must imbibe
-			To go on living life like this is as impossible as dying is
-			Weather predictors are false prophets, do not listen to their heresy
-			Happy dreams keep you happy in a dream job
-			An impressive drift-catch
-			You must be swollen 
+			Sleep well. Nothing foreboding, it's not like you have only this last chance. Just… a good idea | tom
+			The houses are only separated by colorful banners enscripted with avant garde medieval symbols | tom
+			Control, down-shift, now park the car | tom
+			The frugality of an onion is overrated | tom
+			The growing ball of dirt is simply a distraction | henry
+			Do not concern yourself with them | henry
+			To reach enlightenment, you must imbibe | henry
+			To go on living life like this is as impossible as dying is | tom
+			Weather predictors are false prophets, do not listen to their heresy | tom
+			Happy dreams keep you happy in a dream job | tom
+			An impressive drift-catch | tom
+			You must be swollen | tom
 		`),
 		//animals and... bread?
 		new Scroll("Dilap", `
-			Cavehorses can't even walk around in mud
-			Peppers are toxic, perhaps
-			Bread was never an animal
-			They plead for toast
-			The birds will save you from yourself
-			The birds will be your downfall
-			The horses are here, they wish fortune upon you
-			Bird and primates sometimes have similar degrees of skill at aviation
+			Cavehorses can't even walk around in mud | tom
+			Peppers are toxic, perhaps | tom
+			Bread was never an animal | declan
+			They plead for toast | tom
+			The birds will save you from yourself | henry
+			The birds will be your downfall | henry
+			The horses are here, they wish fortune upon you | henry
+			Bird and primates sometimes have similar degrees of skill at aviation | henry
 		`),
 		// mid - high tier proverbs in general and insanity
 		new Scroll("Praculae", `
-			A simple, everyday, all-consuming  life routine 
-			Good insanity is necessary as it will leave no room for bad insanity
-			Cynicism is futile
+			A simple, everyday, all-consuming life routine | tom
+			Good insanity is necessary as it will leave no room for bad insanity | tom
+			Cynicism is futile | tom
 			So I've made up my mind now
-			We're only doing this if we all die
-			You will need to wait a little longer
-			The feelings are enumerable
-			It never gets old. It doesn't need to
-			There is nothing left - not even the truth
-			The books within visible writing are the easiest to understand
-			An image is worth twice as much as a ten hundred words
+			We're only doing this if we all die | tom
+			You will need to wait a little longer | tom
+			The feelings are enumerable | tom
+			It never gets old. It doesn't need to | tom
+			There is nothing left - not even the truth | tom
+			The books within visible writing are the easiest to understand | tom
+			An image is worth twice as much as a ten hundred words | tom
 		`),
 		// in the title
 		new Scroll("Unpleasant Thoughts", `
-			Carpeted windows
-			Guitar of vocal cords
-			Don't build an atom bomb with teeth
-			The fan companies have a plan
-			No one is ever sure
-			Stop voting at all, you're a fool
-			The potatoes are watching, the corn is listening, and the grapes are feeling your skin. Right now
-			A hundred and one thousand days, which they want to get rid of, but they do not
-			There's an old gentleman inside the house. Currently. The old woman is later, don't worry
-			The phone is out of range
-			A breath of fresh air
+			Carpeted windows | tom
+			Guitar of vocal cords | tom
+			Don't build an atom bomb with teeth | tom
+			The fan companies have a plan | tom
+			No one is ever sure | tom
+			Stop voting at all, you're a fool | tom
+			The potatoes are watching, the corn is listening, and the grapes are feeling your skin. Right now | henry
+			A hundred and one thousand days, which they want to get rid of, but they do not | tom
+			There's an old gentleman inside the house. Currently. The old woman is later, don't worry | tom
+			The phone is out of range | henry
+			A breath of fresh air | tom
 		`),
 		// what does this ***mean***
 		new Scroll("Sputilations", `
-			Mass production companies of tether cords are being overrun by small scale, local businesses producing tether cords
-			Last edit was a bit ago and you don't know what it was
-			A new random object has been added to your living room aesthetic
-			A new random object has been removed from your living groom aesthetic
-			Your own mind always seems to bend
-			The world is an illusion and never will be. Everything is impossible
-			You are too big to live on a tiny island in any shape or form
-			There is no do but try 
-			Try, there isn't a do
-			The weather must be treated carefully, its quite slippery
+			Mass production companies of tether cords are being overrun by small scale, local businesses producing tether cords | tom
+			Last edit was a bit ago and you don't know what it was | tom
+			A new random object has been added to your living room aesthetic | tom
+			A new random object has been removed from your living groom aesthetic | henry
+			Your own mind always seems to bend | tom
+			The world is an illusion and never will be. Everything is impossible | tom
+			You are too big to live on a tiny island in any shape or form | tom
+			There is no do but try | tom
+			Try, there isn't a do | tom
+			The weather must be treated carefully, its quite slippery | tom
 		`),
 		// honest stuff, no funny business, like a lower tier Illuminating
 		new Scroll("Ti", `
-			The blind man knows, the deaf man speaks, but the wise man can only hear
-			An eye for an eye makes the whole world able to hear better
-			Reality is not about you
-			Reality is purely you
-			Reality is a lie
-			Rumbling in the soul
-			Realer than should be possible
-			To live without being distracted
-			I do not know from whence I speak   
-			The future you've seen is real. It has been there since after all
-			Let yourself admit it
+			The blind man knows, the deaf man speaks, but the wise man can only hear | tom
+			An eye for an eye makes the whole world able to hear better | tom
+			Reality is not about you | tom
+			Reality is purely you | tom
+			Reality is a lie | tom
+			Rumbling in the soul | tom
+			Realer than should be possible | tom
+			To live without being distracted | tom
+			I do not know from whence I speak | henry
+			The future you've seen is real. It has been there since after all | tom
+			Let yourself admit it | henry
 		`),
 		//death, cycles, circles
 		new Scroll("Circles of Polarity", `
-			Am I dead?
-			We don't believe in death
-			You would prefer to be cautious of death
-			Fairy Tales and the Death of Humankind
-			Run away, you won't end up where you started. Ever.
-			Running in threes 
-			What? Did I think of something?
-			Watches are the hands of eternity
-			Hues keep on rotating until they die
-			Nobody except you knows your location, geographically and possibly in some other way if you see the metaphor in this
-			&wish you were here&
+			Am I dead? | tom
+			We don't believe in death | tom
+			You would prefer to be cautious of death | tom
+			Fairy Tales and the Death of Humankind | tom
+			Run away, you won't end up where you started. Ever. | henry
+			Running in threes | tom
+			What? Did I think of something? | henry
+			Watches are the hands of eternity | tom
+			Hues keep on rotating until they die | tom
+			Nobody except you knows your location, geographically and possibly in some other way if you see the metaphor in this | tom
+			&wish you were here& | tom
 		`),
 		// ectermine! classics here too
 		new Scroll("Ectermine's Legacy", `
-			It's done. All the doctors are dead. Apples are no longer necessary
-			An apple a day keeps the doctor away. Ten will send them flying
-			The apple counter is non zero. #&Panic&#
-			Misanthrope? more like miso soup!
-			There's nothing here for you
-			Need be has been
-			The eyes which await you in the void only want your mangoes, nothing more   
-			Molasses that should be eaten
-			Have you checked upon it recently?
-			I'm going to become extremely ethical tomorrow
-			There will never again be a house
-			The shards are horrifying
-			(This post will not be written with any intention of making you work at the post as I am an ex-gale worker)
-			Glutenfree Genderfluid Girlfriend
-			Glutenfree Genderfriend Girlfluid
-			Glutenfluid Genderfree Girlfriend
-			Glutenfluid Genderfriend Girlfree
-			Glutenfriend Genderfree Girlfluid
-			Glutenfriend Genderfluid Girlfree
+			It's done. All the doctors are dead. Apples are no longer necessary | tom
+			An apple a day keeps the doctor away. Ten will send them flying | henry
+			The apple counter is non-zero. #&Panic&# | henry
+			Misanthrope? more like miso soup! | henry
+			There's nothing here for you | henry
+			Need be has been | tom
+			The eyes which await you in the void only want your mangoes, nothing more | tom   
+			Molasses that should be eaten | tom
+			Have you checked upon it recently? | tom
+			I'm going to become extremely ethical tomorrow | molly
+			There will never again be a house | tom
+			The shards are horrifying | tom
+			(This post will not be written with any intention of making you work at the post as I am an ex-gale worker) | AI
+			Glutenfree Genderfluid Girlfriend | henry
+			Glutenfree Genderfriend Girlfluid | henry
+			Glutenfluid Genderfree Girlfriend | henry
+			Glutenfluid Genderfriend Girlfree | henry
+			Glutenfriend Genderfree Girlfluid | henry
+			Glutenfriend Genderfluid Girlfree | henry
 		`),
 		// short things
 		new Scroll("Spaoons", `
-			Don't tap the keyboard twice
-			Suburban, urban, hypourban
-			The rurals are the main source of the urbs
-			The butterflies are dropping from the sky
-			Subavocado
-			Visual mode engaged
-			Kanye's Game of Life
-			They approach
-			You thought!!!
-			Chopped calcium: serves plenty
-			Fun fact: doors are not guaranteed to be associative
+			Don't tap the keyboard twice | tom
+			Suburban, urban, hypourban | tom
+			The rurals are the main source of the urbs | tom
+			The butterflies are dropping from the sky | tom
+			Subavocado | tom
+			Visual mode engaged | tom
+			Kanye's Game of Life | luca
+			They approach | henry
+			You thought!!! | tom
+			Chopped calcium: serves plenty | henry
+			Fun fact: doors are not guaranteed to be associative | henry
 		`),
 		// apathy and surrealism
 		new Scroll("Apathetium", `
-			Surreal continents continue
-			That is a proverb
-			Meteor, across the dimmed landscape
-			An amber lamp for you in this paling room
-			You &love& your coworkers
-			Absolute nothing! &echoes&
-			They have all the same memories of the day
-			Behold upon the pit of ash and thou shall fall into luminance
-			If I was going to be gone forever, I'd bring my 3DS with me
+			Surreal continents continue | tom
+			Meteor, across the dimmed landscape | tom
+			An amber lamp for you in this paling room | tom
+			You &love& your coworkers | tom
+			Absolute nothing! &echoes& | tom
+			They have all the same memories of the day | tom
+			Behold upon the pit of ash and thou shall fall into luminance | tom
+			If I was going to be gone forever, I'd bring my 3DS with me | max
 		`),
 		// cooks, random things
 		new Scroll("Plagarized Optics", `
-			Tied up in holiday ribbons!
-			The cooks are in the kitchen
-			The cooks are in your living room
-			The cooks are in the restroom currently. Give them sufficient time
-			We all scream for ice cream
-			The ice cream screams for salvation
-			The ants are listening
-			The answer: listening... 
-			Many simply voted for a candidate they detest because they feared the other guy   
+			Tied up in holiday ribbons! | tom
+			The cooks are in the kitchen | tom
+			The cooks are in your living room | tom
+			The cooks are in the restroom currently. Give them sufficient time | tom
+			We all scream for ice cream | henry
+			The ice cream screams for salvation | henry
+			The ants are listening | declan
+			The answer: listening... | molly
+			Many simply voted for a candidate they detest because they feared the other guy | tom   
 		`),
 		// violent unity. the whole gang is together
 		new Scroll("Konradism", `
-			They are up in arms
-			The belldrum is full of all the things we won't have time to know
-			Strike by the cover of the book
-			Become the anvil
-			The strong hand sends a heavy message
-			Banish from our cradle the idea of violent unity
-			Houses on the summit of a mountain
-			We heard that it would end in a museum, but it hasn't yet
-			Keep fighting against the system
-			The webs hold their corpses
-			They must be enraged by the fissure
-			A &real& patriot will know what's best
+			They are up in arms | tom
+			The belldrum is full of all the things we won't have time to know | tom
+			Strike by the cover of the book | tom
+			Become the anvil | tom
+			The strong hand sends a heavy message | tom
+			Banish from our cradle the idea of violent unity | tom
+			Houses on the summit of a mountain | tom
+			We heard that it would end in a museum, but it hasn't yet | tom
+			Keep fighting against the system | tom
+			The webs hold their corpses | tom
+			They must be enraged by the fissure | tom
+			A &real& patriot will know what's best | tom
 		`),
 		//ahhahahhah jokes!!
 		new Scroll("Varying Elements", `
-			When is a crab not a crustacean? Whenever the train reaches the station!
-			When is a dog not a bison? When a sheep not a horse? When a pig, a pig's tail, a pig's head
-			What does the old day say? The day of the sun
-			Why does the egg contain a seed? It tastes better
-			What is there in black glass? Something shiny, a like glass or liquid
-			What color are the stars of Jupiter and Saturn? Tears of war
-			Where are the old trees? We'll never know
-			Wait. How many ribs did you say I have currently inside me?!
-			The undulations feed your despair
-			Roads are imaginary
-			The frugal will pay
-			Agreed much, i just thought it would be fun for a few
-			They seek friendship, why would they be so foolish
-			I've been taking my new prescription. I really wish doc would've told me about the strings! &muffled laughter of a comedy routine, at a joke you can't seem to understand&
+			When is a crab not a crustacean? Whenever the train reaches the station! | AI
+			When is a dog not a bison? When a sheep not a horse? When a pig, a pig's tail, a pig's head | AI
+			What does the old day say? The day of the sun | tom
+			Why does the egg contain a seed? It tastes better | tom
+			What is there in black glass? Something shiny, a like glass or liquid | tom
+			What color are the stars of Jupiter and Saturn? Tears of war | tom
+			Where are the old trees? We'll never know | tom
+			Wait. How many ribs did you say I have currently inside me?! | tom
+			The undulations feed your despair | henry
+			Roads are imaginary | tom
+			The frugal will pay | tom
+			Agreed much, i just thought it would be fun for a few | tom
+			They seek friendship, why would they be so foolish | henry
+			I've been taking my new prescription. I really wish doc would've told me about the strings! &muffled laughter of a comedy routine, at a joke you can't seem to understand& | tom
 		`),
 		// TV and media. very good proverbs here
 		new Scroll("Vocaloid", `
-			There's a possibility the people from TV are from the best of both worlds
-			Achieve points every time!
-			The television is full of ""gala appels""
-			Come, join the show
-			We're being watched and that's why our lives are so much happier
-			They watch and because of that you leave
-			Monster. Look at yourself, and despair
-			You are tired, tired of having to wait 20 minutes to go in front of a big tv show
-			Sitcom idea where it goes on for nine season and everybody loves the amicable characters, goofy gimmicks, and adorable romances. After a few years of this, end the show with all the characters dying in tragic manners and watch the chaos unfold
-			Our lives! Turned upside down in no time! Free warranty!
-			Our priests work &round the clock&
-			You will not enter &#heaven.#&
-			Sitting in a counter, staring at the customers
-			We will be going into the restaurant \\& watching people talk when they sit down
-			There's one last great show for everyone
-			Happy TV viewing, happy family
-			I hope you enjoy, enjoy the show of the same name!
-			Please have fun with this world and get together with your children, lovers, and family in this life long journey
+			There's a possibility the people from TV are from the best of both worlds | AI
+			Achieve points every time! | AI
+			The television is full of ""gala appels"" | tom
+			Come, join the show | tom
+			We're being watched and that's why our lives are so much happier | AI
+			They watch and because of that you leave | tom
+			Monster. Look at yourself, and despair | tom
+			You are tired, tired of having to wait 20 minutes to go in front of a big tv show | AI
+			Sitcom idea where it goes on for nine season and everybody loves the amicable characters, goofy gimmicks, and adorable romances. After a few years of this, end the show with all the characters dying in tragic manners and watch the chaos unfold | tom
+			Our lives! Turned upside down in no time! Free warranty! | AI
+			Our priests work &round the clock& | tom
+			You will not enter &#heaven.#& | tom
+			Sitting in a counter, staring at the customers | tom
+			We will be going into the restaurant \\& watching people talk when they sit down | AI
+			There's one last great show for everyone | AI
+			Happy TV viewing, happy family | AI
+			I hope you enjoy, enjoy the show of the same name! | AI
+			Please have fun with this world and get together with your children, lovers, and family in this life long journey | AI
 		`),
 		// math, numbers
 		new Scroll("Frill Optanal", `
-			Persimmons are sufficient to sustain life
-			Persimmons are sufficient to sustain transportation
-			Persimmons are sufficient
-			The distinction between you and me is only 1% greater than ~99.099% of the distinction between you and me
-			Rolling a coin 10 times will not result in 10% spades
-			It is gone now, you won't need to fear for about another 38 months
-			If every event in a collection were a result of an enumeration to which it is not a result, and that enumeration is only a sum of numbers where some element does not exist on it, and that the enumeration of the elements is only a sum (or sum) of numbers where some element exist on the collection, we will have all the general forms of functions from which there is no natural law (unless the particular form is logically equivalent to the general form) and the natural laws will be determined as the natural law of the universe would be
-			Five score, to the tenth. Business as usual
-			I've been adding cubes for about four minutes
-			The air is warm for almost 30 minutes
-			A dog is not a feather, but a brick 
+			Persimmons are sufficient to sustain life | henry
+			Persimmons are sufficient to sustain transportation | henry
+			Persimmons are sufficient | henry
+			The distinction between you and me is only 1% greater than ~99.099% of the distinction between you and me | henry
+			Rolling a coin 10 times will not result in 10% spades | tom
+			It is gone now, you won't need to fear for about another 38 months | henry
+			If every event in a collection were a result of an enumeration to which it is not a result, and that enumeration is only a sum of numbers where some element does not exist on it, and that the enumeration of the elements is only a sum (or sum) of numbers where some element exist on the collection, we will have all the general forms of functions from which there is no natural law (unless the particular form is logically equivalent to the general form) and the natural laws will be determined as the natural law of the universe would be | AI
+			Five score, to the tenth. Business as usual | tom
+			I've been adding cubes for about four minutes | shannon
+			The air is warm for almost 30 minutes | tom
+			A dog is not a feather, but a brick  | tom
 		`),
 		// things theophrastes would say, high tier stuff, gods
 		new Scroll("Theophrastes's Legacy Pronunciation", `
-			It happened on a tuesday
-			♪ Bouncing on down to New Orleans ♪
-			To sufficiently enjoy photons, take a break from them for a while
-			An awful mess, you've created. Reincarnate please
-			A rapid transmutation and a day off
-			Salted is thy bread, beholden of the tides that bind
-			Only place your faith in falsehoods
-			The world is fastened directly to your abdomen. You don't need an oyster
-			The world is mine and mine alone. Go, get a new name, for it is mine
-			I am your only refuge, your only god
-			Feel the wrath of your only refuge
-			The people that speak is our minds and dreams
-			Half a rock, thrown across the bank. It's finally done
-			Don't let the devil give you a choice!
-			Saying "No thanks" to the devil only make you look bad!
+			It happened on a tuesday | tom
+			♪ Bouncing on down to New Orleans ♪ | max
+			To sufficiently enjoy photons, take a break from them for a while | henry
+			An awful mess, you've created. Reincarnate please | henry
+			A rapid transmutation and a day off | henry
+			Salted is thy bread, beholden of the tides that bind | tom
+			Only place your faith in falsehoods | henry
+			The world is fastened directly to your abdomen. You don't need an oyster | henry
+			The world is mine and mine alone. Go, get a new name, for it is mine | tom
+			I am your only refuge, your only god | tom
+			Feel the wrath of your only refuge | tom
+			The people that speak is our minds and dreams | tom
+			Half a rock, thrown across the bank. It's finally done | tom
+			Don't let the devil give you a choice! | AI
+			Saying "No thanks" to the devil only make you look bad! | AI
 		`),
 		// strangeness, misc.
 		new Scroll("Auberations", `
-			Door locks are the career to good business
-			The countrypeople are quite picky
-			Moss is [emotion here]. Now, moss is a philosophy
-			To see is to believe, to feel is to doubt, and to smell is to be thoroughly disenchanted
-			The feeling of being able to feel your voice in the woods is lovely
-			What the hell did I think I was gonna hear this on the radio?
-			It's fun to watch y'all manipulate others
-			The packing peanuts entice me
-			Being found guilty of counterfeiting settled an unmistakable aura of authority on a metallurgist
-			There's also a little part in this episode where Liz points out why you shouldn't get rid of all the gods at once, so how does that make people unhappy?
+			Door locks are the career to good business | tom
+			The countrypeople are quite picky | tom
+			Moss is [emotion here]. Now, moss is a philosophy | tom
+			To see is to believe, to feel is to doubt, and to smell is to be thoroughly disenchanted | henry
+			The feeling of being able to feel your voice in the woods is lovely | tom
+			What the hell did I think I was gonna hear this on the radio? | tom
+			It's fun to watch y'all manipulate others | tom
+			The packing peanuts entice me | tom
+			Being found guilty of counterfeiting settled an unmistakable aura of authority on a metallurgist | max
+			There's also a little part in this episode where Liz points out why you shouldn't get rid of all the gods at once, so how does that make people unhappy? | AI
 		`),
 		// cards and games and fun and zooz
 		new Scroll("Boron's Toussaint", `
-			The king of spades is mad at you
-			You've been deal a hand of a king of spades and an ace. That would be great for blackjack but this is five card draw and you seem to somehow have lost three cards already
-			A glass of water for Zeus
-			Zeus doesn't like the idea of your promotion
-			The stars have aligned into the shape of your future! It's a clear day outside
-			We exist in the space between brain and mind
-			You must speak before truth is possible
-			The ability to distinguish between smoke and mirrors will be invaluable
-			The trees are but daughter nature's haphazard attempts at drawing a triangle
-			The whole reality is a game of skill
-			Playing cards should be worth more. You could try and collect a full deck
-			Exuberate yourself
+			The king of spades is mad at you | tom
+			You've been deal a hand of a king of spades and an ace. That would be great for blackjack but this is five card draw and you seem to somehow have lost three cards already | tom
+			A glass of water for Zeus | tom
+			Zeus doesn't like the idea of your promotion | tom
+			The stars have aligned into the shape of your future! It's a clear day outside | henry
+			We exist in the space between brain and mind | henry
+			You must speak before truth is possible | tom
+			The ability to distinguish between smoke and mirrors will be invaluable | henry
+			The trees are but daughter nature's haphazard attempts at drawing a triangle | henry
+			The whole reality is a game of skill | tom
+			Playing cards should be worth more. You could try and collect a full deck | tom
+			Exuberate yourself | tom
 		`),
 		// sea and salt and food and stuff idk
 		new Scroll("Kelp", `
-			Salt in the sea brings you to your knees
-			Loops upon loops
-			There's nothing but more humans and they're just as confused as I. Where is everyone else?
-			Joy is a boundless restriction
-			Randomness is the salt
-			I value sleep with cities and gold
-			The habitat is no longer safe. Maybe it never was
-			I came for aspirin but I wound up with chocolate
+			Salt in the sea brings you to your knees | tom
+			Loops upon loops | tom
+			There's nothing but more humans and they're just as confused as I. Where is everyone else? | tom
+			Joy is a boundless restriction | tom
+			Randomness is the salt | tom
+			I value sleep with cities and gold | tom
+			The habitat is no longer safe. Maybe it never was | tom
+			I came for aspirin but I wound up with chocolate | molly
 		`),
 		// ceremony instructions
 		new Scroll("Ceremonisms", `
-			Humming and warring
-			Take up a new hobby. You'll have to, eventually
-			Lock your doors, open your windows, and call upon your neighbors
-			You will go and I will follow, in my own twisted way
-			Identical depression and twins
-			It's nothing personal
-			Home is where you play open handed
-			Peanuts are likely to have tiny hats
-			A bearded man is present within the legumes, if only you choose to find him
-			A man is coming out of the oven
-			I feel I know everyone and nobody
-			Myopia is an inadequate foundation
-			The fibers have prevented your self-realization
-			Don't forget \\& don't remember!
-			A strong, ancient voice calls to the world
+			Humming and warring | tom
+			Take up a new hobby. You'll have to, eventually | henry
+			Lock your doors, open your windows, and call upon your neighbors | tom
+			You will go and I will follow, in my own twisted way | tom
+			Identical depression and twins | tom
+			It's nothing personal | henry
+			Home is where you play open handed | henry
+			Peanuts are likely to have tiny hats | declan
+			A bearded man is present within the legumes, if only you choose to find him | henry
+			A man is coming out of the oven | tom
+			I feel I know everyone and nobody | tom
+			Myopia is an inadequate foundation | henry
+			The fibers have prevented your self-realization | tom
+			Don't forget \\& don't remember! | AI
+			A strong, ancient voice calls to the world | tom
 		`),
 		// disconcerting ones
 		new Scroll("Splines", `
-			Scream, for they can hear you. Sing, for this is literally a recording studio
-			Splines cannot have hurt you
-			Attic is towering
-			You must not be italicized
-			Passages through the void, find nothing else
-			Accurate predictions strain the system
-			You shalln't see anything of significance if you look
-			We don't leave any more
-			But your mouth does not open
-			You set down the weight and your shoulders feel heavier. You could have predicted this
-			The alternative versions of the present are your favorite
-			The alternative presence of the versions scares you
+			Scream, for they can hear you. Sing, for this is literally a recording studio | henry
+			Splines cannot have hurt you | tom
+			Attic is towering | tom
+			You must not be italicized | tom
+			Passages through the void, find nothing else | henry
+			Accurate predictions strain the system | henry
+			You shalln't see anything of significance if you look | henry
+			We don't leave any more | tom
+			But your mouth does not open | tom
+			You set down the weight and your shoulders feel heavier. You could have predicted this | tom
+			The alternative versions of the present are your favorite | henry
+			The alternative presence of the versions scares you | henry
 		`),
 		// instruction on the inhalation. slightly disconcerting. good proverbs
 		new Scroll("Inhalation of Pleo-Jovian Artifacts", `
-			Luminance and the ethereal, it flows beneath
-			Don't mask what you can't see
-			The are tunnels
-			Pretend you aren't breathing
-			The seashells are strewn across the counter. If only this could last
-			Nothing amidst the fluid carries the answer
-			The road doesn't work ahead. Stop hoping
-			As you fall, look behind you
-			And I was watching as it suddenly changed
-			When there is silence, there is a lack of conversation
+			Luminance and the ethereal, it flows beneath | tom
+			Don't mask what you can't see | tom
+			The are tunnels | tom
+			Pretend you aren't breathing | tom
+			The seashells are strewn across the counter. If only this could last | henry
+			Nothing amidst the fluid carries the answer | henry
+			The road doesn't work ahead. Stop hoping | henry
+			As you fall, look behind you | henry
+			And I was watching as it suddenly changed | tom
+			When there is silence, there is a lack of conversation | sofia
 		`),
 		// disconcerting, death, confusion, liturgy
 		new Scroll("Liturgical Pots of Blood", `
-			The patchwork is incomplete
-			Only you see it that way; this is good
-			If you're worried, then examine the glass, the grass, and the breeze
-			No one among you can understand the gravity of what you've done
-			Wicker lanterns, dancing 'till there is nothing left but light
-			The fruit smiles, your time has come
-			Why must they anger us so
-			There is always time for flexibility at the end of a candle
-			You're viewing it in the wrong dimension, you goofball    
-			For there shall come a time, when a time comes    
-			A small fraction of you may end up happy. Although it means no harm to you, many of you want to leave
+			The patchwork is incomplete | tom
+			Only you see it that way; this is good | tom
+			If you're worried, then examine the glass, the grass, and the breeze | tom
+			No one among you can understand the gravity of what you've done | henry
+			Wicker lanterns, dancing 'till there is nothing left but light | henry
+			The fruit smiles, your time has come | henry
+			Why must they anger us so | henry
+			There is always time for flexibility at the end of a candle | tom
+			You're viewing it in the wrong dimension, you goofball | tom    
+			For there shall come a time, when a time comes | tom
+			A small fraction of you may end up happy. Although it means no harm to you, many of you want to leave | tom
 		`),
 		// neptune and their wisdom and wide instruction
 		new Scroll("Neptune's Quenches", `
-			Endless fits of understanding
-			I had a dream where all my dreams came true
-			Silent nods of laughter
-			Sometimes fits of arise
+			Endless fits of understanding | henry
+			I had a dream where all my dreams came true | tom
+			Silent nods of laughter | henry
+			Sometimes fits of arise | tom
 			Predictions are a thing of the past
-			If the sky is original, the ground holds possibility
-			That may have been a deception
-			Just keep doing this forever and you'll feel awfully mediocre
-			It is the event
-			The choice of being me over you is one that I will choose
-			Your identity is only as strong as your willingness to leave
-			Pretend you are an aglet. Now stop, please. Tell us your experience
+			If the sky is original, the ground holds possibility | tom
+			That may have been a deception | henry
+			Just keep doing this forever and you'll feel awfully mediocre | henry
+			It is the event | tom
+			The choice of being me over you is one that I will choose | tom
+			Your identity is only as strong as your willingness to leave | henry
+			Pretend you are an aglet. Now stop, please. Tell us your experience | tom
 		`),
 		//stones
 		new Scroll("Ossuary's Fingers", `
-			A touch is not a stone
-			The last step is to bring the stone into the furnace
-			You do not remember the stones
-			The stones welcome you into their ranks
-			The stones hold memories and cradle them, softly but firmly
-			The stone keeps watch on you and your future
-			The stones guide you through the valley to a new life
-			Stones encrust your skin
-			Minerals amidst your veins
-			Stones offer protection from the sun, and you are always at peace
-			And you are still a stone
+			A touch is not a stone | tom
+			The last step is to bring the stone into the furnace | tom
+			You do not remember the stones | tom
+			The stones welcome you into their ranks | henry
+			The stones hold memories and cradle them, softly but firmly | ryan
+			The stone keeps watch on you and your future | tom
+			The stones guide you through the valley to a new life | tom
+			Stones encrust your skin | henry
+			Minerals amidst your veins | henry
+			Stones offer protection from the sun, and you are always at peace | tom
+			And you are still a stone | tom
 		`),
 		// singularity
 		new Scroll("Aplicality", `
-			A single grain of milk
-			An entirety of a bird egg is but a shell
-			They are right, for they come from below
-			They are left, for they come for above
-			A word is worth exactly three sevenths of a length of string, as determined by the latest census
-			Drifting with a single strand   
-			Barely one of us left
-			You are now one of these two souls 
-			Fugue in the deepest of nights
+			A single grain of milk | tom
+			An entirety of a bird egg is but a shell | tom
+			They are right, for they come from below | tom
+			They are left, for they come for above | tom
+			A word is worth exactly three sevenths of a length of string, as determined by the latest census | tom
+			Drifting with a single strand | tom
+			Barely one of us left | tom
+			You are now one of these two souls | tom 
+			Fugue in the deepest of nights | tom
 		`),
 		// sun, cycles, duality, misc.
 		new Scroll("Shifting Ties", `
-			We keep our gnomes around for the season
-			Look how long that hat is
-			Dinosaurs are a primary component of the industrial revolution
-			Heartbreak and insanity often coincide for crustaceans
-			Nothing you say can or will be used against you in a court of law
-			You keep forgetting that you are confused
-			Olive trees, despite their beauty, do not
-			The limits of the tree are infinite, albeit two dimensional
-			The stars will be caught up soon!
-			There is the soil, there is the stone, and there is something below
-			There is the sun, there is moon, and there is something else
-			This is paradise, and our existence is one more time to die
+			We keep our gnomes around for the season | tom
+			Look how long that hat is | tom
+			Dinosaurs are a primary component of the industrial revolution | henry
+			Heartbreak and insanity often coincide for crustaceans | henry
+			Nothing you say can or will be used against you in a court of law | henry
+			You keep forgetting that you are confused | tom
+			Olive trees, despite their beauty, do not | tom
+			The limits of the tree are infinite, albeit two dimensional | tom
+			The stars will be caught up soon! | tom
+			There is the soil, there is the stone, and there is something below | tom
+			There is the sun, there is moon, and there is something else | tom
+			This is paradise, and our existence is one more time to die | tom
 		`),
 		// ...'s and random characters and things that dont make sense
 		new Scroll("Freud the Spinner", `
-			A book is ㅋ
-			I“ʘ I don“x“? Yes
-			Ankh per size but not a length
-			Ankh per width the depth of ships, amidst the life and death there is
-			Ata khe ata!
-			Edge on edge!
-			Dog is lode
-			Intel... outside
-			Escape! Escape! &Escape!&
-			Scrolling past trees and breeze. Like, y'know...
-			I am not that type that can write scripts, I am just...
+			A book is ㅋ | AI
+			I“ʘ I don“x“? Yes | AI
+			Ankh per size but not a length | tom
+			Ankh per width the depth of ships, amidst the life and death there is | tom
+			Ata khe ata! | tom
+			Edge on edge! | tom
+			Dog is lode | tom
+			Intel... outside | tom
+			Escape! Escape! &Escape!& | tom
+			Scrolling past trees and breeze. Like, y'know... | tom
+			I am not that type that can write scripts, I am just... | tom
 		`),
 		// landscapes, new location, relatively small book
 		new Scroll("Exlareel", `
-			That was an awful "place". I was there
-			Oh dear! I'm so sorry you had to see that! View it again
-			What a time to be Alice
-			The questions you ponder shall remain
-			Parallax universe. Don't be so sure of existence
-			Gaze upon the wasteland before you and know your place
-			Avenge the risen, for the fallen have come too far
-			They let you come here. Don't mess up
+			That was an awful "place". I was there | shannon
+			Oh dear! I'm so sorry you had to see that! View it again | henry
+			What a time to be Alice | tom
+			The questions you ponder shall remain | henry
+			Parallax universe. Don't be so sure of existence | tom
+			Gaze upon the wasteland before you and know your place | henry
+			Avenge the risen, for the fallen have come too far | tom
+			They let you come here. Don't mess up | henry
 		`),
 		// sea, dreams, reality and confusion
 		new Scroll("Tidescales", `
-			Sanctity is the mnemonic device
+			Sanctity is the mnemonic device | tom
 			Black is the new black
-			The music is ever present. Embrace it or perish
-			Dreams are the reality and what seems is the dream
-			The ships that sail the sea defy the powers that be
-			Fish on the land. Sky in the sea
-			Fish on the window
-			Bring them to me
-			There is no horse on the water
-			A furious cocktail indeed
-			Circles intersecting makes the dizziness go away
+			The music is ever present. Embrace it or perish | tom
+			Dreams are the reality and what seems is the dream | tom
+			The ships that sail the sea defy the powers that be | tom
+			Fish on the land. Sky in the sea | tom
+			Fish on the window | henry
+			Bring them to me | henry
+			There is no horse on the water | tom
+			A furious cocktail indeed | tom
+			Circles intersecting makes the dizziness go away | tom
 		`),
 		// chaos, disconcerting, high tier stuff
 		new Scroll("Carnalicy", `
-			You will cause chaos if you try and leave
-			Pulled from the jaws of real life
-			Ripped! Just like reality!
-			Reality is objectively arguable
-			Gravity is objectively arguable
-			Face the enemy, find the enemy, dispel the enemy
-			You have died of blunt edges
-			The vessel is open
-			The air was filled with silence as I stood in the middle
-			Even though everything is so well planned, you're going to be the next one
-			You're far when it doesn't hurt anymore 
-			Be careful, or your permanent record will go on you
-			A rich lode of scandal and alleged crime
-			Everything is being &ripped apart&! The best part is it was &hollow all along&!!!
-			If it wanted us dead, we would #all# be dead
+			You will cause chaos if you try and leave | tom
+			Pulled from the jaws of real life | tom
+			Ripped! Just like reality! | tom
+			Reality is objectively arguable | tom
+			Gravity is objectively arguable | tom
+			Face the enemy, find the enemy, dispel the enemy | tom
+			You have died of blunt edges | tom
+			The vessel is open | tom
+			The air was filled with silence as I stood in the middle | tom
+			Even though everything is so well planned, you're going to be the next one | tom
+			You're far when it doesn't hurt anymore | tom
+			Be careful, or your permanent record will go on you | henry
+			A rich lode of scandal and alleged crime | tom
+			Everything is being &ripped apart&! The best part is it was &hollow all along&!!! | tom
+			If it wanted us dead, we would #all# be dead | tom
 		`),
 		// short-mid length, moon, misc.
 		new Scroll("Lunar Parchment", `
 			Cofusation
-			Do not consider the monotonality of the fungus
-			Late onset IQ deficiency
-			The vacuum followed me as I ran
-			The average height is recursive 
-			The moon is not our enemy (probably, it hasn't responded yet)  
-			You don't know what the wizard does
-			Live til you shouldn't
-			Splitten rope giveth the trope
-			Thy sun is not identical
+			Do not consider the monotonality of the fungus | tom
+			Late onset IQ deficiency | shannon
+			The vacuum followed me as I ran | henry
+			The average height is recursive | tom
+			The moon is not our enemy (probably, it hasn't responded yet) | tom  
+			You don't know what the wizard does | tom
+			Live til you shouldn't | tom
+			Splitten rope giveth the trope | tom
+			Thy sun is not identical | tom
 		`),
 		// random, less philosophic, many words, pretty misc
 		new Scroll("Geonosis", `
-			Chicken nuggets are probably a hoax
-			Lived you have not, until enveloped in the gourds you have become
-			The sheer mindfuck of a group of children in a circle throwing rocks
-			Such an earthly world
-			Bob is your uncle
-			An onion is very much like the Earth, in the sense that it has many layers and can't do calculus
-			The air feels thicker than the ground
-			A dark spot where the sun was shall fall into the dark
-			Don't do drugs, become absorbed in unreality instead
-			The difference is that a spoonful of sugar is not much
+			Chicken nuggets are probably a hoax | henry
+			Lived you have not, until enveloped in the gourds you have become | tom
+			The sheer mindfuck of a group of children in a circle throwing rocks | tom
+			Such an earthly world | tom
+			Bob is your uncle | tom
+			An onion is very much like the Earth, in the sense that it has many layers and can't do calculus | henry
+			The air feels thicker than the ground | tom
+			A dark spot where the sun was shall fall into the dark | tom
+			Don't do drugs, become absorbed in unreality instead | tom
+			The difference is that a spoonful of sugar is not much | tom
 		`),
 		// confusion, less philosophic
 		new Scroll("Hyubert", `
-			The cupboards contain boundless hope (bounded of course by the cupboards)
-			The grass is greener on the side closer to the chemical plant. Neon even
-			It's only Source Sans Pro? Always has been
-			10-12 times a month, they hunt
-			I see... you've seen. You've seen what it feels like to be an asshole
-			We are there yet. What now?
-			Why can't I understand clocks?
-			Psst. You're missing a color
-			Splitshop in the middle of the state
-			Left right in the middle
+			The cupboards contain boundless hope (bounded of course by the cupboards) | henry
+			The grass is greener on the side closer to the chemical plant. Neon even | henry
+			It's only Source Sans Pro? Always has been | henry
+			10-12 times a month, they hunt | henry
+			I see... you've seen. You've seen what it feels like to be an asshole | AI
+			We are there yet. What now? | henry
+			Why can't I understand clocks? | tom
+			Psst. You're missing a color | tom
+			Splitshop in the middle of the state | tom
+			Left right in the middle | tom
 		`),
 		// people, foolish things
 		new Scroll("Fools", `
 			That is normal
-			This is expected behavior   
-			Mackenzie: good gods, good humans, good stories, good people, good music 
-			Grim, the peddler, amongst the Lorician
-			Cephalopods are particularily bad spies
-			Trees don't just grow on trees
-			I open my mouth and the continent surges through my esophagus
+			This is expected behavior | max
+			Mackenzie: good gods, good humans, good stories, good people, good music | AI
+			Grim, the peddler, amongst the Lorician | tom
+			Cephalopods are particularily bad spies | henry
+			Trees don't just grow on money | molly
+			I open my mouth and the continent surges through my esophagus | henry
 			I think Rowan is dead
 			The length of the nasal cavity can be unexpected, and not for the faint of heart
-			Your teacher had a nose like a damp washcloth and is in a gang with old people   
-			You dad has all the appeal of a smacked backside and really wants to kiss sock puppets
 		`),
 		// definitions
 		new Scroll("Dictatics", `
-			Anagrams: In order to get a deeper understanding of mathematics and to grasp the world of philosophy, here is a list of most important art
-			Moderation: an effective anti-productivity mechanism
-			Netches: A shallow corner, a human can only descend about six in a lifetime but others can do much more
-			Aplosery: Knowledge gained through metaphysical or spiritual extrasensory input
-			Aplosiatic: One who is detached from reality | One who gains experience/input from extrasensory sources
-			Lelipatheim: The state of experiencing a large number of conflicting emotions at the same moment, typically in some balance
-			Ift's Day: The day when the sun created the Pillars
-			Kiplim: An easily snapping rope
-			Cytrusid: A very small, light-green fruit found in the Spite Range. Inedible, but has other uses
-			Orthomine: any one of the narrow, vertical, pre-Illuminating tunnels within the pillars
-			Nau: A medium sized, freshwater fish. Lives in alpine climates, such as the Apex
-			Cenosidian: One who cannot remember the past | One who lives within the Respite
-			Nepymil: The "soil" found in the Spite Range
-			Nipore: To be intentionally late
-			Aplurion: An impossibly large watermass
+			Anagrams: In order to get a deeper understanding of mathematics and to grasp the world of philosophy, here is a list of most important art | AI
+			Moderation: an effective anti-productivity mechanism | henry
+			Netches: A shallow corner, a human can only descend about six in a lifetime but others can do much more | tom
+			Aplosery: Knowledge gained through metaphysical or spiritual extrasensory input | tom
+			Aplosiatic: One who is detached from reality | One who gains experience/input from extrasensory sources | tom
+			Lelipatheim: The state of experiencing a large number of conflicting emotions at the same moment, typically in some balance | tom
+			Ift's Day: The day when the sun created the Pillars | tom
+			Kiplim: An easily snapping rope | tom
+			Cytrusid: A very small, light-green fruit found in the Spite Range. Inedible, but has other uses | tom
+			Orthomine: any one of the narrow, vertical, pre-Illuminating tunnels within the pillars | tom
+			Nau: A medium sized, freshwater fish. Lives in alpine climates, such as the Apex | tom
+			Cenosidian: One who cannot remember the past | One who lives within the Respite | tom
+			Nepymil: The "soil" found in the Spite Range | tom
+			Nipore: To be intentionally late | tom
+			Aplurion: An impossibly large watermass | tom
 			Orvis: A small to large plant with a thick-spined, spindly root structure and an orange-colored, thick, sticky trunk called 'the lily' that grows naturally within the Spite Range
-			Itzkahova: A deep, biodiverse crevasse
-			Counseling: Stop being sad in this hell of a experience
-			Retrulatery: decor, typically ceremonial or ritualistic
+			Itzkahova: A deep, biodiverse crevasse | tom
+			Counseling: Stop being sad in this hell of a experience | tom
+			Retrulatery: decor, typically ceremonial or ritualistic | tom
 		`)
 	];
 
