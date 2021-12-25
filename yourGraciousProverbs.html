@@ -302,7 +302,7 @@
 		index,
 		proverb
 	}) {
-		let input = `${proverb.text}\n-${proverb.authors.join(" & ")}`;
+		let input = proverb.text;
 
 		betterSeed = 0;
 
@@ -381,9 +381,10 @@
 		constructor(title, proverbs) {
 			this.title = title;
 			this.proverbs = proverbs
-			.trim()
-			.split("\n")
-			.map(line => new Proverb(line));
+				.trim()
+				.split("\n")
+				.filter(line => line.trim().length > 0)
+				.map(line => new Proverb(line));
 			this.size = this.proverbs.length;
 		}
 		computeWeight(totalSize) {
@@ -393,7 +394,111 @@
 
 	const scrolls = [
 		//uncatergorized proverbs	
-		new Scroll("Onter", `			
+		new Scroll("Onter", `
+			Don't even try | henry
+			The electrical cords are grinning broadly | henry
+			If you get too close to your friends you will &#experience#& | henry
+			Don't undo your companions | henry
+			Don't feel shame when you fail, feel it when you succeed | henry
+			Practice running, it'll make you more &dextrous& | henry
+			If you don't evacuate your network, what can you expect to gain? | henry
+			Instrumenting your wishes | henry
+			Don't start with that | henry
+			You wouldn't feel it if it were right | henry
+			Most wrong answers | henry
+			I wish the letters would manage the din | henry
+			Sharp objects make it all stop turning, for a little while | henry
+			Labs were fun | tom
+			I don't think it's healthy | henry
+			You get to be here | henry
+			You can't move &that& quickly here | henry
+			I like how you remembered that | tom
+			You don't get the refractions until &next& week | henry
+			Only talk of the end will be sustainable | henry
+			That wasn't even selfless and it pained you! | henry
+			It will end more vigorously than it began | henry
+			It will end slowly, painfully, more mildly than it began | henry
+			Teeth under your skin, rising | henry
+			Dreams within your heart will do whatever they can to break free, even if it kills you | henry
+			Technicolor bones | henry
+			Fully emotionally stable! As seen on TV! | henry
+			Cozy vs. safe has a depressingly low r² | henry
+			Wobble like there's no tomorrow | molly
+			Side effects may include a distinct lack of purpose | henry
+			Blue indicates you should #stay#! stay! &stay&! | henry
+			Spend a lil' time in the panic room | tom
+			Wow! I wish &I& could cry! | henry
+			Greeting cards for the undead, 30% off! | henry
+			Who's ready!? | henry
+			Don't place your faith at the start line | henry
+			Your temporally negative doppelgänger is likely a bad judge of character (especially yours) | henry
+			Where can you find several oysters? | henry
+			Silently selected, washed, and reincarnated | tom
+			&Tuning the gears allows &proper& thought flow | tom
+			Your temporally positive doppelgänger is limbless | tom
+			Your skin is begging to break free | henry
+			Tiled bedroom for you and yours | henry
+			Use an umbrella to keep rain out of your soul | henry
+			Your soul (it stings) | henry
+			I don't think they can hear you. Not yet anyway | henry
+			Various dents indicate your dedication | henry
+			Ghostwritten acknowledgments | henry
+			Your surroundings are exhilarated | henry
+			The glass is unbroken, your sleep is peaceful, and your mind spins in the emptiness, waiting for dawn | henry
+			Both love and smell are blind, given time | henry
+			Don't add to things you wish were gone | henry
+			Doing nothing is not a substitute for living wrong | henry
+			Give up on the dreams that push you further down the gravel path | henry
+			The asphalt burns as you step towards the dim glow. If only they could send someone else | henry
+			We all belong in low saturation rooms, our consciousness and silhouettes providing the only details | henry
+			The stones contribute to the rigidity of your knuckles and vertibrae | henry
+			A scathing critique of the faithless | henry
+			Dying of thirst is a substantial possibility on the way from legality to morality | henry
+			My soul feels so crisp at this time of night | henry
+			Your breath illuminates the things you try to ignore about yourself | henry
+			The air cuts deep into the scars in your skull | henry
+			Hear them walk through the halls | henry
+			Pretend that didn't happen, if you want to keep your skeleton &within& you | henry
+			Singular. Drops. Of. Water. | henry
+			You can't even see the peeling paint or tattered lamps anymore, just the imprint of your warmth | henry
+			You've been hard at work | tom
+			The stadium is full of moss | tom
+			The whole stadium is &full to the brim& with moss | tom
+			We're fighting against a machine we created a purpose for | tom
+			Everyone &else& is a figment | tom
+			You are a figment of your own imagination | henry
+			You create rality to prevent insanity | tom
+			Love in an instant | tom
+			Crumbling sidewalks typically are a facade | tom
+			Earthly storefronts are frequently in the business of disguise | henry
+			You can't hear the parchment, though it wails so | henry
+			Scream against the void that is your friendship | henry
+			Don't look them out the eye | henry
+			Walk 'til you can't run anymore | henry
+			Your multiple tongues | tom
+			He has the genius not to say the extraordinary but to say the ordinary | anna
+			When one moves briskly, the air will freeze on their hands | tom
+			There are no gaurentees that there aren't piecewise laws of physics | henry
+			You rarely recognize the things closest or furthest from you | henry
+			You rarely recognize anything | henry
+			We're all nervous | tom
+			The gauntness of her philosophy is repulsive, although compelling implications | tom
+			Our minds are too stringent for our own good | henry
+			You feel the air settle around your shoulders, you are at peace | henry
+			Raisins in deeply sorrowful locales | henry
+			The tears run up your face as you lose your voice | henry
+			Not a single one of the plans ends well | henry
+			It's not worth it to try and figure out how the wizard does | henry
+			Typography is going to be a surprisingly luctrative profession | henry
+			Flicks hair before turning awake | tom
+			Shirtless in a removable vehicle | tom
+			The escape hatch is often easier to use than the door | henry
+			You struggle to sleep during soul storms | henry
+			Medium sized lighting and numerous blankets makes for a comfortable evening | tom
+			Eyes? how about conveyors of lies | tom
+			Body language, bone language, spirit language. Collect four and you will be pursued! | henry
+			Pitiful fractions and refractions of the shadows of doubts flicker across the minds of the human race. Only those holding their homes tight to their chests are delivered to comfort by fear. | henry
+			And the uncanny Illumit befell upon the city and the twisted bowl was a false protector. The dwellings crumbled like those within and the twisted bowl filled with blood | tom
 		`),
 		//actual kinda philosophy thats more clear and just very high tier stuff
 		new Scroll("Illuminating", `
@@ -401,7 +506,7 @@
 			I need to stop the madness and start putting my mind to rest | tom
 			You're a dream… A nightmare… | AI
 			I am alive again. The sun has come full circle ... and now I am standing in a sun-flicker... | AI
-			The dappled light upon the ground reminds me of the distance | tom
+			The dappled light upon the ground reminds me of the distance | henry
 			My consciousness glints in the autumn light | henry
 			It's boring to be obvious | henry
 			There is a certain level of chaos that is subjective | henry
@@ -476,6 +581,7 @@
 			An impressive drift-catch | tom
 			You must be swollen | tom
 			You don't want to stay out of sight for a while | henry
+			They're probably fine | henry
 		`),
 		//animals and... bread?
 		new Scroll("Dilap", `
@@ -489,6 +595,7 @@
 			Bird and primates sometimes have similar degrees of skill at aviation | henry
 			From little acorns large octopi grow! | molly
 			The pulverized seeds glisten in the flourescent light | henry
+			Don't look at the barley | henry
 		`),
 		// mid - high tier proverbs in general and insanity
 		new Scroll("Praculae", `
@@ -533,6 +640,7 @@
 			Mass production companies of tether cords are being overrun by small scale, local businesses producing tether cords | tom
 			No soul, no service | henry
 			We only sell #solid# plinths | tom
+			The containers keep on costing greater amounts | henry
 			Last edit was a bit ago and you don't know what it was | tom
 			A new random object has been added to your living room aesthetic | tom
 			A new random object has been removed from your living groom aesthetic | henry
@@ -708,6 +816,7 @@
 			Please have fun with this world and get together with your children, lovers, and family in this life long journey | AI
 			Media in your lymph nodes | henry
 			If you wish, we could &all& call instead | henry
+			The crowd loves it when you do that | tom
 		`),
 		// math, numbers
 		new Scroll("Frill Optanal", `
@@ -856,7 +965,7 @@
 			Only you see it that way; this is good | tom
 			If you're worried, then examine the glass, the grass, and the breeze | tom
 			No one among you can understand the gravity of what you've done | henry
-			Wicker lanterns, dancing 'till there is nothing left but light | henry
+			Wicker lanterns, dancing 'til there is nothing left but light | henry
 			The fruit smiles, your time has come | henry
 			Why must they anger us so | henry
 			There is always time for flexibility at the end of a candle | henry
@@ -939,6 +1048,7 @@
 			Scrolling past trees and breeze. Like, y'know... | tom
 			I am not that type that can write scripts, I am just... | tom
 			*aerates quartz* hmm, yes... a hint of walnut | henry
+			Please press 'Enter' | henry
 		`),
 		// landscapes, new location, relatively small book
 		new Scroll("Exlareel", `
@@ -1047,6 +1157,7 @@
 			The length of the nasal cavity can be unexpected, and not for the faint of heart | henry
 			We don't know because we crossed it substantially | henry
 			Only worry about what &won't& happen | henry
+			We'll have a splendid time. It'll be absolutely wonderful there. You won't have to worry about a singular thing. | tom
 		`),
 		// definitions
 		new Scroll("Dictatics", `
@@ -1069,6 +1180,8 @@
 			Itzkahova: A deep, biodiverse crevasse | tom
 			Counseling: Stop being sad in this hell of a experience | tom
 			Retrulatery: decor, typically ceremonial or ritualistic | tom
+			Sum (math): To #sum#marize data | henry
+			Oydiu: Regretting enjoyable actions as you do them, all while continuing | henry
 		`)
 	];
 
