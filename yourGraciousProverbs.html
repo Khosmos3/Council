@@ -42,7 +42,7 @@
 			left: 20%;
 			padding-right: 15%;
 			letter-spacing: 3px;
-			line-height: 50px;
+			line-height: 7vh;
 			scroll-behavior: smooth;
 		}
 
@@ -338,8 +338,8 @@
 			escaped = char === "\\" && !escaped;
 
 			const fInx = output.length - 1;
-			if (bold) format[fInx] += "i";
-			if (italic) format[fInx] += "b";
+			if (bold) format[fInx] += "b";
+			if (italic) format[fInx] += "i";
 		}
 
 		const donePrinting = canvasPrint({
@@ -505,6 +505,7 @@
 			In the fourth spacial dimension, there is North, South, East, West, Posck, Whick, Deach, and Gokch | Tom
 			Blind mapmaking has created new, difficult to explore realms | tom
 			A semblance of reality | tom
+			We could just apply a grayscale filter to our memories, and it would have the same effect | henry
 		`),
 		//actual kinda philosophy thats more clear and just very high tier stuff
 		new Scroll("Illuminating", `
