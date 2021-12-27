@@ -42,6 +42,7 @@
 			left: 20%;
 			padding-right: 15%;
 			line-height: 1;
+			letter-spacing: 3px;
 			scroll-behavior: smooth;
 		}
 
@@ -406,13 +407,11 @@
 			} else {
 				this.text = line
 					.slice(0, index)
-					.trim()
-					;
+					.trim();
 				this.authors = line
 					.slice(index + 1)
 					.split("/")
-					.map(author => author.trim())
-					;
+					.map(author => author.trim());
 			}
 		}
 	}
