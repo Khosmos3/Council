@@ -41,8 +41,7 @@
 			font-family: "Quintessential";
 			left: 20%;
 			padding-right: 15%;
-			letter-spacing: 3px;
-			line-height: 7vh;
+			line-height: 1;
 			scroll-behavior: smooth;
 		}
 
@@ -51,7 +50,7 @@
 			padding-bottom: 30%;
 		}
 
-		#paper canvas {
+		#paper .proverb {
 			margin-bottom: 1em;
 			display: block;
 		}
@@ -103,7 +102,7 @@
 	<div id="bar">
 		<a href="https://soupnight.space">
 			<div id="side">
-			<span id="span">s</span>
+				<span id="span">s</span>
 			</div>
 		</a>
 	</div>
@@ -145,7 +144,7 @@
 		for (let i = 0; i < scrolls.length; i++) {
 			const scroll = scrolls[i];
 			if (acc <= t && t < acc + scroll.weight)
-			return scroll;
+				return scroll;
 			acc += scroll.weight;
 		}
 		return scrolls[scrolls.length - 1];
@@ -171,33 +170,33 @@
 		text,
 		format = [],
 		padding = 3,
-		speed = 0.5,
+		speed = 3,//0.5,
 		fontSize = parseInt(getComputedStyle(parent).fontSize),
 		fontFamily = getComputedStyle(parent).fontFamily
 	}) {
 
 		function packText(str, getWidth, maxWidth) {
 			return str
-			.split("\n")
-			.map(line => {
-				let lineStart = true;
-				const words = line.split(" ");
-				const lines = [];
-				let acc = "";
-				for (let i = 0; i < words.length; i++) {
-					const word = words[i];
-					if (getWidth(acc + (lineStart ? "" : " ") + word) > maxWidth) {
-						lines.push(acc);
-						acc = "";
-						lineStart = true;
+				.split("\n")
+				.map(line => {
+					let lineStart = true;
+					const words = line.split(" ");
+					const lines = [];
+					let acc = "";
+					for (let i = 0; i < words.length; i++) {
+						const word = words[i];
+						if (getWidth(acc + (lineStart ? "" : " ") + word) > maxWidth) {
+							lines.push(acc);
+							acc = "";
+							lineStart = true;
+						}
+						acc += (lineStart ? "" : " ") + word;
+						lineStart = false;
 					}
-					acc += (lineStart ? "" : " ") + word;
-					lineStart = false;
-				}
-				if (acc) lines.push(acc);
-				return lines.join("\n");
-			})
-			.join("\n");
+					if (acc) lines.push(acc);
+					return lines.join("\n");
+				})
+				.join("\n");
 		}
 
 		function setState(c) {
@@ -206,8 +205,23 @@
 			c.lineCap = "round";
 		}
 
+		function getFont(fmti) {
+			const fmt = fmti ? fmti
+				.split("")
+				.map(v => ({
+					b: "bold",
+					i: "italic"
+				}[v]))
+				.join(" ") : "";
+
+			const font = `${fmt} ${fontSize}px/1 ${fontFamily}`;
+
+			return font;
+		}
+
 		// setup
 		const canvas = document.createElement("canvas");
+		canvas.className = "proverb";
 		parent.appendChild(canvas);
 
 		const c = canvas.getContext("2d");
@@ -222,7 +236,7 @@
 
 		const TEXT_WIDTH = Math.max(
 			...text.split("\n")
-			.map(line => getWidth(line))
+				.map(line => getWidth(line))
 		);
 
 		const TEXT_HEIGHT = text.split("\n").length * fontSize;
@@ -245,51 +259,78 @@
 
 		const startTime = performance.now();
 
+		const color = "107, 22, 23";
+
 		return new Promise(resolve => {
 
 			function animate(now) {
-			c.clearRect(0, 0, canvas.width, canvas.height);
+				c.clearRect(0, 0, canvas.width, canvas.height);
 
-			const offset = (performance.now() - startTime) * speed;
+				const offset = (performance.now() - startTime) * speed;
 
-			let X = padding;
-			let Y = padding;
+				let X = padding;
+				let Y = padding;
 
-			c.setLineDash([PIXELS_PER_CHAR * 2 * renderedText.length]);
+				c.setLineDash([PIXELS_PER_CHAR * 2 * renderedText.length]);
 
-			for (let i = 0; i < renderedText.length; i++) {
-				const char = renderedText[i];
-				const fmt = format[i] ? format[i]
-					.split("")
-					.map(v => ({
-						b: "bold",
-						i: "italic"
-					}[v]))
-					.join(" ") : "";
+				for (let i = 0; i < renderedText.length; i++) {
+					const char = renderedText[i];
+					const font = getFont(format[i]);
 
-				const font = `${fmt} ${fontSize}px ${fontFamily}`;
+					if (font !== c.font) c.font = font;
 
-				if (font !== c.font) c.font = font;
+					if (char === "\n") {
+						X = padding;
+						Y += fontSize;
+					} else {
 
-				const alpha = Math.max(0, Math.min(1, 0.5 * (offset / PIXELS_PER_CHAR - i)));
-				c.fillStyle = `rgba(107, 22, 23, ${alpha})`;
-				c.strokeStyle = `rgba(107, 22, 23, ${1 - alpha})`;
+						const alpha = Math.max(0, Math.min(1, 0.5 * (offset / PIXELS_PER_CHAR - i)));
+						c.fillStyle = `rgba(${color}, ${alpha})`;
+						c.strokeStyle = `rgba(${color}, ${1 - alpha})`;
+						c.lineDashOffset = offset - i * PIXELS_PER_CHAR;
+						c.strokeText(char, X, Y + Y_OFFSET);
+						c.fillText(char, X, Y + Y_OFFSET);
 
-				c.lineDashOffset = offset - i * PIXELS_PER_CHAR;
-				c.strokeText(char, X, Y + Y_OFFSET);
-				c.fillText(char, X, Y + Y_OFFSET);
-
-				if (char === "\n") {
-					X = padding;
-					Y += fontSize;
-				} else {
-					X += getWidth(char);
+						X += getWidth(char);
+					}
 				}
-			}
 
-			if (offset < PIXELS_PER_CHAR * (renderedText.length + 1 /* fade buffer */)) {
-				requestAnimationFrame(animate);
-			} else resolve();
+				if (offset < PIXELS_PER_CHAR * (renderedText.length + 1 /* fade buffer */)) {
+					requestAnimationFrame(animate);
+				} else {
+					setTimeout(() => {
+						// convert to normal element
+
+						const imposter = document.createElement("div");
+						imposter.className = "proverb";
+
+						imposter.style.padding = padding + "px";
+						imposter.style.transform = `translateY(0.5 * ${fontSize}px)`;
+
+						let out = "";
+						let currentFont = "";
+						for (let i = 0; i < renderedText.length; i++) {
+							const font = getFont(format[i]);
+
+							if (font !== currentFont) {
+								if (currentFont.length) out += "</span>";
+								out += `<span style="font: ${font};">`;
+								currentFont = font;
+							}
+
+							const char = renderedText[i];
+							if (char === "\n") out += "<br>";
+							else out += char;
+						}
+						out += "</span>";
+						imposter.innerHTML = out;
+						
+						canvas.insertAdjacentElement("afterend", imposter);
+						canvas.remove();
+					}, 10000);
+
+					resolve();
+				}
 			}
 
 			requestAnimationFrame(animate);
@@ -329,17 +370,17 @@
 			const char = input[t];
 
 			if (char == "&" && !escaped)
-			italic = !italic;
+				italic = !italic;
 			else if (char == "#" && !escaped)
-			bold = !bold;
-			else if (char !== "\\" || escaped)
-			output += char;
+				bold = !bold;
+			else if (char !== "\\" || escaped) {
+				output += char;
+				const fInx = output.length - 1;
+				if (bold) format[fInx] += "b";
+				if (italic) format[fInx] += "i";
+			}
 
 			escaped = char === "\\" && !escaped;
-
-			const fInx = output.length - 1;
-			if (bold) format[fInx] += "b";
-			if (italic) format[fInx] += "i";
 		}
 
 		const donePrinting = canvasPrint({
@@ -834,7 +875,7 @@
 		// cards and games and fun and zooz
 		new Scroll("Boron's Toussaint", `
 			The king of spades is mad at you | tom
-			You've been deal a hand of a king of spades and an ace. That would be great for blackjack but this is five card draw and you seem to somehow have lost three cards already | tom
+			You've been dealt a hand of a king of spades and an ace. That would be great for blackjack but this is five card draw and you seem to somehow have lost three cards already | tom
 			A glass of water for Zeus | tom
 			Zeus doesn't like the idea of your promotion | wes
 			The stars have aligned into the shape of your future! It's a clear day outside | tom
@@ -1227,8 +1268,8 @@
 			Date.now();
 			await SLEEP(1000)
 			while (true) {
-			await outputToScreen(proverb());
-			await SLEEP(DISPLAY_TIME);
+				await outputToScreen(proverb());
+				await SLEEP(DISPLAY_TIME);
 			}
 		} catch (e) { alert(e.stack) }
 	})(); 
