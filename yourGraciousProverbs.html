@@ -365,13 +365,11 @@
 			} else {
 				this.text = line
 					.slice(0, index)
-					.trim()
-					;
+					.trim();
 				this.authors = line
 					.slice(index + 1)
 					.split("/")
-					.map(author => author.trim())
-					;
+					.map(author => author.trim());
 			}
 		}
 	}
