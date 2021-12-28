@@ -176,7 +176,13 @@
 		fontFamily = getComputedStyle(parent).fontFamily
 	}) {
 
-		function packText(str, getWidth, maxWidth) {
+		function packText(str, getCharWidth, maxWidth) {
+			function getStringWidth(string) {
+				return string
+					.split("")
+					.map(char => getCharWidth(char))
+					.reduce((a, b) => a + b, 0);
+			}
 			return str
 				.split("\n")
 				.map(line => {
@@ -186,7 +192,7 @@
 					let acc = "";
 					for (let i = 0; i < words.length; i++) {
 						const word = words[i];
-						if (getWidth(acc + (lineStart ? "" : " ") + word) > maxWidth) {
+						if (getStringWidth(acc + (lineStart ? "" : " ") + word) > maxWidth) {
 							lines.push(acc);
 							acc = "";
 							lineStart = true;
@@ -435,6 +441,9 @@
 	const scrolls = [
 		//uncatergorized proverbs	
 		new Scroll("Onter", `
+			The lil' guy's skull contains a celestial body
+			The lil' guy has an object
+			The lil' guy is unwinding
 		`),
 		//actual kinda philosophy thats more clear and just very high tier stuff
 		new Scroll("Illuminating", `
