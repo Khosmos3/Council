@@ -670,8 +670,8 @@
 			Your own mind always seems to bend | tom
 			The world is an illusion and never will be. Everything is impossible | tom
 			You are too big to live on a tiny island in any shape or form | tom
-			There is no do but try | tom/unknown
-			Try, there isn't a do | unknown/tom
+			There is no do but try | tom / unknown
+			Try, there isn't a do | unknown / tom
 			The weather must be treated carefully, its quite slippery | tom
 			There is something inside of out | tom
 			The electrical cords are grinning broadly | henry
@@ -973,8 +973,8 @@
 			Randomness is the salt | tom
 			I value sleep with cities and gold | tom
 			The habitat is no longer safe. Maybe it never was | tom
-			I came for aspirin but I wound up with chocolate | molly
-			The powdered joy too often comes out in clumps | molly/henry
+			I came for aspirin but I wound up with chocolate | wes
+			The powdered joy too often comes out in clumps | molly / henry
 			My brain has been clogged with hair and the seratonin won't drain | henry			
 			Some regions of the brain are likely to be burgled | henry
 			Singular. Drops. Of. Water. | henry
@@ -1351,6 +1351,15 @@
 	}
 	function percentAuthoredBy(author) {
 		return amountAuthoredBy(author) / totalProverbs * 100;
+	}
+
+	function statSession() {
+		while (true) {
+			const text = prompt("expression?");
+			if (text === "quit") break;
+			const result = eval(text);
+			alert(result);
+		}
 	}
 
 	//yourGraciousProverbs[choose(Object.keys(yourGraciousProverbs))]
