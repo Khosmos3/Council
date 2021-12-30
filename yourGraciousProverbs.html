@@ -65,23 +65,21 @@
 			margin-top: 3vw;
 			margin-left: 3vw;
 			opacity: .2;
-			transition: opacity .6s, width .6s;
+			transition: opacity .6s, width .6s, color .2s;
 			border: 3px solid #410304;
 			text-align: center;
 			font-size: 3vw;
 			font-family: Quintessential, serif;
 		}
-
-		#side #span {
-			display: none;
+		#span{
+			margin-top: 1vw;
+			display: block;
 		}
 
 		#side:hover:after {
 			display: block;
-			margin-top: 1.1vw;
-			content: "Home";
 			white-space: nowrap;
-		}
+        }
 
 		#side:hover {
 			opacity: 1;
@@ -96,6 +94,33 @@
 			color: #410304;
 			transition: opacity .6s, background-color .2s, width .6s, color .2s;
 		}
+        #suggest{
+            width: 7vw;
+			height: 2vw;
+			background-color: #410304;
+			position: absolute;
+			color: rgba(65, 3, 4, 0);
+			margin-top: 12vw;
+			margin-left: 3vw;
+			opacity: .2;
+			transition: opacity .6s, width .6s, color .2s;
+			border: 3px solid #410304;
+			text-align: center;
+			font-size: 1.3vw;
+			font-family: Quintessential, serif;
+        }
+        #suggest:hover{
+            opacity: 1;
+			background-color: #410304;
+			color: #F6E9D8;
+			transition: opacity .6s, background-color .2s, width .6s, color 1s;
+        }
+        #suggest:active {
+			background-color: #F6E9D8;
+			color: #410304;
+			transition: opacity .6s, background-color .2s, width .6s, color .2s;
+		}
+
 	</style>
 </head>
 
@@ -103,8 +128,13 @@
 	<div id="bar">
 		<a href="https://soupnight.space">
 			<div id="side">
-			<span id="span">s</span>
+			<span id="span">Home</span>
 			</div>
+		</a>
+		<a href="https://docs.google.com/forms/d/e/1FAIpQLSdpb8y4vaLeV6Eyk9WdsCjNRBALelec0sLwc7QNAtM-VnT-yA/viewform?usp=sf_link" target="_blank">
+            <div id = "suggest">
+                <span id="suggest-span">Propound</span>
+            </div>
 		</a>
 	</div>
 	<div id="n">
@@ -501,6 +531,8 @@
 			You can cleanse yourself any day you like and however you like | tom
 			One day you will realize the ability you possess | tom
 			Chaos is subjective | tom
+            The vistas with snow-covered trees and the sun reflecting off snow crystals to create brilliant, shining obelisks of light | tom
+            Snow does contribute a certain surreal beauty to this world | henry
 		`),
 		//suffering
 		new Scroll("Suffering", `
@@ -538,6 +570,7 @@
 			To be free from any external and internal suffering is very, very difficult | AI
 			If you hear them, do not touch 'em when you are hungry. Even if you touch them when the sun sets, this may seem strange. | AI
 			I can't feel the extremities of consciousness anymore | henry
+            No better way than simple communication to reach our goals | henry
 		`),
 		//you
 		new Scroll("Isfaths", `
@@ -558,6 +591,7 @@
 			You can't move &that& quickly here | henry
 			I like how you remembered that | tom
 			You've been hard at work | tom
+            Enjoy your interactable labour | henry
 		`),
 		// its the title. its just hubris
 		new Scroll("Hubris", `
@@ -582,6 +616,7 @@
 			Time spent making up proverbs is a proverbial waste of time | alan
 			Meatballs are strictly less painful than daggers | molly
 			There's nothing in the pudding | henry
+			It probably won't exceed the capacity of the known universe | henry
 		`),
 		//animals and... bread?
 		new Scroll("Dilap", `
@@ -765,6 +800,7 @@
 			Labs were fun | tom
 			Most wrong answers | henry
 			Who's ready!? | henry
+            Just talk | tom
 		`),
 		// apathy and surrealism and longer, story-like ones
 		new Scroll("Apathetium", `
@@ -789,6 +825,7 @@
 			You rarely recognize the things closest or furthest from you | henry
 			You rarely recognize anything | henry
 			We could just apply a grayscale filter to our memories, and it would have the same effect | henry
+            The combination of incredible cold, dry air must've worked just right | tom
 		`),
 		// cooks, random things
 		new Scroll("Plagarized Optics", `
@@ -808,6 +845,7 @@
 			Only talk of the end will be sustainable | henry
 			That wasn't even selfless and it pained you! | henry		
 			Wobble like there's no tomorrow | molly
+            You'd see others in the distance | tom
 			Scribbling is an unproductive mechanism, built on obscure and unjustified beliefs, however its uses will soon become apparent | tom
 		`),
 		// violent unity. the whole gang is together
@@ -848,6 +886,7 @@
 			They seek friendship, why would they be so foolish | henry
 			You don't get the refractions until &next& week | henry
 			I've been taking my new prescription. I really wish doc would've told me about the strings! &muffled laughter of a comedy routine, at a joke you can't seem to understand& | tom
+			Wooooooooo! Sig-ni-fi-cance! | tom
 		`),
 		// TV and media. very good proverbs here
 		new Scroll("Vocaloid", `
@@ -877,6 +916,7 @@
 			Technicolor bones | henry
 			Fully emotionally stable! As seen on TV! | henry
 			Side effects may include a distinct lack of purpose | henry
+            #Upgrades#; people, am I right? | henry
 		`),
 		// math, numbers
 		new Scroll("Frill Optanal", `
@@ -896,12 +936,10 @@
 			There are no gaurentees that there aren't piecewise laws of physics | henry
 			Weight is dependant on many more things than we thought | tom
 			Computers aren't electronic, but will become electronic one you know what you're looking for | tom
-		`),
-		// things theophrastes would say, high tier stuff, gods
-		new Scroll("Theophrastes's Legacy Pronunciation", `
-			It happened on a tuesday | tom
-			♪ Bouncing on down to New Orleans ♪ | max
 			To sufficiently enjoy photons, take a break from them for a while | henry
+		`),
+		// things theophrastes would say, high tier stuff, lore
+		new Scroll("Theophrastes's Legacy Pronunciation", `
 			An awful mess, you've created. Reincarnate please | henry
 			A rapid transmutation and a day off | henry
 			A home invitation and a sharp decline | tom
@@ -914,16 +952,18 @@
 			Feel the wrath of your only refuge | tom
 			The people that speak is our minds and dreams | tom
 			Half a rock, thrown across the bank. It's finally done | tom
-			Don't let the devil give you a choice! | AI
-			Saying "No thanks" to the devil only makes you look bad! | AI
 			Ifcara reached past her domain, idle minds breed reaching fingers | tom
 			The gauntness of her philosophy is repulsive, although compelling implications | tom
 			You need to feel bad after you read it | henry
 			Our minds are too stringent for our own good | henry
 			And that's what it is. That's all it is | tom
+			Now tip the vessel and bathe | tom
+
 		`),
 		// strangeness, moss/plants, misc. good
 		new Scroll("Auberations", `
+			It happened on a tuesday | tom
+			♪ Bouncing on down to New Orleans ♪ | max
 			Door locks are the career to good business | tom
 			The countrypeople are quite picky | tom
 			Moss is [emotion here]. Now, moss is a philosophy | tom
@@ -965,6 +1005,8 @@
 			A semblance of reality | tom
 			&Tuning the gears allows &proper& thought flow | tom
 			I don't think they can hear you. Not yet anyway | henry
+			Don't let the devil give you a choice! | AI
+			Saying "No thanks" to the devil only makes you look bad! | AI
 		`),
 		// sea and salt and food and stuff idk
 		new Scroll("Kelp", `
@@ -1007,6 +1049,7 @@
 			The lil' guy is all wound up | henry
 			And the uncanny Illumit befell upon the city and the twisted bowl was a false protector. The dwellings crumbled like those within and the twisted bowl filled with blood | tom
 			Instrumenting your wishes | henry
+            The best part was there wasn't just one | tom
 		`),
 		// disconcerting ones
 		new Scroll("Splines", `
@@ -1093,7 +1136,6 @@
 			They bathed in the new light of the Illuminating | tom
 			You feel the air settle around your shoulders, you are at peace | henry
 			The tears run up your face as you lose your voice | henry
-			Now tip the vessel and bathe | tom
 		`),
 		//stones
 		new Scroll("Ossuary's Fingers", `
