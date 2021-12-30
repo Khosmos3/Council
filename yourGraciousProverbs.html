@@ -393,6 +393,96 @@
 	const scrolls = [
 		//uncatergorized proverbs	
 		new Scroll("Onter", `
+			Although simple in principle, the process is difficult to unravel | tom
+			Praise to the ascended | tom
+			Who's your least elevated character | tom
+			We aren't the ones who defend the Continent. They are | tom
+			The Aplotris Soldiers stood as vangaurd against the sharpness, their minds hardened by kin and storm | tom
+			It's not a &bad& thing, at least on how &we& view death | tom
+			Vitamins in the skin | henry
+			Your doom, for only $19.99! | henry
+			You look very trapezoidal from this angle | henry
+			And the paladin stared across the grassland and across your soul | tom
+			Death is a myth | tom
+			A semicircle indicates happiness and contentment | tom
+			Once again, we begin | tom
+			I have a soul? You've got one of them! | henry / wes
+			Birds falling to the sea | henry
+			You guys know my longstanding antipathy towards mayonnaise | molly
+			We may have doubled, actually | henry
+			Definite voids are only for the upper class | henry
+			Sufficiency, sweetheart | tom
+			The distance is mesmerizing and difficult to win against | tom
+			The wiring in the walls goes unused, just like before | tom
+			Your reflection is not yours to keep, it is simply borrowed | tom
+			Mirrors have a wide range of customer reviews | tom
+			Mirrors have varying levels of reflection | tom
+			The copper turns green and the iron turns red in an instant | tom
+			And maybe it'll be okay, maybe it'll be worse then even projected | tom
+			What is the time and why does it chase me so? | tom
+			Put on your &blackout gear& | tom
+			To live on your own (which may or may not end) | tom
+			Clarity 'til it's over | tom
+			You wouldn't know reality even if you died | tom
+			It's a bit cliché, this life | tom
+			Praise, and you may decide your own future | tom
+			There's worlds beyond these | tom
+			In the house! | tom
+			Dying isn't an effective method of transportation | tom
+			Just forget about having a good memory | alan
+			Authors, like dogs, can only hear your tone of voice | henry
+			You have been inflicted with the "end of days" | henry
+			Soul crushing truths with a money back guarantee | henry
+			That's when they eliminated your home | henry
+			Low temporal resolution on daily activities can help improve performance | henry
+			Oh glorious instrument, it rhymes! | henry
+			Bricks? Bricks! Many for a penny | henry
+			Half of your soul is left, feel free to see yourself out | henry
+			You knew what I was going to do | henry
+			Where's he, late to sanity?
+			You can't hear them, I can't hear them; who's ringing the bells? | henry
+			Slightly off-kilter diction where you though you'd see advice | henry
+			Heavy objects going for an excursion | henry
+			Places to meet and people to be | henry
+			Yell into the space you cannot feel (only when you feel lost) | henry
+			Who's knocking on my head at this time of night? | henry
+			Break down the barriers that keep you from making your greatest mistakes | henry
+			More information may be found in the walls | henry
+			Contribution feeds that within you which should starve | henry
+			Life by sharp edges and hard corners | henry
+			Holes in the floor (by design) | henry
+			Regret tangles your time off this week | henry
+			The night looks on, bemused | henry
+			It's fluffy here in the place I should be trying to leave | henry
+			Portions of recollection, even organized by perceived significance, will always degrade eventually | henry
+			Oh, to be an idiot in a castle | henry
+			Praying for departure requires octagonal perambulation for the best results | henry
+			The lil' guy can't feel his toes | henry
+			This object contains several surfaces, most of which have vernacular potential! | henry
+			Tactically placed voids | henry
+			It hurts more to know &how& to fix something | henry
+			Rolling down a hill with tragedy at the bottom, debating the merits of existentialism | henry
+			A die in glue | henry
+			The surface of the ocean you're drowning in is just more oil! &You& can't breath | henry
+			I can &feel& again | henry
+			Taking derivatives, alone in a room | henry
+			Stop fighting the nature of your goals | henry
+			Too fuzzy to be sticky above most circumstances | henry
+			UV resistant adenine!? What an idea! &chuckles& | henry
+			It all falls apart when exposed to insulation | henry
+			Friendship looks golden in the pale moonlight | henry
+			Wow! It glistens! | henry
+			It hurts to stop screaming | henry
+			Containers for the heart: rib cages, love, greeting cards, etc. | henry
+			Non-Euclidean geometry uses the romantic solids | henry
+			Folding, folding, folding. When will it's form repeat? | henry
+			Carving significance out of those you forgot | henry
+			Dusty, porous faces | henry
+			A wrinkled piece of home | henry
+			Freckles on your soul | henry
+			They arrive in many turns | henry
+			Cyclic in an infinitely precise universe | tom
+			The constrast of the grey clouds and the blue sky gives clarity and luster to entities nearby | tom
 		`),
 		//actual kinda philosophy thats more clear and just very high tier stuff
 		new Scroll("Illuminating", `
@@ -489,6 +579,7 @@
 			Use an umbrella to keep rain out of your soul | henry
 			Pitiful fractions and refractions of the shadows of doubts flicker across the minds of the human race. Only those holding their homes tight to their chests are delivered to comfort by fear. | henry
 			Time spent making up proverbs is a proverbial waste of time | alan
+			Meatballs are strictly less painful than daggers | molly
 		`),
 		//animals and... bread?
 		new Scroll("Dilap", `
@@ -545,6 +636,7 @@
 			It's fuzzy here, your blanket snug between a rock and hard place | henry
 			There's something here for you | henry
 			The grain of the wood runs in the direction you'd expect | henry
+			The lil' guy is instigating | henry
 		`),
 		// in the title
 		new Scroll("Unpleasant Thoughts", `
@@ -1230,15 +1322,36 @@
 			Retrulatery: decor, typically ceremonial or ritualistic | tom
 			Sum (math): To #sum#marize data | henry
 			Oydiu: Regretting enjoyable actions as you do them, all while continuing | henry
+		`),
+		// zoest
+		new Scroll("Umlauts", `
+			Window pains: baguettes made of glass | henry / zoë
 		`)
 	];
 
 	// compute weights
+	const allProverbs = scrolls
+		.flatMap(scroll => scroll.proverbs)
+		.filter(scroll => scroll.authors.length > 1 || scroll.authors[0] !== "unknown");
 	const totalProverbs = scrolls
 		.map(scroll => scroll.size)
 		.reduce((a, b) => a + b, 0);
 	for (let i = 0; i < scrolls.length; i++)
 		scrolls[i].computeWeight(totalProverbs);
+
+	function authorsOf(fragment) {
+		const contains = allProverbs.filter(proverb => proverb.text.toLowerCase().indexOf(fragment.toLowerCase()) > -1);
+		if (contains.length === 1) return contains[0].authors;
+		const matches = allProverbs.find(proverb => proverb.text === fragment);
+		return matches ? matches.authors : null;
+	}
+
+	function amountAuthoredBy(author) {
+		return allProverbs.filter(proverb => proverb.authors.includes(author)).length;
+	}
+	function percentAuthoredBy(author) {
+		return amountAuthoredBy(author) / totalProverbs * 100;
+	}
 
 	//yourGraciousProverbs[choose(Object.keys(yourGraciousProverbs))]
 	function proverb() {
