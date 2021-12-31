@@ -345,7 +345,7 @@
 		for (let i = 0; i < index; i++)
 			place += book.proverbs[i].length + 3;
 
-		input = `&#${book.title}# ${place + (proverb.length > 1 ? "-" + (place + proverb.length) : "")}&\n${input}`;
+		input = `&#${book.title}# ${place + (proverb.length > 1 ? "-" + (place + proverb.length - 1) : "")}&\n${input}`;
 
 		let bold = false;
 		let italic = false;
