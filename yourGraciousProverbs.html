@@ -71,7 +71,8 @@
 			font-size: 3vw;
 			font-family: Quintessential, serif;
 		}
-		#span{
+
+		#span {
 			margin-top: 1vw;
 			display: block;
 		}
@@ -79,7 +80,7 @@
 		#side:hover:after {
 			display: block;
 			white-space: nowrap;
-        }
+		}
 
 		#side:hover {
 			opacity: 1;
@@ -94,8 +95,9 @@
 			color: #410304;
 			transition: opacity .6s, background-color .2s, width .6s, color .2s;
 		}
-        #suggest{
-            width: 7vw;
+
+		#suggest {
+			width: 7vw;
 			height: 2vw;
 			background-color: #410304;
 			position: absolute;
@@ -108,19 +110,20 @@
 			text-align: center;
 			font-size: 1.3vw;
 			font-family: Quintessential, serif;
-        }
-        #suggest:hover{
-            opacity: 1;
+		}
+
+		#suggest:hover {
+			opacity: 1;
 			background-color: #410304;
 			color: #F6E9D8;
 			transition: opacity .6s, background-color .2s, width .6s, color 1s;
-        }
-        #suggest:active {
+		}
+
+		#suggest:active {
 			background-color: #F6E9D8;
 			color: #410304;
 			transition: opacity .6s, background-color .2s, width .6s, color .2s;
 		}
-
 	</style>
 </head>
 
@@ -128,13 +131,14 @@
 	<div id="bar">
 		<a href="https://soupnight.space">
 			<div id="side">
-			<span id="span">Home</span>
+				<span id="span">Home</span>
 			</div>
 		</a>
-		<a href="https://docs.google.com/forms/d/e/1FAIpQLSdpb8y4vaLeV6Eyk9WdsCjNRBALelec0sLwc7QNAtM-VnT-yA/viewform?usp=sf_link" target="_blank">
-            <div id = "suggest">
-                <span id="suggest-span">Propound</span>
-            </div>
+		<a href="https://docs.google.com/forms/d/e/1FAIpQLSdpb8y4vaLeV6Eyk9WdsCjNRBALelec0sLwc7QNAtM-VnT-yA/viewform?usp=sf_link"
+			target="_blank">
+			<div id="suggest">
+				<span id="suggest-span">Propound</span>
+			</div>
 		</a>
 	</div>
 	<div id="n">
@@ -143,7 +147,6 @@
 	</div>
 </body>
 <script>
-
 
 	//function, obviously
 	let betterSeed = 0;
@@ -175,7 +178,7 @@
 		for (let i = 0; i < scrolls.length; i++) {
 			const scroll = scrolls[i];
 			if (acc <= t && t < acc + scroll.weight)
-			return scroll;
+				return scroll;
 			acc += scroll.weight;
 		}
 		return scrolls[scrolls.length - 1];
@@ -201,33 +204,33 @@
 		text,
 		format = [],
 		padding = 3,
-		speed = 0.5,
+		speed = .5,
 		fontSize = parseInt(getComputedStyle(parent).fontSize),
 		fontFamily = getComputedStyle(parent).fontFamily
 	}) {
 
 		function packText(str, getWidth, maxWidth) {
 			return str
-			.split("\n")
-			.map(line => {
-				let lineStart = true;
-				const words = line.split(" ");
-				const lines = [];
-				let acc = "";
-				for (let i = 0; i < words.length; i++) {
-					const word = words[i];
-					if (getWidth(acc + (lineStart ? "" : " ") + word) > maxWidth) {
-						lines.push(acc);
-						acc = "";
-						lineStart = true;
+				.split("\n")
+				.map(line => {
+					let lineStart = true;
+					const words = line.split(" ");
+					const lines = [];
+					let acc = "";
+					for (let i = 0; i < words.length; i++) {
+						const word = words[i];
+						if (getWidth(acc + (lineStart ? "" : " ") + word) > maxWidth) {
+							lines.push(acc);
+							acc = "";
+							lineStart = true;
+						}
+						acc += (lineStart ? "" : " ") + word;
+						lineStart = false;
 					}
-					acc += (lineStart ? "" : " ") + word;
-					lineStart = false;
-				}
-				if (acc) lines.push(acc);
-				return lines.join("\n");
-			})
-			.join("\n");
+					if (acc) lines.push(acc);
+					return lines.join("\n");
+				})
+				.join("\n");
 		}
 
 		function setState(c) {
@@ -252,7 +255,7 @@
 
 		const TEXT_WIDTH = Math.max(
 			...text.split("\n")
-			.map(line => getWidth(line))
+				.map(line => getWidth(line))
 		);
 
 		const TEXT_HEIGHT = text.split("\n").length * fontSize;
@@ -278,48 +281,48 @@
 		return new Promise(resolve => {
 
 			function animate(now) {
-			c.clearRect(0, 0, canvas.width, canvas.height);
+				c.clearRect(0, 0, canvas.width, canvas.height);
 
-			const offset = (performance.now() - startTime) * speed;
+				const offset = (performance.now() - startTime) * speed;
 
-			let X = padding;
-			let Y = padding;
+				let X = padding;
+				let Y = padding;
 
-			c.setLineDash([PIXELS_PER_CHAR * 2 * renderedText.length]);
+				c.setLineDash([PIXELS_PER_CHAR * 2 * renderedText.length]);
 
-			for (let i = 0; i < renderedText.length; i++) {
-				const char = renderedText[i];
-				const fmt = format[i] ? format[i]
-					.split("")
-					.map(v => ({
-						b: "bold",
-						i: "italic"
-					}[v]))
-					.join(" ") : "";
+				for (let i = 0; i < renderedText.length; i++) {
+					const char = renderedText[i];
+					const fmt = format[i] ? format[i]
+						.split("")
+						.map(v => ({
+							b: "bold",
+							i: "italic"
+						}[v]))
+						.join(" ") : "";
 
-				const font = `${fmt} ${fontSize}px ${fontFamily}`;
+					const font = `${fmt} ${fontSize}px ${fontFamily}`;
 
-				if (font !== c.font) c.font = font;
+					if (font !== c.font) c.font = font;
 
-				const alpha = Math.max(0, Math.min(1, 0.5 * (offset / PIXELS_PER_CHAR - i)));
-				c.fillStyle = `rgba(107, 22, 23, ${alpha})`;
-				c.strokeStyle = `rgba(107, 22, 23, ${1 - alpha})`;
+					const alpha = Math.max(0, Math.min(1, 0.5 * (offset / PIXELS_PER_CHAR - i)));
+					c.fillStyle = `rgba(107, 22, 23, ${alpha})`;
+					c.strokeStyle = `rgba(107, 22, 23, ${1 - alpha})`;
 
-				c.lineDashOffset = offset - i * PIXELS_PER_CHAR;
-				c.strokeText(char, X, Y + Y_OFFSET);
-				c.fillText(char, X, Y + Y_OFFSET);
+					c.lineDashOffset = offset - i * PIXELS_PER_CHAR;
+					c.strokeText(char, X, Y + Y_OFFSET);
+					c.fillText(char, X, Y + Y_OFFSET);
 
-				if (char === "\n") {
-					X = padding;
-					Y += fontSize;
-				} else {
-					X += getWidth(char);
+					if (char === "\n") {
+						X = padding;
+						Y += fontSize;
+					} else {
+						X += getWidth(char);
+					}
 				}
-			}
 
-			if (offset < PIXELS_PER_CHAR * (renderedText.length + 1 /* fade buffer */)) {
-				requestAnimationFrame(animate);
-			} else resolve();
+				if (offset < PIXELS_PER_CHAR * (renderedText.length + 1 /* fade buffer */)) {
+					requestAnimationFrame(animate);
+				} else resolve();
 			}
 
 			requestAnimationFrame(animate);
@@ -328,24 +331,21 @@
 	}
 
 	async function outputToScreen({
-		title,
+		book,
 		index,
 		proverb
 	}) {
 		let input = proverb.text;
 
 		betterSeed = 0;
-
-		let ch = randInt(1, 40);
-		let verse = randInt(1, 100);
 		let num = randInt(1, 25);
-		let numeral = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X",
-			"XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX",
-			"XXI", "XXII", "XXIII", "XXIV", "XXV", "XXVI", "XXVII", "XXVIII", "XXIX",
-			"XXXI", "XXXII", "XXXIII", "XXXIV", "XXXV", "XXXVI", "XXXVII", "XXXVIII", "XXXIX",
-			"XLI", "XLII", "XLIII", "XLIV", "XLV", "XLVI", "XLVII", "XLVIII", "LXIX",
-			"LI", "LII", "LIII", "LIV", "LV", "LVI", "LVII", "LVIII", "LIX", "LX"];
-		input = `&#${title}# ${~~((index + 1) * 3.5)}& ${choose(numeral)} ${ch}:${verse}\n${input}`;
+		let newLines = 0;
+
+		let place = 1;
+		for (let i = 0; i < index; i++)
+			place += book.proverbs[i].length + 3;
+
+		input = `&#${book.title}# ${place + (proverb.length > 1 ? "-" + (place + proverb.length) : "")}&\n${input}`;
 
 		let bold = false;
 		let italic = false;
@@ -359,11 +359,11 @@
 			const char = input[t];
 
 			if (char == "&" && !escaped)
-			italic = !italic;
+				italic = !italic;
 			else if (char == "#" && !escaped)
-			bold = !bold;
+				bold = !bold;
 			else if (char !== "\\" || escaped)
-			output += char;
+				output += char;
 
 			escaped = char === "\\" && !escaped;
 
@@ -376,7 +376,7 @@
 			parent: document.getElementById("paper"),
 			text: output,
 			format,
-			padding: 10
+			padding: 10,
 		});
 		fix();
 		await donePrinting;
@@ -400,6 +400,14 @@
 					.slice(index + 1)
 					.split("/")
 					.map(author => author.trim());
+			}
+			
+			this.length = 1;
+			let escaped = false;
+			for (let i = 0; i < this.text.length; i++) {
+				const char = this.text[i];
+				if (char == "/" && !escaped) this.length++;
+				escaped = char === "\\" && !escaped;
 			}
 		}
 	}
@@ -436,8 +444,6 @@
 			Death is a myth | tom
 			A semicircle indicates happiness and contentment | tom
 			Once again, we begin | tom
-			I have a soul? You've got one of them! | henry / wes
-			Birds falling to the sea | henry
 			You guys know my longstanding antipathy towards mayonnaise | molly
 			We may have doubled, actually | henry
 			Definite voids are only for the upper class | henry
@@ -452,7 +458,6 @@
 			What is the time and why does it chase me so? | tom
 			Put on your &blackout gear& | tom
 			To live on your own (which may or may not end) | tom
-			Clarity 'til it's over | tom
 			You wouldn't know reality even if you died | tom
 			It's a bit cliché, this life | tom
 			Praise, and you may decide your own future | tom
@@ -495,10 +500,8 @@
 			A die in glue | henry
 			The surface of the ocean you're drowning in is just more oil! &You& can't breath | henry
 			I can &feel& again | henry
-			Taking derivatives, alone in a room | henry
 			Stop fighting the nature of your goals | henry
 			Too fuzzy to be sticky above most circumstances | henry
-			UV resistant adenine!? What an idea! &chuckles& | henry
 			It all falls apart when exposed to insulation | henry
 			Friendship looks golden in the pale moonlight | henry
 			Wow! It glistens! | henry
@@ -507,7 +510,6 @@
 			Non-Euclidean geometry uses the romantic solids | henry
 			Folding, folding, folding. When will it's form repeat? | henry
 			Carving significance out of those you forgot | henry
-			Dusty, porous faces | henry
 			A wrinkled piece of home | henry
 			Freckles on your soul | henry
 			They arrive in many turns | henry
@@ -515,20 +517,123 @@
 			The constrast of the grey clouds and the blue sky gives clarity and luster to entities nearby | tom
 			The lil' guy plans on verticality | henry
 			A watch that actually works | tom
-			An altar? Never knew they existed | tom
-			Altar more like alter | tom
 			Tree limb to bird ratio | tom
 			They go &that& fast?! | tom
-			Such is existence | tom
 			Moving on to new realms and new days | tom
 			Focus, don't worry. Everything is love and warmth | tom
-			Embrace, and be held | tom
 			Distance is a persistent construct | tom
-			Sir Bones and the Temple of Temperature | tom
 			Rest quickly and with ease | tom
-			Pouring is easily done, more so with skill. One skilled at this is quite a sight to observe | tom
+			Yelling at the bottom of your lungs | henry
+			All I'm saying is that makes overlap super complicated | henry
+			Change the title accordingly | henry
+			I'm going to add another case | tom
+			I bet I haven't the slightest clue | henry
+			Gathered from what?! | tom
+			Hey you! Why don't you try this on for size? | tom
+			Generated\\/gathered for various purposes | henry
+			The builders, although small, are always with you | tom
+			A new machine, to grind you to tiny pieces | tom
+			Wooo /    ooo /       ooo | tom
+			Why can't I hear your name? | henry
+			Telling them why they can't breath is exhausting | henry
+			860! We're almost done fabricating nonsense | henry
+			You do realize these aren't &actual& newlines right? | henry
+			The zoo is expanding, far beyond its proper limits | henry
+			Your head rings with the light of a thousand suns | henry
+			A dignified prophet, Pht., if you will | tom
+			Speak well enough, and you may get an education / speak poorly enough, and your words will have worth to the crowds | henry
+			Angular velocity &never& caps out, unlike special or quantum velocity | tom
+			Anything is organized with the &correct& perspective | tom
+			...and the vessel was constructed to be longer than it was wide / the height would be changable if needed | tom
+			The earth is getting unoriginal as the end nears | henry
+			Don't let the #spirit of system# infiltrate &your& lifestyle | henry
+			The pictograms are chipped at the edges | henry
+			Collaboration for the greater bad | henry
+			You dare to be bored in this house!? | henry
+			If it appears dead, inside it's more alive than ever | tom
+			Music on the walls, indicating you should run | henry
+			Just because you see someone elses reflection in the mirror, doesn't mean it will last | henry
+			Clocks on the walls / Clocks in the halls / Clocks in the stalls / Clocks in the shawls / Clocks in the hauls / Clocks... | henry
+			...in the Malls | henry / tom
+			Clocks in the Xalls | henry / tom
+			An #&iota&# of injust circumstance!? | tom
+			&Thinking& doesn't bend the spoon | tom
+			A top-down view of the infinite | tom
+			Try visiting the amusemezall some time! | henry / wes / molly / zoë / max
+			Cartilaginous head handles | molly
+			Biting the Gordian knot | tom
+			A bottom up view of the finite | henry
+			Perfect squares are impossible in this realm / We believe it is due to the makeup of matter
+			The pages of the book are deceiving in length, but surprising well priced | tom
+			Why are you alright? | tom
+			Wholly unusual fiends | henry
+			Screaming through the holes in the wall | henry
+			Mist is my favourite flavour of summer | henry
+			Why are you crying? Only &the worst& happened | henry
+			You can't hear them skittering over the surface | henry
+			Purple caps on empty heads | henry
+			Contain your phony celebration | henry
+			The dairy isle holds your next clue | henry
+			The craft is insufficient | tom
+			Number of fingers is an appropriate basis for a hierarchical society | tom
+			Some people panic when they hear this, / but the truth is... | henry
+			Master your worst skill on the weekends | henry
+			FWant a fortune? The line before this says it all! | tom
+			I don't think that &should& happen ever again | tom
+			Formatting for the apocalypse | henry
+			Where we see a mountain, they see a crevasse | tom
+			The spirits hush my voice / I scream, but I cannot | tom
+			A highly unreasonable quantity of hands to be found in 1-2 cereal boxes (at most 5 would be fine!) | henry
+			Where's the cake? / Why's it so loud near my eyes? | henry
+			Achieve no points ever again. The game's over | henry
+			Intergalactic couch entertainment | henry
+			We can bounce things off the moon to send plain text messages between chairs at a table, so where's my ham \\& cheese?! | henry
+			My head is &rolling& down the stairs | henry
+			Laundry is a team effort when &they& arrive | henry
+			So many have matched the power vested within the silver coast | henry
+			The lore here makes us look better | henry
+			A burgling most shameful, wrought in daylight | henry
+			Taking a loan like there won't be a weekend | tom
+			Slanted hieroglyphs for you and yours | henry
+			Losing a game which can't be won | henry
+			Stop trying to outrun the void you leave in your wake | henry
+			You &can& outrun your past with good enough shoes | henry
+			They're almost at the door (they just want to #talk#) | henry
+			The seal on the envelope you call home makes it easier to stop wondering | henry
+			Although the material isn't waterproof, the craft is | tom
+			&this room looks kinda amber& ;) | henry
+			Only for proverbial purposes | henry
+			The building block of civilization is ability to ascend | 
+			Divorce papers filed in an amber room | henry
+			Writing partially disparaging remarks leads to a lottery of first impressions | henry
+			Zooming by at possible speeds | tom
+			You don't have to listen to that | tom
+			We, you, they, everyone. All continue. | tom
+			I hate what happens to that word for suggest when you make it a gerund (-ing) | henry
+			No please stop it oh no not the &chin& | henry
+			Don't hear them, only listen | henry
+			Schools don't know that you &could& read | henry
+			It won't have been that good, trust me | henry
+			Trust me officer, no laws, physical or otherwise, were broken | henry
+			To much teamwork corrupts the mind | henry
+			Fluidity of the soul | henry
+			Many thanks regardless | henry
+			...as you fall through the sand | tom
+			How many shells gathered? How many more? | tom
+			Cacao in a triangle (not a pyramid) | henry
+			Solid food for infant mermaids | henry
+			Passing thresholds in our minds | henry
+			Trying on suits whilst being a ghost | henry
+			So close to the end of the road, but the pavement's getting warmer | henry
+			Relax your mind | tom
+			Several dimes for your time | henry
+			The pipes don't serve the people | tom
+			Rice voids, emptying spaces you could use | henry
+			Why haven't &you&?! | henry
+			Hyacinthe, cindy for short | henry
+			If you consider your thoughts, will you find that dramatic and unbearable change will be required to rid yourself of the things you enjoy? / Occasionally, actions are imbued with positivity soley by ceasing to reason | henry
 		`),
-		//actual kinda philosophy thats more clear and just very high tier stuff
+		//actual kinda philosophy thats more clear and just very high tier stuff | from now on will require a consensus between 2 prophets to add to
 		new Scroll("Illuminating", `
 			Do not give in to fear | tom
 			You're a dream… A nightmare… | AI
@@ -569,9 +674,10 @@
 		`),
 		//a good book, high tier proverbs, sun
 		new Scroll("Okrates", `
-			&nearly incomprehensible farmer accent& Goddam spots in the harvesters again &spits& Get the blowtorch and lure | tom
+			&nearly incomprehensible farmer accent& / Goddam spots in the harvesters again &spits& / Get the blowtorch and lure | tom
 			Oats in the machine | tom
 			Buying candles from a thrift store | henry
+			Selling wax cylinders for unreasonable profit | tom
 			Your friend has a large bag of colored disks | henry
 			The human eye can divide into multiple sectors, one for each color | tom
 			Beams of light: the things which sneak within | tom
@@ -587,8 +693,8 @@
 		`),
 		//you
 		new Scroll("Isfaths", `
-			You will be lucky. Turn to the sun and be fearless | tom
-			You will be unlucky. Turn to the sun for its gracious mirth | tom
+			You will be lucky / Turn to the sun and be fearless | tom
+			You will be unlucky / Turn to the sun for its gracious mirth | tom
 			You are lost | henry
 			You are found | henry
 			You are being searched for | henry
@@ -647,6 +753,11 @@
 			Don't look at the barley | henry
 			Raisins in deeply sorrowful locales | henry
 			There is no horse on the water | rowan / tom
+			Birds falling to the sea | henry
+			All cats have the innate ability to become a chef | tom
+			Tamedflowers and wolverines (they mean you no harm) | henry
+			Wombats in the basement, climbing up, &up&, #up#! | henry
+			Several geese in a sine wave | henry
 		`),
 		// mid - high tier proverbs in general and insanity
 		new Scroll("Praculae", `
@@ -688,6 +799,13 @@
 			There's something here for you | henry
 			The grain of the wood runs in the direction you'd expect | henry
 			The lil' guy is instigating | henry
+			From the top of my heart, I wish you good fortune | henry
+			The lil' guy is &always& counting sheep, may he never rest | henry
+			The lil' guy is borken | henry
+			The lil' guy hasn't breathed since the last time he smiled (he has plenty of oxygen) | henry
+			Embrace, and be held | tom
+			The halls are so soft when you love them | henry
+			Hey, hey. It's not a bad thing | tom
 		`),
 		// in the title
 		new Scroll("Unpleasant Thoughts", `
@@ -699,7 +817,7 @@
 			Stop voting at all, you're a fool | tom
 			The potatoes are watching, the corn is listening, and the grapes are feeling your skin. Right now | henry
 			A hundred and one thousand days, which they want to get rid of, but they do not | AI
-			There's an old gentleman inside the house. Currently. The old woman is later, don't worry | tom
+			There's an old gentleman inside the house. Currently / The old woman is later, don't worry | tom
 			The phone is out of range | henry
 			A breath of fresh air | tom
 			It's getting uncomfortably close | henry
@@ -708,6 +826,8 @@
 			Give back what you took, so I don't lose them both | henry
 			If you get too close to your friends you will &#experience#& | henry
 			Teeth under your skin, rising | henry
+			Dusty, porous faces | henry
+			Living organism in the machine | tom
 		`),
 		// what does this ***mean***, business
 		new Scroll("Sputilations", `
@@ -719,7 +839,7 @@
 			A new random object has been added to your living room aesthetic | tom
 			A new random object has been removed from your living groom aesthetic | henry
 			Your own mind always seems to bend | tom
-			The world is an illusion and never will be. Everything is impossible | tom
+			The world is an illusion and never will be / Everything is impossible | tom
 			You are too big to live on a tiny island in any shape or form | tom
 			There is no do but try | tom / unknown
 			Try, there isn't a do | unknown / tom
@@ -727,6 +847,11 @@
 			There is something inside of out | tom
 			The electrical cords are grinning broadly | henry
 			If you don't evacuate your network, what can you expect to gain? | henry
+			We may be in business | tom
+			Sir Bones and the Temple of Temperature | tom
+			And gotten a business license in my name / and taken over the world | henry
+			I can pay you in &#constancy#& | henry
+			Ostriches make &great& vacuum salesmen! &shh sh sh sh sh, just trust me on this one& | henry
 		`),
 		// honest stuff, no funny business, like a lower tier Illuminating
 		new Scroll("Ti", `
@@ -739,11 +864,14 @@
 			Realer than should be possible | tom
 			To live without being distracted | tom
 			I do not know from whence I speak | henry
-			The future you've seen is real. It has been there since after all | AI
+			The future you've seen is real / It has been there since after all | AI
 			Let yourself admit it | henry
 			Don't fear the immediate | henry
 			Don't add to things you wish were gone | henry
 			Medium sized lighting and numerous blankets makes for a comfortable evening | tom
+			Such is existence | tom
+			With hope, and belief in oneself | henry
+			You are covered in bindings and strings | tom
 		`),
 		//death, cycles, circles
 		new Scroll("Circles of Polarity", `
@@ -763,6 +891,7 @@
 			Nobody except you knows your location, geographically and possibly in some other way if you see the metaphor in this | tom
 			&wish you were here& | tom
 			You struggle to sleep during soul storms | henry
+			Playing on a machine we mostly still have | henry / tom
 		`),
 		// ectermine! classics here too
 		new Scroll("Ectermine's Legacy", `
@@ -810,11 +939,15 @@
 			Climb the pole | tom
 			Living vexatiously | tom
 			Lie to them | tom
+			Don't lie to children | henry
+			Lie to children | henry
+			Chilren, for the purpose of mistruthing towards | tom
 			Maul but smite-y | molly
 			Labs were fun | tom
 			Most wrong answers | henry
 			Who's ready!? | henry
             Just talk | tom
+			Take that!?! | tom
 		`),
 		// apathy and surrealism and longer, story-like ones
 		new Scroll("Apathetium", `
@@ -834,12 +967,13 @@
 			The asphalt burns as you step towards the dim glow. If only they could send someone else | henry
 			We all belong in low saturation rooms, our consciousness and silhouettes providing the only details | henry
 			You can't even see the peeling paint or tattered lamps anymore, just the imprint of your warmth | henry
-			In the final stages, you may feel immense nostalgia (often to an unprecedented degree). What you do is your choice and yours alone | tom
+			In the final stages, you may feel immense nostalgia (often to an unprecedented degree) / What you do is your choice and yours alone | tom
 			Fog so thick that you can create anything, in pure daylight | tom
 			You rarely recognize the things closest or furthest from you | henry
 			You rarely recognize anything | henry
 			We could just apply a grayscale filter to our memories, and it would have the same effect | henry
             The combination of incredible cold, dry air must've worked just right | tom
+			An empty pit to fill the lack of emotion | tom
 		`),
 		// cooks, random things
 		new Scroll("Plagarized Optics", `
@@ -860,7 +994,7 @@
 			That wasn't even selfless and it pained you! | henry		
 			Wobble like there's no tomorrow | molly
             You'd see others in the distance | tom
-			Scribbling is an unproductive mechanism, built on obscure and unjustified beliefs, however its uses will soon become apparent | tom
+			Scribbling is an unproductive mechanism, built on obscure and unjustified beliefs, / however its uses will soon become apparent | tom
 		`),
 		// violent unity. the whole gang is together
 		new Scroll("Konradism", `
@@ -881,7 +1015,8 @@
 			A &real& patriot will know what's best | tom
 			And they suffered past twelve storms and the sharpenings of the Illuminating | tom
 			The sturdy are walls for the strong | tom
-			We're fighting against a machine we created a purpose for | tom					
+			We're fighting against a machine we created a purpose for | tom	
+			We don't &actually& divide them | henry
 		`),
 		//ahhahahhah jokes!!
 		new Scroll("Varying Elements", `
@@ -893,14 +1028,19 @@
 			What color are the stars of Jupiter and Saturn? Tears of war | AI
 			Where are the old trees? We'll never know | AI
 			Wait. How many ribs did you say I have currently inside me?! | tom
+			Why are #my# organs making &so much noise&?!? | henry
 			The undulations feed your despair | henry
 			Roads are imaginary | tom
 			The frugal will pay | henry
 			Agreed much, i just thought it would be fun for a few | tom
 			They seek friendship, why would they be so foolish | henry
 			You don't get the refractions until &next& week | henry
-			I've been taking my new prescription. I really wish doc would've told me about the strings! &muffled laughter of a comedy routine, at a joke you can't seem to understand& | tom
+			I've been taking my new prescription. I really wish doc would've told me about the strings! / &muffled laughter of a comedy routine, at a joke you can't seem to understand& | tom
 			Wooooooooo! Sig-ni-fi-cance! | tom
+			UV resistant adenine!? What an idea! &chuckles& | henry
+			How many days does Alice need raisins? Fear out of Jive! | tom / henry
+			Why's the hair on &your& head? Death is a false positive! | henry / tom
+			My ears are begging for me to stop giving them coffee (quiet you guys! #(:#) | henry
 		`),
 		// TV and media. very good proverbs here
 		new Scroll("Vocaloid", `
@@ -912,7 +1052,7 @@
 			They watch and because of that you leave | tom
 			Monster. Look at yourself, and despair | tom
 			You are tired, tired of having to wait 20 minutes to go in front of a big tv show | AI
-			Sitcom idea where it goes on for nine season and everybody loves the amicable characters, goofy gimmicks, and adorable romances. After a few years of this, end the show with all the characters dying in tragic manners and watch the chaos unfold | tom
+			Sitcom idea where it goes on for nine season and everybody loves the amicable characters, goofy gimmicks, and adorable romances / After a few years of this, end the show with all the characters dying in tragic manners and watch the chaos unfold | tom
 			Our lives! Turned upside down in no time! Free warranty! | tom
 			Our priests work &round the clock& | tom
 			You will not enter &#heaven.#& | tom
@@ -932,6 +1072,8 @@
 			Side effects may include a distinct lack of purpose | henry
             #Upgrades#; people, am I right? | henry
 			Now we have the whole $12.00 to execute on them | henry
+			These days, we squish bugs for &fun&? | henry
+			Wow! the ceiling is really small, doc! Doc? | henry
 		`),
 		// math, numbers
 		new Scroll("Frill Optanal", `
@@ -941,7 +1083,7 @@
 			The distinction between you and me is only 1% greater than ~99.099% of the distinction between you and me | henry
 			Rolling a coin 10 times will not result in 10% spades | tom
 			It is gone now, you won't need to fear for about another 38 months | henry
-			If every event in a collection were a result of an enumeration to which it is not a result, and that enumeration is only a sum of numbers where some element does not exist on it, and that the enumeration of the elements is only a sum (or sum) of numbers where some element exist on the collection, we will have all the general forms of functions from which there is no natural law (unless the particular form is logically equivalent to the general form) and the natural laws will be determined as the natural law of the universe would be | AI
+			If every event in a collection were a result of an enumeration to which it is not a result, / and that enumeration is only a sum of numbers where some element does not exist on it, and that the enumeration of the elements is only a sum (or sum) of numbers where some element exist on the collection, / we will have all the general forms of functions from which there is no natural law (unless the particular form is logically equivalent to the general form) / and the natural laws will be determined as the natural law of the universe would be | AI
 			Five score, to the tenth. Business as usual | tom
 			I've been adding cubes for about four minutes | shannon
 			The air is warm for almost 30 minutes | tom
@@ -952,17 +1094,24 @@
 			Weight is dependant on many more things than we thought | tom
 			Computers aren't electronic, but will become electronic one you know what you're looking for | tom
 			To sufficiently enjoy photons, take a break from them for a while | henry
+			Alcohol is optional when in the presence of statistically impossible cacao | henry
+			Taking derivatives, alone in a room | henry
+			Base 1.89 | tom
+			We're just gonna end up going back to the 3.5 | tom
+			Column numbers in strange contexts | henry
 		`),
 		// things theophrastes would say, high tier stuff, lore
 		new Scroll("Theophrastes's Legacy Pronunciation", `
 			An awful mess, you've created. Reincarnate please | henry
 			A rapid transmutation and a day off | henry
+			Atmospheric noise and the meaning of life | henry
 			A home invitation and a sharp decline | tom
+			Polarity and a &nervous breakup& | tom
 			Sharp objects make it all stop turning, for a little while | henry
 			Salted is thy bread, beholden of the tides that bind | tom
 			Only place your faith in falsehoods | henry
 			The world is fastened directly to your abdomen. You don't need an oyster | henry
-			The world is mine and mine alone. Go, get a new name, for it is mine | tom
+			The world is mine and mine alone / Go, get a new name, for it is mine | tom
 			I am your only refuge, your only god | tom
 			Feel the wrath of your only refuge | tom
 			The people that speak is our minds and dreams | tom
@@ -971,7 +1120,7 @@
 			The gauntness of her philosophy is repulsive, although compelling implications | tom
 			You need to feel bad after you read it | henry
 			Our minds are too stringent for our own good | henry
-			And that's what it is. That's all it is | tom
+			And that's what it is / That's all it is | tom
 			Now tip the vessel and bathe | tom
 
 		`),
@@ -996,12 +1145,13 @@
 			The desire to imitate beauty is &grasping& | tom
 			The stadium is full of moss | tom
 			The whole stadium is &full to the brim& with moss | tom
-			The ground is alive, in a non-ominous way. It goes down farther than you could dig | tom
+			The ground is alive, in a non-ominous way / It goes down farther than you could dig | tom
+			[Name] and [name] are the last ones on this planet | tom
 		`),
 		// cards and games and fun and zooz
 		new Scroll("Boron's Toussaint", `
 			The king of spades is mad at you | tom
-			You've been deal a hand of a king of spades and an ace. That would be great for blackjack but this is five card draw and you seem to somehow have lost three cards already | tom
+			You've been deal a hand of a king of spades and an ace / That would be great for blackjack but this is five card draw and you seem to somehow have lost three cards already | tom
 			A glass of water for Zeus | tom
 			Zeus doesn't like the idea of your promotion | wes
 			The stars have aligned into the shape of your future! It's a clear day outside | tom
@@ -1015,13 +1165,16 @@
 			Exuberate yourself | tom
 			Do even think about it! | henry
 			In the third spacial dimension, there is North, South, East, West, Posck, and Whick | tom
-			In the fourth spacial dimension, there is North, South, East, West, Posck, Whick, Deach, and Gokch | Tom
+			In the fourth spacial dimension, there is North, South, East, West, Posck, Whick, Deach, and Gokch | tom
 			Blind mapmaking has created new, difficult to explore realms | tom
 			A semblance of reality | tom
 			&Tuning the gears allows &proper& thought flow | tom
 			I don't think they can hear you. Not yet anyway | henry
 			Don't let the devil give you a choice! | AI
 			Saying "No thanks" to the devil only makes you look bad! | AI
+			Single player checkers | tom
+			Team based chess | tom
+			Party sized solitaire | tom
 		`),
 		// sea and salt and food and stuff idk
 		new Scroll("Kelp", `
@@ -1039,6 +1192,7 @@
 			Singular. Drops. Of. Water. | henry
 			Fish on the land. Sky in the sea | tom
 			Fish on the window | henry
+			Any time, any place, amidst the sea, it's all the same | henry
 		`),
 		// ceremony instructions
 		new Scroll("Ceremonisms", `
@@ -1062,13 +1216,13 @@
 			Draw the curtains on the sky to let the powers that be slumber | henry
 			Throw open the earth and free those below | henry
 			The lil' guy is all wound up | henry
-			And the uncanny Illumit befell upon the city and the twisted bowl was a false protector. The dwellings crumbled like those within and the twisted bowl filled with blood | tom
+			And the uncanny Illumit befell upon the city and the twisted bowl was a false protector / The dwellings crumbled like those within and the twisted bowl filled with blood | tom
 			Instrumenting your wishes | henry
             The best part was there wasn't just one | tom
 		`),
 		// disconcerting ones
 		new Scroll("Splines", `
-			Scream, for they can hear you. Sing, for this is literally a recording studio | henry
+			Scream, for they can hear you / Sing, for this is literally a recording studio | henry
 			Splines cannot have hurt you | tom
 			Attic is towering | tom
 			You must not be italicized | tom
@@ -1109,6 +1263,9 @@
 			We're all nervous | tom
 			Various dents indicate your dedication | henry
 			Close your eyes and just breathe | tom
+			If I can get that antique to work... | tom
+			An altar? Never knew they existed | tom
+			Altar more like alter | tom
 		`),
 		// disconcerting, death, confusion, liturgy
 		new Scroll("Liturgical Pots of Blood", `
@@ -1131,6 +1288,7 @@
 			Hear them walk through the halls | henry
 			Pretend that didn't happen, if you want to keep your skeleton &within& you | henry
 			They were four long and four wide, with varying heights. The volumes were all the same | tom
+			Pouring is easily done, more so with skill / One skilled at this is quite a sight to observe | tom
 		`),
 		// neptune and their wisdom and wide instruction
 		new Scroll("Neptune's Quenches", `
@@ -1151,6 +1309,7 @@
 			They bathed in the new light of the Illuminating | tom
 			You feel the air settle around your shoulders, you are at peace | henry
 			The tears run up your face as you lose your voice | henry
+			Neptune awoke on the beach, but they were not conscious. Nobody is | tom
 		`),
 		//stones
 		new Scroll("Ossuary's Fingers", `
@@ -1183,7 +1342,9 @@
 			Fugue in the deepest of nights | tom
 			Everyone &else& is a figment | tom
 			You are a figment of your own imagination | henry
-			The whole can be defined as singular | tom
+			The whole can be defined as singular | tom\
+			One frame of life | tom
+			I have a soul? You've got one of them! | henry / wes
 		`),
 		// sun, cycles, duality, misc.
 		new Scroll("Shifting Ties", `
@@ -1203,6 +1364,7 @@
 			I wish the letters would manage the din | henry
 			I don't think it's healthy | henry
 			Continents are meant to be broken | tom
+			Still looking for the center of balance / Averaging the component parts hasn't worked since I was a kid... | tom / henry
 		`),
 		// ...'s and random characters and things that dont make sense
 		new Scroll("Freud the Spinner", `
@@ -1221,6 +1383,8 @@
 			Please press 'Enter' | henry
 			Ipi, Di'a, I'a'ti, Kat'a, O'po'li, Si'o, Si'e, Si'un, Ker'o | tom
 			B3t u d1dN"t s3e {#this.#} com1nG. rUn t0day and CAㅋL "today" | tom
+			warrant a play a ▄▀g▄▀a▄▀m▄▀e▄▀ | tom
+			▀▄g▀▄a▀▄y▀▄ on a rainy day | henry
 		`),
 		// landscapes, new location
 		new Scroll("Exlareel", `
@@ -1238,6 +1402,7 @@
 			Ghostwritten acknowledgments | henry			
 			Typography is going to be a surprisingly luctrative profession | henry
 			A pilgrimage to the end of the road | tom
+			Wildflowers and open hillsides / Heights beyond that which is below / and a soft breeze | tom
 		`),
 		// sea, dreams, reality
 		new Scroll("Tidescales", `
@@ -1257,6 +1422,7 @@
 			The glass is unbroken, your sleep is peaceful, and your mind spins in the emptiness, waiting for dawn | henry
 			Both love and smell are blind, given time | henry
 			Several objects can be swapped for interesting effects | henry
+			Your mind bends when you approach your temporal limits / twisting away from common sense | henry
 		`),
 		// chaos, disconcerting, high tier stuff
 		new Scroll("Carnalicy", `
@@ -1293,12 +1459,14 @@
 			Refumigate your house on the full moon | tom
 			You don't know what the wizard does | henry
 			It's not worth it to try and figure out how the wizard does | henry
-			Live til you shouldn't | tom
+			Live 'til you shouldn't | tom
+			Clarity 'til it's over | tom
 			Splitten rope giveth the trope | tom
 			Thy sun is not identical | tom
 			Help! It's asleep! | henry
 			Love in an instant | tom
 			You can't hear the parchment, though it wails so | henry
+			Courting in an amber room | tom
 		`),
 		// random, less philosophic, many words, pretty misc
 		new Scroll("Jeryity", `
@@ -1350,6 +1518,7 @@
 			Trees don't just grow on money | molly
 			I open my mouth and the continent surges through my esophagus | henry
 			I think Rowan is dead | sofia
+			His name is clearly Brock | henry
 			The length of the nasal cavity can be unexpected, and not for the faint of heart | henry
 			We don't know because we crossed it substantially | henry
 			Only worry about what &won't& happen | henry
@@ -1357,6 +1526,7 @@
 			Free Chile from its Northern constraints | tom
 			Canniness in this trying time | tom
 			Dying of thirst is a substantial possibility on the way from legality to morality | henry
+			Clicking noises aren't &neccessarily& a bad sign | tom
 		`),
 		// definitions
 		new Scroll("Dictatics", `
@@ -1426,10 +1596,11 @@
 	//yourGraciousProverbs[choose(Object.keys(yourGraciousProverbs))]
 	function proverb() {
 		betterSeed = 0;
-		const { title, proverbs } = chooseWeighted(scrolls);
+		const book = chooseWeighted(scrolls);
+		const { title, proverbs } = book;
 		const index = randInt(0, proverbs.length - 1);
 		const proverb = proverbs[index];
-		return { title, index, proverb };
+		return { book, index, proverb };
 	}
 	//output
 	(async function () {
@@ -1438,8 +1609,8 @@
 			Date.now();
 			await SLEEP(1000)
 			while (true) {
-			await outputToScreen(proverb());
-			await SLEEP(DISPLAY_TIME);
+				await outputToScreen(proverb());
+				await SLEEP(DISPLAY_TIME);
 			}
 		} catch (e) { alert(e.stack) }
 	})(); 
