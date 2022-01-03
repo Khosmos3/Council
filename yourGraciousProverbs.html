@@ -151,19 +151,29 @@
 	//function, obviously
 	let betterSeed = 0;
 	function getSeed() {
-		betterSeed += 71;
-		let seed = Date.now() + betterSeed;
+		betterSeed++;
+		const seed = Date.now() + betterSeed;
 		return seed;
 	}
 	function random01() {
 		let seed = getSeed();
+		
 		seed ^= seed << 5;
 		seed ^= seed >> 2;
+		seed -= 836492754;
 		seed ^= seed << 4;
+		seed+=999;
 		seed ^= seed >> 7;
+		seed += 128936382;
+		seed ^= seed << 2;
+		seed += 128936382;
+		seed ^= seed >> 6;
+		seed-=42099;
+		seed^= seed << 1;
+		seed ^= seed >> 9;
 		seed /= 0xFFFF;
-		return Math.abs(seed % 1);
 
+		return Math.abs(seed) % 1;
 	}
 	function randInt(min, max) {
 		return Math.floor(random01() * (max - min + 1) + min);
@@ -431,6 +441,11 @@
 	const scrolls = [
 		//uncatergorized proverbs	
 		new Scroll("Onter", `
+			Helpless in opportunity | henry
+			You are scared of the space inside | henry
+			Only feel bad around others | henry
+			You have done that which &can& be forgiven | henry
+			Don't justify their actions | henry
 		`),
 		//actual kinda philosophy thats more clear and just very high tier stuff | from now on will require a consensus between 2 prophets to add to
 		new Scroll("Illuminating", `
@@ -491,7 +506,7 @@
 			The distance is mesmerizing and difficult to win against | tom
 			Here's your report / Where did you &get& this? | henry
 		`),
-		//a good book, high tier proverbs, sun
+		//a good book, high tier proverbs, sun, logic
 		new Scroll("Okrates", `
 			&nearly incomprehensible farmer accent& / Goddam spots in the harvesters again &spits& / Get the blowtorch and lure | tom
 			Buying candles from a thrift store | henry
@@ -516,6 +531,7 @@
 			Passing thresholds in our minds | henry
 			Your head rings with the light of a thousand suns | henry
 			Ambiguous descriptions of everyday phenomena | henry
+			Common sense is a plague that can only be destroyed by common logic | tobyn
 		`),
 		//you
 		new Scroll("Isfaths", `
@@ -664,6 +680,7 @@
 			Freckles on your soul | henry
 			Focus, don't worry. Everything is love and warmth | tom
 			Many thanks regardless | henry
+			The lil' guy is here for his apple juice / He needs a graham cracker to go with | henry / molly
 		`),
 		// in the title
 		new Scroll("Unpleasant Thoughts", `
@@ -1506,6 +1523,8 @@
 			The tune is sad, melancholy, &meaningless& | tom / henry
 			Change the title accordingly | henry
 			Parenthetically, it was all resolved | molly
+			French isn't turing complete | henry
+			Foolishly, I took the eggs | tom
 		`),
 		// confusion, random, less philosophic
 		new Scroll("Hyubert", `
@@ -1624,6 +1643,7 @@
 			Window pains: baguettes made of glass | henry / zoë
 			The given is in the pudding | zoë
 			He! he! Geometry! | zoë
+			Just that little existential something in my day | zoë
 		`)
 	];
 
