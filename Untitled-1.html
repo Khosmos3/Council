@@ -1,455 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Proverbs</title>
-	<link rel="shortcut icon" type="image/jpg" href="favicon_soup.png" />
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Quintessential&display=swap" rel="stylesheet">
-	<style>
-		* {
-			margin: 0;
-			font-family: "Quintessential";
-		}
-
-		body {
-			font-size: 5.3vmin;
-			background-color: #F6E9D8;
-			color: #6b1617;
-			font-family: "Quintessential";
-		}
-
-		#bar {
-			width: 13%;
-			height: 100%;
-
-			position: fixed;
-			background-color: currentColor;
-		}
-
-		#n {
-			overflow: auto;
-			width: calc(100vw - 20% - 15%);
-			height: 100vh;
-			text-align: left;
-			position: absolute;
-			/* bottom: 54%; */
-			font-family: "Quintessential";
-			left: 20%;
-			padding-right: 15%;
-			letter-spacing: 3px;
-			line-height: 7vh;
-			scroll-behavior: smooth;
-		}
-
-		#paper {
-			padding-top: 20%;
-			padding-bottom: 30%;
-		}
-
-		#paper canvas {
-			margin-bottom: 1em;
-			display: block;
-		}
-
-		#side {
-			width: 7vw;
-			height: 7vw;
-			background-color: #410304;
-			position: absolute;
-			color: rgba(65, 3, 4, 0);
-			margin-top: 3vw;
-			margin-left: 3vw;
-			opacity: .2;
-			transition: opacity .6s, width .6s, color .2s;
-			border: 3px solid #410304;
-			text-align: center;
-			font-size: 3vw;
-			font-family: Quintessential, serif;
-		}
-
-		#span {
-			margin-top: 1vw;
-			display: block;
-		}
-
-		#side:hover:after {
-			display: block;
-			white-space: nowrap;
-		}
-
-		#side:hover {
-			opacity: 1;
-			background-color: #410304;
-			width: 17vw;
-			color: #F6E9D8;
-			transition: opacity .6s, background-color .2s, width .6s, color 1s;
-		}
-
-		#side:active {
-			background-color: #F6E9D8;
-			color: #410304;
-			transition: opacity .6s, background-color .2s, width .6s, color .2s;
-		}
-
-		#suggest {
-			width: 7vw;
-			height: 2vw;
-			background-color: #410304;
-			position: absolute;
-			color: rgba(65, 3, 4, 0);
-			margin-top: 12vw;
-			margin-left: 3vw;
-			opacity: .2;
-			transition: opacity .6s, width .6s, color .2s;
-			border: 3px solid #410304;
-			text-align: center;
-			font-size: 1.3vw;
-			font-family: Quintessential, serif;
-		}
-
-		#suggest:hover {
-			opacity: 1;
-			background-color: #410304;
-			color: #F6E9D8;
-			transition: opacity .6s, background-color .2s, width .6s, color 1s;
-		}
-
-		#suggest:active {
-			background-color: #F6E9D8;
-			color: #410304;
-			transition: opacity .6s, background-color .2s, width .6s, color .2s;
-		}
-	</style>
-</head>
-
-<body id="body">
-	<div id="bar">
-		<a href="https://soupnight.space">
-			<div id="side">
-				<span id="span">Home</span>
-			</div>
-		</a>
-		<a href="https://docs.google.com/forms/d/e/1FAIpQLSdpb8y4vaLeV6Eyk9WdsCjNRBALelec0sLwc7QNAtM-VnT-yA/viewform?usp=sf_link"
-			target="_blank">
-			<div id="suggest">
-				<span id="suggest-span">Propound</span>
-			</div>
-		</a>
-	</div>
-	<div id="n">
-		<div id="paper"></div>
-		<div id="evil"></div>
-	</div>
-</body>
-<script>
-
-	//function, obviously
-	let betterSeed = 0;
-	function getSeed() {
-		betterSeed++;
-		const seed = Date.now() + betterSeed;
-		return seed;
-	}
-	function random01() {
-		let seed = getSeed();
-		
-		seed ^= seed << 5;
-		seed ^= seed >> 2;
-		seed -= 836492754;
-		seed ^= seed << 4;
-		seed+=999;
-		seed ^= seed >> 7;
-		seed += 128936382;
-		seed ^= seed << 2;
-		seed += 128936382;
-		seed ^= seed >> 6;
-		seed-=42099;
-		seed^= seed << 1;
-		seed ^= seed >> 9;
-		seed /= 0xFFFF;
-
-		return Math.abs(seed) % 1;
-	}
-	function randInt(min, max) {
-		return Math.floor(random01() * (max - min + 1) + min);
-	}
-	function choose(arr) {
-		return arr[randInt(0, arr.length - 1)];
-	}
-
-	function chooseWeighted(scrolls) {
-		const t = random01();
-		let acc = 0;
-		for (let i = 0; i < scrolls.length; i++) {
-			const scroll = scrolls[i];
-			if (acc <= t && t < acc + scroll.weight)
-				return scroll;
-			acc += scroll.weight;
-		}
-		return scrolls[scrolls.length - 1];
-	}
-
-	//the artifact
-	let _l;
-	Object.defineProperty(window, "l", {
-		set: v => _l = v,
-		get: () => _l++
-	});
-
-	//how long the text appears in place
-	const DISPLAY_TIME = 3200;
-	const SLEEP = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-
-	function fix() {
-		document.getElementById("evil").scrollIntoView();
-	}
-
-	function canvasPrint({
-		parent,
-		text,
-		format = [],
-		padding = 3,
-		speed = .5,
-		fontSize = parseInt(getComputedStyle(parent).fontSize),
-		fontFamily = getComputedStyle(parent).fontFamily
-	}) {
-
-		function packText(str, getWidth, maxWidth) {
-			return str
-				.split("\n")
-				.map(line => {
-					let lineStart = true;
-					const words = line.split(" ");
-					const lines = [];
-					let acc = "";
-					for (let i = 0; i < words.length; i++) {
-						const word = words[i];
-						if (getWidth(acc + (lineStart ? "" : " ") + word) > maxWidth) {
-							lines.push(acc);
-							acc = "";
-							lineStart = true;
-						}
-						acc += (lineStart ? "" : " ") + word;
-						lineStart = false;
-					}
-					if (acc) lines.push(acc);
-					return lines.join("\n");
-				})
-				.join("\n");
-		}
-
-		function setState(c) {
-			c.font = `${fontSize}px ${fontFamily}`;
-			c.lineWidth = 1;
-			c.lineCap = "round";
-		}
-
-		// setup
-		const canvas = document.createElement("canvas");
-		parent.appendChild(canvas);
-
-		const c = canvas.getContext("2d");
-		setState(c);
-
-		const getWidth = t => c.measureText(t).width;
-
-		canvas.style.width = "100%";
-		const MAX_WIDTH = canvas.getBoundingClientRect().width - padding * 2;
-
-		text = packText(text, getWidth, MAX_WIDTH);
-
-		const TEXT_WIDTH = Math.max(
-			...text.split("\n")
-				.map(line => getWidth(line))
-		);
-
-		const TEXT_HEIGHT = text.split("\n").length * fontSize;
-
-		const CANVAS_WIDTH = TEXT_WIDTH + padding * 2;
-		const CANVAS_HEIGHT = TEXT_HEIGHT + padding * 2;
-
-		canvas.width = CANVAS_WIDTH * devicePixelRatio;
-		canvas.height = CANVAS_HEIGHT * devicePixelRatio;
-		canvas.style.width = CANVAS_WIDTH + "px";
-		canvas.style.height = CANVAS_HEIGHT + "px";
-
-		setState(c);
-		c.scale(devicePixelRatio, devicePixelRatio);
-
-		let renderedText = text;
-
-		const PIXELS_PER_CHAR = fontSize;
-		const Y_OFFSET = fontSize * 0.9;
-
-		const startTime = performance.now();
-
-		return new Promise(resolve => {
-
-			function animate(now) {
-				c.clearRect(0, 0, canvas.width, canvas.height);
-
-				const offset = (performance.now() - startTime) * speed;
-
-				let X = padding;
-				let Y = padding;
-
-				c.setLineDash([PIXELS_PER_CHAR * 2 * renderedText.length]);
-
-				for (let i = 0; i < renderedText.length; i++) {
-					const char = renderedText[i];
-					const fmt = format[i] ? format[i]
-						.split("")
-						.map(v => ({
-							b: "bold",
-							i: "italic"
-						}[v]))
-						.join(" ") : "";
-
-					const font = `${fmt} ${fontSize}px ${fontFamily}`;
-
-					if (font !== c.font) c.font = font;
-
-					const alpha = Math.max(0, Math.min(1, 0.5 * (offset / PIXELS_PER_CHAR - i)));
-					c.fillStyle = `rgba(107, 22, 23, ${alpha})`;
-					c.strokeStyle = `rgba(107, 22, 23, ${1 - alpha})`;
-
-					c.lineDashOffset = offset - i * PIXELS_PER_CHAR;
-					c.strokeText(char, X, Y + Y_OFFSET);
-					c.fillText(char, X, Y + Y_OFFSET);
-
-					if (char === "\n") {
-						X = padding;
-						Y += fontSize;
-					} else {
-						X += getWidth(char);
-					}
-				}
-
-				if (offset < PIXELS_PER_CHAR * (renderedText.length + 1 /* fade buffer */)) {
-					requestAnimationFrame(animate);
-				} else resolve();
-			}
-
-			requestAnimationFrame(animate);
-
-		});
-	}
-
-	async function outputToScreen({
-		book,
-		index,
-		proverb
-	}) {
-		let input = proverb.text;
-
-		betterSeed = 0;
-		let num = randInt(1, 25);
-		let newLines = 0;
-
-		let place = 1;
-		for (let i = 0; i < index; i++)
-			place += book.proverbs[i].length + 3;
-
-		input = `&#${book.title}# ${place + (proverb.length > 1 ? "-" + (place + proverb.length - 1) : "")}&\n${input}`;
-
-		let bold = false;
-		let italic = false;
-
-		const format = new Array(input.length).fill("");
-
-		let output = "";
-
-		let escaped = false;
-		for (let t = 0; t < input.length; t++) {
-			const char = input[t];
-
-			if (char == "&" && !escaped)
-				italic = !italic;
-			else if (char == "#" && !escaped)
-				bold = !bold;
-			else if (char !== "\\" || escaped)
-				output += char;
-
-			escaped = char === "\\" && !escaped;
-
-			const fInx = output.length - 1;
-			if (bold) format[fInx] += "b";
-			if (italic) format[fInx] += "i";
-		}
-
-		const donePrinting = canvasPrint({
-			parent: document.getElementById("paper"),
-			text: output,
-			format,
-			padding: 10,
-		});
-		fix();
-		await donePrinting;
-
-		betterSeed = 0;
-		//this line is my best fren i am keep it -->  let br = "<br>";     
-	}
-
-	class Proverb {
-		constructor(line) {
-			line = line.trim();
-			const index = line.lastIndexOf("|");
-			if (index === -1) {
-				this.text = line;
-				this.authors = ["unknown"];
-			} else {
-				this.text = line
-					.slice(0, index)
-					.trim();
-				this.authors = line
-					.slice(index + 1)
-					.split("/")
-					.map(author => author.trim());
-			}
-			
-			this.length = 1;
-			let escaped = false;
-			for (let i = 0; i < this.text.length; i++) {
-				const char = this.text[i];
-				if (char == "/" && !escaped) this.length++;
-				escaped = char === "\\" && !escaped;
-			}
-		}
-	}
-
-
-	class Scroll {
-		constructor(title, proverbs) {
-			this.title = title;
-			this.proverbs = proverbs
-				.trim()
-				.split("\n")
-				.filter(line => line.trim().length > 0)
-				.map(line => new Proverb(line));
-			this.size = this.proverbs.length;
-		}
-		computeWeight(totalSize) {
-			this.weight = this.size / totalSize;
-		}
-	}
-
-	const scrolls = [
-		//uncatergorized proverbs	
-		new Scroll("Onter", `
-			Helpless in opportunity | henry
-			You are scared of the space inside | henry
-			Only feel bad around others | henry
-			You have done that which &can& be forgiven | henry
-			Don't justify their actions | henry
-		`),
-		//actual kinda philosophy thats more clear and just very high tier stuff | from now on will require a consensus between 2 prophets to add to
-		new Scroll("Illuminating", `
-			Do not give in to fear | tom
+			//illuminating word word word
+            Do not give in to fear | tom
 			You're a dream… A nightmare… | AI
 			The dappled light upon the ground reminds me of the distance | henry
 			My consciousness glints in the autumn light | henry
@@ -471,9 +21,7 @@
 			Friendship looks golden in the pale moonlight | henry
 			The constrast of the grey clouds and the blue sky gives clarity and luster to entities nearby | tom
 			Just because you see someone else's reflection in the mirror, doesn't mean it will last | henry
-		`),
-		//suffering
-		new Scroll("Suffering", `
+		    //suffering word word word
 			You're so happy! You're so relieved you're not dead | AI
 			I will be with you the day you die, that day is now | tom
 			We hope that you find comfort in the fact that you have the capacity to move around and think | tom
@@ -505,9 +53,7 @@
 			Regret tangles your time off this week | henry
 			The distance is mesmerizing and difficult to win against | tom
 			Here's your report / Where did you &get& this? | henry
-		`),
-		//a good book, high tier proverbs, sun, logic
-		new Scroll("Okrates", `
+            //okrates word word word
 			&nearly incomprehensible farmer accent& / Goddam spots in the harvesters again &spits& / Get the blowtorch and lure | tom
 			Buying candles from a thrift store | henry
 			Selling wax cylinders for unreasonable profit | tom
@@ -531,10 +77,7 @@
 			Passing thresholds in our minds | henry
 			Your head rings with the light of a thousand suns | henry
 			Ambiguous descriptions of everyday phenomena | henry
-			Common sense is a plague that can only be destroyed by common logic | tobyn
-		`),
-		//you
-		new Scroll("Isfaths", `
+            //isfaths word word word
 			You will be lucky / Turn to the sun and be fearless | tom
 			You will be unlucky / Turn to the sun for its gracious mirth | tom
 			You are lost | henry
@@ -559,9 +102,7 @@
 			You can't hear them skittering over the surface | henry
 			Purple caps on empty heads | henry
 			Contain your phony celebration | henry
-		`),
-		// its the title. its just hubris
-		new Scroll("Hubris", `
+		    //hubris word word word
 			Sleep well. Nothing foreboding, it's not like you have only this last chance. Just… a good idea | tom
 			The houses are only separated by colorful banners enscripted with avant garde medieval symbols | tom
 			Control, down-shift, now park the car | tom
@@ -590,9 +131,7 @@
 			Black is the new black | shannon
 			Try visiting the amusemezall some time! | henry / wes / molly / zoë / max
 			Trying on suits whilst being a ghost | henry
-		`),
-		//animals and... bread?
-		new Scroll("Dilap", `
+            //dilap word word word
 			Cavehorses can't even walk around in mud | tom
 			Peppers are toxic, perhaps | henry (t)
 			Bread was never an animal | declan
@@ -617,9 +156,7 @@
 			The zoo is expanding, far beyond its proper limits | henry
 			Psst. Come hither candy. Would you like some children? | molly
 			Do not operate heavy machinery while under the influence of willful iguanas | molly
-		`),
-		// mid - high tier proverbs in general and insanity
-		new Scroll("Praculae", `
+            //praculae word word word
 			A simple, everyday, all-consuming life routine | tom / AI
 			Good insanity is necessary as it will leave no room for bad insanity | tom
 			Insanity is just the eye of the storm | tom
@@ -648,9 +185,7 @@
 			Running down walls | henry 
 			Walking on Reque Road | tom			
 			Decrepit and unsatisfactory weather | tom
-		`),
-		// pleasant thoughts
-		new Scroll("Ique", `
+		    //ique word word word
 			The lil' guy's skull contains a celestial body | henry
 			The lil' guy has an object | henry
 			The lil' guy is unwinding | henry
@@ -680,10 +215,7 @@
 			Freckles on your soul | henry
 			Focus, don't worry. Everything is love and warmth | tom
 			Many thanks regardless | henry
-			The lil' guy is here for his apple juice / He needs a graham cracker to go with | henry / molly
-		`),
-		// in the title
-		new Scroll("Unpleasant Thoughts", `
+            //unpleasant thoughts word word word
 			Carpeted windows | tom
 			Guitar of vocal cords | tom
 			Don't build an atom bomb with teeth | sofia
@@ -722,9 +254,7 @@
 			You just wish a couple more disasters would find their way in front of you | henry
 			Too fuzzy to be sticky above most circumstances | henry		
 			Some people panic when they hear this, / but the truth is... | henry	
-		`),
-		// what does this ***mean***, business
-		new Scroll("Sputilations", `
+		    //sputilations word word word
 			Mass production companies of tether cords are being overrun by small scale, local businesses producing tether cords | tom
 			No soul, no service | henry
 			We only sell #solid# plinths | tom
@@ -752,9 +282,7 @@
 			It's fluffy here in the place I should be trying to leave | henry		
 			It hurts more to know &how& to fix something | henry		
 			The surface of the ocean you're drowning in is just more oil! &You& can't breath | henry
-		`),
-		// honest stuff, no funny business
-		new Scroll("Ti", `
+		    //ti word word word
 			The blind man knows, the deaf man speaks, but the wise man can only hear | tom
 			An eye for an eye makes the whole world able to hear better | tom
 			Reality is not about you | tom
@@ -781,9 +309,7 @@
 			There's worlds beyond these | tom
 			Stop fighting the nature of your goals | henry
 			Break down the barriers that keep you from making your greatest mistakes | henry
-		`),
-		//death, cycles, circles, birth, rebirth
-		new Scroll("Circles of Polarity", `
+		    //circles of polarity word word word
 			Am I dead? | tom
 			We don't believe in death | tom
 			I am alive again. The sun has come full circle ... and now I am standing in a sun-flicker... | AI
@@ -807,9 +333,7 @@
 			If it appears dead, inside it's more alive than ever | tom
 			I can &feel& again | henry
 			Dying isn't an effective method of transportation | tom
-		`),
-		// ectermine! classics here too
-		new Scroll("Ectermine's Legacy", `
+		    //ectermine's legacy word word word
 			It's done. All the doctors are dead. Apples are no longer necessary | tom
 			An apple a day keeps the doctor away. Ten will send them flying | henry
 			The apple counter is non-zero. #&Panic&# | henry
@@ -837,9 +361,7 @@
 			The cooks are in the kitchen | tom
 			The cooks are in your living room | tom
 			The cooks are in the restroom currently. Give them sufficient time | tom
-		`),
-		// short things, doors
-		new Scroll("Spaoons", `
+		    //spaoons word word word
 			Don't tap the keyboard twice | tom
 			Suburban, urban, hyperurban | tom
 			The rurals are the main source of the urbs | tom
@@ -874,9 +396,7 @@
 			Wholly unusual fiends | henry
 			They go &that& fast?! | tom
 			Gathered from what?! | tom
-		`),
-		// apathy and surrealism and longer, story-like ones
-		new Scroll("Apathetium", `
+		    //apathetium word word word
 			Surreal continents continue | tom
 			Meteor, across the dimmed landscape | tom
 			An amber lamp for you in this paling room | tom
@@ -905,10 +425,7 @@
 			So many have matched the power vested within the silver coast | henry
 			You &can& outrun your past with good enough shoes | henry
 			Comforting insulation, at least. You can't feel the warmth as the walls are too thick | tom
-			
-		`),
-		// time, etc
-		new Scroll("Plagarized Optics", `
+		    //plagarized optics word word word
 			Why can't I understand clocks? | tom
 			Knocking on clocks | tom
 			The past is substantially more relevant to this recipe | henry		 
@@ -924,9 +441,7 @@
 			Half eaten dreams | henry
 			Seconds away from a deep concern with oneself | henry
 			It won't have been that good, trust me | henry			
-		`),
-		// violent unity. the whole gang is together
-		new Scroll("Konradism", `
+		    //konradism word word word
 			They are up in arms | tom
 			The belldrum is full of all the things we won't have time to know | tom
 			Strike by the cover of the book | tom
@@ -951,9 +466,7 @@
 			Definite voids are only for the upper class | henry
 			Tactically placed voids | henry
 			We weren't firing on any cylinders | henry
-		`),
-		//ahhahahhah jokes!!
-		new Scroll("Varying Elements", `
+		    //varying elements word word word
 			When is a crab not a crustacean? Whenever the train reaches the station! | AI
 			When is a dog not a bison? When a sheep not a horse? When a pig, a pig's tail, a pig's head | AI
 			What does the old day say? The day of the sun | AI
@@ -978,9 +491,7 @@
 			Quid pro sapientia - at what price knowledge? | wes
 			Universal Lutefisk - fish for everyone! | wes
 			Just forget about having a good memory | alan
-		`),
-		// TV and media. very good proverbs here
-		new Scroll("Vocaloid", `
+		    //vocaloid word word word
 			There's a possibility the people from TV are from the best of both worlds | AI
 			Achieve points every time! | tom
 			The television is full of ""gala appels"" | tom
@@ -1023,9 +534,7 @@
 			Have a moment? Try reconsidering your basic assumptions about the universe! | henry
 			Losing a game which can't be won | henry
 			Intergalactic couch entertainment | henry
-		`),
-		// math, numbers
-		new Scroll("Frill Optanal", `
+		    //frill optanal word word word
 			Persimmons are sufficient to sustain life | henry
 			Persimmons are sufficient to sustain transportation | henry
 			Persimmons are sufficient | henry
@@ -1056,9 +565,7 @@
 			A highly unreasonable quantity of hands to be found in 1-2 cereal boxes (at most 5 would be fine!) | henry
 			A bottom up view of the finite | henry
 			We may have doubled, actually | henry
-		`),
-		// things theophrastes would say, high tier stuff, lore
-		new Scroll("Theophrastus", `
+		    //theophrastus word word word
 			An awful mess, you've created. Reincarnate please | henry
 			A rapid transmutation and a day off | henry
 			Atmospheric noise and the meaning of life | henry
@@ -1086,9 +593,7 @@
 			To live on your own (which may or may not end) | tom
 			Praise, and you may decide your own future | tom
 			No one is ever sure | tom
-		`),
-		// strangeness, moss/plants, misc. good
-		new Scroll("Auberations", `
+		    //auberations word word word
 			It happened on a tuesday | tom
 			♪ Bouncing on down to New Orleans ♪ | max
 			The countrypeople are quite picky | tom
@@ -1113,9 +618,7 @@
 			Going by "synth" at a grand piano convention | henry
 			Thou doth protest only on Tuesdays | wes
 			Mist is my favourite flavour of summer | henry
-		`),
-		// cards and games and fun and zooz
-		new Scroll("Boron's Toussaint", `
+		    //boron's toussaint word word word
 			The king of spades is mad at you | tom
 			You've been deal a hand of a king of spades and an ace / That would be great for blackjack but this is five card draw and you seem to somehow have lost three cards already | tom
 			A glass of water for Zeus | tom
@@ -1147,9 +650,7 @@
 			Out of the fact, we transcend | tom
 			You think &that& will save me? | tom
 			Several deities inhabit your attic | henry
-		`),
-		// sea and salt and food and stuff idk
-		new Scroll("Kelp", `
+		    //kelp word word word
 			Salt in the sea brings you to your knees | tom
 			Loops upon loops | tom
 			There's nothing but more humans and they're just as confused as I. Where is everyone else? | tom
@@ -1174,9 +675,7 @@
 			The ice cream screams for salvation | henry
 			We can bounce things off the moon to send plain text messages between chairs at a table, so where's my ham \\& cheese?! | henry
 			Where's the cake? / Why's it so loud near my eyes? | henry
-		`),
-		// ceremony instructions
-		new Scroll("Ceremonisms", `
+		    //ceremonisms word word word
 			Humming and warring | tom
 			They arrive in many turns | henry
 			Take up a new hobby. You'll have to, eventually | henry
@@ -1205,9 +704,7 @@
 			A dignified prophet, Pht., if you will | tom
 			Generated\\/gathered for various purposes | henry
 			Praying for departure requires octagonal perambulation for the best results | henry
-		`),
-		// disconcerting ones, void/emptiness
-		new Scroll("Splines", `
+		    //splines word word word
 			Scream, for they can hear you / Sing, for this is literally a recording studio | henry
 			Splines cannot have hurt you | tom
 			Attic is towering | tom
@@ -1234,9 +731,7 @@
 			Rice voids, emptying spaces you could use | henry
 			Stop trying to outrun the void you leave in your wake | henry
 			Yell into the space you cannot feel (only when you feel lost) | henry
-		`),
-		// instruction on the inhalation. slightly disconcerting. good proverbs
-		new Scroll("Winding Respirations", `
+		    //winding respirations word word word
 			Luminance and the ethereal, it flows beneath | tom
 			The height of the earth mostly influences the red channel | henry
 			Don't mask what you can't see | tom
@@ -1261,9 +756,7 @@
 			The death of Pleo-Jovia | tom
 			The pipes don't serve the people | tom
 			Now &you& know what the deal is | tom
-		`),
-		// disconcerting, death, confusion, liturgy
-		new Scroll("Liturgical Lifeblood", `
+		    //liturgical lifeblood word word word
 			The patchwork is incomplete | tom
 			Only you see it that way; this is good | tom
 			If you're worried, then examine the glass, the grass, and the breeze | tom
@@ -1286,9 +779,7 @@
 			Pouring is easily done, more so with skill / One skilled at this is quite a sight to observe | tom
 			What is the time and why does it chase me so? | tom
 			Put on your &blackout gear& | tom
-		`),
-		// neptune and their wisdom and wide instruction
-		new Scroll("Neptune's Quenches", `
+		    //neptune's quenches word word word
 			Endless fits of understanding | henry
 			Silent nods of laughter | henry
 			I had a dream where all my dreams came true | tom
@@ -1310,9 +801,7 @@
 			And the night looks on, bemused | henry
 			Telling them why they can't breath is exhausting | henry
 			Anything is organized with the &correct& perspective | tom
-		`),
-		//stones
-		new Scroll("Ossuary's Fingers", `
+            //ossuary's fingers word word word
 			A touch is not a stone | tom
 			The last step is to bring the stone into the furnace | tom
 			You do not remember the stones | tom
@@ -1329,9 +818,7 @@
 			The stones contribute to the rigidity of your knuckles and vertibrae | henry
 			Backstones | tom
 			The stones in the mountains #contribute# to the ritual | henry
-		`),
-		// singularity
-		new Scroll("Aplicality", `
+		    //aplicality word word word
 			A single grain of milk | tom
 			An entirety of a bird egg is but a shell | tom
 			They are right, for they come from below | tom
@@ -1349,9 +836,7 @@
 			I have a soul? You've got one of them! | henry / wes
 			You're only #Born# once (not to be confused with "born") | tom
 			Opticular ones? Don't exist | tom
-		`),
-		// sun, cycles, duality, misc.
-		new Scroll("Shifting Ties", `
+		    //shifting ties word word word
 			We keep our gnomes around for the season | tom
 			Look how long that hat is | tom
 			Dinosaurs are a primary component of the industrial revolution | henry
@@ -1371,9 +856,7 @@
 			Still looking for the center of balance / Averaging the component parts hasn't worked since I was a kid... | tom / henry
 			You knew what I was going to do | henry
 			Slightly off-kilter diction where you thought you'd see advice | henry
-		`),
-		// ...'s and random characters and things that dont make sense
-		new Scroll("Freud the Spinner", `
+		    //freud the spinner word word word
 			A book is ㅋ | AI
 			I“ʘ I don“x“? Yes | AI
 			Ankh per size but not a length | tom
@@ -1523,8 +1006,6 @@
 			The tune is sad, melancholy, &meaningless& | tom / henry
 			Change the title accordingly | henry
 			Parenthetically, it was all resolved | molly
-			French isn't turing complete | henry
-			Foolishly, I took the eggs | tom
 		`),
 		// confusion, random, less philosophic
 		new Scroll("Hyubert", `
@@ -1643,89 +1124,4 @@
 			Window pains: baguettes made of glass | henry / zoë
 			The given is in the pudding | zoë
 			He! he! Geometry! | zoë
-			Just that little existential something in my day | zoë
 		`)
-	];
-
-	// compute weights
-	const allProverbs = scrolls
-		.flatMap(scroll => scroll.proverbs)
-		.filter(scroll => scroll.authors.length > 1 || scroll.authors[0] !== "unknown");
-	const totalProverbs = scrolls
-		.map(scroll => scroll.size)
-		.reduce((a, b) => a + b, 0);
-	for (let i = 0; i < scrolls.length; i++)
-		scrolls[i].computeWeight(totalProverbs);
-
-	function authorsOf(fragment) {
-		const contains = allProverbs.filter(proverb => proverb.text.toLowerCase().indexOf(fragment.toLowerCase()) > -1);
-		if (contains.length === 1) return contains[0].authors;
-		const matches = allProverbs.find(proverb => proverb.text === fragment);
-		return matches ? matches.authors : null;
-	}
-
-	function amountAuthoredBy(author) {
-		return allProverbs.filter(proverb => proverb.authors.includes(author)).length;
-	}
-	function percentAuthoredBy(author) {
-		return amountAuthoredBy(author) / totalProverbs * 100;
-	}
-
-	function statSession() {
-		while (true) {
-			const text = prompt("expression?");
-			if (text === "quit") break;
-			const result = eval(text);
-			alert(result);
-		}
-	}
-
-	function getDocument(filename, text){
-		var element = document.createElement('a');
-		element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-		element.setAttribute('download', filename);
-		element.style.display = 'none';
-		document.body.appendChild(element);
-		element.click();
-		document.body.removeChild(element);
-	}
-
-	function getAll(){
-		let list = "";
-		for(ib = 0; ib < scrolls.length; ib++){
-			list += "|| " + scrolls[ib].title + " ||\n";
-			for(ip = 0; ip < scrolls[ib].proverbs.length; ip++){
-				list += (scrolls[ib].proverbs[ip].text + "\n");
-			}
-		}
-		return list
-	}
-
-	function downloadProverbs(){
-		getDocument("All", getAll());
-	}
-
-	//yourGraciousProverbs[choose(Object.keys(yourGraciousProverbs))]
-	function proverb() {
-		betterSeed = 0;
-		const book = chooseWeighted(scrolls);
-		const { title, proverbs } = book;
-		const index = randInt(0, proverbs.length - 1);
-		const proverb = proverbs[index];
-		return { book, index, proverb };
-	}
-	//output
-	(async function () {
-		try {
-
-			Date.now();
-			await SLEEP(1000)
-			while (true) {
-				await outputToScreen(proverb());
-				await SLEEP(DISPLAY_TIME);
-			}
-		} catch (e) { alert(e.stack) }
-	})(); 
-</script>
-
-</html>
