@@ -610,7 +610,11 @@
 			We could eradicate custard, but where exactly would that leave us? | molly
 			Confounds abound | molly
 			An academy of illustrious nincompoops | molly
-			
+			Life is a burrito filled with water | julian
+			Remain unsatiated | tom
+			Shielding children from literacy | tom
+			&Completely& unreactive | tom
+			Beating without the pulp | tom
 		`),
 		//actual kinda philosophy thats more clear and just very high tier stuff | from now on will require a consensus between 2 prophets to add to
 		new Scroll("Illuminating", `
@@ -891,6 +895,7 @@
 			Too fuzzy to be sticky above most circumstances | henry		
 			Some people panic when they hear this, / but the truth is... | henry
 			Helpless in opportunity | henry
+			Salmon: Engage your landing gear (somber) | molly
 		`),
 		// what does this ***mean***, business
 		new Scroll("Sputilations", `
@@ -1095,7 +1100,8 @@
 			A watch that actually works | tom
 			Half eaten dreams | henry
 			Seconds away from a deep concern with oneself | henry
-			It won't have been that good, trust me | henry			
+			It won't have been that good, trust me | henry	
+			Negotiating with relativity | tom		
 		`),
 		// violent unity. the whole gang is together
 		new Scroll("Konradism", `
@@ -1485,6 +1491,7 @@
 			And the night looks on, bemused | henry
 			Telling them why they can't breath is exhausting | henry
 			Anything is organized with the &correct& perspective | tom
+			I haven't &ever& seen you this young | tom
 		`),
 		//stones
 		new Scroll("Ossuary's Fingers", `
@@ -1524,6 +1531,7 @@
 			I have a soul? You've got one of them! | henry / wes
 			You're only #Born# once (not to be confused with "born") | tom
 			Opticular ones? Don't exist | tom
+			The moment! Here it comes... | tom
 		`),
 		// sun, cycles, duality, misc.
 		new Scroll("Shifting Ties", `
@@ -1700,6 +1708,8 @@
 			Parenthetically, it was all resolved | molly
 			French isn't turing complete | henry
 			Foolishly, I took the eggs | tom
+			Monotonal phosphorous can only be obtained by the unimaginative | tom
+			The insidious prince only exists in your mind's paintbrush | tom
 		`),
 		// confusion, random, less philosophic
 		new Scroll("Hyubert", `
@@ -1785,6 +1795,9 @@
 			All I'm saying is that makes overlap super complicated | henry
 			Zooming by at possible speeds | tom
 			You are scared of the space inside | henry
+			The icosahedrons are &languishing& | tom
+			The icosahedrons are #crestfallen# | tom
+			Bottles #filled# with none of the states of matter | tom
 		`),
 		// definitions
 		new Scroll("Dictatics", `
@@ -1812,7 +1825,6 @@
 			Compass: an effective tool for idiots | tom
 			Compass: an ineffective tool for architects | henry
 			Rachet Tool: a moderate tool for the intellectually inclined | tom
-			Salmon: Engage your landing gear (somber) | molly
 		`),
 		// zoest
 		new Scroll("Umlauts", `
@@ -1820,6 +1832,7 @@
 			The given is in the pudding | zoë
 			He! he! Geometry! | zoë
 			Just that little existential something in my day | zoë
+			The lil' guy's feeling snuggly | zoë
 		`)
 	];
 
@@ -1833,6 +1846,8 @@
 	for (let i = 0; i < scrolls.length; i++)
 		scrolls[i].computeWeight(totalProverbs);
 
+	const allAuthors = [...new Set(allProverbs.flatMap(proverb => proverb.authors))];
+
 	function authorsOf(fragment) {
 		const contains = allProverbs.filter(proverb => proverb.text.toLowerCase().indexOf(fragment.toLowerCase()) > -1);
 		if (contains.length === 1) return contains[0].authors;
@@ -1840,7 +1855,7 @@
 		return matches ? matches.authors : null;
 	}
 	function getDocument(filename, text){
-		var element = document.createElement('a');
+		const element = document.createElement('a');
 		element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
 		element.setAttribute('download', filename);
 		element.style.display = 'none';
@@ -1852,7 +1867,7 @@
 	function getAll(){
 		let list = "";
 		for(ib = 0; ib < scrolls.length; ib++){
-			list += "|| " + scrolls[ib].title + " ||\n";
+			list += `|| ${scrolls[ib].title} ||\n`;
 			for(ip = 0; ip < scrolls[ib].proverbs.length; ip++){
 				list += (scrolls[ib].proverbs[ip].text + "\n");
 			}
@@ -1868,6 +1883,12 @@
 	}
 	function percentAuthoredBy(author) {
 		return amountAuthoredBy(author) / totalProverbs * 100;
+	}
+
+	function proverbsBy(author) {
+		return allProverbs
+			.filter(proverb => proverb.authors.includes(author))
+			.map(proverb => proverb.text);
 	}
 
 	function statSession() {
