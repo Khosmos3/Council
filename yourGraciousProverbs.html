@@ -155,19 +155,19 @@
 	}
 	function random01() {
 		let seed = getSeed();
-		
+
 		seed ^= seed << 5;
 		seed ^= seed >> 2;
 		seed -= 836492754;
 		seed ^= seed << 4;
-		seed+=999;
+		seed += 999;
 		seed ^= seed >> 7;
 		seed += 128936382;
 		seed ^= seed << 2;
 		seed += 128936382;
 		seed ^= seed >> 6;
-		seed-=42099;
-		seed^= seed << 1;
+		seed -= 42099;
+		seed ^= seed << 1;
 		seed ^= seed >> 9;
 		seed /= 0xFFFF;
 
@@ -373,7 +373,7 @@
 						}
 						out += "</span>";
 						imposter.innerHTML = out;
-						
+
 						canvas.insertAdjacentElement("afterend", imposter);
 						canvas.remove();
 					}, 20000);
@@ -458,7 +458,7 @@
 					.split("/")
 					.map(author => author.trim());
 			}
-			
+
 			this.length = 1;
 			let escaped = false;
 			for (let i = 0; i < this.text.length; i++) {
@@ -691,7 +691,7 @@
 			Breasts are occasionally worrisome | wesley
 			Slide down the carrots for a fun time! | wesley
 			Make orbs round again | wesley
-			You know like sauce of the brain | wesley
+			You know, like sauce of the brain | wesley
 			You fall to the salty depths | julian
 			A bunch of random words equals profound knowledge? I suppose | mayzie
 			Stubbing toes in the sandbox of life | tom
@@ -702,7 +702,7 @@
 			The inner workings of your mind are tumultuous | wesley
 			It was here a second ago | shannon
 			We are retracting | tom
-			Its like dinner, but without the food and only knives | shannon
+			It's like dinner, but without the food and only knives | shannon
 			I shouldn't feel safe here but I do | shannon
 			The spectators are &stunned& | tom
 			Smiling does not necessarily denote a good person, or lack thereof | tom
@@ -715,6 +715,63 @@
 			Encapsulated is the cri de coeur | tom
 			Strong gravity, weak gravity, and visible gravity | tom
 			Fire, water, cloud, air, stone, and the invisible heuristic | tom / shannon
+			Tune the audience | henry
+			Go on, drink their life force | henry
+			Cold, cozy plants, resting at the bottom of the pit I call home | henry
+			Losing a game of chance on the way to work | henry
+			Freckles on your heart have a neutral connotation | henry
+			Slightly closer to false goals | henry
+			Don't live by the nature of suffering | henry
+			They're almost #here# | henry
+			Bow to the universe | henry
+			Manners in a state of anarchy | henry
+			A long way to go before you'll stand here steadily | henry
+			You're full of promise | henry
+			You're full of contracts | henry
+			Converb (antonym) | molly
+			They are &rising& quickly | henry
+			The lil' guy is feeling ominous | henry
+			Don't place bets on your death | henry
+			Hope in the drain | henry
+			Spinning around on the way to the hound | henry
+			A slight victory for the slugs | henry
+			I CAN'T HAVE ANY UNIQUE THOUGHTS IN THIS ROOM | henry
+			Thinking outside the box, and inside the sphere | henry
+			They shift subtly when you aren't looking | henry
+			They can hear your shock | henry
+			Just a whole lot of curry | henry
+			Feeling french on a friday afternoon | henry
+			Looking around: are we all grammatically correct? | henry
+			Trans Hunds goeth fast | henry
+			Ever-slimmer margins | henry
+			Why do we &think& so poorly? | henry
+			Asterisks of inaccuracy | henry
+			Opaqify: to make more convoluted and obscure | henry
+			Faint scratches of strange minerals upon the corpses of our ancestors | henry
+			We only invent things to the #left# of our time | henry
+			"Donate" to a lost cause | henry
+			Lime-green covers of "solid" books | henry
+			Remove power from your device (without using it) | henry
+			Organizing thoughts in a peculiar area | henry
+			Terms of the contemporary | henry
+			Roaming the terrain of antiquity | henry
+			Drawing a card from a standard 40 card deck / It's &your& future | henry
+			Fully "organic" / Not even remotely stolen | henry
+			A plethora of ways to walk over it | henry
+			Truly bad situations | henry
+			Insanity brings greater comfort than clarity in a disaffected space | henry
+			They are heading out to go stopping | henry
+			Don't let them tell you what (or what not) to "do" | henry
+			Surreal and unusual, referencing things not from our world | henry
+			When we say rats, we don't really &mean& rats | henry
+			Can't trust them, now can you | henry
+			Trustworthy lawyers, planning on helping* you win your case! | henry
+			Mildly unhappy people flood the offices | henry
+			Gaps in expensive objects | henry
+			Just because we can't do anything, doesn't mean we shouldn't | henry
+			Fighting the urge to release one's soul back into the wild | henry
+			They're working together on the "project" | henry
+			Circumspect intentions lead to winding executions | henry
 		`),
 		//actual kinda philosophy thats more clear and just very high tier stuff | from now on will require a consensus between 2 prophets to add to
 		new Scroll("Illuminating", `
@@ -2030,7 +2087,8 @@
 		const matches = allProverbs.find(proverb => proverb.text === fragment);
 		return matches ? matches.authors : null;
 	}
-	function getDocument(filename, text){
+
+	function getDocument(filename, text) {
 		const element = document.createElement('a');
 		element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
 		element.setAttribute('download', filename);
@@ -2040,25 +2098,43 @@
 		document.body.removeChild(element);
 	}
 
-	function getAll(){
+	function getAll() {
 		let list = "";
-		for(ib = 0; ib < scrolls.length; ib++){
+		for (ib = 0; ib < scrolls.length; ib++) {
 			list += `|| ${scrolls[ib].title} ||\n`;
-			for(ip = 0; ip < scrolls[ib].proverbs.length; ip++){
+			for (ip = 0; ip < scrolls[ib].proverbs.length; ip++) {
 				list += (scrolls[ib].proverbs[ip].text + "\n");
 			}
 		}
-		return list
+		return list;
 	}
 
-	function downloadProverbs(){
+	function downloadProverbs() {
 		getDocument("All", getAll());
 	}
+
 	function amountAuthoredBy(author) {
 		return allProverbs.filter(proverb => proverb.authors.includes(author)).length;
 	}
+
 	function percentAuthoredBy(author) {
 		return amountAuthoredBy(author) / totalProverbs * 100;
+	}
+
+	function percentToProverbs(author, percent) {
+		const amount = amountAuthoredBy(author);
+		percent /= 100;
+		const currentPercent = amount / totalProverbs
+		const finalPercent = percent + currentPercent;
+		return (amount / finalPercent - totalProverbs) / (1 - 1 / finalPercent);
+	}
+
+	function proverbsToPercent(author, proverbs) {
+		const amount = amountAuthoredBy(author);
+		const finalProverbs = amount + proverbs;
+		const finalTotal = totalProverbs + proverbs;
+		const percent = finalProverbs / finalTotal - amount / totalProverbs;
+		return percent * 100;
 	}
 
 	function proverbsBy(author) {
