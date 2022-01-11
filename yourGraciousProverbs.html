@@ -496,6 +496,7 @@
 	const scrolls = [
 		//uncatergorized proverbs	
 		new Scroll("Onter", `
+			
 		`),
 		//actual kinda philosophy thats more clear and just very high tier stuff | from now on will require a consensus between 2 prophets to add to
 		new Scroll("Illuminating", `
@@ -812,6 +813,7 @@
 			Revel in what you do not know | tom
 			My brain spits out specifics like you wouldn't believe | molly
 			It likes to highlight | tom
+			Hasn't it ever crossed your mind | tom
 		`),
 		// pleasant thoughts
 		new Scroll("Ique", `
@@ -1116,7 +1118,7 @@
 			Lie to them | tom
 			Don't lie to children | henry
 			Lie to children | henry
-			Chilren, for the purpose of mistruthing towards | tom
+			Children, for the purpose of mistruthing towards | tom
 			Maul but smite-y | molly
 			Labs were fun | tom
 			Most wrong answers | henry
@@ -1405,6 +1407,7 @@
 			100% organic souls | henry
 			I do so &love& "acrostics" (see below) | hyacinth
 			It's like an endless soup bowl but with our lives | henry	
+			Join us next* week when we do something awful! | henry
 		`),
 		// math, numbers
 		new Scroll("Frill Optanal", `
@@ -1457,7 +1460,9 @@
 			Consider the likelihood | molly
 			Home grown numbers | henry
 			One eighth: fraction? | tom
-			Two of A is equal to B, ignore their stark differences | hyacinth
+			Two of A is equal to B, ignoring their stark differences | hyacinth
+			Full of accuracy | tom
+			Don't &you& feel the data? | tom
 		`),
 		// things theophrastes would say, high tier stuff, lore
 		new Scroll("Theophrastus", `
@@ -2311,6 +2316,7 @@
 			They are heading out to go stopping | henry
 			What do you want me to say? "What are we aware of?"? | wes
 			Encrypting your soul | tom
+			There many things young children will wonder in their lifetimes, such as: "How long will the flame persist?" | tom
 		`),
 		// shapes, geometry, form
 		new Scroll("Meilothon", `
@@ -2429,6 +2435,22 @@
 	for (let i = 0; i < scrolls.length; i++)
 		scrolls[i].computeWeight(totalProverbs);
 
+	const allProverbWords = allProverbs
+		.map(proverb => proverb.text
+			.split(/\b/g)
+			.filter(piece => piece.match(/\w/g))
+		);
+	const allWords = allProverbWords.flat();
+	const allWordLengths = allWords.map(word => word.length);
+	const allProverbWordLengths = allProverbWords.map(words => words.length);
+	const allProverbLetters = allProverbWords
+		.map(words => words
+			.flatMap(word => word
+				.toLowerCase()
+				.split("")
+			)
+		);
+	const allLetters = allProverbLetters.flat();
 	const allAuthors = [...new Set(allProverbs.flatMap(proverb => proverb.authors))];
 
 	function authorsOf(fragment) {
