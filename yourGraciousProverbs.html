@@ -2729,6 +2729,10 @@
 	const allProverbs = scrolls
 		.flatMap(scroll => scroll.proverbs)
 		.filter(scroll => scroll.authors.length > 1 || scroll.authors[0] !== "unknown");
+
+	const allScrolls = scrolls
+		.flatMap(scrolls => scroll.title);
+
 	const totalProverbs = scrolls
 		.map(scroll => scroll.size)
 		.reduce((a, b) => a + b, 0);
