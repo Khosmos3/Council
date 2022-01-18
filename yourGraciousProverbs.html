@@ -14,7 +14,7 @@
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-216684625-1"></script>
 	<script>
 		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
+		function gtag() { dataLayer.push(arguments); }
 		gtag('js', new Date());
 		gtag('config', 'UA-216684625-1')
 	</script>
@@ -215,6 +215,72 @@
 		document.getElementById("evil").scrollIntoView();
 	}
 
+	function getFont(fmti, fontSize, fontFamily) {
+		const fmt = fmti ? fmti
+			.split("")
+			.map(v => ({
+				b: "bold",
+				i: "italic"
+			}[v]))
+			.join(" ") : "";
+
+		const font = `${fmt} ${fontSize}px/1 ${fontFamily}`;
+
+		return font;
+	}
+
+	function extractFormatting(text) {
+		let format = new Array(text.length).fill("");
+
+		let output = "";
+
+		let bold = false;
+		let italic = false;
+
+		let escaped = false;
+		for (let t = 0; t < text.length; t++) {
+			const char = text[t];
+
+			if (char == "&" && !escaped)
+				italic = !italic;
+			else if (char == "#" && !escaped)
+				bold = !bold;
+			else if (char !== "\\" || escaped) {
+				output += char;
+				const fInx = output.length - 1;
+				if (bold) format[fInx] += "b";
+				if (italic) format[fInx] += "i";
+			}
+
+			escaped = char === "\\" && !escaped;
+		}
+
+		format = format.slice(0, output.length);
+
+		return { text: output, format };
+	}
+
+	function getFormattedHTML(text, format, fontSize = 16, fontFamily = "Arial") {
+		let out = "";
+		let currentFont = "";
+		for (let i = 0; i < text.length; i++) {
+			const font = getFont(format[i], fontSize, fontFamily);
+
+			if (font !== currentFont) {
+				if (currentFont.length) out += "</span>";
+				out += `<span style="font: ${font};">`;
+				currentFont = font;
+			}
+
+			const char = text[i];
+			if (char === "\n") out += "<br>";
+			else out += char;
+		}
+		out += "</span>";
+
+		return out;
+	}
+
 	function canvasPrint({
 		parent,
 		text,
@@ -259,20 +325,6 @@
 			c.font = `${fontSize}px ${fontFamily}`;
 			c.lineWidth = 1;
 			c.lineCap = "round";
-		}
-
-		function getFont(fmti) {
-			const fmt = fmti ? fmti
-				.split("")
-				.map(v => ({
-					b: "bold",
-					i: "italic"
-				}[v]))
-				.join(" ") : "";
-
-			const font = `${fmt} ${fontSize}px/1 ${fontFamily}`;
-
-			return font;
 		}
 
 		// setup
@@ -335,7 +387,7 @@
 
 				for (let i = 0; i < renderedText.length; i++) {
 					const char = renderedText[i];
-					const font = getFont(format[i]);
+					const font = getFont(format[i], fontSize, fontFamily);
 
 					if (font !== c.font) c.font = font;
 
@@ -368,23 +420,7 @@
 						imposter.style.padding = padding + "px";
 						imposter.style.transform = `translateY(0.5 * ${fontSize}px)`;
 
-						let out = "";
-						let currentFont = "";
-						for (let i = 0; i < renderedText.length; i++) {
-							const font = getFont(format[i]);
-
-							if (font !== currentFont) {
-								if (currentFont.length) out += "</span>";
-								out += `<span style="font: ${font};">`;
-								currentFont = font;
-							}
-
-							const char = renderedText[i];
-							if (char === "\n") out += "<br>";
-							else out += char;
-						}
-						out += "</span>";
-						imposter.innerHTML = out;
+						imposter.innerHTML = getFormattedHTML(text, format, fontSize, fontFamily);
 
 						canvas.insertAdjacentElement("afterend", imposter);
 						canvas.remove();
@@ -408,42 +444,14 @@
 
 		betterSeed = 0;
 		let num = randInt(1, 25);
-		let newLines = 0;
 
-		let place = 1;
-		for (let i = 0; i < index; i++)
-			place += book.proverbs[i].length + 2;
+		input = `&#${book.title}# ${book.getProverbLocation(proverb, index)}&\n${input}`;
 
-		input = `&#${book.title}# ${place + (proverb.length > 1 ? "-" + (place + proverb.length - 1) : "")}&\n${input}`;
-
-		let bold = false;
-		let italic = false;
-
-		const format = new Array(input.length).fill("");
-
-		let output = "";
-
-		let escaped = false;
-		for (let t = 0; t < input.length; t++) {
-			const char = input[t];
-
-			if (char == "&" && !escaped)
-				italic = !italic;
-			else if (char == "#" && !escaped)
-				bold = !bold;
-			else if (char !== "\\" || escaped) {
-				output += char;
-				const fInx = output.length - 1;
-				if (bold) format[fInx] += "b";
-				if (italic) format[fInx] += "i";
-			}
-
-			escaped = char === "\\" && !escaped;
-		}
+		const { text, format } = extractFormatting(input);
 
 		const donePrinting = canvasPrint({
 			parent: document.getElementById("paper"),
-			text: output,
+			text,
 			format,
 			padding: 10,
 		});
@@ -495,12 +503,23 @@
 		computeWeight(totalSize) {
 			this.weight = this.size / totalSize;
 		}
+		getProverbLocation(proverb, index = this.proverbs.indexOf(proverb)) {
+			let newLines = 0;
+
+			let place = 1;
+			for (let i = 0; i < index; i++)
+				place += this.proverbs[i].length + 2;
+
+			const location = place + (proverb.length > 1 ? "-" + (place + proverb.length - 1) : "");
+
+			return location;
+		}
 	}
-																																																																																																																																																															
+
 	const scrolls = [
 		//uncatergorized proverbs	
 		new Scroll("Onter", `
-			&ᵐᵃʸᵇᵉ ʷᵉ'ˡˡ ᵖʳᵘⁿᵉ ᵗʰᵉᵐ ˢᵒᵐᵉ ᵗᶦᵐᵉ& / &ᵐᵃʸᵇᵉ ᵗʰᵉʸ'ˡˡ ᵍʳᵒʷ& | henry
+			&Maybe we'll prune them sometime / Maybe they'll grow& | hyacinth
 		`),
 		//actual kinda philosophy thats more clear and just very high tier stuff | from now on will require a consensus between 2 prophets to add to
 		new Scroll("Illuminating", `
@@ -606,7 +625,7 @@
 		`),
 		//a good book, high tier proverbs, logic / thoughts
 		new Scroll("Okrates", `
-			&nearly incomprehensible farmer accent& / Goddam spots in the harvesters again &spits& / Get the blowtorch and lure | tom
+			&Nearly incomprehensible farmer accent& / Goddam spots in the harvesters again &spits& / Get the blowtorch and lure | tom
 			Buying candles from a thrift store | henry
 			Selling wax cylinders for unreasonable profit | tom
 			Your friend has a large bag of colored disks | henry
@@ -664,7 +683,7 @@
 			You are being searched for | henry
 			You are the entire vehicle of change | tom
 			The greatest thing is that you are now a human being | tom
-			you must know ONE DAY YOU WILL BE HELD | tom
+			You must know ONE DAY YOU WILL BE HELD | tom
 			There are a few moments of truth. Five have passed but you've only realized one | tom
 			You do not hear evil | tom
 			Several pieces of advice for you and mine | henry
@@ -1058,6 +1077,7 @@
 			Ooh I can get a formless body? | tom
 			Not even $3, more like a dime | hyacinth
 			We only sell / We never buy | hyacinth
+			Now &that's& something | tom
 		`),
 		// honest stuff, no funny business
 		new Scroll("Ti", `
@@ -1460,6 +1480,7 @@
 			You can't kill those ones | tom
 			They are in &lock-step& | hyacinth
 			Despise that which is required of you | henry
+			Fading out of line | hyacinth
 		`),
 		//ahhahahhah jokes!!
 		new Scroll("Varying Elements", `
@@ -1528,8 +1549,8 @@
 			Fully emotionally stable! As seen on TV! | henry
 			Side effects may include a distinct lack of purpose | henry
             #Upgrades#; people, am I right? | henry
-			Now we have the whole $12.00 to execute on them | henry
-			Your doom, for only $19.99! | henry
+			Now we have the whole $12.⁰⁰ to execute on them | henry
+			Your doom, for only $19.⁹⁹! | henry
 			These days, we squish bugs for &fun&? | henry
 			Wow! the ceiling is really small, doc! Doc? | henry
 			Achieve no points ever again. The game's over | henry
@@ -1779,7 +1800,7 @@
 			In the fourth spacial dimension, there is North, South, East, West, Posck, Whick, Deach, and Gokch | tom
 			Blind mapmaking has created new, difficult to explore realms | tom
 			A semblance of reality | tom
-			&Tuning the gears allows &proper& thought flow | tom
+			Tuning the gears allows &proper& thought flow | tom
 			I don't think they can hear you. Not yet anyway | henry
 			Don't let the devil give you a choice! | AI
 			Saying "No thanks" to the devil only makes you look bad! | AI
@@ -1949,6 +1970,7 @@
 			Truly a shame; they've never been open. Ever | tom
 			Every inch is still, but you're definitely still here | hyacinth
 			I refuse to speak any longer for it is getting full | tom
+			You know all my favorite sins | tom
 		`),
 		// disconcerting ones, void/emptiness
 		new Scroll("Splines", `
@@ -2181,6 +2203,7 @@
 			Gems were found as their last resort | anna
 			The nobility held the gems captive | tom
 			Sealed salt for use as decorative stone | tom
+			Stones spiralling slowly towards the gate, Peaceful and solemn | hyacinth
 		`),
 		// singularity
 		new Scroll("Aplicality", `
@@ -2791,7 +2814,7 @@
 			Moderation (&\\/ˌmädəˈrāSH(ə)n\\/&): an effective anti-productivity mechanism | henry
 			Netches (&\\/nɛtʃz\\/&): A shallow corner, a human can only descend about six in a lifetime but others can do much more | tom
 			Aplosery (&\\/æploʊsəri\\/&): Knowledge gained through metaphysical or spiritual extrasensory input | tom
-			Aplosiatic (&\\/æploʊsiætɪk\\/&): One who is detached from reality | One who gains experience/input from extrasensory sources | tom
+			Aplosiatic (&\\/æploʊsiætɪk\\/&): One who is detached from reality | One who gains experience\\/input from extrasensory sources | tom
 			Lelipatheim (&\\/lɛˈləˌpæθiɛm\\/&): The state of experiencing a large number of conflicting emotions at the same moment, typically in some balance | tom
 			Ift's Day (&\\/ɪftˌs deɪ\\/&): The day when the sun created the Pillars | tom
 			Kiplim (&\\/ˈkɪpˌlɪm\\/&): An easily snapping rope | tom
@@ -2887,9 +2910,9 @@
 		return matches ? matches.authors : null;
 	}
 
-	function getDocument(filename, text) {
+	function getDocument(filename, type, text) {
 		const element = document.createElement('a');
-		element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+		element.setAttribute('href', `data:${type};charset=utf-8,` + encodeURIComponent(text));
 		element.setAttribute('download', filename);
 		element.style.display = 'none';
 		document.body.appendChild(element);
@@ -2909,7 +2932,116 @@
 	}
 
 	function downloadProverbs() {
-		getDocument("All", getAll());
+		getDocument("AllProverbs.txt", "text/plain", getAll());
+	}
+
+	function getAllFormatted() {
+
+		const scrollHTML = scrolls.map(scroll => {
+			const proverbs = scroll.proverbs
+				.map((proverb, index) => {
+					const { text, format } = extractFormatting(proverb.text);
+					const html = getFormattedHTML(text, format, 16, "Serif");
+					return `
+						<div class="proverb">
+							<span class="proverb-number">${scroll.getProverbLocation(proverb, index)}</span>
+							<span class="proverb-text">${html}</span>
+							<span class="proverb-space"></span>
+						</div>
+					`;
+				});
+			return `
+				<div class="scroll">
+					<div class="scroll-header">
+						<div class="scroll-subtitle">${scroll.size === 1 ? "The fragment of" : "Fragments of"}</div>
+						<div class="scroll-title">${scroll.title}</div>
+						<div class="scroll-image"></div>
+					</div>
+					<div class="scroll-contents">
+						${proverbs.join("")}
+					</div>
+				</div>
+			`;
+		});
+
+		return `
+			<head>
+				<style>
+					* {
+						margin: 0;
+						padding: 0;
+						box-sizing: border-box;
+						text-align: center;
+					}
+
+					body {
+						background: #999;						
+					}
+
+					#wrapper {
+						position: absolute;
+						top: 0;
+						left: 50%;
+						transform: translateX(-50%);
+						width: 600px;
+					}
+
+					.proverb > span {
+						display: block;
+						min-height: 1em;
+						font-family: Serif !important;
+					}
+
+					.proverb .proverb-space {
+						font-size: 8pt;
+					}
+
+					.proverb *:not(.proverb-space) {
+						font-size: 11pt !important;
+					}
+
+					.scroll-subtitle {
+						font-size: 22pt;
+						font-family: sans-serif;
+					}
+
+					.scroll-title {
+						font-family: serif;
+						font-size: 48pt;
+					}
+
+					.scroll-image {
+						margin-top: 32pt;
+						margin-bottom: 48pt;
+						width: 300px;
+						height: 260px;
+						background: #666;
+					}
+
+					.scroll-header {
+						display: flex;
+						flex-direction: column;
+						align-items: center;
+					}
+
+					.scroll {
+						background: white;
+						border-radius: 2px;
+						margin: 3em 0;
+						padding: 3em;
+					}
+				</style>
+			</head>
+			<body>
+				<div id="wrapper">
+					${scrollHTML.join("")}
+				</div>
+			</body>
+		`;
+	}
+
+	function downloadFormattedProverbs() {
+		getDocument("AllFormattedProverbs.html", "text/html", getAllFormatted());
 	}
 
 	function amountAuthoredBy(author) {
@@ -2954,7 +3086,7 @@
 			alert(result);
 		}
 	}
-	
+
 	//yourGraciousProverbs[choose(Object.keys(yourGraciousProverbs))]
 	function proverb() {
 		betterSeed = 0;
@@ -2979,4 +3111,3 @@
 </script>
 
 </html>
-
