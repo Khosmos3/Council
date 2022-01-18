@@ -2946,7 +2946,7 @@
 						<div class="proverb">
 							<span class="proverb-number">${scroll.getProverbLocation(proverb, index)}</span>
 							<span class="proverb-text">${html}</span>
-							<span class="proverb-space"></span>
+							<span class="proverb-space">&nbsp;</span>
 						</div>
 					`;
 				});
@@ -2988,15 +2988,13 @@
 
 					.proverb > span {
 						display: block;
-						min-height: 1em;
-						font-family: Serif !important;
 					}
 
-					.proverb .proverb-space {
+					.proverb-space, .proverb-number {
 						font-size: 8pt;
 					}
 
-					.proverb *:not(.proverb-space) {
+					.proverb-text {
 						font-size: 11pt !important;
 					}
 
