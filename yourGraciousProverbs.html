@@ -2972,6 +2972,10 @@
 			<head>
 				<style>
 
+					:root {
+						--number-inset: calc(8pt * 3);
+					}
+
 					* {
 						margin: 0;
 						padding: 0;
@@ -3002,7 +3006,7 @@
 					}
 
 					.proverb-number {
-						flex: 0 0 3em;
+						flex: 0 0 6em;
 						text-align: right;
 						font-size: 8pt;
 					}
@@ -3040,13 +3044,18 @@
 
 					.scroll-header {
 						align-items: center;
+						padding: 3em;
+					}
+
+					.scroll-contents {
+						padding: 3em;
+						padding-left: calc(3em - var(--number-inset));
 					}
 
 					.scroll {
 						background: white;
 						border-radius: 2px;
 						margin: 3em 0;
-						padding: 3em;
 					}
 				</style>
 			</head>
