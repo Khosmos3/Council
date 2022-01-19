@@ -888,6 +888,7 @@
 			Invisible to any eye you can muster | tom
 			You ought not to have a mind where your going | hyacinth
 			You can feel that your mind is about to collapse at any time | hyacinth
+			I'm going to put you in the Mind Room | tom
 		`),
 		// pleasant thoughts
 		new Scroll("Ique", `
@@ -1139,6 +1140,7 @@
 			It is central to your own philosophy | tom
 			People need to see dead ends for themselves | tom
 			You need to slow down | hyacinth
+			But, in a way, that explains nothing | hyacinth
 		`),
 		//death, cycles, circles, birth, rebirth
 		new Scroll("Circles of Polarity", `
@@ -1182,6 +1184,7 @@
 			You can't &still& be running | hyacinth
 			Born into a life without chances | tom
 			Prepare to be born | hyacinth
+			Death, a simple illusion. Life, an abstraction
 		`),
 		// ectermine! classics here too
 		new Scroll("Ectermine's Legacy", `
@@ -1481,6 +1484,7 @@
 			They are in &lock-step& | hyacinth
 			Despise that which is required of you | henry
 			Fading out of line | hyacinth
+			Step by step guide to winning a tickle war of attrition | rowan
 		`),
 		//ahhahahhah jokes!!
 		new Scroll("Varying Elements", `
@@ -1839,6 +1843,7 @@
 			No event is independent | tom
 			The distinction is important | tom
 			Sewing is a way to talk to the inanimate | anna
+			Threading the needle through #thick# and &thin& | henry
 		`),
 		// sea and salt and food
 		new Scroll("Kelp", `
@@ -2946,7 +2951,6 @@
 						<div class="proverb">
 							<span class="proverb-number">${scroll.getProverbLocation(proverb, index)}</span>
 							<span class="proverb-text">${html}</span>
-							<span class="proverb-space"></span>
 						</div>
 					`;
 				});
@@ -2986,14 +2990,8 @@
 						width: 600px;
 					}
 
-					.proverb > span {
-						display: block;
-						min-height: 1em;
-						font-family: Serif !important;
-					}
+					.proverb {
 
-					.proverb .proverb-space {
-						font-size: 8pt;
 					}
 
 					.proverb *:not(.proverb-space) {
