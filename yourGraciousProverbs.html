@@ -2951,6 +2951,10 @@
 						<div class="proverb">
 							<span class="proverb-number">${scroll.getProverbLocation(proverb, index)}</span>
 							<span class="proverb-text">${html}</span>
+<<<<<<< HEAD
+=======
+							<span class="proverb-space">&nbsp;</span>
+>>>>>>> 3576509be5f29c09ba2e20a21cec2d7b5fafbcac
 						</div>
 					`;
 				});
@@ -2990,11 +2994,15 @@
 						width: 600px;
 					}
 
-					.proverb {
-						
+					.proverb > span {
+						display: block;
 					}
 
-					.proverb *:not(.proverb-space) {
+					.proverb-space, .proverb-number {
+						font-size: 8pt;
+					}
+
+					.proverb-text {
 						font-size: 11pt !important;
 					}
 
