@@ -224,7 +224,7 @@
 			}[v]))
 			.join(" ") : "";
 
-		const font = `${fmt} ${fontSize}px/1 ${fontFamily}`;
+		const font = `${fmt} ${fontSize}/1 ${fontFamily}`;
 
 		return font;
 	}
@@ -260,7 +260,7 @@
 		return { text: output, format };
 	}
 
-	function getFormattedHTML(text, format, fontSize = 16, fontFamily = "Arial") {
+	function getFormattedHTML(text, format, fontSize = "16px", fontFamily = "Arial") {
 		let out = "";
 		let currentFont = "";
 		for (let i = 0; i < text.length; i++) {
@@ -387,7 +387,7 @@
 
 				for (let i = 0; i < renderedText.length; i++) {
 					const char = renderedText[i];
-					const font = getFont(format[i], fontSize, fontFamily);
+					const font = getFont(format[i], fontSize + "px", fontFamily);
 
 					if (font !== c.font) c.font = font;
 
@@ -420,7 +420,7 @@
 						imposter.style.padding = padding + "px";
 						imposter.style.transform = `translateY(0.5 * ${fontSize}px)`;
 
-						imposter.innerHTML = getFormattedHTML(text, format, fontSize, fontFamily);
+						imposter.innerHTML = getFormattedHTML(text, format, fontSize + "px", fontFamily);
 
 						canvas.insertAdjacentElement("afterend", imposter);
 						canvas.remove();
@@ -2946,15 +2946,11 @@
 			const proverbs = scroll.proverbs
 				.map((proverb, index) => {
 					const { text, format } = extractFormatting(proverb.text);
-					const html = getFormattedHTML(text, format, 16, "Serif");
+					const html = getFormattedHTML(text, format, "11pt", "Serif");
 					return `
 						<div class="proverb">
 							<span class="proverb-number">${scroll.getProverbLocation(proverb, index)}</span>
 							<span class="proverb-text">${html}</span>
-<<<<<<< HEAD
-=======
-							<span class="proverb-space">&nbsp;</span>
->>>>>>> 3576509be5f29c09ba2e20a21cec2d7b5fafbcac
 						</div>
 					`;
 				});
@@ -2963,7 +2959,7 @@
 					<div class="scroll-header">
 						<div class="scroll-subtitle">${scroll.size === 1 ? "The fragment of" : "Fragments of"}</div>
 						<div class="scroll-title">${scroll.title}</div>
-						<div class="scroll-image"></div>
+						<img class="scroll-image" src="https://soupnight.space/scrollDrawings/${scroll.title}.png">
 					</div>
 					<div class="scroll-contents">
 						${proverbs.join("")}
@@ -2975,11 +2971,11 @@
 		return `
 			<head>
 				<style>
+
 					* {
 						margin: 0;
 						padding: 0;
 						box-sizing: border-box;
-						text-align: center;
 					}
 
 					body {
@@ -2991,19 +2987,30 @@
 						top: 0;
 						left: 50%;
 						transform: translateX(-50%);
-						width: 600px;
+						width: 500px;
 					}
 
-					.proverb > span {
+					.proverb {
+						margin-bottom: 8pt;
+						width: 100%;
+						display: flex;
+						flex-direction: row;
+					}
+					
+					.proverb > * {
 						display: block;
 					}
 
-					.proverb-space, .proverb-number {
+					.proverb-number {
+						flex: 0 0 3em;
+						text-align: right;
 						font-size: 8pt;
 					}
 
 					.proverb-text {
-						font-size: 11pt !important;
+						border-left: 1px black solid;
+						padding-left: 8pt;
+						margin-left: 8pt;
 					}
 
 					.scroll-subtitle {
@@ -3014,6 +3021,7 @@
 					.scroll-title {
 						font-family: serif;
 						font-size: 48pt;
+						text-align: center;
 					}
 
 					.scroll-image {
@@ -3021,12 +3029,16 @@
 						margin-bottom: 48pt;
 						width: 300px;
 						height: 260px;
-						background: #666;
+						// background: #666;
+						border: 3px white solid;
+					}
+
+					.scroll-header, .scroll-contents {
+						display: flex;
+						flex-direction: column;
 					}
 
 					.scroll-header {
-						display: flex;
-						flex-direction: column;
 						align-items: center;
 					}
 
