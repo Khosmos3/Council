@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>The Ills They Portray</title>
+	<script src="proverbs.js"></script>
+	<style>
+		:root {
+			--number-inset: calc(8pt * 3);
+		}
+
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			background: #999;
+		}
+
+		#wrapper {
+			position: absolute;
+			top: 0;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 500px;
+		}
+
+		.proverb {
+			margin-bottom: 8pt;
+			width: 100%;
+			display: flex;
+			flex-direction: row;
+		}
+
+		.proverb>* {
+			display: block;
+		}
+
+		.proverb-number {
+			flex: 0 0 6em;
+			text-align: right;
+			font-size: 8pt;
+		}
+
+		.proverb-text {
+			border-left: 1px black solid;
+			padding-left: 8pt;
+			margin-left: 8pt;
+		}
+
+		.scroll-subtitle {
+			font-size: 22pt;
+			font-family: sans-serif;
+		}
+
+		.scroll-title {
+			font-family: serif;
+			font-size: 48pt;
+			text-align: center;
+		}
+
+		.scroll-image {
+			margin-top: 32pt;
+			margin-bottom: 48pt;
+			width: 300px;
+			height: 260px;
+			border: 3px white solid;
+		}
+
+		.scroll-header,
+		.scroll-contents {
+			display: flex;
+			flex-direction: column;
+		}
+
+		.scroll-header {
+			align-items: center;
+			padding: 3em;
+		}
+
+		.scroll-contents {
+			padding: 3em;
+			padding-left: calc(3em - var(--number-inset));
+		}
+
+		.scroll {
+			background: white;
+			border-radius: 2px;
+			margin: 3em 0;
+		}
+	</style>
+</head>
+
+<body>
+	
+	<div id="wrapper"></div>
+
+	<script>
+		const scrollHTML = scrolls.map(scroll => {
+			const proverbs = scroll.proverbs
+				.map((proverb, index) => {
+					const { text, format } = extractFormatting(proverb.text);
+					const html = getFormattedHTML(text, format, "11pt", "Serif");
+					return `
+						<div class="proverb">
+							<span class="proverb-number">${scroll.getProverbLocation(proverb, index)}</span>
+							<span class="proverb-text">${html}</span>
+						</div>
+					`;
+				});
+			return `
+				<div class="scroll">
+					<div class="scroll-header">
+						<div class="scroll-subtitle">${scroll.size === 1 ? "The fragment of" : "Fragments of"}</div>
+						<div class="scroll-title">${scroll.title}</div>
+						<img class="scroll-image" src="https://soupnight.space/scrollDrawings/${scroll.title}.png">
+					</div>
+					<div class="scroll-contents">
+						${proverbs.join("")}
+					</div>
+				</div>
+			`;
+		});
+
+		document.getElementById("wrapper").innerHTML = scrollHTML.join("");
+	</script>
+</body>
+
+</html>
