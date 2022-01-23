@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>The Ills They Portray</title>
+	<script src="proverbs.js"></script>
+	<link rel="shortcut icon" href="favicon_soup.png" type="image/png">
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			tab-size: 50px;
+		}
+
+		#wrapper {
+			white-space: pre;
+		}
+	</style>
+</head>
+
+<body>
+	
+	<div id="wrapper"></div>
+
+	<script>
+		const scrollHTML = scrolls.map(scroll => {
+			const proverbs = scroll.proverbs
+				.map((proverb, index) => {
+					const { text, format } = extractFormatting(proverb.text);
+					const html = getFormattedHTML(text, format, "11pt", "Serif");
+					return `<span style="font-size: 8pt">${scroll.getProverbLocation(proverb, index)}\t</span>${html}<br>`;
+				})
+			return `${scroll.title}<br>${proverbs.join("")}`;
+		}).join("");
+
+		document.getElementById("wrapper").innerHTML = scrollHTML;
+	</script>
+</body>
+
+</html>
