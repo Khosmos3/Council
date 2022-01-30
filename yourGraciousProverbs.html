@@ -423,12 +423,19 @@
 		getDocument("AllProverbs.txt", "text/plain", getAll());
 	}
 
+	function downloadProverbsBy(author) {
+		getDocument(
+			`all${author[0].toUpperCase() + author.slice(1)}Proverbs.txt`,
+			"text/plain",
+			proverbsBy(author).join("\n")
+		);
+	}
+
 	function statSession() {
 		while (true) {
 			const text = prompt("expression?");
 			if (text === "quit") break;
-			const result = eval(text);
-			alert(result);
+			alert(eval(text));
 		}
 	}
 
