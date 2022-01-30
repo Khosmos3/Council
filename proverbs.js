@@ -2456,14 +2456,14 @@ const scrolls = [
 	new Scroll("Umlauts", `
 		Window pains: baguettes made of glass | henry / zoë
 		The given is in the pudding | zoë
-		He! he! Geometry! | zoë
+		Hee! hee! Geometry! | zoë
 		Just that little existential something in my day | zoë
 		The lil' guy's feeling snuggly | zoë
 		Two points determine a lime | zoë
 		"Mise en place"?! No! It's "I'm en place"! | zoë
 		On a sinking ship, given the choice between a first class life and a &sweet& boat, you chose the former | zoë
 		I'm braiding my bones | zoë
-		Ah yes! Your two genres! Physcology and evaporated milk | zoë
+		Ah yes! Your two genres! Psychology and evaporated milk | zoë
 		Do you want me to &recind& my offer | zoë
 		I got condensed | zoë
 		Why don't &you& know what your lungs taste like? (accusatory) | zoë
