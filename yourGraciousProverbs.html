@@ -277,19 +277,9 @@
 
 		text = packText(text, getWidth, MAX_WIDTH);
 
-		const TEXT_WIDTH = Math.max(
-			...text
-				.split("\n")
-				.map(line => line
-					.split("")
-					.map(getWidth)
-					.reduce((a, b) => a + b, 0)
-				)
-		);
-
 		const TEXT_HEIGHT = text.split("\n").length * fontSize;
 
-		const CANVAS_WIDTH = MAX_WIDTH;//TEXT_WIDTH + padding * 2;
+		const CANVAS_WIDTH = MAX_WIDTH;
 		const CANVAS_HEIGHT = TEXT_HEIGHT + padding * 2;
 
 		canvas.width = CANVAS_WIDTH * devicePixelRatio;

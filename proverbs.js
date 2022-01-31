@@ -1030,7 +1030,6 @@ const scrolls = [
 		Tactically placed voids | henry
 		We weren't firing on any cylinders | henry
 		Assume violence | henry
-		Breasts are occasionally worrisome | wesley
 		Don't betray your alliance | henry
 		The nom de guerre given to the Headknight was "Ornamental Cabbage." The war effort tripled | tom
 		A shocking amount of empty slots | henry
@@ -2195,6 +2194,7 @@ const scrolls = [
 		There was a book and our family found it | wes
 		That almost deserves music notes! | hyacinth
 		Drawing the curtains in pen | hyacinth
+		...but you've already been written? | tom
 	`),
 	// confusion, random, less philosophic
 	new Scroll("Hyubert", `
