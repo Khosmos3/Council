@@ -1373,7 +1373,7 @@ const scrolls = [
 		The metaphysics of plants beguile us all in the end | molly
 		Strips of moss dangling from the heavens | henry
 		Finely minced forests | tom
-		Close enought to a soul to work | tom
+		Close enough to a soul to work | tom
 		The second best thing to replace a spirit | tom
 		The closest thing to a body you'll ever get | henry
 		The package is "damp" | henry
