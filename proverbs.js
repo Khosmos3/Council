@@ -414,6 +414,7 @@ const scrolls = [
 		Ground up grains with a helping of pain | tom
 		Wasps in the hive | henry
 		Birds have windows to our souls | declan
+		I have claimed this spot with my lingonberries and paper | wesley
 	`),
 	// mid - high tier proverbs in general and insanity, light
 	new Scroll("Praculae", `
@@ -870,7 +871,6 @@ const scrolls = [
 		Dark radiation | henry
 		Confounds abound | molly
 		Remain unsatiated | tom
-		Chonky margins | henry
 		Ever-slimmer margins | henry
 		Iiiiiiiiiiiiiiiiiiiit's suppertime! | henry
 		Water hazard | tom
@@ -1917,7 +1917,7 @@ const scrolls = [
 		A die in glue | henry
 		Wow! It glistens! | henry
 		Stripes on stripes on stripes! I see my #soul# | henry
-		An #&iota&# of injust circumstance!? | tom			
+		An #&iota&# of injust circumstance!? | tom
 		Abandon all here ye who enter hope | molly
 		tHE cYLINDER hAS bEEN rMOVED? | tom
 		Lost! In the liiiiiibrary | tom
