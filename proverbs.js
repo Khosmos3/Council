@@ -121,7 +121,6 @@ class Scroll {
 	}
 }
 
-
 const scrolls = [
 	//uncatergorized proverbs	
 	new Scroll("Onter", `
