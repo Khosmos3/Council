@@ -1388,7 +1388,7 @@ const scrolls = [
 	// cards and games. study of the universe. science
 	new Scroll("Boron's Knautsawn", `
 		The king of spades is mad at you | tom
-		You've been deal a hand of a king of spades and an ace / That would be great for blackjack but this is five card draw and you seem to somehow have lost three cards already | tom
+		You've been dealt a hand of a king of spades and an ace / That would be great for blackjack but this is five card draw and you seem to somehow have lost three cards already | tom
 		The cards* are being dealt | henry
 		Oh, you &know& what they want | tom
 		&The dealers are ready& | henry
