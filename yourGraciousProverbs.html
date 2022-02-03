@@ -279,7 +279,7 @@
 
 		const TEXT_HEIGHT = text.split("\n").length * fontSize;
 
-		const CANVAS_WIDTH = MAX_WIDTH;
+		const CANVAS_WIDTH = MAX_WIDTH + padding * 2;
 		const CANVAS_HEIGHT = TEXT_HEIGHT + padding * 2;
 
 		canvas.width = CANVAS_WIDTH * devicePixelRatio;
