@@ -321,7 +321,7 @@ const scrolls = [
 	// its the title. its just hubris
 	new Scroll("Hubris", `
 		Sleep well. Nothing foreboding, it's not like you have only this last chance. Just... a good idea | tom
-		The houses are only separated by colorful banners enscripted with avant garde medieval symbols | tom
+		The houses are only separated by colorful banners enscripted with avant-garde medieval symbols | tom
 		Control, down-shift, now park the car | tom
 		The frugality of an onion is overrated | shannon
 		The growing ball of dirt is simply a distraction | henry
@@ -361,12 +361,12 @@ const scrolls = [
 		You know, like sauce of the brain | wesley
 		What are you asking? / This is the question | declan / henry
 		Stop looking so gruntled | henry
-		The coating, though effective, is very unneccesary | tom
+		The coating, though effective, is very unnecessary | tom
 		I bet if we ran into that fence fast enough, we would go on an adventure | shannon
 		Just cause it's on fire doesn't make it a &bad& destination | henry
 		The world* is &exactly& what it seems | tom
 		* "They," in this document, can be assumed to be only singular | hyacinth
-		Pronounciation is strictly subjective | tom
+		Pronunciation is strictly subjective | tom
 		The title was composed of five adjectives and a single meaningless phrase | henry
 		We &all& feel bad | henry
 		We've got plenty of room | henry
@@ -437,7 +437,7 @@ const scrolls = [
 		We haven't slept | hyacinth
 		you can't &still& be awake | tom
 		You &know& how to sleep, right? | tom
-		Feelings of another supercede feelings for another | henry
+		Feelings of another supersede feelings for another | henry
 		Feelings of one intercept feelings of the other
 		You create reality to prevent insanity | tom
 		You create insanity to prevent reality | ryan
@@ -456,7 +456,7 @@ const scrolls = [
 		Au contraire! I am not a home for insanity! | tom / shannon
 		Insanity brings greater comfort than clarity in a disaffected space | henry
 		Filming the steps to insanity | henry
-		My shadow is a demon, thirsting for my blood. / I first figured this out at age 13 and have been hiding in the darkness ever since. / If there's no light there's no shadow. If there's no shadow there's no demon. If there's no demon I stay alive. / Alive in darkness slowly going mad | mayzie 
+		My shadow is a demon, thirsting for my blood. / I first figured this out at age 13 and have been hiding in the darkness ever since. / If there's no light there's no shadow. If there's no shadow there's no demon. If there's no demon, I stay alive. / Alive in darkness slowly going mad | mayzie 
 		Retrorefractivity | henry
 		Keep making the photosensitivity larger | henry
 		&Completely& unreactive | tom
@@ -484,14 +484,14 @@ const scrolls = [
 		Storm of your amber eyes | tom
 		What? In blindness you can't see? | declan
 		Thinking is terrifying / At least, that's what it wants you to think... | tobyn
-		So all thoughts should be about not thinking, / so even if you happen to think you will only be able to think about not thinking, / which means the object of thinking will be lost in a flood of thinking about not thinking / and your thoughts won't be productive | tobyn
+		So, all thoughts should be about not thinking, / so even if you happen to think you will only be able to think about not thinking, / which means the object of thinking will be lost in a flood of thinking about not thinking / and your thoughts won't be productive | tobyn
 		Madness that isn't yours, despite your contribution | tom
 		Low equality in nonsense contribution | henry
 		Nearing consciousness / Fearing consciousness | henry
 		Looking ever closer | henry
 		He's unambiguously plural | hyacinth
 		Invisible to any eye you can muster | tom
-		You ought not to have a mind where your going | hyacinth
+		You ought not to have a mind where you're going | hyacinth
 		You can feel that your mind is about to collapse at any time | hyacinth
 		I'm going to put you in the Mind Room | tom
 	`),
@@ -582,7 +582,7 @@ const scrolls = [
 		Some more, dusty | henry
 		Holes in the floor (by design) | henry
 		You do realize these aren't &actual& newlines right? | henry
-		If you consider your thoughts, will you find that dramatic and unbearable change will be required to rid yourself of the things you enjoy? / Occasionally, actions are imbued with positivity soley by ceasing to reason | henry
+		If you consider your thoughts, will you find that dramatic and unbearable change will be required to rid yourself of the things you enjoy? / Occasionally, actions are imbued with positivity solely by ceasing to reason | henry
 		I'm going to add another case | tom
 		The pages of the book are deceiving in length, but surprising well priced | tom
 		Contribution feeds that within you which should starve | henry
@@ -635,7 +635,7 @@ const scrolls = [
 		The world is an illusion and never will be / Everything is impossible | tom
 		There is no do but try | tom / unknown
 		Try, there isn't a do | unknown / tom
-		The weather must be treated carefully, its quite slippery | tom
+		The weather must be treated carefully, it's quite slippery | tom
 		There is something inside of out | tom
 		The electrical cords are grinning broadly | henry
 		If you don't evacuate your network, what can you expect to gain? | henry
@@ -653,7 +653,7 @@ const scrolls = [
 		The surface of the ocean you're drowning in is just more oil! &You& can't breath | henry
 		Crop circles encoded into your genes | tom
 		Crop circles encoded into your jeans | tom
-		Resignnation? No, please, re-sign this paper | tom
+		Resignation? No, please, re-sign this paper | tom
 		Signing off your doom | tom
 		Cents, it happened | tom
 		The capital owners love puppies | declan
@@ -1117,11 +1117,11 @@ const scrolls = [
 		Just forget about having a good memory | alan
 		When is the sun not above our heads? When it approaches! | tom / shannon
 		Doubles as a surreal nightmare! | molly
-		Nostrils for knuckles or knuckes for nostrils? | molly
+		Nostrils for knuckles or knuckles for nostrils? | molly
 		A misconception falls down a hole into two dreary ravines. / The rabbit says, "What's the time?" / We all say, "Tomorrow!" | tom / henry
 		Hopelessly apocalyptic, but bound to be better by Tuesday! | molly
 		Entirely undone by shenanigans, the dachshund bid adieu | molly
-		Life is like a carosel, vomit inducing | shannon
+		Life is like a carousel, vomit inducing | shannon
 		Takes out two stones with a ˢᶦⁿᵍᵘˡᵃʳ bird | tom
 		Let's make the last ones be truly &excerional& | tom
 	`),
@@ -1214,7 +1214,7 @@ const scrolls = [
 		Persimmons are sufficient | henry
 		The distinction between you and me is only 1% greater than ~99.099% of the distinction between you and me | henry
 		Rolling a coin 10 times will not result in 10% spades | tom
-		It is gone now, you won't need to fear for about another 38 months | henry
+		It is gone now; you won't need to fear for about another 38 months | henry
 		If every event in a collection were a result of an enumeration to which it is not a result, / and that enumeration is only a sum of numbers where some element does not exist on it, and that the enumeration of the elements is only a sum (or sum) of numbers where some element exist on the collection, / we will have all the general forms of functions from which there is no natural law (unless the particular form is logically equivalent to the general form) / and the natural laws will be determined as the natural law of the universe would be | AI
 		Five score, to the tenth. Business as usual | tom
 		I've been adding cubes for about four minutes | shannon
@@ -1223,7 +1223,7 @@ const scrolls = [
 		Gambling away across the entire range (it's about 40 or so meters) | tom
 		Cozy vs. safe has a depressingly low r² | henry
 		There are no guarantees that there aren't piecewise laws of physics | henry
-		Weight is dependant on many more things than we thought | tom
+		Weight is dependent on many more things than we thought | tom
 		To sufficiently enjoy photons, take a break from them for a while | henry
 		Alcohol is optional when in the presence of statistically impossible cacao | henry
 		Taking derivatives, alone in a room | henry
@@ -1266,7 +1266,7 @@ const scrolls = [
 		Your percentage is growing | henry
 		A healthy brainbeat of 6,200 | tom
 		300.24q = 1wM | henry
-		A couple "9 and a half"s | henry
+		A couple "9 and a half"'s | henry
 		Concerningly low prevalence | henry
 		Their precision is unfathomable / Their accuracy... not so much | henry
 		2 may be a challenge, but 30 is a piece of cake | hyacinth
@@ -1587,7 +1587,7 @@ const scrolls = [
 		Attic is towering | tom
 		You must not be italicized | tom
 		Passages through the void, find nothing else | henry
-		Pulling through the dark zone is... unadvisable, though definitely encouraged extracurricularily | tom
+		Pulling through the dark zone is... unadvisable, though definitely encouraged extracurricularly | tom
 		As long as you're off the premises, we can't stop you | henry 
 		The void wishes for your company (the feeling isn't mutual) | henry
 		Scream against the void that is your friendship | henry
@@ -1950,7 +1950,7 @@ const scrolls = [
 		Consider the distance you must fall to reach the sky | henry
 		Where can you find several oysters? | henry
 		Ghostwritten acknowledgments | henry			
-		Typography is going to be a surprisingly luctrative profession | henry
+		Typography is going to be a surprisingly lucrative profession | henry
 		A pilgrimage to the end of the road | tom
 		Wildflowers and open hillsides / Heights beyond that which is below / and a soft breeze | tom
 		The zoo is expanding, far beyond its proper limits | henry
