@@ -1253,7 +1253,6 @@ const scrolls = [
 		Forty several cans of chili | wesley	
 		Increasing numbers, mildly | henry
 		The sum of constitution, if you will | henry
-		Only don't know, go straight | lewis
 		In the space between stimulus and response is a yeti, seven snowplows, and 13 kalamata olives | molly
 		Consider the likelihood | molly
 		Home grown numbers | henry
@@ -1384,6 +1383,7 @@ const scrolls = [
 		...I may have committed accidental propagation | shannon
 		You can't even know how many cells you have | tom
 		You just made every tree in this forest an inch taller | tom
+		That of which is but a fern  | shannon
 	`),
 	// cards and games. study of the universe. science
 	new Scroll("Boron's Knautsawn", `
