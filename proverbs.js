@@ -1383,7 +1383,6 @@ const scrolls = [
 		...I may have committed accidental propagation | shannon
 		You can't even know how many cells you have | tom
 		You just made every tree in this forest an inch taller | tom
-		That of which is but a fern  | shannon
 	`),
 	// cards and games. study of the universe. science
 	new Scroll("Boron's Knautsawn", `
@@ -2417,6 +2416,7 @@ const scrolls = [
 		We're adding to the document | hyacinth
 		Liaising with the incandescence | molly
 		I know their actions, not themselves | tom
+		Blame nobody, expect nothing, and serve the motherf*****s / Lord knows they need it | lewis
 	`),
 	// definitions
 	new Scroll("Dictatics", `
