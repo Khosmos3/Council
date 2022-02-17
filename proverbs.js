@@ -414,6 +414,7 @@ const scrolls = [
 		Wasps in the hive | henry
 		Birds have windows to our souls | declan
 		I have claimed this spot with my lingonberries and paper | wesley
+		Is there food made entirely with rocks? | noah
 	`),
 	// mid - high tier proverbs in general and insanity, light
 	new Scroll("Praculae", `
@@ -1308,7 +1309,7 @@ const scrolls = [
 		We are retracting | tom
 		Animate your demons | henry
 		A glass of water for Zeus | tom
-		Zeus doesn't like the idea of your promotion | wes
+		Zeus doesn't like the idea of your promotion | smith
 		The stars have aligned into the shape of your future! It's a clear day outside | tom
 		Nearly comprehensible, on the brink of competence | henry
 		I can't even see why knowing would be helpful! | henry
@@ -1552,7 +1553,7 @@ const scrolls = [
 		Corpses are 97.05% &hydration& | tom
 		Your shadow may leave for a time / You will accept this | henry
 		The sun actively racing towards the ground | wes
-		The trouble is, some people don't &need& the drugs | wes
+		The trouble is, some people don't &need& the drugs | smith
 		Toiling and tumbling, up and down | henry
 		No afterlife = No beforelife? | tom
 		Ancient domains rumbling below | henry
@@ -2185,7 +2186,6 @@ const scrolls = [
 		It's perfect for my movies | tom
 		Frightening words with everyday definitions | tom
 		Frightening definitions of everyday words | hyacinth
-		Flora, Fauna, and the Fabiform Father | shannon
 		Motifs of your free time | henry
 		They read a simple poem | henry
 		Tooth maracas | hyacinth
@@ -2293,7 +2293,7 @@ const scrolls = [
 		An academy of illustrious nincompoops | molly
 		He has the genius not to say the extraordinary but to say the ordinary | anna
 		A bunch of random words equals profound knowledge? I suppose | mayzie
-		Gold doesn't tarnish! / Easy for you to say... | noah / camden
+		...Assuming your oyster is a bunch of annoying debugging | camden
 		He literally just killed his glasses | forrest
 		Now &that's& how the job is done | tom
 		I know acceptance when I see it | tom
