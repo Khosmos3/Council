@@ -159,7 +159,7 @@ class Scroll {
 	}
 
 	randomOffset(i){
-		return Math.floor(randomSeeded(i+this.seed)*4.643)
+		return Math.floor(randomSeeded(i+this.seed)*5.643)
 	}
 
 	getProverbLocation(proverb, index = this.proverbs.indexOf(proverb)) {
