@@ -155,51 +155,7 @@
 </body>
 <script>
 
-	//function, obviously
-	let betterSeed = 0;
-	function getSeed() {
-		betterSeed++;
-		const seed = Date.now() + betterSeed;
-		return seed;
-	}
-	function random01() {
-		let seed = getSeed();
-
-		seed ^= seed << 5;
-		seed ^= seed >> 2;
-		seed -= 836492754;
-		seed ^= seed << 4;
-		seed += 999;
-		seed ^= seed >> 7;
-		seed += 128936382;
-		seed ^= seed << 2;
-		seed += 128936382;
-		seed ^= seed >> 6;
-		seed -= 42099;
-		seed ^= seed << 1;
-		seed ^= seed >> 9;
-		seed /= 0xFFFF;
-
-		return Math.abs(seed) % 1;
-	}
-	function randInt(min, max) {
-		return Math.floor(random01() * (max - min + 1) + min);
-	}
-	function choose(arr) {
-		return arr[randInt(0, arr.length - 1)];
-	}
-
-	function chooseWeighted(scrolls) {
-		const t = random01();
-		let acc = 0;
-		for (let i = 0; i < scrolls.length; i++) {
-			const scroll = scrolls[i];
-			if (acc <= t && t < acc + scroll.weight)
-				return scroll;
-			acc += scroll.weight;
-		}
-		return scrolls[scrolls.length - 1];
-	}
+	//function, no longer
 
 	//the artifact
 	let _l;

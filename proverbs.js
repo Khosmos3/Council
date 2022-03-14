@@ -1,3 +1,51 @@
+let betterSeed = 0;
+	function getSeed() {
+		betterSeed++;
+		const seed = Date.now() + betterSeed;
+		return seed;
+	}
+	function randomSeeded(seed) {
+
+		seed ^= seed << 5;
+		seed ^= seed >> 2;
+		seed -= 836492754;
+		seed ^= seed << 4;
+		seed += 999;
+		seed ^= seed >> 7;
+		seed += 128936382;
+		seed ^= seed << 2;
+		seed += 128936382;
+		seed ^= seed >> 6;
+		seed -= 42099;
+		seed ^= seed << 1;
+		seed ^= seed >> 9;
+		seed /= 0xFFFF;
+
+		return Math.abs(seed) % 1;
+	}
+	function random01(){
+		return randomSeeded(getSeed());
+	}
+	function randInt(min, max) {
+		return Math.floor(random01() * (max - min + 1) + min);
+	}
+	function choose(arr) {
+		return arr[randInt(0, arr.length - 1)];
+	}
+
+	function chooseWeighted(scrolls) {
+		const t = random01();
+		let acc = 0;
+		for (let i = 0; i < scrolls.length; i++) {
+			const scroll = scrolls[i];
+			if (acc <= t && t < acc + scroll.weight)
+				return scroll;
+			acc += scroll.weight;
+		}
+		return scrolls[scrolls.length - 1];
+	}
+
+
 
 function getFont(fmti, fontSize, fontFamily) {
 	const fmt = fmti ? fmti
@@ -104,6 +152,7 @@ class Scroll {
 			.filter(line => line.trim().length > 0)
 			.map(line => new Proverb(line));
 		this.size = this.proverbs.length;
+		this.seed = this.size^this.title.split("").reduce((a, b) => a^b.charCodeAt(0), 0)
 	}
 	computeWeight(totalSize) {
 		this.weight = this.size / totalSize;
@@ -113,7 +162,7 @@ class Scroll {
 
 		let place = 1;
 		for (let i = 0; i < index; i++)
-			place += this.proverbs[i].length + 2;
+			place += this.proverbs[i].length + 1 + Math.floor(randomSeeded(i+this.seed)*3);
 
 		const location = place + (proverb.length > 1 ? "-" + (place + proverb.length - 1) : "");
 
