@@ -157,12 +157,17 @@ class Scroll {
 	computeWeight(totalSize) {
 		this.weight = this.size / totalSize;
 	}
+
+	randomOffset(i){
+		return Math.floor(randomSeeded(i+this.seed)*4.643)
+	}
+
 	getProverbLocation(proverb, index = this.proverbs.indexOf(proverb)) {
 		let newLines = 0;
 
-		let place = 1;
+		let place = 1 + this.randomOffset(-1);
 		for (let i = 0; i < index; i++)
-			place += this.proverbs[i].length + 1 + Math.floor(randomSeeded(i+this.seed)*3);
+			place += this.proverbs[i].length + this.randomOffset(i);
 
 		const location = place + (proverb.length > 1 ? "-" + (place + proverb.length - 1) : "");
 
