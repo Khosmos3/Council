@@ -142,6 +142,16 @@ class Proverb {
 	}
 }
 
+function getNormal(x){
+	return Math.log(1 / x - 1) / -1.68;
+}
+
+function seededRandNorm(s){
+	let r = getNormal(randomSeeded(s));
+	r /= 6;
+	r += 0.5;
+	return Math.max(0, Math.min(1, r));
+}
 
 class Scroll {
 	constructor(title, proverbs) {
@@ -159,7 +169,7 @@ class Scroll {
 	}
 
 	randomOffset(i){
-		return Math.floor(randomSeeded(i+this.seed)*5.643)
+		return Math.floor(seededRandNorm(i+this.seed)*7);
 	}
 
 	getProverbLocation(proverb, index = this.proverbs.indexOf(proverb)) {
