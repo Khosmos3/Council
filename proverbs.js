@@ -318,7 +318,7 @@ const scrolls = [
 		They're on the move | henry
 		They are &rising& quickly | henry
 		Assumption is the doorway to new ideas | tom
-		Mankind is but a kernel of corn in the cob of truth | julian
+		Humans and the beings they occupy | tom
 		Losing a game of chance on the way to work | henry
 		Slightly closer to false goals | henry
 		A long way to go before you'll stand here steadily | henry
@@ -374,7 +374,7 @@ const scrolls = [
 		"You" are alive | tom
 		Become strategic when you can't | henry
 		You have one* chance to learn this, and &you& aren't even paying attention | henry
-		You look through the window bewildered | julian
+		You don't work here but the customers &know& you, / you haughtily sit behind the counter, / hiding, hiding / for a 9 to 6 work day | tom
 		It can't hurt you | tom
 		Despite you, I feel ᴇᴄsᴛᴀᴛɪᴄ | tom
 		You are tantamount to the big picture | molly
@@ -608,7 +608,7 @@ const scrolls = [
 		Just kinda dancing on the dashboard of a car | henry
 		Decency glows underneath despite the dust | anna
 		Sunny shiny sweet spun sugar | mayzie
-		You are like a potato (we all grow) | julian
+		Like a bucket, but for humans | hyacinth
 		Creating a tripping hazard (simply for the inevitable power?) | henry
 		You'll be ready for what comes next | tom
 		Joy on a blue day | hyacinth
@@ -786,7 +786,7 @@ const scrolls = [
 		Only feel bad around others | henry
 		Don't justify their actions | henry
 		The octopus twiddled his tentacles as the world dashed madly on | molly
-		Everything is where it is | julian
+		Our creator has no guarantees | hyacinth
 		Discovering those within your soul | henry
 		So old you're past "age" | tom
 		Too young to use "stupid" | tom
@@ -1035,8 +1035,8 @@ const scrolls = [
 		Negotiating with relativity | tom
 		There are tunnels | tom
 		Your multiple tongues | tom
-		Notice / Time is running out | julian
-		Time is but a laptop on a train | julian
+		Time-based triangles | tom
+		Free time is where you start to apply / Caged time is where you start to learn | hyacinth
 		So much time but so little to be | henry
 		That hadn't happened in this timeline, nor was it expected to | tom
 		Only 33 more years | henry
@@ -1138,7 +1138,7 @@ const scrolls = [
 		Any action you take shall be documented | sofia
 		Punching in the afterlight | henry
 		The burning sensation reminds you it's not yours | henry
-		Above! There it is! | julian
+		Despise to be inspected | tom
 		An impromptu show to force | tom
 		Oh, they fought / They fought til the borders cracked / and the knot snapped. / But then our soldier / got stabbed in the back | tom
 		Surround the rising humans | tom
@@ -1515,7 +1515,7 @@ const scrolls = [
 	// sea and salt and food
 	new Scroll("Kelp", `
 		Salt in the sea brings you to your knees | tom
-		You fall to the salty depths | julian
+		It is not dependent upon the inclusion of fruit | ryan
 		Loops upon loops | tom
 		There's nothing but more humans and they're just as confused as I. Where is everyone else? | tom
 		Looking around: are we all grammatically correct? | henry
@@ -1677,7 +1677,7 @@ const scrolls = [
 		A quiet acceptance of the void between my ears | henry
 		Voids in the family room | henry
 		Sorry I'm late. Traffic jam in the void | molly
-		They just look stoic | julian
+		♩ Just because we don't know what we'll find when we get there, that doesn't mean we shouldn't run ♩ | hyacinth
 		Yodeling into the abyss | molly
 		Smiling does not necessarily denote a good person, or lack thereof | tom
 		Consider a chasm, filled with Spam | molly
@@ -2421,7 +2421,7 @@ const scrolls = [
 		The heavy vibration is indeed necessary | tom
 		You'll know when you're not contiguous | molly
 		Estranged coordinate points in space | tom
-		They've got some columns! | julian
+		Geometry for the undimensioned folk | tom
 		Sideways and vertical | tom
 		Especially gradiented spoon | tom
 		Knotting of the intestines | henry
@@ -2455,7 +2455,7 @@ const scrolls = [
 		Physiocrats with save* our government | henry
 		The new reign is disappointed in its citizens | tom
 		Applications violating the basic barriers of technology / Worms floating in the air | henry
-		The only thing that changes is the name, and the map above | julian
+		Electric shocks make the air stick to your skin | hyacinth
 		From the floor on up | henry
 		Edible technology is the ⁿᵉˣᵗ ˢᵗᵉᵖ | tom
 		Cube-shaped flags | tom

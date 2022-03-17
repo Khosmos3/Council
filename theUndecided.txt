@@ -15,7 +15,6 @@ Everyone strives to be so original that it has already become a mainstream! | ir
 Intellectual ability does not necessarily denote logical intelligence | hyacinth
 A dash of wisdom | hyacinth
 Hand over the absence | henry 
-Humans and the beings they occupy | tom
 The bag is incidental to the items inside the bag | molly
 There is no wisdom here, but viewing the ever stranger waterfall may lead to understanding | hyacinth
 Try and view yourself from your own perspective sometime | hyacinth
@@ -26,7 +25,6 @@ Your eyes, amused / your conscious, hindered | shannon / tom
 You have a more objective opinion of the shadows | tom
 You must first thaw the body to thaw the soul | sofia t
 The action's theoretically in your wheelhouse | hyacinth
-You don't work here but the customers &know& you, / you haughtily sit behind the counter, / hiding, hiding / for a 9 to 6 work day | tom
 
 == Hubris ==
 No tomb two's pair | tom
@@ -61,7 +59,6 @@ We're both caught up and hardworking and breaks are good | tom
 Woe is no one / Everything's fine | hyacinth
 Full to the &brim& with insight | hyacinth
 The liquid leaves us all &utterly& sustainable | hyacinth
-Like a bucket, but for humans | hyacinth
 Would you like to put some friends in the bucket? | henry
 
 == Unpleasant Thoughts ==
@@ -81,7 +78,6 @@ Mass-producing sense | hyacinth
 
 == Ti ==
 Cry for your eternal soul | tom
-Our creator has no guarantees | hyacinth
 The meaning is your own | tom
 You may not coalesce, but you're still strong | hyacinth
 The archives are full / All further knowledge shall simply be ephemeral | hyacinth
@@ -114,14 +110,11 @@ As the days go by, the wind howls and the corresponding dignity wanes | tom
 Scaling the cliffs as they crumble / Jump to the next ledge, jump to the last | hyacinth
 
 == Plagiarized Optics ==
-Free time is where you start to apply / Caged time is where you start to learn | hyacinth
 It's later. That's how time works | molly
-Time-based triangles | tom
 High class in the end of times | hyacinth
 Monolithic in many months | tom
 
 == Konradism ==
-Despise to be inspected | tom
 Vigor on the half-shell | hyacinth
 The city guard is fluctuating | hyacinth
 The sheer scale of the relevant being | hyacinth
@@ -182,7 +175,6 @@ It's rapidly hibernating | hyacinth
 Share air with the others through subterranean methods | molly
 
 == Kelp ==
-It is not dependent upon the inclusion of fruit | ryan
 From riptides to modified polypeptides, the sea claims all | tom
 Cut down and made into various ornamental foodstuffs | tom
 I have claimed this spot with my lingonberries and paper | wesley
@@ -200,7 +192,6 @@ Debauchery to rebauchery | tom
 It never takes a long time, and it's disappointing  | hyacinth
 
 == Splines ==
-♩ Just because we don't know what we'll find when we get there, that doesn't mean we shouldn't run ♩ | hyacinth
 It’s actually really funny to look at your bones when they do that | rowan
 Needlestare | tom
 &can I kill it& | hyacinth
@@ -322,7 +313,6 @@ We wouldn't want to &defend& anyone | henry
 
 == Meilothon ==
 Polygons speak to me in my sleep | wesley
-Geometry for the undimensioned folk | tom
 Forty-several millimeters | wesley
 Sideways, not sharpened | hyacinth
 Shockingly intersected | hyacinth
@@ -334,7 +324,6 @@ That's clearly a violation | tom
 Needlepoint & Needleclick | hyacinth
 As it turns out, this non-standard behavior is supported in all major browsers | henry
 Magnetic sources stick you to the air | tom
-Electric shocks make the air stick to your skin | hyacinth
 The network is slow and inescapable | hyacinth
 The government can't take them down anymore | hyacinth
 We live, gilded / The continued electrical shocks keep the metal &ionized& to our skin | hyacinth
@@ -345,13 +334,13 @@ Falsifying the witness | hyacinth
 Life (&\\/līf\\/&): Context-free, simple, and to the point | hyacinth
 Lyricism (&\\/ˈlirəˌsizəm\\/&): it’s a way of life! | rowan
 God night (&\\/ɡäd nīt\\/&): When they rise | hyacinth
-Rind: skin of the soul | tom
-Koi: you don't even know! | tom
-Brilkolic: Sewn, sweatered, set in stone | tom
-Spop: a violent, excruciatingly blood, tooth filled, dismemberment of a body | tom
+Rind (&\\/rīnd\\/&): skin of the soul | tom
+Koi (&\\/koi\\/&): you don't even know! | tom
+Brilkolic (&//\brɪkɒlɪk//\&): Sewn, sweatered, set in stone | tom
+Spop (&//\spɑp//\&): a violent, excruciatingly blood, tooth filled, dismemberment of a body | tom
 Ribbery (&\\/rib(ə)rē\\/&): an addition of bones | a facility for the harvesting of bones | tom
 Animal Crackers (&\\/anəməl ˈkrakərz\\/&): Existential Crises in a Box | alice skipton
-Frisklevas: chopped in the night | tom
+Frisklevas (&//\frɪsklvɑs//\&): chopped in the night | tom
 
 == Umlauts ==
 That's what life is for... | zoë
@@ -361,3 +350,16 @@ Back in the land of the living! | zoë
 It's rhythmically screaming at you | zoë
 Chaos is nice sometimes | zoë
 Collected and connected | zoë
+
+- Julian Relics -
+Mankind is but a kernel of corn in the cob of truth | julian
+You look through the window bewildered | julian
+You are like a potato (we all grow) | julian
+Everything is where it is | julian
+Notice / Time is running out | julian
+Time is but a laptop on a train | julian
+Above! There it is! | julian
+You fall to the salty depths | julian
+They just look stoic | julian
+They've got some columns! | julian
+The only thing that changes is the name, and the map above | julian
