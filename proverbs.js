@@ -1499,7 +1499,7 @@ const scrolls = [
 		Nothing but the sand you came from and will return to is free | tom
 		Alone in a randomly generated landscape | tom
 		Curiously, intellect and flammability of the body appear to be linked | tom
-		An common copper tube is all you need for this one | tom
+		A common copper tube is all you need for this one | tom
 		Although concerning, the variation of particles seems to be stable | tom
 		Pawns, both Towers, both Judges, Prophets, Seamstress, King and the Sun, set upon the board | tom
 		Antiquity, ambiguity, quality / My favorite children's game | henry
@@ -2334,7 +2334,7 @@ const scrolls = [
 		We don't know because we crossed it substantially | henry
 		Only worry about what &won't& happen | henry
 		We'll have a splendid time. It'll be absolutely wonderful there. You won't have to worry about a singular thing | tom
-		Free Chile from its Northern constraints | tom
+		The rampant carnage caresses you into a lengthy slumber | tom
 		Canniness in this trying time | tom
 		Dying of thirst is a substantial possibility on the way from legality to morality | henry
 		Clicking noises aren't &necessarily& a bad sign | tom
