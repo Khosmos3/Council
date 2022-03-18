@@ -1,3 +1,4 @@
+//if you see this, you succeeded. good job tom
 let betterSeed = 0;
 	function getSeed() {
 		betterSeed++;
