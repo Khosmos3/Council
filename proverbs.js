@@ -413,7 +413,7 @@ const scrolls = [
 		Who's your least elevated character | tom
 		Sanctity is the mnemonic device | tom
 		Black is the new black | shannon
-		Try visiting the amusemezall some time! | henry / wes / molly / zoë / max
+		Try visiting the amusemezall some time! | henry / wes / molly / zoë
 		Trying on suits whilst being a ghost | henry
 		Be afraid! | declan
 		When we say rats, we don't really &mean& rats | henry
@@ -957,7 +957,7 @@ const scrolls = [
 		Absolute nothing! &echoes& | tom
 		They have all the same memories of the day | AI
 		Behold upon the pit of ash and thou shall fall into luminance | tom
-		If I was going to be gone forever, I'd bring my 3DS with me | max
+		The shadows only reverse as the rain start the pour | hyacinth
 		Do your best before it's gone | tom			
 		Visit them every once and a while | henry
 		It is not certain that we'll find anyone there | henry
@@ -1396,7 +1396,7 @@ const scrolls = [
 	new Scroll("Auberations", `
 		It happened on a Tuesday | tom
 		♪ I &can& hear &you& ♪ | henry
-		♪ Bouncing on down to New Orleans ♪ | max
+		Ordering "moss on the rocks" at a bar | hyacinth
 		The country people are quite picky | tom
 		Moss is [emotion here]. Now, moss is a philosophy | tom
 		To see is to believe, to feel is to doubt, and to smell is to be thoroughly disenchanted | henry
@@ -1405,7 +1405,7 @@ const scrolls = [
 		What the hell did I think I was gonna hear this on the radio? | tom
 		It's fun to watch y'all manipulate others | shannon
 		The packing peanuts entice me | tom
-		Being found guilty of counterfeiting settled an unmistakable aura of authority on a metallurgist | max
+		Flora, Fauna, and the Fabiform Father | shannon
 		There's also a little part in this episode where Liz points out why you shouldn't get rid of all the gods at once, so how does that make people unhappy? | AI
 		There have always been a couple rogue linguists | henry
 		Make staying-alive-style choices | henry
@@ -1776,7 +1776,7 @@ const scrolls = [
 		You're viewing it in the wrong dimension, you goofball | tom    
 		For there shall come a time, when a time comes | ryan
 		A small fraction of you may end up happy. Although it means no harm to you, many of you want to leave | AI
-		I'm going to turn you into a ghost | max
+		Step into the magnet machine and feel your #blood# | tom
 		The weight of emotional release will be passed on to someone else | tom
 		When one moves briskly, the air will freeze on their hands | tom
 		Your breath illuminates the things you try to ignore about yourself | henry
@@ -2034,7 +2034,7 @@ const scrolls = [
 		Swimming through the planet | tom
 		The height of the earth mostly influences the red channel | henry
 		Causing confusion without meaning | tom
-		Seven is a bad way to divide the continents / There's clearly five: Eastern Australia, Western Australia, The other land, the sea, and the sky | max
+		You don't deserve the darkness between rooms | hyacinth
 		*Our home in the trees | hyacinth
 		Once here, you certainly once have | hyacinth
 		Several bridges between the locales | hyacinth
@@ -2285,7 +2285,7 @@ const scrolls = [
 		A dark spot where the sun was shall fall into the dark | tom
 		Don't do drugs, become absorbed in unreality instead | tom
 		The difference is that a spoonful of sugar is not much | tom
-		And he wanted to give you some pudding, and that's it! | max 
+		Come down to Saint France Auto Bay Company Church down on the hill for free  r e p a i r s | tom
 		Blue indicates you should #stay#! stay! &stay&! | henry
 		Crumbling sidewalks typically are a facade | tom
 		Earthly storefronts are frequently in the business of disguise | henry		
@@ -2318,7 +2318,7 @@ const scrolls = [
 	// people, foolish things
 	new Scroll("Fools", `
 		That is normal | henry
-		This is expected behavior | max
+		A delirium gives justification for its abrupt greeting | tom
 		Mackenzie: good gods, good humans, good stories, good people, good music | AI
 		And Mackenzie said the terms aren't negotiable, but we'd continue regardless | tom
 		Mackenzie: last time, last runner, last life | tom
