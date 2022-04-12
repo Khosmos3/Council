@@ -213,9 +213,9 @@ const scrolls = [
 		Relax your mind | tom
 		Friendship looks golden in the pale moonlight | henry
 		The contrast of the grey clouds and the blue sky gives clarity and luster to entities nearby | tom
-		Just because you see someone else's reflection in the mirror, doesn't mean it will last | henry
+		Just because you see someone else's reflection in the mirror doesn't mean it will last | henry
 		Our shadows are bookmarks the universe leaves to remember where she put us | molly
-		Missing a distinct opportunity is either a sign of resignation, contentment, or idiocy | tom
+		Missing a distinct opportunity is a sign of resignation, contentment, or idiocy | tom
 		Bow to the universe | henry
 		Uncharacteristically established in your place in the universe | tom
 		Try and arrange your thoughts in circles (the chances are higher that way) | henry
