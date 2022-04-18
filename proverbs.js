@@ -1,3 +1,52 @@
+//if you see this, you succeeded. good job tom
+let betterSeed = 0;
+	function getSeed() {
+		betterSeed++;
+		const seed = Date.now() + betterSeed;
+		return seed;
+	}
+	function randomSeeded(seed) {
+
+		seed ^= seed << 5;
+		seed ^= seed >> 2;
+		seed -= 836492754;
+		seed ^= seed << 4;
+		seed += 999;
+		seed ^= seed >> 7;
+		seed += 128936382;
+		seed ^= seed << 2;
+		seed += 128936382;
+		seed ^= seed >> 6;
+		seed -= 42099;
+		seed ^= seed << 1;
+		seed ^= seed >> 9;
+		seed /= 0xFFFF;
+
+		return Math.abs(seed) % 1;
+	}
+	function random01(){
+		return randomSeeded(getSeed());
+	}
+	function randInt(min, max) {
+		return Math.floor(random01() * (max - min + 1) + min);
+	}
+	function choose(arr) {
+		return arr[randInt(0, arr.length - 1)];
+	}
+
+	function chooseWeighted(scrolls) {
+		const t = random01();
+		let acc = 0;
+		for (let i = 0; i < scrolls.length; i++) {
+			const scroll = scrolls[i];
+			if (acc <= t && t < acc + scroll.weight)
+				return scroll;
+			acc += scroll.weight;
+		}
+		return scrolls[scrolls.length - 1];
+	}
+
+
 
 function getFont(fmti, fontSize, fontFamily) {
 	const fmt = fmti ? fmti
@@ -94,6 +143,16 @@ class Proverb {
 	}
 }
 
+function getNormal(x){
+	return Math.log(1 / x - 1) / -1.68;
+}
+
+function seededRandNorm(s){
+	let r = getNormal(randomSeeded(s));
+	r /= 6;
+	r += 0.5;
+	return Math.max(0, Math.min(1, r));
+}
 
 class Scroll {
 	constructor(title, proverbs) {
@@ -104,23 +163,28 @@ class Scroll {
 			.filter(line => line.trim().length > 0)
 			.map(line => new Proverb(line));
 		this.size = this.proverbs.length;
+		this.seed = this.size^this.title.split("").reduce((a, b) => a^b.charCodeAt(0), 0)
 	}
 	computeWeight(totalSize) {
 		this.weight = this.size / totalSize;
 	}
+
+	randomOffset(i){
+		return Math.floor(seededRandNorm(i+this.seed)*7);
+	}
+
 	getProverbLocation(proverb, index = this.proverbs.indexOf(proverb)) {
 		let newLines = 0;
 
-		let place = 1;
+		let place = 1 + this.randomOffset(-1);
 		for (let i = 0; i < index; i++)
-			place += this.proverbs[i].length + 2;
+			place += this.proverbs[i].length + this.randomOffset(i);
 
 		const location = place + (proverb.length > 1 ? "-" + (place + proverb.length - 1) : "");
 
 		return location;
 	}
 }
-
 
 const scrolls = [
 	//uncatergorized proverbs	
@@ -149,9 +213,9 @@ const scrolls = [
 		Relax your mind | tom
 		Friendship looks golden in the pale moonlight | henry
 		The contrast of the grey clouds and the blue sky gives clarity and luster to entities nearby | tom
-		Just because you see someone else's reflection in the mirror, doesn't mean it will last | henry
+		Just because you see someone else's reflection in the mirror doesn't mean it will last | henry
 		Our shadows are bookmarks the universe leaves to remember where she put us | molly
-		Missing a distinct opportunity is either a sign of resignation, contentment, or idiocy | tom
+		Missing a distinct opportunity is a sign of resignation, contentment, or idiocy | tom
 		Bow to the universe | henry
 		Uncharacteristically established in your place in the universe | tom
 		Try and arrange your thoughts in circles (the chances are higher that way) | henry
@@ -198,7 +262,7 @@ const scrolls = [
 		Don't forget your keys before leaving the house | declan
 		Evil, evilness! / Terrible | forrest
 		Encapsulated is the cri de coeur | tom
-		A cacaphony of binder clips, shrill and inconsolable | molly
+		A cacophony of binder clips, shrill and inconsolable | molly
 		Beating without the pulp | tom
 		&Un-pinning joy from your quick access& | henry
 		The lil' guy can't feel his toes | henry
@@ -255,7 +319,7 @@ const scrolls = [
 		They're on the move | henry
 		They are &rising& quickly | henry
 		Assumption is the doorway to new ideas | tom
-		Mankind is but a kernel of corn in the cob of truth | julian
+		Humans and the beings they occupy | tom
 		Losing a game of chance on the way to work | henry
 		Slightly closer to false goals | henry
 		A long way to go before you'll stand here steadily | henry
@@ -311,7 +375,7 @@ const scrolls = [
 		"You" are alive | tom
 		Become strategic when you can't | henry
 		You have one* chance to learn this, and &you& aren't even paying attention | henry
-		You look through the window bewildered | julian
+		You don't work here but the customers &know& you, / you haughtily sit behind the counter, / hiding, hiding / for a 9 to 6 work day | tom
 		It can't hurt you | tom
 		Despite you, I feel ᴇᴄsᴛᴀᴛɪᴄ | tom
 		You are tantamount to the big picture | molly
@@ -322,7 +386,7 @@ const scrolls = [
 	// its the title. its just hubris
 	new Scroll("Hubris", `
 		Sleep well. Nothing foreboding, it's not like you have only this last chance. Just... a good idea | tom
-		The houses are only separated by colorful banners enscripted with avant garde medieval symbols | tom
+		The houses are only separated by colorful banners inscripted with avant-garde medieval symbols | tom
 		Control, down-shift, now park the car | tom
 		The frugality of an onion is overrated | shannon
 		The growing ball of dirt is simply a distraction | henry
@@ -349,7 +413,7 @@ const scrolls = [
 		Who's your least elevated character | tom
 		Sanctity is the mnemonic device | tom
 		Black is the new black | shannon
-		Try visiting the amusemezall some time! | henry / wes / molly / zoë / max
+		Try visiting the amusemezall some time! | henry / wes / molly / zoë
 		Trying on suits whilst being a ghost | henry
 		Be afraid! | declan
 		When we say rats, we don't really &mean& rats | henry
@@ -362,12 +426,12 @@ const scrolls = [
 		You know, like sauce of the brain | wesley
 		What are you asking? / This is the question | declan / henry
 		Stop looking so gruntled | henry
-		The coating, though effective, is very unneccesary | tom
+		The coating, though effective, is very unnecessary | tom
 		I bet if we ran into that fence fast enough, we would go on an adventure | shannon
 		Just cause it's on fire doesn't make it a &bad& destination | henry
 		The world* is &exactly& what it seems | tom
 		* "They," in this document, can be assumed to be only singular | hyacinth
-		Pronounciation is strictly subjective | tom
+		Pronunciation is strictly subjective | tom
 		The title was composed of five adjectives and a single meaningless phrase | henry
 		We &all& feel bad | henry
 		We've got plenty of room | henry
@@ -385,7 +449,7 @@ const scrolls = [
 		The horses are here, they wish fortune upon you | henry
 		Bird and primates sometimes have similar degrees of skill at aviation | henry
 		From little acorns large octopi grow! | molly
-		The pulverized seeds glisten in the flourescent light | henry
+		The pulverized seeds glisten in the fluorescent light | henry
 		Don't look at the barley | henry
 		Raisins in deeply sorrowful locales | henry
 		There is no horse on the water | rowan / tom
@@ -405,7 +469,7 @@ const scrolls = [
 		Barnacles: discuss. | molly
 		Barnacles, discuss! | tom / molly
 		O'erhead, the cuttlefish flying south for the winter... | molly
-		Spoonfeed the cats for optimal maturation | wesley
+		Spoon-feed the cats for optimal maturation | wesley
 		The dodo bird had always believed he had plot protection | molly
 		Toast: truth or a good story? | molly
 		The platypi left for a night on the town, and returned with opposable thumbs | molly
@@ -414,6 +478,8 @@ const scrolls = [
 		Ground up grains with a helping of pain | tom
 		Wasps in the hive | henry
 		Birds have windows to our souls | declan
+		I have claimed this spot with my lingonberries and paper | wesley
+		Is there food made entirely with rocks? | noah
 	`),
 	// mid - high tier proverbs in general and insanity, light
 	new Scroll("Praculae", `
@@ -437,7 +503,7 @@ const scrolls = [
 		We haven't slept | hyacinth
 		you can't &still& be awake | tom
 		You &know& how to sleep, right? | tom
-		Feelings of another supercede feelings for another | henry
+		Feelings of another supersede feelings for another | henry
 		Feelings of one intercept feelings of the other
 		You create reality to prevent insanity | tom
 		You create insanity to prevent reality | ryan
@@ -456,7 +522,7 @@ const scrolls = [
 		Au contraire! I am not a home for insanity! | tom / shannon
 		Insanity brings greater comfort than clarity in a disaffected space | henry
 		Filming the steps to insanity | henry
-		My shadow is a demon, thirsting for my blood. / I first figured this out at age 13 and have been hiding in the darkness ever since. / If there's no light there's no shadow. If there's no shadow there's no demon. If there's no demon I stay alive. / Alive in darkness slowly going mad | mayzie 
+		My shadow is a demon, thirsting for my blood. / I first figured this out at age 13 and have been hiding in the darkness ever since. / If there's no light there's no shadow. If there's no shadow there's no demon. If there's no demon, I stay alive. / Alive in darkness slowly going mad | mayzie 
 		Retrorefractivity | henry
 		Keep making the photosensitivity larger | henry
 		&Completely& unreactive | tom
@@ -484,14 +550,14 @@ const scrolls = [
 		Storm of your amber eyes | tom
 		What? In blindness you can't see? | declan
 		Thinking is terrifying / At least, that's what it wants you to think... | tobyn
-		So all thoughts should be about not thinking, / so even if you happen to think you will only be able to think about not thinking, / which means the object of thinking will be lost in a flood of thinking about not thinking / and your thoughts won't be productive | tobyn
+		So, all thoughts should be about not thinking, / so even if you happen to think you will only be able to think about not thinking, / which means the object of thinking will be lost in a flood of thinking about not thinking / and your thoughts won't be productive | tobyn
 		Madness that isn't yours, despite your contribution | tom
 		Low equality in nonsense contribution | henry
 		Nearing consciousness / Fearing consciousness | henry
 		Looking ever closer | henry
 		He's unambiguously plural | hyacinth
 		Invisible to any eye you can muster | tom
-		You ought not to have a mind where your going | hyacinth
+		You ought not to have a mind where you're going | hyacinth
 		You can feel that your mind is about to collapse at any time | hyacinth
 		I'm going to put you in the Mind Room | tom
 	`),
@@ -543,11 +609,11 @@ const scrolls = [
 		Just kinda dancing on the dashboard of a car | henry
 		Decency glows underneath despite the dust | anna
 		Sunny shiny sweet spun sugar | mayzie
-		You are like a potato (we all grow) | julian
+		Like a bucket, but for humans | hyacinth
 		Creating a tripping hazard (simply for the inevitable power?) | henry
 		You'll be ready for what comes next | tom
 		Joy on a blue day | hyacinth
-		Feeling fluffy on a friday | henry
+		Feeling fluffy on a Friday | henry
 		They are &bounce& | sofia
 		Contain the child | william
 		Sprinkling my home with light | tom
@@ -581,15 +647,15 @@ const scrolls = [
 		Dusty, porous faces | henry
 		Some more, dusty | henry
 		Holes in the floor (by design) | henry
-		You do realize these aren't &actual& newlines right? | henry
-		If you consider your thoughts, will you find that dramatic and unbearable change will be required to rid yourself of the things you enjoy? / Occasionally, actions are imbued with positivity soley by ceasing to reason | henry
+		You do realize these aren't &actual& newlines, right? | henry
+		If you consider your thoughts, will you find that dramatic and unbearable change will be required to rid yourself of the things you enjoy? / Occasionally, actions are imbued with positivity solely by ceasing to reason | henry
 		I'm going to add another case | tom
 		The pages of the book are deceiving in length, but surprising well priced | tom
 		Contribution feeds that within you which should starve | henry
 		Cartilaginous head handles | molly
 		The craft is insufficient | tom
 		Number of fingers is an appropriate basis for a hierarchical society | tom
-		To much teamwork corrupts the mind | henry
+		Too much teamwork corrupts the mind | henry
 		Collaboration for the greater bad | henry
 		Decidedly unappetizing drywall | henry
 		Feeling your neurons swell | henry
@@ -635,7 +701,7 @@ const scrolls = [
 		The world is an illusion and never will be / Everything is impossible | tom
 		There is no do but try | tom / unknown
 		Try, there isn't a do | unknown / tom
-		The weather must be treated carefully, its quite slippery | tom
+		The weather must be treated carefully, it's quite slippery | tom
 		There is something inside of out | tom
 		The electrical cords are grinning broadly | henry
 		If you don't evacuate your network, what can you expect to gain? | henry
@@ -650,10 +716,10 @@ const scrolls = [
 		More information may be found in the walls | henry
 		It's fluffy here in the place I should be trying to leave | henry		
 		It hurts more to know &how& to fix something | henry		
-		The surface of the ocean you're drowning in is just more oil! &You& can't breath | henry
+		The surface of the ocean you're drowning in is just more oil! &You& can't breathe | henry
 		Crop circles encoded into your genes | tom
 		Crop circles encoded into your jeans | tom
-		Resignnation? No, please, re-sign this paper | tom
+		Resignation? No, please, re-sign this paper | tom
 		Signing off your doom | tom
 		Cents, it happened | tom
 		The capital owners love puppies | declan
@@ -712,16 +778,16 @@ const scrolls = [
 		A burgling most shameful, wrought in daylight | henry
 		If I had a dollar for every good deed I've done, I'd have several dollars by now | alan
 		Writing partially disparaging remarks leads to a lottery of first impressions | henry
-		Similar pain for disimilar people. / Is grouping by this really advisable? | henry
+		Similar pain for dissimilar people. / Is grouping by this really advisable? | henry
 		Portions of recollection, even organized by perceived significance, will always degrade eventually | henry
 		Speak well enough, and you may get an education / speak poorly enough, and your words will have worth to the crowds | henry
-		There's worlds beyond these | tom
+		There're worlds beyond these | tom
 		Stop fighting the nature of your goals | henry
 		Break down the barriers that keep you from making your greatest mistakes | henry
 		Only feel bad around others | henry
 		Don't justify their actions | henry
 		The octopus twiddled his tentacles as the world dashed madly on | molly
-		Everything is where it is | julian
+		Our creator has no guarantees | hyacinth
 		Discovering those within your soul | henry
 		So old you're past "age" | tom
 		Too young to use "stupid" | tom
@@ -730,15 +796,15 @@ const scrolls = [
 		Stubbing toes in the sandbox of life | tom
 		Failure and winning are linked. To win you must first fail | mayzie
 		Circumspect intentions lead to winding executions | henry
-		There's two devils inside every one of us | tom
+		There're two devils inside every one of us | tom
 		Advice for morally decrepit | henry
 		None of the cool things are easy | henry
 		Your knowledge is yours, although it may change without your will | tom
-		On a sinking ship, given the choice between a first class suite and a lifeboat, you chose the former | henry
+		On a sinking ship, given the choice between a first-class suite and a lifeboat, you chose the former | henry
 		Feels like rooms in an infinite mansion... is there an outdoors? | tom
 		Almost always if the answer is genuinely yes | molly
 		If you lie well enough, disguise in unneeded | henry
-		The best line's from a book no one's read | hyacinth
+		The best lines from a book no one's read | hyacinth
 		Maybe I need to think outside real life | tom
 		You can only go there 2 or 3 times before you can't leave | henry
 		One or two strands of our minds connect us to others | tom
@@ -826,7 +892,7 @@ const scrolls = [
 		Better than the rest of them | henry
 		Trans Hunds goeth fast | henry
 		Although small, the percentage of Vitamin C in the atmosphere was unreasonable and unmoderated | tom
-		Feeling french on a friday afternoon | henry
+		Feeling French on a Friday afternoon | henry
 		The foreshadows get longer at noon | henry
 		ɪn the space you call home / 'til the day rings true / ᴍy knights, they arrive / ɢarish and blue / ᴇnding the lines / ɴear to the brink / ᴅefeating the darkness / ᴇrased in a blink / ʀevealing the brightness / ғull of esteem / ʟeading the faithless / ᴜnder the steam / ɪn poor situation, we find ourselves here / ᴅecrepit and empty, lost amidst fear | hyacinth
 		Then she gave up / Then he gave up / Then they gave up / Then it was done | henry
@@ -870,7 +936,6 @@ const scrolls = [
 		Dark radiation | henry
 		Confounds abound | molly
 		Remain unsatiated | tom
-		Chonky margins | henry
 		Ever-slimmer margins | henry
 		Iiiiiiiiiiiiiiiiiiiit's suppertime! | henry
 		Water hazard | tom
@@ -892,7 +957,7 @@ const scrolls = [
 		Absolute nothing! &echoes& | tom
 		They have all the same memories of the day | AI
 		Behold upon the pit of ash and thou shall fall into luminance | tom
-		If I was going to be gone forever, I'd bring my 3DS with me | max
+		The shadows only reverse as the rain start the pour | hyacinth
 		Do your best before it's gone | tom			
 		Visit them every once and a while | henry
 		It is not certain that we'll find anyone there | henry
@@ -944,7 +1009,7 @@ const scrolls = [
 		Alone in the room | henry
 		The room &isn't& empty | henry
 		The search continues | tom
-		Speckled sunlight and warm glow and a long wrought iron archway / it is here whic... | tom
+		Speckled sunlight and warm glow and a long, wrought-iron archway / it is here whic... | tom
 		Your portrait stares back at you in this empty abode | tom
 		A hilly, grass coated place | tom
 		Venture into the plateau, I guess | hyacinth
@@ -971,8 +1036,8 @@ const scrolls = [
 		Negotiating with relativity | tom
 		There are tunnels | tom
 		Your multiple tongues | tom
-		Notice / Time is running out | julian
-		Time is but a laptop on a train | julian
+		Time-based triangles | tom
+		Free time is where you start to apply / Caged time is where you start to learn | hyacinth
 		So much time but so little to be | henry
 		That hadn't happened in this timeline, nor was it expected to | tom
 		Only 33 more years | henry
@@ -1030,14 +1095,13 @@ const scrolls = [
 		Tactically placed voids | henry
 		We weren't firing on any cylinders | henry
 		Assume violence | henry
-		Breasts are occasionally worrisome | wesley
 		Don't betray your alliance | henry
 		The nom de guerre given to the Headknight was "Ornamental Cabbage." The war effort tripled | tom
 		A shocking amount of empty slots | henry
 		The Judges are present | tom
-		Knights at the top of a hill, debating the philisophical merits of war | henry
+		Knights at the top of a hill, debating the philosophical merits of war | henry
 		Dulling your knife to use as a blunt weapon | tom
-		The first can decapitate with one motion. / The second requires two motions, however, there will be &zero& bloodflow and thus no mess | tom
+		The first can decapitate with one motion. / The second requires two motions, however, there will be &zero& blood flow and thus no mess | tom
 		Scoring for &the& enemy | henry
 		The message had been delivered: vibrant, vitriolic, and vile | henry
 		An invasion of morals, as opposed to an invasion of armies | tom
@@ -1070,14 +1134,14 @@ const scrolls = [
 		Laugh at the line of your superiors | henry
 		This was not founded in the spirit of competition | tom
 		Delivering mail &can& make you an enemy of the state | henry
-		Steelclad tentacles slamming against your will (as well as the hull of the warvessel you occupy) | tom
+		Steel-clad tentacles slamming against your will (as well as the hull of the warvessel you occupy) | tom
 		Soul or strong spirit is needed to be "alive" | tom
 		Any action you take shall be documented | sofia
 		Punching in the afterlight | henry
 		The burning sensation reminds you it's not yours | henry
-		Above! There it is! | julian
+		Despise to be inspected | tom
 		An impromptu show to force | tom
-		Oh they fought / They fought til the borders cracked / and the knot snapped. / But then our soldier / got stabbed in the back | tom
+		Oh, they fought / They fought til the borders cracked / and the knot snapped. / But then our soldier / got stabbed in the back | tom
 		Surround the rising humans | tom
 		I want to be on the safest possible side | henry
 		Supporting the crews / Eluding the views | henry
@@ -1119,11 +1183,11 @@ const scrolls = [
 		Just forget about having a good memory | alan
 		When is the sun not above our heads? When it approaches! | tom / shannon
 		Doubles as a surreal nightmare! | molly
-		Nostrils for knuckles or knuckes for nostrils? | molly
+		Nostrils for knuckles or knuckles for nostrils? | molly
 		A misconception falls down a hole into two dreary ravines. / The rabbit says, "What's the time?" / We all say, "Tomorrow!" | tom / henry
 		Hopelessly apocalyptic, but bound to be better by Tuesday! | molly
 		Entirely undone by shenanigans, the dachshund bid adieu | molly
-		Life is like a carosel, vomit inducing | shannon
+		Life is like a carousel, vomit inducing | shannon
 		Takes out two stones with a ˢᶦⁿᵍᵘˡᵃʳ bird | tom
 		Let's make the last ones be truly &excerional& | tom
 	`),
@@ -1216,7 +1280,7 @@ const scrolls = [
 		Persimmons are sufficient | henry
 		The distinction between you and me is only 1% greater than ~99.099% of the distinction between you and me | henry
 		Rolling a coin 10 times will not result in 10% spades | tom
-		It is gone now, you won't need to fear for about another 38 months | henry
+		It is gone now; you won't need to fear for about another 38 months | henry
 		If every event in a collection were a result of an enumeration to which it is not a result, / and that enumeration is only a sum of numbers where some element does not exist on it, and that the enumeration of the elements is only a sum (or sum) of numbers where some element exist on the collection, / we will have all the general forms of functions from which there is no natural law (unless the particular form is logically equivalent to the general form) / and the natural laws will be determined as the natural law of the universe would be | AI
 		Five score, to the tenth. Business as usual | tom
 		I've been adding cubes for about four minutes | shannon
@@ -1225,7 +1289,7 @@ const scrolls = [
 		Gambling away across the entire range (it's about 40 or so meters) | tom
 		Cozy vs. safe has a depressingly low r² | henry
 		There are no guarantees that there aren't piecewise laws of physics | henry
-		Weight is dependant on many more things than we thought | tom
+		Weight is dependent on many more things than we thought | tom
 		To sufficiently enjoy photons, take a break from them for a while | henry
 		Alcohol is optional when in the presence of statistically impossible cacao | henry
 		Taking derivatives, alone in a room | henry
@@ -1238,7 +1302,7 @@ const scrolls = [
 		Angular velocity &never& caps out, unlike special or quantum velocity | tom
 		A top-down view of the infinite | tom
 		A highly unreasonable quantity of hands to be found in 1-2 cereal boxes (at most 5 would be fine!) | henry
-		A bottom up view of the finite | henry
+		A bottom-up view of the finite | henry
 		We may have doubled, actually | henry
 		The maximum is 8, obviously | henry
 		Moving from place A to place א | henry
@@ -1255,7 +1319,6 @@ const scrolls = [
 		Forty several cans of chili | wesley	
 		Increasing numbers, mildly | henry
 		The sum of constitution, if you will | henry
-		Only don't know, go straight | lewis
 		In the space between stimulus and response is a yeti, seven snowplows, and 13 kalamata olives | molly
 		Consider the likelihood | molly
 		Home grown numbers | henry
@@ -1268,7 +1331,7 @@ const scrolls = [
 		Your percentage is growing | henry
 		A healthy brainbeat of 6,200 | tom
 		300.24q = 1wM | henry
-		A couple "9 and a half"s | henry
+		A couple "9 and a half"'s | henry
 		Concerningly low prevalence | henry
 		Their precision is unfathomable / Their accuracy... not so much | henry
 		2 may be a challenge, but 30 is a piece of cake | hyacinth
@@ -1299,7 +1362,7 @@ const scrolls = [
 		Life by sharp edges and hard corners | henry
 		The lore here makes us look better | henry
 		The earth is getting unoriginal as the end nears | henry
-		And maybe it'll be okay, maybe it'll be worse then even projected | tom
+		And maybe it'll be okay, maybe it'll be worse than even projected | tom
 		To live on your own (which may or may not end) | tom
 		Praise, and you may decide your own future | tom
 		No one is ever sure | tom
@@ -1311,7 +1374,7 @@ const scrolls = [
 		We are retracting | tom
 		Animate your demons | henry
 		A glass of water for Zeus | tom
-		Zeus doesn't like the idea of your promotion | wes
+		Zeus doesn't like the idea of your promotion | smith
 		The stars have aligned into the shape of your future! It's a clear day outside | tom
 		Nearly comprehensible, on the brink of competence | henry
 		I can't even see why knowing would be helpful! | henry
@@ -1331,10 +1394,10 @@ const scrolls = [
 	`),
 	// strangeness, moss/plants, good
 	new Scroll("Auberations", `
-		It happened on a tuesday | tom
+		It happened on a Tuesday | tom
 		♪ I &can& hear &you& ♪ | henry
-		♪ Bouncing on down to New Orleans ♪ | max
-		The countrypeople are quite picky | tom
+		Ordering "moss on the rocks" at a bar | hyacinth
+		The country people are quite picky | tom
 		Moss is [emotion here]. Now, moss is a philosophy | tom
 		To see is to believe, to feel is to doubt, and to smell is to be thoroughly disenchanted | henry
 		The feeling of being able to feel your voice in the woods is lovely | tom
@@ -1342,7 +1405,7 @@ const scrolls = [
 		What the hell did I think I was gonna hear this on the radio? | tom
 		It's fun to watch y'all manipulate others | shannon
 		The packing peanuts entice me | tom
-		Being found guilty of counterfeiting settled an unmistakable aura of authority on a metallurgist | max
+		Flora, Fauna, and the Fabiform Father | shannon
 		There's also a little part in this episode where Liz points out why you shouldn't get rid of all the gods at once, so how does that make people unhappy? | AI
 		There have always been a couple rogue linguists | henry
 		Make staying-alive-style choices | henry
@@ -1359,13 +1422,13 @@ const scrolls = [
 		The moss feels annoying, overdone, derivative | henry
 		Try empty voids and epic poems instead! | henry
 		You're my moss (affectionate) | shannon 
-		The ferns spotted fingers and tickled the toas of all who walked by | molly
+		The ferns spotted fingers and tickled the toes of all who walked by | molly
 		Do you feel your breath today? | henry
 		I'm spiraling down to the ferns of my soul | wesley
 		The biodiversity of a plane does not denote its habitability | tom
 		Cold, cozy plants, resting at the bottom of the pit I call home | henry
 		Grass in the alleyway | henry
-		Dragonflys make good steeds if your friend is a tree | rowan
+		Dragonflies make good steeds if your friend is a tree | rowan
 		Dishwater consumption is based on morals, or lack thereof | tom
 		Slide down the carrots for a fun time! | wesley
 		Fully "organic" / Not even remotely stolen | henry
@@ -1373,7 +1436,7 @@ const scrolls = [
 		The metaphysics of plants beguile us all in the end | molly
 		Strips of moss dangling from the heavens | henry
 		Finely minced forests | tom
-		Close enought to a soul to work | tom
+		Close enough to a soul to work | tom
 		The second best thing to replace a spirit | tom
 		The closest thing to a body you'll ever get | henry
 		The package is "damp" | henry
@@ -1381,7 +1444,7 @@ const scrolls = [
 		They grow in the bathtub | tom
 		My ears feel crisp at this time of night | hyacinth
 		Now you know where the flowers | tom
-		The plants speek nothing of they're annoyance | ryan
+		The plants speak nothing of they're annoyance | ryan
 		Keep them submerged 'til they're ripe | henry
 		...I may have committed accidental propagation | shannon
 		You can't even know how many cells you have | tom
@@ -1390,7 +1453,7 @@ const scrolls = [
 	// cards and games. study of the universe. science
 	new Scroll("Boron's Knautsawn", `
 		The king of spades is mad at you | tom
-		You've been deal a hand of a king of spades and an ace / That would be great for blackjack but this is five card draw and you seem to somehow have lost three cards already | tom
+		You've been dealt a hand of a king of spades and an ace / That would be great for blackjack but this is five card draw and you seem to somehow have lost three cards already | tom
 		The cards* are being dealt | henry
 		Oh, you &know& what they want | tom
 		&The dealers are ready& | henry
@@ -1405,8 +1468,8 @@ const scrolls = [
 		Playing cards should be worth more. You could try and collect a full deck | tom
 		Exuberate yourself | tom
 		Do even think about it! | henry
-		In the third spacial dimension, there is North, South, East, West, Posck, and Whick | tom
-		In the fourth spacial dimension, there is North, South, East, West, Posck, Whick, Deach, and Gokch | tom
+		In the third spatial dimension, there is North, South, East, West, Posck, and Whick | tom
+		In the fourth spatial dimension, there is North, South, East, West, Posck, Whick, Deach, and Gokch | tom
 		Blind mapmaking has created new, difficult to explore realms | tom
 		A semblance of reality | tom
 		Tuning the gears allows &proper& thought flow | tom
@@ -1430,16 +1493,16 @@ const scrolls = [
 		If the former, then where are the boundaries of these worlds? | tom
 		If true death is possible, is it balanced or will we go extinct? | tom
 		Think or be thought | declan
-		The Knautsawn was contructed, in mind at the very least | tom
+		The Knautsawn was constructed, in mind at the very least | tom
 		Drawing a card from a standard 40 card deck / It's &your& future | henry
 		Fire, water, cloud, air, stone, and the invisible heuristic | tom / shannon
 		Air, Wind, Sky, and Atmosphere / The four elements surprise some... | henry / tom
 		Nothing but the sand you came from and will return to is free | tom
 		Alone in a randomly generated landscape | tom
 		Curiously, intellect and flammability of the body appear to be linked | tom
-		An ununique copper tube is all you need for this one | tom
+		A common copper tube is all you need for this one | tom
 		Although concerning, the variation of particles seems to be stable | tom
-		Pawnes, both Towers, both Judges, Prophets, Seamstress, King and the Sun, set upon the board | tom
+		Pawns, both Towers, both Judges, Prophets, Seamstress, King and the Sun, set upon the board | tom
 		Antiquity, ambiguity, quality / My favorite children's game | henry
 		Ambiguity conquers antiquity | tom
 		Quality triumphs over ambiguity | tom
@@ -1453,7 +1516,7 @@ const scrolls = [
 	// sea and salt and food
 	new Scroll("Kelp", `
 		Salt in the sea brings you to your knees | tom
-		You fall to the salty depths | julian
+		It is not dependent upon the inclusion of fruit | ryan
 		Loops upon loops | tom
 		There's nothing but more humans and they're just as confused as I. Where is everyone else? | tom
 		Looking around: are we all grammatically correct? | henry
@@ -1463,7 +1526,7 @@ const scrolls = [
 		The habitat is no longer safe. Maybe it never was | tom
 		I came for aspirin but I wound up with chocolate | wes
 		The powdered joy too often comes out in clumps | molly / henry
-		My brain has been clogged with hair and the seratonin won't drain | henry			
+		My brain has been clogged with hair and the serotonin won't drain | henry			
 		Some regions of the brain are likely to be burgled | henry
 		Singular. Drops. Of. Water. | henry
 		Fish on the land. Sky in the sea | tom
@@ -1506,7 +1569,7 @@ const scrolls = [
 		Take up a new hobby. You'll have to, eventually | henry
 		Lock your doors, open your windows, and call upon your neighbors | tom
 		You will go and I will follow, in my own twisted way | tom
-		Intertwined, measureably | tom
+		Intertwined, measurably | tom
 		All light is simply a byproduct of your own twisted constructions | tom
 		Identical depression and twins | tom
 		It's nothing personal | henry
@@ -1532,7 +1595,7 @@ const scrolls = [
 		Praying for departure requires octagonal perambulation for the best results | henry
 		Lock your doors and windows, hide in the basement, and wait for someone to arrive | sofia
 		Hiding in the basement / run from their glance | henry
-		Oh the keys they burn / Please cool your keys before preparing the ritual | declan
+		Oh, the keys they burn / Please cool your keys before preparing the ritual | declan
 		Unexpectedly, we congealed | molly
 		Your papers are lacking the proper signatures plus a certain je ne sais quoi | molly
 		Overcome by an influx | molly
@@ -1555,7 +1618,7 @@ const scrolls = [
 		Corpses are 97.05% &hydration& | tom
 		Your shadow may leave for a time / You will accept this | henry
 		The sun actively racing towards the ground | wes
-		The trouble is, some people don't &need& the drugs | wes
+		The trouble is, some people don't &need& the drugs | smith
 		Toiling and tumbling, up and down | henry
 		No afterlife = No beforelife? | tom
 		Ancient domains rumbling below | henry
@@ -1589,13 +1652,13 @@ const scrolls = [
 		Attic is towering | tom
 		You must not be italicized | tom
 		Passages through the void, find nothing else | henry
-		Pulling through the dark zone is... unadvisable, though definitely encouraged extracurricularily | tom
+		Pulling through the dark zone is... unadvisable, though definitely encouraged extracurricularly | tom
 		As long as you're off the premises, we can't stop you | henry 
 		The void wishes for your company (the feeling isn't mutual) | henry
 		Scream against the void that is your friendship | henry
 		Don't look them out the eye | henry
 		Accurate predictions strain the system | henry
-		You shalln't see anything of significance if you look | henry
+		You shan't see anything of significance if you look | henry
 		We don't leave any more | tom
 		But your mouth does not open | tom
 		You set down the weight and your shoulders feel heavier. You could have predicted this | henry
@@ -1615,7 +1678,7 @@ const scrolls = [
 		A quiet acceptance of the void between my ears | henry
 		Voids in the family room | henry
 		Sorry I'm late. Traffic jam in the void | molly
-		They just look stoic | julian
+		♩ Just because we don't know what we'll find when we get there, that doesn't mean we shouldn't run ♩ | hyacinth
 		Yodeling into the abyss | molly
 		Smiling does not necessarily denote a good person, or lack thereof | tom
 		Consider a chasm, filled with Spam | molly
@@ -1713,7 +1776,7 @@ const scrolls = [
 		You're viewing it in the wrong dimension, you goofball | tom    
 		For there shall come a time, when a time comes | ryan
 		A small fraction of you may end up happy. Although it means no harm to you, many of you want to leave | AI
-		I'm going to turn you into a ghost | max
+		Step into the magnet machine and feel your #blood# | tom
 		The weight of emotional release will be passed on to someone else | tom
 		When one moves briskly, the air will freeze on their hands | tom
 		Your breath illuminates the things you try to ignore about yourself | henry
@@ -1767,7 +1830,7 @@ const scrolls = [
 		The tears run up your face as you lose your voice | henry
 		Neptune awoke on the beach, but they were not conscious. Nobody is | tom
 		And the night looks on, bemused | henry
-		Telling them why they can't breath is exhausting | henry
+		Telling them why they can't breathe is exhausting | henry
 		Anything is organized with the &correct& perspective | tom
 		I haven't &ever& seen you this young | tom
 		Only false gods lack domains | declan
@@ -1775,7 +1838,7 @@ const scrolls = [
 		You must speak before truth is possible | henry
 		Boron, he thought death was optional | tom
 		You can't ever really be &dead& dead | tom
-		You wear death but you haven't know it for a while | tom
+		You wear death but you haven't known it for a while | tom
 		Don't remember last time? | tom
 		And now we've met! | tom
 		The copper turns green and the iron turns red in an instant | tom
@@ -1806,14 +1869,14 @@ const scrolls = [
 		And you are still a stone | tom
 		Driven from your home, the stone-lined path guides you to your next | tom
 		They must not realize what this stone arrangement meant | tom 
-		The stones contribute to the rigidity of your knuckles and vertibrae | henry
+		The stones contribute to the rigidity of your knuckles and vertebrae | henry
 		Backstones | tom
 		The stones in the mountains #contribute# to the ritual | henry
 		The stones will encourage you to leave, &soon& | henry
 		Gems were found as their last resort | anna
 		The nobility held the gems captive | tom
 		Sealed salt for use as decorative stone | tom
-		Stones spiralling slowly towards the gate, peaceful and solemn | hyacinth
+		Stones spiraling slowly towards the gate, peaceful and solemn | hyacinth
 	`),
 	// singularity
 	new Scroll("Aplicality", `
@@ -1898,7 +1961,6 @@ const scrolls = [
 		Ata khe ata! | tom
 		Edge on edge! | tom
 		Dog is lode | sofia
-		Intel... outside | tom
 		Escape! Escape! &Escape!& | tom
 		Scrolling past trees and breeze. Like, y'know... | tom
 		I am not that type that can write scripts, I am just... | tom
@@ -1918,7 +1980,7 @@ const scrolls = [
 		A die in glue | henry
 		Wow! It glistens! | henry
 		Stripes on stripes on stripes! I see my #soul# | henry
-		An #&iota&# of injust circumstance!? | tom			
+		An #&iota&# of unjust circumstance!? | tom
 		Abandon all here ye who enter hope | molly
 		tHE cYLINDER hAS bEEN rMOVED? | tom
 		Lost! In the liiiiiibrary | tom
@@ -1952,7 +2014,7 @@ const scrolls = [
 		Consider the distance you must fall to reach the sky | henry
 		Where can you find several oysters? | henry
 		Ghostwritten acknowledgments | henry			
-		Typography is going to be a surprisingly luctrative profession | henry
+		Typography is going to be a surprisingly lucrative profession | henry
 		A pilgrimage to the end of the road | tom
 		Wildflowers and open hillsides / Heights beyond that which is below / and a soft breeze | tom
 		The zoo is expanding, far beyond its proper limits | henry
@@ -1972,7 +2034,7 @@ const scrolls = [
 		Swimming through the planet | tom
 		The height of the earth mostly influences the red channel | henry
 		Causing confusion without meaning | tom
-		Seven is a bad way to divide the continents / There's clearly five: Eastern Australia, Western Australia, The other land, the sea, and the sky | max
+		You don't deserve the darkness between rooms | hyacinth
 		*Our home in the trees | hyacinth
 		Once here, you certainly once have | hyacinth
 		Several bridges between the locales | hyacinth
@@ -2003,8 +2065,8 @@ const scrolls = [
 		The seal on the envelope you call home makes it easier to stop wondering | henry
 		Although the material isn't waterproof, the craft is | tom
 		The building block of civilization is ability to ascend | tom
-		Reality is currently currently experiencing technical difficulties. Please try again later | molly
-		The cloven-hooved cod was once a deep sea spectacle, but mediocre once battered and fried | molly
+		Reality is currently experiencing technical difficulties. Please try again later | molly
+		The cloven-hooved cod was once a deep-sea spectacle, but mediocre once battered and fried | molly
 		Simply boil down your hopes and dreams | henry
 		Don't run from your dreams... Or your nightmares | henry
 		Out of real life* | tom
@@ -2017,7 +2079,7 @@ const scrolls = [
 		The room is &empty& | henry
 		Wallet for the ocean | tom	
 		Maybe they'll dream | tom / henry
-		Ever denser, Ever smarter | hyacinth
+		Ever denser, ever smarter | hyacinth
 		Such floof, such bliss | tom
 		"Conscious" doesn't even begin to describe it | tom
 		We cut ours out of nothing / There is no greater whole | henry
@@ -2054,7 +2116,7 @@ const scrolls = [
 		Where we see a tree, they see a thicket | tom
 		Growth in the off season...? | tom
 		Fully grown, not nearly in time. Nothing is ready | tom
-		They still have an overwhelmingly real world theme, but it's getting better | henry
+		They still have an overwhelmingly real-world theme, but it's getting better | henry
 		Entropy kisses and kills us all | tom
 		Ordering phalanges à la carte | tom / shannon
 		They're almost #here# | henry
@@ -2080,7 +2142,7 @@ const scrolls = [
 		Eyes wide / Grin wider | henry
 		Your body image is ᶠ ˡ ᵘ ᶜ ᵗ ᵘ ᵃ ᵗ ⁱ ⁿ ᵍ  ʳᵃᵖⁱᵈˡʸ / It has a third eye | henry
 		Sleeping in the inbetween | henry
-		Hear yourself breath / Now stop / You decide | henry
+		Hear yourself breathe  / Now stop / You decide | henry
 		Life goes on, perturbed but otherwise unchanged | tom
 		It hurts better than it ever did before | henry
 		Your soul is not clean enough to be sold | tom
@@ -2088,6 +2150,7 @@ const scrolls = [
 		You don't fear being eaten alive... do you? | tom
 		Kill the head, again and again | tom
 		Your heartrate is climbing | henry
+		We've killed it and yet it moves / Again and again, striving to be better and failing as / I am drenched in the blood of what is lost and what I have yet to discover. / The beasts grin and I am befallen with gratitude / I skewer the beast. / For a time left long ago, when the blood did not drench me / And the ˢᵐᶦˡᵉˢ were not as wide as they have become. / The spear I carry is not mine to hold but my pilgrimage has gifted it to me. / I skewer the beast. / It groans and I grasp my hairless head / My age is irrelevant to this plight / For they see my sign and nothing changes / I am unrecognizable, indistinct, unsharpened / I skewer the beast. / And it dies, but it doesn't really die, or does it? Does anything? / It fades, I am blurred, my vision, my form, my thoughts / And [BLAnD] above and below is blind / Running from a fate with insufficient shoes / I trip in the misty, rusty haze / I lay and look into the not-sky / I skewer my internal organs / The weak are sheltered by my sacrifice and will be overcome at…  …my suffering to be ended and theirs begun. / But my spiked existence progresses through chaos, / And the sun grows ever longer / I know not to fear and yet I must, must cleanse the souls of the bloody and bruised, / Splintered and sought / &Beaten and befallen& / You watch me, you observe me, you with your pen and your smile / The hymn they sing continues; with / Knives for fingers and fingers for knives / Growing, out of rhythm out of time, as / Parts of my mind waver, as the space is being filled, growing, growth, grown / Defying the state of this world is for the clean / And yet my tainted form remains unchanged through this pause, this inescapable ruse / I try and leave / You do not / Real life is for those unlike me / And I trudge to the next beast / Mind, body, and bone / No place to call home / Not even my form, my thoughts, forlorn / And #Rebirth# / Ifcarnic ideals &seize& your domain / They stood, solid, stoic, faceless / Hollowed by the realization of what was, is, and [BLAnD] / Superficial and glimmering / The sand is still caught between your eyelids, under your fingers, in the threads of your soul, timeless, bindless, ever-present constant of this ᶜʳᵘⁿᶜʰᶦⁿᵍ ᵖᵒʳᵗʳᵃʸᵃˡ / Such a blatant lie and we believe it / They smile and see, simply to be / And as the peeling skin of the world is pulled back / The smiles widen as they see / Truly see / And it is done / The sand falls from the bodies / And you rise and they rise and she rises / But it happens all over again / This is not rebirth, this is the pause over and again and the rich moon rises | tom
 	`),
 	// short-mid length, universe, moon, machine
 	new Scroll("Lunar Parchment", `
@@ -2139,9 +2202,9 @@ const scrolls = [
 		We heard that it would end in a museum, but it hasn't yet | tom
 		The pictograms are chipped at the edges | henry
 		Slanted hieroglyphs for you and yours | henry
-		Oh glorious instrument, it rhymes! | henry
+		Oh, glorious instrument, it rhymes! | henry
 		Music on the walls, indicating you should run | henry
-		You can't hear them, I can't hear them; who's ringing the bells? | henry
+		You can't hear them; I can't hear them; who's ringing the bells? | henry
 		We don't know what's echoing / Nobody said anything to spur it to action | henry
 		Don't hear them, only listen | henry
 		You don't have to listen to that | tom
@@ -2151,14 +2214,14 @@ const scrolls = [
 		The tune is sad, melancholy, &meaningless& | tom / henry
 		Change the title accordingly | henry
 		Parenthetically, it was all resolved | molly
-		French isn't turing complete | henry
+		French isn't Turing complete | henry
 		Foolishly, I took the eggs | tom
 		Monotonal phosphorous can only be obtained by the unimaginative | tom
 		The insidious prince only exists in your mind's paintbrush | tom
 		Put your brain together / Now you might as well just think | tom
 		Spinning, in circles, without a rapport | tom
 		There is a slim chance you will hit thirty or more | tom
-		The attic oozes jello while the band plays on | molly
+		The attic oozes Jell-O while the band plays on | molly
 		I wonder if pianos can feel the constant agony of their keys being abused. / The music that plays is just their screams | shannon
 		Tune the audience | henry
 		Don't use &direct& quotes | henry
@@ -2178,7 +2241,7 @@ const scrolls = [
 		You sit in judgement but can't spell "beguile" | molly
 		Paradoxical is just &standard& weird | henry
 		Surprisingly, the two connected works have several parallels | henry
-		Frustratingly mild snaps (&arpeggioed&) | henry
+		Frustratingly mild snaps (&arpeggiated&) | henry
 		50,000 lines and the only thing different is my first and last name! | tom
 		You've received a "letter" | tom
 		The Music is always True | ryan
@@ -2188,13 +2251,13 @@ const scrolls = [
 		It's perfect for my movies | tom
 		Frightening words with everyday definitions | tom
 		Frightening definitions of everyday words | hyacinth
-		Tell me, O Muse, of the man of many devices, who wandered full many ways after he had sacked the sacred citadel of Troy | julian
 		Motifs of your free time | henry
 		They read a simple poem | henry
 		Tooth maracas | hyacinth
 		There was a book and our family found it | wes
 		That almost deserves music notes! | hyacinth
 		Drawing the curtains in pen | hyacinth
+		...but you've already been written? | tom
 	`),
 	// confusion, random, less philosophic
 	new Scroll("Hyubert", `
@@ -2222,7 +2285,7 @@ const scrolls = [
 		A dark spot where the sun was shall fall into the dark | tom
 		Don't do drugs, become absorbed in unreality instead | tom
 		The difference is that a spoonful of sugar is not much | tom
-		And he wanted to give you some pudding, and that's it! | max 
+		Come down to Saint France Auto Bay Company Church down on the hill for free  r e p a i r s | tom
 		Blue indicates you should #stay#! stay! &stay&! | henry
 		Crumbling sidewalks typically are a facade | tom
 		Earthly storefronts are frequently in the business of disguise | henry		
@@ -2255,13 +2318,13 @@ const scrolls = [
 	// people, foolish things
 	new Scroll("Fools", `
 		That is normal | henry
-		This is expected behavior | max
+		A delirium gives justification for its abrupt greeting | tom
 		Mackenzie: good gods, good humans, good stories, good people, good music | AI
-		And Mackenzie said the terms arent negotiable, but we'd continue regardless | tom
+		And Mackenzie said the terms aren't negotiable, but we'd continue regardless | tom
 		Mackenzie: last time, last runner, last life | tom
 		Special characters, special people | henry
 		Grim, the peddler, amongst the Lorician | tom
-		Cephalopods are particularily bad spies | henry
+		Cephalopods are particularly bad spies | henry
 		Trees don't just grow on money | molly
 		I open my mouth and the continent surges through my esophagus | henry
 		Purchasing continents on the dark web | henry
@@ -2272,10 +2335,10 @@ const scrolls = [
 		We don't know because we crossed it substantially | henry
 		Only worry about what &won't& happen | henry
 		We'll have a splendid time. It'll be absolutely wonderful there. You won't have to worry about a singular thing | tom
-		Free Chile from its Northern constraints | tom
+		The rampant carnage caresses you into a lengthy slumber | tom
 		Canniness in this trying time | tom
 		Dying of thirst is a substantial possibility on the way from legality to morality | henry
-		Clicking noises aren't &neccessarily& a bad sign | tom
+		Clicking noises aren't &necessarily& a bad sign | tom
 		Why are you alright? | tom
 		Overdramatic, but in perfect time | tom
 		Sufficiency, sweetheart | tom
@@ -2295,7 +2358,7 @@ const scrolls = [
 		An academy of illustrious nincompoops | molly
 		He has the genius not to say the extraordinary but to say the ordinary | anna
 		A bunch of random words equals profound knowledge? I suppose | mayzie
-		Gold doesn't tarnish! / Easy for you to say... | noah / camden
+		...Assuming your oyster is a bunch of annoying debugging | camden
 		He literally just killed his glasses | forrest
 		Now &that's& how the job is done | tom
 		I know acceptance when I see it | tom
@@ -2326,7 +2389,7 @@ const scrolls = [
 		Half-hearted black holes | tom
 		Unspinning particles / Unvibrating knots | tom
 		You look very trapezoidal from this angle | henry
-		...and the vessel was constructed to be longer than it was wide / the height would be changable if needed | tom
+		...and the vessel was constructed to be longer than it was wide / the height would be changeable if needed | tom
 		The builders, although small, are always with you | tom
 		This object contains several surfaces, most of which have vernacular potential! | henry
 		Distance is a persistent construct | tom
@@ -2347,19 +2410,19 @@ const scrolls = [
 		Truly reprehensible geometry | henry
 		New quarks! | tom
 		Phase diagrams are purely situational. &pours you a cup of steaming liquid oxygen& | tom
-		Unbounded force from a swining plumb bob | tom
+		Unbounded force from a swinging plumb bob | tom
 		Three dimensions mapped into your mind | tom
 		Make orbs round again | wesley
-		Immensity is an unknown contruct | tom
+		Immensity is an unknown construct | tom
 		Strong gravity, weak gravity, and visible gravity | tom
 		Circles dream of being edgy, but alas | molly
 		Thinking outside the box, and inside the sphere | henry
 		Merely a yard from your home | henry
 		Once upon a space | tom
 		The heavy vibration is indeed necessary | tom
-		You'll know when you're not continguous | molly
+		You'll know when you're not contiguous | molly
 		Estranged coordinate points in space | tom
-		They've got some columns! | julian
+		Geometry for the undimensioned folk | tom
 		Sideways and vertical | tom
 		Especially gradiented spoon | tom
 		Knotting of the intestines | henry
@@ -2380,12 +2443,12 @@ const scrolls = [
 	// government, electronics (ock - la - swah)
 	new Scroll("Oklacois", `
 		Don't fear the establishment* | henry
-		Just a switch on a circuitboard | tom
+		Just a switch on a circuit board | tom
 		Computers aren't electronic, but will become electronic one you know what you're looking for | tom
 		She turns wiring to meal for the unconstitutionalists | henry / tom
 		&holds up olive& Electrically sufficient | tom
 		Evil SUV electric car | forrest
-		Ghosts are kept apart from civilians in federal cemetaries | tom
+		Ghosts are kept apart from civilians in federal cemeteries | tom
 		The blackberry bushes have come to an unanimous consensus | tom
 		Two small, particular, oddly specific tasks | molly
 		Radical centrism is a controversial stance | henry
@@ -2393,7 +2456,7 @@ const scrolls = [
 		Physiocrats with save* our government | henry
 		The new reign is disappointed in its citizens | tom
 		Applications violating the basic barriers of technology / Worms floating in the air | henry
-		The only thing that changes is the name, and the map above | julian
+		Electric shocks make the air stick to your skin | hyacinth
 		From the floor on up | henry
 		Edible technology is the ⁿᵉˣᵗ ˢᵗᵉᵖ | tom
 		Cube-shaped flags | tom
@@ -2418,6 +2481,7 @@ const scrolls = [
 		We're adding to the document | hyacinth
 		Liaising with the incandescence | molly
 		I know their actions, not themselves | tom
+		Blame nobody, expect nothing, and serve the motherf*****s / Lord knows they need it | lewis
 	`),
 	// definitions
 	new Scroll("Dictatics", `
@@ -2461,10 +2525,10 @@ const scrolls = [
 		The lil' guy's feeling snuggly | zoë
 		Two points determine a lime | zoë
 		"Mise en place"?! No! It's "I'm en place"! | zoë
-		On a sinking ship, given the choice between a first class life and a &sweet& boat, you chose the former | zoë
+		On a sinking ship, given the choice between a first-class life and a &sweet& boat, you chose the former | zoë
 		I'm braiding my bones | zoë
 		Ah yes! Your two genres! Psychology and evaporated milk | zoë
-		Do you want me to &recind& my offer | zoë
+		Do you want me to &rescind& my offer | zoë
 		I got condensed | zoë
 		Why don't &you& know what your lungs taste like? (accusatory) | zoë
 		Hiiiiii! How beest thou? | zoë
@@ -2478,7 +2542,7 @@ const scrolls = [
 		Crash bang moo! The cows have dispersed | zoë
 		Too many cooks spoil the soup / You only need one for proper flavoring | zoë
 		My get up and go got up and sat back down | zoë
-		Ears are like dogs, they hear things and they bark a lot | zoë
+		Ears are like dogs; they hear things and they bark a lot | zoë
 	`)
 ];
 
@@ -2552,5 +2616,5 @@ function proverbsBy(author) {
 }
 
 function howMuchToWorry() {
-	return scrolls.find(scroll => scroll.title === "Freud the Spinner").length / totalProverbs;
+	return 82173.12739 * Math.exp(scrolls.find(scroll => scroll.title === "Freud the Spinner").length / totalProverbs);
 }
