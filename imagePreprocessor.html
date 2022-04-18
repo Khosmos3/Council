@@ -15,16 +15,19 @@
 	`);
 	
 	[
-		"Boron's Knautsawn",
-		"Exlareel",
-		"Freud the Spinner",
-		"Isfaths",
-		"Suffering",
-		"Tidescales",
-		"Unpleasant Thoughts"
+		"Onter", "Illuminating", "Suffering", "Okrates", "Isfaths", "Hubris",
+		"Dilap", "Praculae", "Ique", "Unpleasant Thoughts", "Sputilations", "Ti",
+		"Circles of Polarity", "Ectermine's Legacy", "Spaoons", "Apathetium",
+		"Plagiarized Optics", "Konradism", "Varying Elements", "Vocaloid", "Frill Optanal",
+		"Theophrastus", "Auberations", "Boron's Knautsawn", "Kelp", "Ceremonisms",
+		"Splines", "Winding Respirations", "Liturgical Lifeblood", "Neptune's Quenches",
+		"Ossuary's Fingers", "Aplicality", "Shifting Ties", "Freud the Spinner", "Exlareel", "Tidescales",
+		"Carnalicy", "Lunar Parchment", "Jeryity", "Hyubert", "Fools", "Meilothon",
+		"Oklacois", "Dictatics", "Umlauts"
 	].map(async name => {
 		const image = await new HengineImageResource(`scrollDrawings/${name}.jpg`).load();
-
+		if (image === null)
+			return;
 		transparentify.resize(image.width, image.height);
 		transparentify.setArguments({ image });
 		transparentify.download(name);
