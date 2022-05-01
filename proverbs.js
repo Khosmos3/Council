@@ -2293,7 +2293,7 @@ const scrolls = [
 		Shirtless in a removable vehicle | tom
 		Laundry is a team effort when &they& arrive | henry
 		My neck is going to be excessively flexible for the rest of today | henry
-		Borneo, Borneo, wherefore art thou, Borneo? | molly
+		Make sure to brush your head, you might get cavities | rowan
 		Forgot to plug in my elbow last night and now my brain's at 6% | molly
 		You vacuumed the lawn thrice daily and yet still, somehow, grubs | molly
 		Smote by cornichons. Again. | molly
