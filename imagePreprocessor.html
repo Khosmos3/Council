@@ -24,7 +24,16 @@
 		// "Ossuary's Fingers", "Aplicality", "Shifting Ties", "Freud the Spinner", "Exlareel", "Tidescales",
 		// "Carnalicy", "Lunar Parchment", "Jeryity", "Hyubert", "Fools", "Meilothon",
 		// "Oklacois", "Dictatics", "Umlauts"
-		"Liturgical Lifeblood", "Apathetium"
+		// "Liturgical Lifeblood", "Apathetium"
+		"Dictatics/Untitled_Artwork 1",
+		"Dictatics/Untitled_Artwork 2",
+		"Dictatics/Untitled_Artwork 3",
+		"Dictatics/Untitled_Artwork 4",
+		"Dictatics/Untitled_Artwork 5",
+		"Dictatics/Untitled_Artwork 6",
+		"Dictatics/Untitled_Artwork 7",
+		"Dictatics/Untitled_Artwork 8",
+		"Dictatics/Untitled_Artwork"
 	].map(async name => {
 		const image = await new HengineImageResource(`scrollDrawings/${name}.jpg`).load();
 		if (image === null)
