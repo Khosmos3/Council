@@ -892,7 +892,7 @@ const scrolls = [
 		Better than the rest of them | henry
 		Trans Hunds goeth fast | henry
 		Although small, the percentage of Vitamin C in the atmosphere was unreasonable and unmoderated | tom
-		Feeling French on a Friday afternoon | henry
+		The Legend of the Braided King | hyacinth
 		The foreshadows get longer at noon | henry
 		ɪn the space you call home / 'til the day rings true / ᴍy knights, they arrive / ɢarish and blue / ᴇnding the lines / ɴear to the brink / ᴅefeating the darkness / ᴇrased in a blink / ʀevealing the brightness / ғull of esteem / ʟeading the faithless / ᴜnder the steam / ɪn poor situation, we find ourselves here / ᴅecrepit and empty, lost amidst fear | hyacinth
 		Then she gave up / Then he gave up / Then they gave up / Then it was done | henry
@@ -2349,7 +2349,7 @@ const scrolls = [
 		I don't think that &should& happen ever again | tom
 		"If you feel lost, remember everyone else is too, in their own way..." / "I'm asking for directions you idiot!" | henry
 		You dare to be bored in this house!? | henry
-		I've cracked the Morse code | tom
+		A rotating house for &ease of mind& | tom
 		"&We& are all the best music," he said from his throne of lies | declan
 		When there is silence, there is a lack of conversation | sofia
 		I love myself / A good fjord | declan
