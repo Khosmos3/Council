@@ -2494,7 +2494,7 @@ const scrolls = [
 		Ift's Day (&\\/ɪftˌs deɪ\\/&): The day when the sun created the Pillars | tom
 		Kiplim (&\\/ˈkɪpˌlɪm\\/&): An easily snapping rope | tom
 		Cytrusid (&\\/ˈsɪtˌrusɪd\\/&): A very small, light-green fruit found in the Spite Range. Inedible, but has other uses | tom
-		Orthomine (&\\/ˈorθoʊmaɪn\\/&): any one of the narrow, vertical, pre-Illuminating tunnels within the pillars | tom
+		Orthomine (&\\/ˈorθoʊmaɪn\\/&): any one of the narrow, vertical, pre-Illuminating tunnels within the Pillars | tom
 		Nau (&\\/naʊ\\/&): A medium sized, freshwater fish. Lives in alpine climates, such as the Apex | tom
 		Cenosidian (&\\/ˈsiˌnoʊsədiɛn\\/&): One who cannot remember the past | One who lives within the Respite | tom
 		Nepymil (&\\/nəpɪmɪl\\/&): The "soil" found in the Spite Range | tom
@@ -2514,7 +2514,7 @@ const scrolls = [
 		Yogurt (&\\/ˈjoʊgərt\\/&): the ultimate chicken or egg | molly
 		Piffcor (\\/pɪfˌkor\\/): the smell of wet charcoal\\/ash | the smell of an old fire | tom
 		Inspiration Rod (\\/ˌinspəˈrāSHən räd\\/): A long cylinder made of steel used to increase the chance of inspiration striking at a specific location | henry
-		The lil' guy (\\/T͟Hə lɪl ɡī/\\): The specific and abstract of the Hund
+		The lil' guy (\\/T͟Hə lɪl ɡī\\/): The specific and abstract of the Hund
 	`),
 	// zoest
 	new Scroll("Umlauts", `
