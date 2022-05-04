@@ -2214,14 +2214,14 @@ const scrolls = [
 		The tune is sad, melancholy, &meaningless& | tom / henry
 		Change the title accordingly | henry
 		Parenthetically, it was all resolved | molly
-		French isn't Turing complete | henry
+		Pat the wood of the instrument, let it rest | hyacinth
 		Foolishly, I took the eggs | tom
 		Monotonal phosphorous can only be obtained by the unimaginative | tom
 		The insidious prince only exists in your mind's paintbrush | tom
 		Put your brain together / Now you might as well just think | tom
 		Spinning, in circles, without a rapport | tom
 		There is a slim chance you will hit thirty or more | tom
-		The attic oozes Jell-O while the band plays on | molly
+		The attic oozes jello while the band plays on | molly
 		I wonder if pianos can feel the constant agony of their keys being abused. / The music that plays is just their screams | shannon
 		Tune the audience | henry
 		Don't use &direct& quotes | henry
