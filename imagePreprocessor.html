@@ -34,10 +34,9 @@
 		// "Dictatics/Untitled_Artwork 7",
 		// "Dictatics/Untitled_Artwork 8",
 		// "Dictatics/Untitled_Artwork"
-		//"tobyn_sig"
-		"tom_sig", "h_sig"
+		"h_sig"
 	].map(async name => {
-		const image = await new HengineImageResource(`scrollDrawings/${name}.jpg`).load();
+		const image = await new HengineImageResource(`scrollDrawings/${name}.png`).load();
 		if (image === null)
 			return;
 		transparentify.resize(image.width, image.height);
