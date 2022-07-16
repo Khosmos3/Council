@@ -8,6 +8,8 @@
 	<title>The Ills They Portray</title>
 	<script src="proverbs.js"></script>
 	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
+
 		:root {
 			--number-inset: calc(8pt * 3);
 		}
@@ -33,24 +35,29 @@
 		.proverb {
 			margin-bottom: 8pt;
 			width: 100%;
-			display: flex;
-			flex-direction: row;
 		}
 
-		.proverb>* {
-			display: block;
+		td {
+			display: inline-block;
+			font-family: Merriweather;
+		}
+
+		.proverb-number, .proverb-text {
+			line-height: 115%;
 		}
 
 		.proverb-number {
-			flex: 0 0 6em;
-			text-align: right;
+			width: 0.65in;
+			text-align: center;
 			font-size: 8pt;
+			padding: 0in 5.4pt 0in 5.4pt;
 		}
 
 		.proverb-text {
+			width: calc(100% - 0.65in);
 			border-left: 1px black solid;
-			padding-left: 8pt;
-			margin-left: 8pt;
+			padding:0in 5.4pt 0in 5.4pt;
+			font-size: 11pt;
 		}
 
 		.scroll-subtitle {
@@ -72,8 +79,7 @@
 			border: 3px white solid;
 		}
 
-		.scroll-header,
-		.scroll-contents {
+		.scroll-header {
 			display: flex;
 			flex-direction: column;
 		}
@@ -86,6 +92,11 @@
 		.scroll-contents {
 			padding: 3em;
 			padding-left: calc(3em - var(--number-inset));
+		}
+
+		.scroll-table {
+			width: 343.3pt;
+			padding: 0in 5.4pt 0in 5.4pt;
 		}
 
 		.scroll {
@@ -106,12 +117,16 @@
 			const proverbs = scroll.proverbs
 				.map((proverb, index) => {
 					const { text, format } = extractFormatting(proverb.text);
-					const html = getFormattedHTML(text, format, "11pt", "Serif");
+					const html = getFormattedHTML(text, format, "11pt", "Merriweather");
 					return `
-						<div class="proverb">
-							<span class="proverb-number">${scroll.getProverbLocation(proverb, index)}</span>
-							<span class="proverb-text">${html}</span>
-						</div>
+						<tr class="proverb">
+							<td class="proverb-number">${scroll.getProverbLocation(proverb, index)}</td>
+							<td class="proverb-text">${html}</td>
+						</tr>
+						<tr class="spacer">
+							<td class="proverb-number">&nbsp;</td>
+							<td class="proverb-number">&nbsp;</td>
+						</tr>
 					`;
 				});
 			return `
@@ -122,13 +137,34 @@
 						<img class="scroll-image" src="./scrollDrawings/${scroll.title}.png">
 					</div>
 					<div class="scroll-contents">
-						${proverbs.join("")}
+						<table class="scroll-table" cellspacing="0">
+							${proverbs.join("")}
+						</table>
 					</div>
 				</div>
 			`;
 		}).join("");
-
 		document.getElementById("wrapper").innerHTML = scrollHTML;
+
+		const scrollElements = document.querySelectorAll(".scroll-contents");
+		for (const element of scrollElements) {
+			element.onclick = () => {
+				const children = element.querySelectorAll("*");
+				
+				for (const child of children) {
+					if (!child.className) continue;
+
+					const styles = getComputedStyle(child);
+
+					for (const style of [...styles])
+						child.style.setProperty(style, styles.getPropertyValue(style));
+				}
+
+				for (const child of children) {
+					child.className = "";
+				}
+			};
+		}
 	</script>
 </body>
 
