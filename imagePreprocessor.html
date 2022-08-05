@@ -5,7 +5,7 @@
 			vec4 color = texture(image, uv);
 
 			float bright = (color.r + color.g + color.b) / 3.0;
-			color.a = 1.0 - bright;
+			color.a = bright < .4 ? 0.0 : 1.0 - bright;
 			color.rgb = vec3(0.0);
 
 			return color;
@@ -32,8 +32,9 @@
 		// "Dictatics/Untitled_Artwork 7",
 		// "Dictatics/Untitled_Artwork 8",
 		// "Dictatics/Untitled_Artwork"
+		"C:/Users/ANNA STEEN/Pictures/rowan and henry sig"
 	].map(async name => {
-		const image = await new HengineImageResource(`scrollDrawings/${name}.jpg`).load();
+		const image = await new HengineImageResource(`${name}.png`).load();
 		if (image === null)
 			return;
 		transparentify.resize(image.width, image.height);
