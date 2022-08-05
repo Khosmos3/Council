@@ -2618,3 +2618,16 @@ function proverbsBy(author) {
 function howMuchToWorry() {
 	return 82173.12739 * Math.exp(scrolls.find(scroll => scroll.title === "Freud the Spinner").length / totalProverbs);
 }
+
+let duplicates;
+{ // find duplicates
+	const proverbs = scrolls
+		.flatMap(scroll => scroll.proverbs)
+		.flatMap(proverb => proverb.text);
+	const counts = { };
+	for (const proverb of proverbs)
+		counts[proverb] = (counts[proverb] ?? 0) + 1;
+	duplicates = Object.entries(counts)
+		.filter(entry => entry[1] > 1)
+		.map(entry => entry[0]);
+};
