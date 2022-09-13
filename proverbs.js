@@ -1,50 +1,50 @@
 //if you see this, you succeeded. good job tom
 let betterSeed = 0;
-	function getSeed() {
-		betterSeed++;
-		const seed = Date.now() + betterSeed;
-		return seed;
-	}
-	function randomSeeded(seed) {
+function getSeed() {
+	betterSeed++;
+	const seed = Date.now() + betterSeed;
+	return seed;
+}
+function randomSeeded(seed) {
 
-		seed ^= seed << 5;
-		seed ^= seed >> 2;
-		seed -= 836492754;
-		seed ^= seed << 4;
-		seed += 999;
-		seed ^= seed >> 7;
-		seed += 128936382;
-		seed ^= seed << 2;
-		seed += 128936382;
-		seed ^= seed >> 6;
-		seed -= 42099;
-		seed ^= seed << 1;
-		seed ^= seed >> 9;
-		seed /= 0xFFFF;
+	seed ^= seed << 5;
+	seed ^= seed >> 2;
+	seed -= 836492754;
+	seed ^= seed << 4;
+	seed += 999;
+	seed ^= seed >> 7;
+	seed += 128936382;
+	seed ^= seed << 2;
+	seed += 128936382;
+	seed ^= seed >> 6;
+	seed -= 42099;
+	seed ^= seed << 1;
+	seed ^= seed >> 9;
+	seed /= 0xFFFF;
 
-		return Math.abs(seed) % 1;
-	}
-	function random01(){
-		return randomSeeded(getSeed());
-	}
-	function randInt(min, max) {
-		return Math.floor(random01() * (max - min + 1) + min);
-	}
-	function choose(arr) {
-		return arr[randInt(0, arr.length - 1)];
-	}
+	return Math.abs(seed) % 1;
+}
+function random01() {
+	return randomSeeded(getSeed());
+}
+function randInt(min, max) {
+	return Math.floor(random01() * (max - min + 1) + min);
+}
+function choose(arr) {
+	return arr[randInt(0, arr.length - 1)];
+}
 
-	function chooseWeighted(scrolls) {
-		const t = random01();
-		let acc = 0;
-		for (let i = 0; i < scrolls.length; i++) {
-			const scroll = scrolls[i];
-			if (acc <= t && t < acc + scroll.weight)
-				return scroll;
-			acc += scroll.weight;
-		}
-		return scrolls[scrolls.length - 1];
+function chooseWeighted(scrolls) {
+	const t = random01();
+	let acc = 0;
+	for (let i = 0; i < scrolls.length; i++) {
+		const scroll = scrolls[i];
+		if (acc <= t && t < acc + scroll.weight)
+			return scroll;
+		acc += scroll.weight;
 	}
+	return scrolls[scrolls.length - 1];
+}
 
 
 
@@ -143,11 +143,11 @@ class Proverb {
 	}
 }
 
-function getNormal(x){
+function getNormal(x) {
 	return Math.log(1 / x - 1) / -1.68;
 }
 
-function seededRandNorm(s){
+function seededRandNorm(s) {
 	let r = getNormal(randomSeeded(s));
 	r /= 6;
 	r += 0.5;
@@ -163,14 +163,14 @@ class Scroll {
 			.filter(line => line.trim().length > 0)
 			.map(line => new Proverb(line));
 		this.size = this.proverbs.length;
-		this.seed = this.size^this.title.split("").reduce((a, b) => a^b.charCodeAt(0), 0)
+		this.seed = this.size ^ this.title.split("").reduce((a, b) => a ^ b.charCodeAt(0), 0)
 	}
 	computeWeight(totalSize) {
 		this.weight = this.size / totalSize;
 	}
 
-	randomOffset(i){
-		return Math.floor(seededRandNorm(i+this.seed)*7);
+	randomOffset(i) {
+		return Math.floor(seededRandNorm(i + this.seed) * 7);
 	}
 
 	getProverbLocation(proverb, index = this.proverbs.indexOf(proverb)) {
@@ -2624,7 +2624,7 @@ let duplicates;
 	const proverbs = scrolls
 		.flatMap(scroll => scroll.proverbs)
 		.flatMap(proverb => proverb.text);
-	const counts = { };
+	const counts = {};
 	for (const proverb of proverbs)
 		counts[proverb] = (counts[proverb] ?? 0) + 1;
 	duplicates = Object.entries(counts)
