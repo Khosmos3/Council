@@ -504,7 +504,7 @@ const scrolls = [
 		You can't &still& be awake | tom
 		You &know& how to sleep, right? | tom
 		Feelings of another supersede feelings for another | hyacinth
-		Feelings of one intercept feelings of the other
+		Feelings of one intercept feelings of the other | tom
 		You create reality to prevent insanity | tom
 		You create insanity to prevent reality | ryan
 		I need to stop the madness and start putting my mind to rest | tom
@@ -855,7 +855,7 @@ const scrolls = [
 		You can't &still& be running | hyacinth
 		Born into a life without chances | tom
 		Prepare to be born | hyacinth
-		Death, a simple illusion. Life, an abstraction
+		Death, a simple illusion. Life, an abstraction | tom
 	`),
 	// ectermine! classics here too
 	new Scroll("Ectermine's Legacy", `
@@ -1014,7 +1014,7 @@ const scrolls = [
 		A hilly, grass coated place | tom
 		Venture into the plateau, I guess | hyacinth
 		Doubled over in a speckled field | hyacinth
-		To turn over the clouds / I must sink into sand / Obligatory silence for / the dun, shadowed lands / / All iron will rust / All silver shall tarnish / Your gold, hollow dust / Time, the discontent artist / / I fall past my borders / The hardened abuse / grates into my skin / A familiar noose / / My legs sore and wrung / My arms limp and burning / The world, like me / uncaring, unturning / / A sand pit of bones / A mere husk of past wrath / The martyrs are dead / no reign to surpass / / My fingers, now bloody / My back, it is lashed / The sky without sun / is convincingly ash
+		To turn over the clouds / I must sink into sand / Obligatory silence for / the dun, shadowed lands / / All iron will rust / All silver shall tarnish / Your gold, hollow dust / Time, the discontent artist / / I fall past my borders / The hardened abuse / grates into my skin / A familiar noose / / My legs sore and wrung / My arms limp and burning / The world, like me / uncaring, unturning / / A sand pit of bones / A mere husk of past wrath / The martyrs are dead / no reign to surpass / / My fingers, now bloody / My back, it is lashed / The sky without sun / is convincingly ash | tom
 	`),
 	// time, etc
 	new Scroll("Plagiarized Optics", `
@@ -1798,7 +1798,7 @@ const scrolls = [
 		Forcefully making my heart beat | tom
 		Blood and tears for the flower | tom
 		Unformed eyes | tom
-		Oh, and how they burned away anything imperfect for it was sinful?
+		Oh, and how they burned away anything imperfect for it was sinful? | alex
 		Pearls from the minds of the deceased | tom
 		Blood loss is as blood loss does / &Bad& | tom
 		Papers in the gaps | hyacinth
@@ -2383,7 +2383,7 @@ const scrolls = [
 	new Scroll("Meilothon", `
 		Non-Euclidean geometry uses the romantic solids | hyacinth
 		Folding, folding, folding. When will it's form repeat? | hyacinth
-		Perfect squares are impossible in this realm / We believe it is due to the makeup of matter
+		Perfect squares are impossible in this realm / We believe it is due to the makeup of matter | tom
 		Biting the Gordian knot | tom
 		Knotted up words | tom
 		Half-hearted black holes | tom
@@ -2438,7 +2438,7 @@ const scrolls = [
 		Spherical life on a spherical world | tom
 		Kaleidoscope, oh sweet swirling geometric mandala, stand still | anna
 		Or... and hear me out... a triangle | tom
-		                                  Why?/                          When the sun/         sinks below the horizon, and/ • all we have known fades to oblivion, •/Why? why does the future always  Why?/As they      beckon us towards     Why do/rise and begin    Demise    we think that/their celebration,  •  our consciousness/why do they think   will be consecutive/they are no longer   or infinite? It never/with us? Spirits all   ends, but it does /         think they are   pause from time/             one with the  to time, of/                            Dead  course/                                       •
+		                                  Why?/                          When the sun/         sinks below the horizon, and/ • all we have known fades to oblivion, •/Why? why does the future always  Why?/As they      beckon us towards     Why do/rise and begin    Demise    we think that/their celebration,  •  our consciousness/why do they think   will be consecutive/they are no longer   or infinite? It never/with us? Spirits all   ends, but it does /         think they are   pause from time/             one with the  to time, of/                            Dead  course/                                       • | hyacinth
 	`),
 	// government, electronics (ock - la - swah)
 	new Scroll("Oklacois", `
@@ -2446,14 +2446,14 @@ const scrolls = [
 		Just a switch on a circuit board | tom
 		Computers aren't electronic, but will become electronic once you know what you're looking for | tom
 		She turns wiring to meal for the unconstitutionalists | hyacinth / tom
-		&holds up olive& Electrically sufficient | tom
+		&holds up olive& Electrically sufficient | hyacinth
 		Evil SUV electric car | forrest
 		Ghosts are kept apart from civilians in federal cemeteries | tom
 		The blackberry bushes have come to an unanimous consensus | tom
 		Two small, particular, oddly specific tasks | molly
 		Radical centrism is a controversial stance | hyacinth
 		The office of establishment is heavy with betrayal | hyacinth
-		Needlepoint & Needleclick | hyacinth
+		Needlepoint \\& Needleclick | hyacinth
 		The new reign is disappointed in its citizens | tom
 		Applications violating the basic barriers of technology / Worms floating in the air | hyacinth
 		Electric shocks make the air stick to your skin | hyacinth
@@ -2491,7 +2491,7 @@ const scrolls = [
 		Aplosery (&\\/æploʊsəri\\/&): Knowledge gained through metaphysical or spiritual extrasensory input | tom
 		Aplosiatic (&\\/æploʊsiætɪk\\/&): One who is detached from reality | One who gains experience\\/input from extrasensory sources | tom
 		Lelipatheim (&\\/lɛˈləˌpæθiɛm\\/&): The state of experiencing a large number of conflicting emotions at the same moment, typically in some balance | tom
-		Halymist (&\\/hæləmɪst\\/&): One who sees reality as drastically worse than it is, but is optimistic about it | tom (or another, but there's many of my definitions im willing to sacrifice)
+		Halymist (&\\/hæləmɪst\\/&): One who sees reality as drastically worse than it is, but is optimistic about it | tom
 		Kiplim (&\\/ˈkɪpˌlɪm\\/&): An easily snapping rope | tom
 		Cytrusid (&\\/ˈsɪtˌrusɪd\\/&): A very small, light-green fruit found in the Spite Range. Inedible, but has other uses | tom
 		Orthomine (&\\/ˈorθoʊmaɪn\\/&): Any one of the narrow, vertical, pre-Illuminating tunnels within the Pillars | tom
@@ -2514,7 +2514,7 @@ const scrolls = [
 		Yogurt (&\\/ˈjoʊgərt\\/&): The ultimate chicken or egg | molly
 		Piffcor (\\/pɪfˌkor\\/): The smell of wet charcoal\\/ash | The smell of an old fire | tom
 		Inspiration Rod (\\/ˌinspəˈrāSHən räd\\/): A long cylinder made of steel used to increase the chance of inspiration striking at a specific location | hyacinth
-		The lil' guy (\\/T͟Hə lɪl ɡī\\/): The specific and abstract of the Hund
+		The lil' guy (\\/T͟Hə lɪl ɡī\\/): The specific and abstract of the Hund | hyacinth
 	`),
 	// zoest
 	new Scroll("Umlauts", `

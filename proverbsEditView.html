@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Editing View</title>
+	<script src="proverbs.js"></script>
+	<style>
+		* {
+			box-sizing: border-box;
+			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+		}
+
+		tr {
+			display: flex;
+			flex-direction: row;
+
+		}
+
+		td {
+			padding: 0.3em;
+			margin: 0.5em;
+		}
+
+		.proverb-author {
+			text-align: center;
+			border-radius: 0.2em;
+			height: 1.85em;
+		}
+
+		table {
+			width: 100%;
+		}
+
+		.spacer {
+			height: 2pt;
+			width: 100%;
+			background-image: linear-gradient(to left, white, white,  black);
+		}
+
+		#watching {
+			display: block;
+			position: fixed;
+			right: 2em;
+			top: 2em;
+			width: 25vw;
+		}
+	</style>
+</head>
+<body>
+	<div id="scrolls"></div>
+	<ul id="watching"></ul>
+	<script>
+		const watching = document.getElementById("watching");
+		const addToList = (scrollIndex, index) => {
+			const li = document.createElement("li");
+			const proverb = scrolls[scrollIndex].proverbs[index];
+			const { text, format } = extractFormatting(proverb.text);
+			li.innerHTML = getFormattedHTML(text, format, "11pt", "Merriweather");
+			watching.appendChild(li);
+		};
+		oncontextmenu = e => {
+			e.preventDefault();
+			watching.innerHTML = "";
+		};
+		const authorColors = new Map(allAuthors.map(author => {
+			const ch = () => Math.random() * 128 + 128;
+			return [author, `rgb(${ch()}, ${ch()}, ${ch()})`];
+		}));
+		document.getElementById("scrolls").innerHTML = scrolls.map((scroll, scrollIndex) => {
+			const proverbs = scroll.proverbs
+				.map((proverb, index) => {
+					const { text, format } = extractFormatting(proverb.text);
+					const html = getFormattedHTML(text, format, "11pt", "Merriweather");
+					return `
+						<tr class="proverb">
+							<td class="proverb-text" onclick="addToList(${scrollIndex}, ${index})">${html}</td>
+							${proverb.authors.map(author => `<td class="proverb-author" style="background-color: ${authorColors.get(author)}">${author}</td>`).join("")}
+						</tr>
+						<tr class="spacer"></tr>
+					`;
+				});
+			return `
+				<div class="scroll">
+					<h1>${scroll.title}</h1>
+					<div class="scroll-contents">
+						<table class="scroll-table" cellspacing="0">
+							${proverbs.join("")}
+						</table>
+					</div>
+				</div>
+			`;
+		}).join("");
+	</script>
+</body>
+</html>
