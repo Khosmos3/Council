@@ -339,9 +339,9 @@ const scrolls = [
 		To add, but not to change | tom
 		Such is the soul | tom
 		That's about it | tom
-		The makers are also subject to the ills they portray | tom
-		Can't you see your eyes are lying to you? | tom
 		The content of their character shifts depending on the device | hyacinth
+		Can't you see your eyes are lying to you? | tom
+		The makers are also subject to the ills they portray | tom
 	`),
 	//you
 	new Scroll("Isfaths", `
@@ -358,7 +358,7 @@ const scrolls = [
 		Several pieces of advice for you and mine | hyacinth
 		Your will to live contains a remarkable amount of embroidery | hyacinth
 		You are encompassed | hyacinth
-		You get to be here | hyacinth
+		You put it on, you fade away | hyacinth
 		You can't move &that& quickly here | hyacinth
 		I like how you remembered that | tom
 		You've been hard at work | tom
@@ -726,8 +726,8 @@ const scrolls = [
 		Trustworthy lawyers, planning on helping* you win your case! | hyacinth
 		Terms of the contemporary | hyacinth
 		Breathing is &not& OK in this establishment | hyacinth
-		You're full of promise | hyacinth
-		You're full of contracts | hyacinth
+		Five bellowing souls in jars behind the register | hyacinth
+		Business lunch with the beings below | hyacinth / rowan
 		Getting used to catastrophic inputs can be uncomfortable in hindsight | hyacinth
 		Fresh baked sand. Right out the oven. For &free& | tom	
 		How about &this& deal? | tom	
@@ -1228,7 +1228,7 @@ const scrolls = [
 		Wow! The ceiling is really small, doc! Doc? | hyacinth
 		Achieve no points ever again. The game's over | hyacinth
 		New methods of expressing one's grief were released today | hyacinth
-		Want a fortune? The line before this says it all! | tom
+		Top ten things that'll make you say "That's not a #hellbreaker scourge#, that's my grandfather!". You'll be wrong! | tom
 		Low temporal resolution on daily activities can help to improve performance | hyacinth
 		Soul crushing truths with a money back guarantee | hyacinth
 		Taking a loan like there won't be a weekend | tom
@@ -1237,7 +1237,7 @@ const scrolls = [
 		Have a moment? Try reconsidering your basic assumptions about the universe! | hyacinth
 		Losing a game which can't be won | hyacinth
 		Winning a game you simply aren't playing | hyacinth
-		Intergalactic couch entertainment | hyacinth
+		Like glass, but you can't empathize with those on the other side | hyacinth
 		Emotional stability limit reached; please insert a quarter | shannon
 		Lights! Camera! Inaction and a general sense of lethargy... | hyacinth
 		Socially incompetent on live TV | hyacinth
@@ -1370,7 +1370,7 @@ const scrolls = [
 		God's favorite color | tom
 		No. You focus | camden
 		To know or to wonder? | tom
-		The inner workings of your mind are tumultuous | wesley
+		By the time I leave here tonight, everybody will be as mad as I was earlier | smith
 		We are retracting | tom
 		Animate your demons | hyacinth
 		A glass of water for Zeus | tom
@@ -1379,7 +1379,7 @@ const scrolls = [
 		Nearly comprehensible, on the brink of competence | hyacinth
 		I can't even see why knowing would be helpful! | hyacinth
 		Threateningly fancy | hyacinth
-		We haven't done &this& since, well, a while ago | tom		
+		The striped being gestures. Slowly, your form crumples | tom	
 		Overcapitalizing as to not Displease the King and Court | tom
 		God is not a figure or object | hyacinth
 		It is not the one being worshipped, no matter how much it wants it | tom
@@ -1601,7 +1601,7 @@ const scrolls = [
 		Overcome by an influx | molly
 		Morally ambiguous "you" | tom
 		&Now& you're alone. It'll be over soon | tom
-		Never finished, always started | tom
+		I have the key to your ribcage | tom
 		The beast's reflection is subtle, but comforting | hyacinth
 		We can discuss later when I'm less purist | tom	
 		We're to become cultural values | hyacinth
@@ -1649,7 +1649,7 @@ const scrolls = [
 	new Scroll("Splines", `
 		Scream, for they can hear you / Sing, for this is literally a recording studio | hyacinth
 		Splines cannot have hurt you | tom
-		Attic is towering | tom
+		Crucially modified organisms | tom
 		You must not be italicized | tom
 		Passages through the void, find nothing else | hyacinth
 		Pulling through the dark zone is... unadvisable, though definitely encouraged extracurricularly | tom
@@ -1664,7 +1664,7 @@ const scrolls = [
 		You set down the weight and your shoulders feel heavier. You could have predicted this | hyacinth
 		The load you bear is not yours to release | hyacinth
 		The alternative versions of the present are your favorite | hyacinth
-		The alternative presence of the versions scares you | hyacinth
+		Sentient; Thoughtful; Afraid | hyacinth
 		Your temporally negative doppelgänger is likely a bad judge of character (especially yours) | hyacinth
 		Your temporally positive doppelgänger is limbless | tom
 		Your soul (it stings) | hyacinth
@@ -1673,7 +1673,7 @@ const scrolls = [
 		Rice voids, emptying spaces you could use | hyacinth
 		Stop trying to outrun the void you leave in your wake | hyacinth
 		Yell into the space you cannot feel (only when you feel lost) | hyacinth
-		Don't scream until you're right there | hyacinth
+		The ever-shrinking space around you | hyacinth
 		The chasm is closed to visitors today. Try again tomorrow | molly
 		A quiet acceptance of the void between my ears | hyacinth
 		Voids in the family room | hyacinth
@@ -1765,7 +1765,7 @@ const scrolls = [
 	// disconcerting, death, blood, liturgy
 	new Scroll("Liturgical Lifeblood", `
 		The patchwork is incomplete | tom
-		Only you see it that way; this is good | tom
+		The guests have been locked | tom
 		If you're worried, then examine the glass, the grass, and the breeze | tom
 		No one among you can understand the gravity of what you've done | hyacinth
 		Wicker lanterns, dancing 'til there is nothing left but light | hyacinth
@@ -1871,7 +1871,7 @@ const scrolls = [
 		They must not realize what this stone arrangement meant | tom 
 		The stones contribute to the rigidity of your knuckles and vertebrae | hyacinth
 		Backstones | tom
-		The stones in the mountains #contribute# to the ritual | hyacinth
+		Never leave a stone unturned, but beware its inertia... | hyacinth
 		The stones will encourage you to leave, &soon& | hyacinth
 		Gems were found as their last resort | anna
 		The nobility held the gems captive | tom
@@ -1921,7 +1921,7 @@ const scrolls = [
 		Heartbreak and insanity often coincide for crustaceans | hyacinth
 		Nothing you say can or will be used against you in a court of law | hyacinth
 		You keep forgetting that you are confused | tom
-		Olive trees, despite their beauty, do not | tom
+		It is a seething celestial mass, weeping silently as it circles our little home | tom
 		The limits of the tree are infinite, albeit two dimensional | hyacinth
 		The stars will be caught up soon! | tom
 		There is the soil, there is the stone, and there is something below | tom
@@ -2089,12 +2089,12 @@ const scrolls = [
 		You will cause chaos if you try and leave | tom
 		Pulled from the jaws of real life | tom / hyacinth
 		Ripped! Just like reality! | tom
-		Reality is objectively arguable | tom
-		Gravity is objectively arguable | tom
+		Reality is subjectively arguable | tom
+		Gravity is subjectively arguable | tom
 		Face the enemy, find the enemy, dispel the enemy | tom / AI
 		You have died of blunt edges | tom
 		I stubbed my toe on the nature of sharpness | hyacinth
-		The vessel is open | tom
+		Too bad you've got 𝕥𝕣𝕪𝕡𝕠𝕡𝕙𝕠𝕓𝕚𝕒 as soon you'll be 𝕗𝕦𝕝𝕝 𝕠𝕗 𝕙𝕠𝕝𝕖𝕤 | tom
 		The air was filled with silence as I stood in the middle | hyacinth / tom
 		I levitated with aplomb until they pulled the air right out from under me | molly
 		Even though everything is so well planned, you're going to be the next one | tom
@@ -2103,7 +2103,7 @@ const scrolls = [
 		You can't tread far from home | tom
 		Be careful, or your permanent record will go on you | hyacinth
 		A rich lode of scandal and alleged crime | tom
-		Everything is being &ripped apart&! The best part is it was &hollow all along&!!! | tom
+		Everything is being &ripped apart&! The best part is it was &hollow all along&! | tom
 		If it wanted us dead, we would #all# be dead | tom
 		The distinct lack of emptiness is jarring | hyacinth
 		Eyes? How about conveyors of lies | tom
@@ -2119,7 +2119,7 @@ const scrolls = [
 		They still have an overwhelmingly real-world theme, but it's getting better | hyacinth
 		Entropy kisses and kills us all | tom
 		Ordering phalanges à la carte | tom / shannon
-		They're almost #here# | hyacinth
+		It's like laying knives on the kitchen floor | hyacinth
 		The more you scratch the more pebbles come out | declan
 		Woolen beasts of great demise | tom
 		Slithering, sliming, climbing to victory | hyacinth
@@ -2154,7 +2154,7 @@ const scrolls = [
 	`),
 	// short-mid length, universe, moon, machine
 	new Scroll("Lunar Parchment", `
-		Cofusation | tom
+		Fairnight, anybutton (affectionate) | tom
 		Do not consider the monotonality of the fungus | tom
 		Late onset IQ deficiency | shannon
 		The vacuum followed me as I ran | hyacinth
@@ -2238,7 +2238,7 @@ const scrolls = [
 		Walk the path of revision carefully and tread not so far as the forest of loss | tom
 		Strangers are truer than fiction | molly
 		So many more words than you ever expected / The madness seeps in as you read | hyacinth
-		You sit in judgement but can't spell "beguile" | molly
+		I’m headed to my Thinkin’ Cube | rowan
 		Paradoxical is just &standard& weird | hyacinth
 		Surprisingly, the two connected works have several parallels | hyacinth
 		Frustratingly mild snaps (&arpeggiated&) | hyacinth
@@ -2317,7 +2317,7 @@ const scrolls = [
 	`),
 	// people, foolish things
 	new Scroll("Fools", `
-		That is normal | hyacinth
+		He was like a discarded story: hiding in recycling bins and full of terrible ideas | hyacinth
 		A delirium gives justification for its abrupt greeting | tom
 		Mackenzie: good gods, good humans, good stories, good people, good music | AI
 		And Mackenzie said the terms aren't negotiable, but we'd continue regardless | tom
@@ -2469,7 +2469,7 @@ const scrolls = [
 		Cartridge based desire | tom
 		Certified pipe-forgetter | tom
 		SWIM AREA: there is no SWIM allowed in the ˢʷᶦᵐ area. P-p-pleeeease coalesce ᵉˡˢᵉʷʰᵉʳᵉ | tom
-		Expressing yourself is a bad way to get the information | hyacinth
+		And I spoke unanimously | hyacinth
 		Caps-locking your life and times | tom
 		Cannibalistic machines causing slight networking issues | tom
 		You've been put on Silence! | tom
@@ -2493,7 +2493,7 @@ const scrolls = [
 		Lelipatheim (&\\/lɛˈləˌpæθiɛm\\/&): The state of experiencing a large number of conflicting emotions at the same moment, typically in some balance | tom
 		Halymist (&\\/hæləmɪst\\/&): One who sees reality as drastically worse than it is, but is optimistic about it | tom
 		Kiplim (&\\/ˈkɪpˌlɪm\\/&): An easily snapping rope | tom
-		Cytrusid (&\\/ˈsɪtˌrusɪd\\/&): A very small, light-green fruit found in the Spite Range. Inedible, but has other uses | tom
+		Ribbery (&\\/rib(ə)rē\\/&): An addition of bones | A facility for the harvesting of bones | tom
 		Orthomine (&\\/ˈorθoʊmaɪn\\/&): Any one of the narrow, vertical, pre-Illuminating tunnels within the Pillars | tom
 		Nau (&\\/naʊ\\/&): A medium sized, freshwater fish. Lives in alpine climates, such as the Apex | tom
 		Cenosidian (&\\/ˈsiˌnoʊsədiɛn\\/&): One who cannot remember the past | One who lives within the Respite | tom
@@ -2520,11 +2520,11 @@ const scrolls = [
 	new Scroll("Umlauts", `
 		Window pains: baguettes made of glass | hyacinth / zoë
 		The given is in the pudding | zoë
-		Hee! hee! Geometry! | zoë
+		Throw back your head and scream | zoë
 		Just that little existential something in my day | zoë
 		The lil' guy's feeling snuggly | zoë
 		Two points determine a lime | zoë
-		"Mise en place"?! No! It's "I'm en place"! | zoë
+		Not alive, but awake | zoë
 		On a sinking ship, given the choice between a first-class life and a &sweet& boat, you chose the former | zoë
 		I'm braiding my bones | zoë
 		Ah yes! Your two genres! Psychology and evaporated milk | zoë
@@ -2542,7 +2542,7 @@ const scrolls = [
 		Crash bang moo! The cows have dispersed | zoë
 		Too many cooks spoil the soup / You only need one for proper flavoring | zoë
 		My get up and go got up and sat back down | zoë
-		Ears are like dogs; they hear things and they bark a lot | zoë
+		I'm only a genius when I need to prove I'm not | zoë
 	`)
 ];
 
