@@ -672,7 +672,7 @@ const scrolls = [
 		Popcorn filled pillows (tired) | tom
 		Dehumanization is "ok" on Thursdays | hyacinth
 		The lil' guy is feeling ominous | hyacinth
-		It’s actually really funny to look at your bones when they do that | rowan
+		It's actually really funny to look at your bones when they do that | rowan
 		Conducting a poll: head, shoulders, knees, or toes? | molly
 		Cracked, shriveling fingers | tom
 		Boiling vats of kidneys | hyacinth
@@ -1625,7 +1625,7 @@ const scrolls = [
 		Scrying the bioluminescence | molly
 		They don't just extract the blood (exasperated) | hyacinth
 		Eye removal techniques (ecstatic) | tom
-		They just die when it’s over | hyacinth
+		They just die when it's over | hyacinth
 		A murmuration of priests filing through the walls | hyacinth
 		The hands are striking | hyacinth
 		Remaking your bones for a stronger statue | tom
@@ -2238,7 +2238,7 @@ const scrolls = [
 		Walk the path of revision carefully and tread not so far as the forest of loss | tom
 		Strangers are truer than fiction | molly
 		So many more words than you ever expected / The madness seeps in as you read | hyacinth
-		I’m headed to my Thinkin’ Cube | rowan
+		I'm headed to my Thinkin' Cube | rowan
 		Paradoxical is just &standard& weird | hyacinth
 		Surprisingly, the two connected works have several parallels | hyacinth
 		Frustratingly mild snaps (&arpeggiated&) | hyacinth
@@ -2301,7 +2301,7 @@ const scrolls = [
 		Single player checkers | tom
 		Team based chess | tom
 		Party sized solitaire | tom
-		It’s easier to keep the peace if your ambitions are small | molly
+		It's easier to keep the peace if your ambitions are small | molly
 		Carbonation is simply the souls of aphids, captured and canned | molly
 		If we have a little alphabet at our disposal, we can do a little buff and polish | molly
 		Just an unacceptable amount of compost | hyacinth
