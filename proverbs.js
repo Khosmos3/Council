@@ -1161,7 +1161,7 @@ const scrolls = [
 		When is a dog not a bison? When a sheep not a horse? When a pig, a pig's tail, a pig's head! | AI
 		What does the old day say? The day of the sun! | AI
 		Why does the egg contain a seed? It tastes better! | AI
-		What is there in black glass? Something shiny, a like glass or liquid! | AI
+		What is there in black glass? Something shiny, like a glass or liquid! | AI
 		What color are the stars of Jupiter and Saturn? Tears of war | AI
 		Where are the old trees? We'll never know | AI
 		Wait. How many ribs did you say I have currently inside me?! | tom
@@ -1826,7 +1826,7 @@ const scrolls = [
 		Pretend you are an aglet. Now stop, please. Tell us your experience | tom
 		Neptune stretched their cloaked fingers and it was done | tom
 		They bathed in the new light of the Illuminating | tom
-		You feel the air settle around your shoulders, you are at peace | hyacinth
+		You feel the air settle around your shoulders; you are at peace | hyacinth
 		The tears run up your face as you lose your voice | hyacinth
 		Neptune awoke on the beach, but they were not conscious. Nobody is | tom
 		And the night looks on, bemused | hyacinth
