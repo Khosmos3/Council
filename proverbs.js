@@ -2485,36 +2485,36 @@ const scrolls = [
 	`),
 	// definitions
 	new Scroll("Dictatics", `
-		Anagrams (&\\/ˈanəˌgrams\\/&): In order to get a deeper understanding of mathematics and to grasp the world of philosophy, here is a list of most important art | AI
-		Moderation (&\\/ˌmädəˈrāSH(ə)n\\/&): An effective anti-productivity mechanism | hyacinth
-		Netches (&\\/nɛtʃz\\/&): A shallow corner, a human can only descend about six in a lifetime but others can do much more | tom
-		Aplosery (&\\/æploʊsəri\\/&): Knowledge gained through metaphysical or spiritual extrasensory input | tom
-		Aplosiatic (&\\/æploʊsiætɪk\\/&): One who is detached from reality | One who gains experience\\/input from extrasensory sources | tom
-		Lelipatheim (&\\/lɛˈləˌpæθiɛm\\/&): The state of experiencing a large number of conflicting emotions at the same moment, typically in some balance | tom
-		Halymist (&\\/hæləmɪst\\/&): One who sees reality as drastically worse than it is, but is optimistic about it | tom
-		Kiplim (&\\/ˈkɪpˌlɪm\\/&): An easily snapping rope | tom
-		Ribbery (&\\/rib(ə)rē\\/&): An addition of bones | A facility for the harvesting of bones | tom
-		Orthomine (&\\/ˈorθoʊmaɪn\\/&): Any one of the narrow, vertical, pre-Illuminating tunnels within the Pillars | tom
-		Nau (&\\/naʊ\\/&): A medium sized, freshwater fish. Lives in alpine climates, such as the Apex | tom
-		Cenosidian (&\\/ˈsiˌnoʊsədiɛn\\/&): One who cannot remember the past | One who lives within the Respite | tom
-		Nepymil (&\\/nəpɪmɪl\\/&): The "soil" found in the Spite Range | tom
-		Nipore (&\\/nəˈporeɪ\\/&): To be intentionally late | tom
-		Aplurion (&\\/ˈæpləriɒn\\/&): An impossibly large watermass | tom
-		Orvis (&\\/ˈorˌvɪs\\/&): A plant varying in size with a thick-spined, spindly root structure and an orange-colored, thick, sticky trunk called 'the lily' that grows naturally within the Spite Range | AI
-		Itzkahova (&\\/ɪtzkəhoʊvə\\/&): A deep, biodiverse crevasse | tom
-		Counseling (&\\/ˈkouns(ə)liNG\\/&): Stop being sad in this hell of an experience | tom
-		Retrulatery (&\\/rɛtrulɔtəri\\/&): Decor, typically ceremonial or ritualistic | tom
-		Sum (&\\/səm\\/&) [math]: To #sum#marize data | hyacinth
-		Oydiu (&\\/ɔɪdu\\/&): Regretting enjoyable actions as you do them, all while continuing | hyacinth
-		Compass (&\\/ˈkəmpəs\\/&): An effective tool for idiots | tom
-		Compass (&\\/ˈkəmpəs\\/&): An ineffective tool for architects | hyacinth
-		Rachet Tool (&\\/ˈrætʃ ɪt ˈtül\\/&): A moderate tool for the intellectually inclined | tom
-		Mevene (&\\/mɛ̃ˌvin\\/&): Slow, unnoticed, sneaky | tom
-		Opaquify (&\\/oʊˈpɑkɪfaɪ\\/&): To make more convoluted and obscure | hyacinth
-		Yogurt (&\\/ˈjoʊgərt\\/&): The ultimate chicken or egg | molly
-		Piffcor (\\/pɪfˌkor\\/): The smell of wet charcoal\\/ash | The smell of an old fire | tom
-		Inspiration Rod (\\/ˌinspəˈrāSHən räd\\/): A long cylinder made of steel used to increase the chance of inspiration striking at a specific location | hyacinth
-		The lil' guy (\\/T͟Hə lɪl ɡī\\/): The specific and abstract of the Hund | hyacinth
+		Anagrams (\\\\&ˈanəˌgrams& \\\\): In order to get a deeper understanding of mathematics and to grasp the world of philosophy, here is a list of most important art | AI
+		Moderation (\\\\&ˌmädəˈrāSH(ə)n& \\\\): An effective anti-productivity mechanism | hyacinth
+		Netches (\\\\&nɛtʃz& \\\\): A shallow corner, a human can only descend about six in a lifetime but others can do much more | tom
+		Aplosery (\\\\&æploʊsəri& \\\\): Knowledge gained through metaphysical or spiritual extrasensory input | tom
+		Aplosiatic (\\\\&æploʊsiætɪk& \\\\): One who is detached from reality | One who gains experience\\/input from extrasensory sources | tom
+		Lelipatheim (\\\\&lɛˈləˌpæθiɛm& \\\\): The state of experiencing a large number of conflicting emotions at the same moment, typically in some balance | tom
+		Halymist (\\\\&hæləmɪst& \\\\): One who sees reality as drastically worse than it is, but is optimistic about it | tom
+		Kiplim (\\\\&ˈkɪpˌlɪm& \\\\): An easily snapping rope | tom
+		Ribbery (\\\\&rib(ə)rē& \\\\): An addition of bones | A facility for the harvesting of bones | tom
+		Orthomine (\\\\&ˈorθoʊmaɪn& \\\\): Any one of the narrow, vertical, pre-Illuminating tunnels within the Pillars | tom
+		Nau (\\\\&naʊ& \\\\): A medium sized, freshwater fish. Lives in alpine climates, such as the Apex | tom
+		Cenosidian (\\\\&ˈsiˌnoʊsədiɛn& \\\\): One who cannot remember the past | One who lives within the Respite | tom
+		Nepymil (\\\\&nəpɪmɪl& \\\\): The "soil" found in the Spite Range | tom
+		Nipore (\\\\&nəˈporeɪ& \\\\): To be intentionally late | tom
+		Aplurion (\\\\&ˈæpləriɒn& \\\\): An impossibly large watermass | tom
+		Orvis (\\\\&ˈorˌvɪs& \\\\): A plant varying in size with a thick-spined, spindly root structure and an orange-colored, thick, sticky trunk called 'the lily' that grows naturally within the Spite Range | AI
+		Itzkahova (\\\\&ɪtzkəhoʊvə& \\\\): A deep, biodiverse crevasse | tom
+		Counseling (\\\\&ˈkouns(ə)liNG& \\\\): Stop being sad in this hell of an experience | tom
+		Retrulatery (\\\\&rɛtrulɔtəri& \\\\): Decor, typically ceremonial or ritualistic | tom
+		Sum (\\\\&səm& \\\\) [math]: To #sum#marize data | hyacinth
+		Oydiu (\\\\&ɔɪdu& \\\\): Regretting enjoyable actions as you do them, all while continuing | hyacinth
+		Compass (\\\\&ˈkəmpəs& \\\\): An effective tool for idiots | tom
+		Compass (\\\\&ˈkəmpəs& \\\\): An ineffective tool for architects | hyacinth
+		Rachet Tool (\\\\&ˈrætʃ ɪt ˈtül& \\\\): A moderate tool for the intellectually inclined | tom
+		Mevene (\\\\&mɛ̃ˌvin& \\\\): Slow, unnoticed, sneaky | tom
+		Opaquify (\\\\&oʊˈpɑkɪfaɪ& \\\\): To make more convoluted and obscure | hyacinth
+		Yogurt (\\\\&ˈjoʊgərt& \\\\): The ultimate chicken or egg | molly
+		Piffcor (\\\\&pɪfˌkor& \\\\): The smell of wet charcoal\\/ash | The smell of an old fire | tom
+		Inspiration Rod (\\\\&ˌinspəˈrāSHən räd& \\\\): A long cylinder made of steel used to increase the chance of inspiration striking at a specific location | hyacinth
+		The lil' guy (\\\\&T͟Hə lɪl ɡī& \\\\): The specific and abstract of the Hund | hyacinth
 	`),
 	// zoest
 	new Scroll("Umlauts", `
