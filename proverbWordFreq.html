@@ -11,8 +11,11 @@
 	<script>
 		try {
 			const words = allProverbs
-				.flatMap(proverb => proverb.text.toLowerCase().split(" "))
-				.map(word => word.trim());
+				.flatMap(proverb => proverb.text
+					.toLowerCase()
+					.replace(/\W/g, "")
+					.split(" ")
+				).map(word => word.trim());
 
 			const frequency = {};
 			for (const word of words)
