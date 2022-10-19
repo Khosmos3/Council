@@ -9,17 +9,21 @@
 </head>
 <body>
 	<script>
-		const words = allProverbs
-			.flatMap(proverb => proverb.text.toLowerCase().split(" "))
-			.map(word => word.trim());
+		try {
+			const words = allProverbs
+				.flatMap(proverb => proverb.text.toLowerCase().split(" "))
+				.map(word => word.trim());
 
-		const frequency = {};
-		for (const word of words)
-			frequency[word] = (frequency[word] ?? 0) + 1;
+			const frequency = {};
+			for (const word of words)
+				frequency[word] = (frequency[word] ?? 0) + 1;
 
-		words.sort((a, b) => frequency[b] - frequency[a]);
+			words.sort((a, b) => frequency[b] - frequency[a]);
 
-		document.body.innerHTML = `<ol>${words.map(word => `<li>${word[0].toUpperCase() + word.slice(1)} | ${frequency[word]}</li>`)}</ol>`;
+			document.body.innerHTML = `<ol>${words.map(word => `<li>${word[0].toUpperCase() + word.slice(1)} | ${frequency[word]}</li>`)}</ol>`;
+		} catch (err) {
+			alert(err.stack);
+		}
 	</script>
 </body>
 </html>
