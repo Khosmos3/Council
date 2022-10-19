@@ -13,7 +13,8 @@
 			const words = allProverbs
 				.flatMap(proverb => proverb.text
 					.toLowerCase()
-					.replace(/\W/g, "")
+					.replace(/[^\w\s]/g, "")
+					.replace(/\s+/g, " ")
 					.split(" ")
 				).map(word => word.trim());
 
@@ -23,7 +24,7 @@
 
 			words.sort((a, b) => frequency[b] - frequency[a]);
 
-			document.body.innerHTML = `<ol>${words.map(word => `<li>${word[0].toUpperCase() + word.slice(1)} | ${frequency[word]}</li>`)}</ol>`;
+			document.body.innerHTML = `<ol>${words.map(word => `<li>${word[0].toUpperCase() + word.slice(1)} | ${frequency[word]}</li>`).join("")}</ol>`;
 		} catch (err) {
 			alert(err.stack);
 		}
