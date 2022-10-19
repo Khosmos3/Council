@@ -16,15 +16,13 @@
 					.replace(/[^\w\s]/g, "")
 					.replace(/\s+/g, " ")
 					.split(" ")
-				);
+				).filter(word => word);
 
 			const frequency = {};
 			for (const word of words)
 				frequency[word] = (frequency[word] ?? 0) + 1;
 
 			words.sort((a, b) => frequency[b] - frequency[a]);
-
-			alert(words);
 
 			document.body.innerHTML = `<ol>${words.map(word => `<li>${word[0].toUpperCase() + word.slice(1)} | ${frequency[word]}</li>`).join("")}</ol>`;
 		} catch (err) {
