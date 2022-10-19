@@ -5,11 +5,10 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Word Frequency</title>
-	<script src="proverb.js"></script>
+	<script src="proverbs.js"></script>
 </head>
 <body>
 	<script>
-		try {
 		const words = allProverbs
 			.flatMap(proverb => proverb.text.toLowerCase().split(" "))
 			.map(word => word.trim());
@@ -21,9 +20,6 @@
 		words.sort((a, b) => frequency[b] - frequency[a]);
 
 		document.body.innerHTML = `<ol>${words.map(word => `<li>${word[0].toUpperCase() + word.slice(1)} | ${frequency[word]}</li>`)}</ol>`;
-		} catch (err) {
-			alert(err.stack);
-		}
 	</script>
 </body>
 </html>
