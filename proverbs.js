@@ -155,8 +155,9 @@ function seededRandNorm(s) {
 }
 
 class Scroll {
-	constructor(title, proverbs) {
+	constructor(title, description, proverbs) {
 		this.title = title;
+		this.description = description;
 		this.proverbs = proverbs
 			.trim()
 			.split("\n")
