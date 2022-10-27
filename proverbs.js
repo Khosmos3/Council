@@ -155,9 +155,8 @@ function seededRandNorm(s) {
 }
 
 class Scroll {
-	constructor(title, description, proverbs) {
+	constructor(title, proverbs) {
 		this.title = title;
-		this.description = description;
 		this.proverbs = proverbs
 			.trim()
 			.split("\n")
@@ -189,10 +188,10 @@ class Scroll {
 }
 
 const scrolls = [
-	new Scroll("Onter", "ncatergorized proverbs	", `
+	new Scroll("Onter", "uncatergorized proverbs	", `
 		&Maybe we'll prune them sometime / Maybe they'll grow& | hyacinth
 	`),
-	new Scroll("Illuminating", "ctual kinda philosophy thats more clear and just very high tier stuff | from now on will require a consensus between 2 prophets to add to", `
+	new Scroll("Illuminating", "actual kinda philosophy thats more clear and just very high tier stuff | from now on will require a consensus between 2 prophets to add to", `
 		Do not give in to fear | tom
 		You're a dream... A nightmare... | AI
 		The dappled light upon the ground reminds me of the distance | hyacinth
@@ -223,7 +222,7 @@ const scrolls = [
 		The finality changes but the statement stays the same | hyacinth
 		Paper-free soul | tom
 	`),
-	new Scroll("Suffering", "uffering", `
+	new Scroll("Suffering", "suffering", `
 		You're so happy! You're so relieved you're not dead | AI
 		I will be with you the day you die, that day is now | tom
 		We hope that you find comfort in the fact that you have the capacity to move around and think | tom
@@ -291,7 +290,7 @@ const scrolls = [
 		You could survive off less | tom
 		Forced into recollection | hyacinth
 	`),
-	new Scroll("Okrates", " good book, high tier proverbs, logic / thoughts", `
+	new Scroll("Okrates", "a good book, high tier proverbs, logic / thoughts", `
 		&Nearly incomprehensible farmer accent& / Goddam spots in the harvesters again &spits& / Get the blowtorch and lure | tom
 		Buying candles from a thrift store | hyacinth
 		Selling wax cylinders for unreasonable profit | tom
@@ -341,7 +340,7 @@ const scrolls = [
 		Can't you see your eyes are lying to you? | tom
 		The makers are also subject to the ills they portray | tom
 	`),
-	new Scroll("Isfaths", "ou", `
+	new Scroll("Isfaths", "you", `
 		You will be lucky / Turn to the sun and be fearless | tom
 		You will be unlucky / Turn to the sun for its gracious mirth | tom
 		You are lost | hyacinth
@@ -433,7 +432,7 @@ const scrolls = [
 		We've got plenty of room | hyacinth
 		Don't trust the koala-headed man | tucker
 	`),
-	new Scroll("Dilap", "nimals and... bread?", `
+	new Scroll("Dilap", "animals and... bread?", `
 		Cavehorses can't even walk around in mud | tom
 		Peppers are toxic, perhaps | henry (t)
 		Some rocks are healthy, actually | hyacinth
@@ -803,7 +802,7 @@ const scrolls = [
 		You need to slow down | hyacinth
 		But, in a way, that explains nothing | hyacinth
 	`),
-	new Scroll("Circles of Polarity", "eath, cycles, circles, birth, rebirth", `
+	new Scroll("Circles of Polarity", "death, cycles, circles, birth, rebirth", `
 		Am I dead? | tom
 		We don't believe in death | tom
 		I am alive again. The sun has come full circle... and now I am standing in a sun-flicker... | AI
@@ -1139,7 +1138,7 @@ const scrolls = [
 		Fading out of line | hyacinth
 		Step by step guide to winning a tickle war of attrition | rowan
 	`),
-	new Scroll("Varying Elements", "hhahahhah jokes!!", `
+	new Scroll("Varying Elements", "ahhahahhah jokes!!", `
 		When is a crab not a crustacean? Whenever the train reaches the station! | AI
 		When is a dog not a bison? When a sheep not a horse? When a pig, a pig's tail, a pig's head! | AI
 		What does the old day say? The day of the sun! | AI
@@ -1826,7 +1825,7 @@ const scrolls = [
 		Undesignated bodies / warm, high, n dry | tom
 		I'll be back soon, in a matter of speaking | molly
 	`),
-	new Scroll("Ossuary's Fingers", "tones", `
+	new Scroll("Ossuary's Fingers", "stones", `
 		A touch is not a stone | tom
 		The last step is to bring the stone into the furnace | tom
 		You do not remember the stones | tom
