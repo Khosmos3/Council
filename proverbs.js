@@ -164,6 +164,7 @@ class Scroll {
 			.map(line => new Proverb(line));
 		this.size = this.proverbs.length;
 		this.seed = this.size ^ this.title.split("").reduce((a, b) => a ^ b.charCodeAt(0), 0)
+		this.descrition = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
 	}
 	computeWeight(totalSize) {
 		this.weight = this.size / totalSize;
@@ -1659,7 +1660,7 @@ const scrolls = [
 		Don't look them out the eye | hyacinth
 		Accurate predictions strain the system | hyacinth
 		You shan't see anything of significance if you look | hyacinth
-		We don't leave any more | tom
+		Invisibeast | tom
 		But your mouth does not open | tom
 		You set down the weight and your shoulders feel heavier. You could have predicted this | hyacinth
 		The load you bear is not yours to release | hyacinth
@@ -1840,7 +1841,7 @@ const scrolls = [
 		You can't ever really be &dead& dead | tom
 		You wear death but you haven't known it for a while | tom
 		Don't remember last time? | tom
-		And now we've met! | tom
+		Please let me sleep, I promise I'll dream | tom
 		The copper turns green and the iron turns red in an instant | tom
 		Iron rusts, copper oxidizes, silver tarnishes, and you persist | tom
 		The correct tools shatter the most persistent of knots | tom
@@ -2026,7 +2027,7 @@ const scrolls = [
 		So close to the end of the road, but the pavement's getting warmer | hyacinth
 		Highest tier items in a collapsing home | hyacinth
 		Missing from a place we call "enemy" | hyacinth
-		They don't like you | tom		
+		I have a series of impossible wishes I've made in a little list in my mind | tom
 		Brilliant blue blazes brighten heralding the end of the world | mayzie
 		Comprehending the "natural" world will forever be impossible / Let's leave it at that | hyacinth
 		Shaved dimensions | tom
@@ -2254,7 +2255,7 @@ const scrolls = [
 		Motifs of your free time | hyacinth
 		They read a simple poem | hyacinth
 		Tooth maracas | hyacinth
-		There was a book and our family found it | wes
+		I'm just haunting these people, in a literary sense | lucca
 		That almost deserves music notes! | hyacinth
 		Drawing the curtains in pen | hyacinth
 		Of meteor and glass / The storms which quickly pass / The humming of the running road, beating swift and fast / / The strumming of my weary soul / Crossing on the lonely fold / Wind and rain and storm / / The fading of my weary self / Sunk and sought and stole / Chasing to a better place; foolishly, I mourn / / Hence my drawn-out shadow grew / Amber, gold, and pale / Pushing on through plateau sands / Land which has since failed / / Sometimes I wonder past the time / A boat without a sail / Sometimes the meaning slips away and / I am lost in the mail | tom
