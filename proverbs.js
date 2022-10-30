@@ -155,8 +155,9 @@ function seededRandNorm(s) {
 }
 
 class Scroll {
-	constructor(title, proverbs) {
+	constructor(title, description, proverbs) {
 		this.title = title;
+		this.description = description;
 		this.proverbs = proverbs
 			.trim()
 			.split("\n")
@@ -188,12 +189,10 @@ class Scroll {
 }
 
 const scrolls = [
-	//uncatergorized proverbs	
-	new Scroll("Onter", `
+	new Scroll("Onter", "uncatergorized proverbs	", `
 		&Maybe we'll prune them sometime / Maybe they'll grow& | hyacinth
 	`),
-	//actual kinda philosophy thats more clear and just very high tier stuff | from now on will require a consensus between 2 prophets to add to
-	new Scroll("Illuminating", `
+	new Scroll("Illuminating", "actual kinda philosophy thats more clear and just very high tier stuff | from now on will require a consensus between 2 prophets to add to", `
 		Do not give in to fear | tom
 		You're a dream... A nightmare... | AI
 		The dappled light upon the ground reminds me of the distance | hyacinth
@@ -224,8 +223,7 @@ const scrolls = [
 		The finality changes but the statement stays the same | hyacinth
 		Paper-free soul | tom
 	`),
-	//suffering
-	new Scroll("Suffering", `
+	new Scroll("Suffering", "suffering", `
 		You're so happy! You're so relieved you're not dead | AI
 		I will be with you the day you die, that day is now | tom
 		We hope that you find comfort in the fact that you have the capacity to move around and think | tom
@@ -293,8 +291,7 @@ const scrolls = [
 		You could survive off less | tom
 		Forced into recollection | hyacinth
 	`),
-	//a good book, high tier proverbs, logic / thoughts
-	new Scroll("Okrates", `
+	new Scroll("Okrates", "a good book, high tier proverbs, logic / thoughts", `
 		&Nearly incomprehensible farmer accent& / Goddam spots in the harvesters again &spits& / Get the blowtorch and lure | tom
 		Buying candles from a thrift store | hyacinth
 		Selling wax cylinders for unreasonable profit | tom
@@ -344,8 +341,7 @@ const scrolls = [
 		Can't you see your eyes are lying to you? | tom
 		The makers are also subject to the ills they portray | tom
 	`),
-	//you
-	new Scroll("Isfaths", `
+	new Scroll("Isfaths", "you", `
 		You will be lucky / Turn to the sun and be fearless | tom
 		You will be unlucky / Turn to the sun for its gracious mirth | tom
 		You are lost | hyacinth
@@ -384,8 +380,7 @@ const scrolls = [
 		A collection of cells, a collection of strands, and your unique being | tom
 		Wait! That's not yours! | tom
 	`),
-	// its the title. its just hubris
-	new Scroll("Hubris", `
+	new Scroll("Hubris", "its the title. its just hubris", `
 		Sleep well. Nothing foreboding, it's not like you have only this last chance. Just... a good idea | tom
 		The houses are only separated by colorful banners inscripted with avant-garde medieval symbols | tom
 		Control, down-shift, now park the car | tom
@@ -438,8 +433,7 @@ const scrolls = [
 		We've got plenty of room | hyacinth
 		Don't trust the koala-headed man | tucker
 	`),
-	//animals and... bread?
-	new Scroll("Dilap", `
+	new Scroll("Dilap", "animals and... bread?", `
 		Cavehorses can't even walk around in mud | tom
 		Peppers are toxic, perhaps | henry (t)
 		Some rocks are healthy, actually | hyacinth
@@ -482,8 +476,7 @@ const scrolls = [
 		I have claimed this spot with my lingonberries and paper | wesley
 		Is there food made entirely with rocks? | noah
 	`),
-	// mid - high tier proverbs in general and insanity, light
-	new Scroll("Praculae", `
+	new Scroll("Praculae", "mid - high tier proverbs in general and insanity, light", `
 		A simple, everyday, all-consuming life routine | tom / AI
 		Good insanity is necessary as it will leave no room for bad insanity | tom
 		Insanity is just the eye of the storm | tom
@@ -562,8 +555,7 @@ const scrolls = [
 		You can feel that your mind is about to collapse at any time | hyacinth
 		I'm going to put you in the Mind Room | tom
 	`),
-	// pleasant thoughts
-	new Scroll("Ique", `
+	new Scroll("Ique", "pleasant thoughts", `
 		The lil' guy has a delivery for you | hyacinth
 		The lil' guy's skull contains a celestial body | hyacinth
 		The lil' guy has an object | hyacinth
@@ -627,8 +619,7 @@ const scrolls = [
 		The chilling breeze reminds you of home | tom
 		The sunset reminds you of comfort... | tom
 	`),
-	// in the title
-	new Scroll("Unpleasant Thoughts", `
+	new Scroll("Unpleasant Thoughts", "in the title", `
 		Carpeted windows | tom
 		Guitar of vocal cords | tom
 		Don't build an atom bomb with teeth | rowan
@@ -689,8 +680,7 @@ const scrolls = [
 		They are &in the house& | hyacinth
 		Phantoms in your clothes | hyacinth
 	`),
-	// what does this ***mean***, business
-	new Scroll("Sputilations", `
+	new Scroll("Sputilations", "what does this ***mean***, business", `
 		Mass production companies of tether cords are being overrun by small scale, local businesses producing tether cords | tom
 		No soul, no service | hyacinth
 		We only sell #solid# plinths | tom
@@ -752,8 +742,7 @@ const scrolls = [
 		We only sell / We never buy | hyacinth
 		Now &that's& something | tom
 	`),
-	// honest stuff, no funny business
-	new Scroll("Ti", `
+	new Scroll("Ti", "honest stuff, no funny business", `
 		The blind man knows, the deaf man speaks, but the wise man can only hear | tom
 		An eye for an eye makes the whole world able to hear better | tom
 		Reality is not about you | tom
@@ -814,8 +803,7 @@ const scrolls = [
 		You need to slow down | hyacinth
 		But, in a way, that explains nothing | hyacinth
 	`),
-	//death, cycles, circles, birth, rebirth
-	new Scroll("Circles of Polarity", `
+	new Scroll("Circles of Polarity", "death, cycles, circles, birth, rebirth", `
 		Am I dead? | tom
 		We don't believe in death | tom
 		I am alive again. The sun has come full circle... and now I am standing in a sun-flicker... | AI
@@ -858,8 +846,7 @@ const scrolls = [
 		Prepare to be born | hyacinth
 		Death, a simple illusion. Life, an abstraction | tom
 	`),
-	// ectermine! classics here too
-	new Scroll("Ectermine's Legacy", `
+	new Scroll("Ectermine's Legacy", "ectermine! classics here too", `
 		It's done. All the doctors are dead. Apples are no longer necessary | tom
 		An apple a day keeps the doctor away. Ten will send them flying | hyacinth
 		The apple counter is non-zero. #&Panic&# | hyacinth
@@ -898,8 +885,7 @@ const scrolls = [
 		ɪn the space you call home / 'til the day rings true / ᴍy knights, they arrive / ɢarish and blue / ᴇnding the lines / ɴear to the brink / ᴅefeating the darkness / ᴇrased in a blink / ʀevealing the brightness / ғull of esteem / ʟeading the faithless / ᴜnder the steam / ɪn poor situation, we find ourselves here / ᴅecrepit and empty, lost amidst fear | hyacinth
 		Then she gave up / Then he gave up / Then they gave up / Then it was done | hyacinth
 	`),
-	// short things, doors
-	new Scroll("Spaoons", `
+	new Scroll("Spaoons", "short things, doors", `
 		Don't tap the keyboard twice | tom
 		Suburban, urban, hyperurban | tom
 		The rurals are the main source of the urbs | tom
@@ -947,8 +933,7 @@ const scrolls = [
 		Doors don't have knobs, at least they don't need to. There doesn't even need to be an opening | tom
 		Particular peculiarity | hyacinth
 	`),
-	// apathy and surrealism and longer, story-like ones
-	new Scroll("Apathetium", `
+	new Scroll("Apathetium", "apathy and surrealism and longer, story-like ones", `
 		Surreal continents continue | tom
 		Meteor, across the dimmed landscape | tom
 		An amber lamp for you in this paling room | tom
@@ -1017,8 +1002,7 @@ const scrolls = [
 		Doubled over in a speckled field | hyacinth
 		To turn over the clouds / I must sink into sand / Obligatory silence for / the dun, shadowed lands / / All iron will rust / All silver shall tarnish / Your gold, hollow dust / Time, the discontent artist / / I fall past my borders / The hardened abuse / grates into my skin / A familiar noose / / My legs sore and wrung / My arms limp and burning / The world, like me / uncaring, unturning / / A sand pit of bones / A mere husk of past wrath / The martyrs are dead / no reign to surpass / / My fingers, now bloody / My back, it is lashed / The sky without sun / is convincingly ash | tom
 	`),
-	// time, etc
-	new Scroll("Plagiarized Optics", `
+	new Scroll("Plagiarized Optics", "time, etc", `
 		Why can't I understand clocks? | tom
 		Knocking on clocks | tom
 		The past is substantially more relevant to this recipe | hyacinth
@@ -1069,8 +1053,7 @@ const scrolls = [
 		Warm in your time | tom
 		The pamphlets list expired dates in timestamps barely still valid | tom
 	`),
-	// violent unity. the whole gang is together
-	new Scroll("Konradism", `
+	new Scroll("Konradism", "violent unity. the whole gang is together", `
 		They are up in arms | tom
 		The Belldrum is full of all the things we won't have time to know | tom
 		Strike by the cover of the book | tom
@@ -1156,8 +1139,7 @@ const scrolls = [
 		Fading out of line | hyacinth
 		Step by step guide to winning a tickle war of attrition | rowan
 	`),
-	//ahhahahhah jokes!!
-	new Scroll("Varying Elements", `
+	new Scroll("Varying Elements", "ahhahahhah jokes!!", `
 		When is a crab not a crustacean? Whenever the train reaches the station! | AI
 		When is a dog not a bison? When a sheep not a horse? When a pig, a pig's tail, a pig's head! | AI
 		What does the old day say? The day of the sun! | AI
@@ -1192,8 +1174,7 @@ const scrolls = [
 		Takes out two stones with a ˢᶦⁿᵍᵘˡᵃʳ bird | tom
 		Let's make the last ones be truly &excerional& | tom
 	`),
-	// TV and media. very good proverbs here
-	new Scroll("Vocaloid", `
+	new Scroll("Vocaloid", "TV and media. very good proverbs here", `
 		There's a possibility the people from TV are from the best of both worlds | AI
 		Achieve points every time! | tom
 		The television is full of ""gala apples"" | tom
@@ -1274,8 +1255,7 @@ const scrolls = [
 		The fans are aggravated | hyacinth
 		There's no "k" in display! | declan
 	`),
-	// math, numbers
-	new Scroll("Frill Optanal", `
+	new Scroll("Frill Optanal", "math, numbers", `
 		Persimmons are sufficient to sustain life | hyacinth
 		Persimmons are sufficient to sustain transportation | hyacinth
 		Persimmons are sufficient | hyacinth
@@ -1337,8 +1317,7 @@ const scrolls = [
 		Their precision is unfathomable / Their accuracy... not so much | hyacinth
 		2 may be a challenge, but 30 is a piece of cake | hyacinth
 	`),
-	// things theophrastes would say, high tier stuff, lore
-	new Scroll("Theophrastus", `
+	new Scroll("Theophrastus", "things theophrastes would say, high tier stuff, lore", `
 		An awful mess, you've created. Reincarnate please | hyacinth
 		A rapid transmutation and a day off | hyacinth
 		Atmospheric noise and the meaning of life | hyacinth
@@ -1393,8 +1372,7 @@ const scrolls = [
 		Consciousness is a pipe dream | hyacinth
 		I try not to make decisions with consequences | hyacinth
 	`),
-	// strangeness, moss/plants, good
-	new Scroll("Auberations", `
+	new Scroll("Auberations", "strangeness, moss/plants, good", `
 		It happened on a Tuesday | tom
 		♪ I &can& hear &you& ♪ | hyacinth
 		Ordering "moss on the rocks" at a bar | hyacinth
@@ -1451,8 +1429,7 @@ const scrolls = [
 		You can't even know how many cells you have | tom
 		You just made every tree in this forest an inch taller | tom
 	`),
-	// cards and games. study of the universe. science
-	new Scroll("Boron's Knautsawn", `
+	new Scroll("Boron's Knautsawn", "cards and games. study of the universe. science", `
 		The king of spades is mad at you | tom
 		You've been dealt a hand of a king of spades and an ace / That would be great for blackjack but this is five card draw and you seem to somehow have lost three cards already | tom
 		The cards* are being dealt | hyacinth
@@ -1514,8 +1491,7 @@ const scrolls = [
 		Sewing is a way to talk to the inanimate | anna
 		Threading the needle through #thick# and &thin& | hyacinth
 	`),
-	// sea and salt and food
-	new Scroll("Kelp", `
+	new Scroll("Kelp", "sea and salt and food", `
 		Salt in the sea brings you to your knees | tom
 		It is not dependent upon the inclusion of fruit | ryan
 		Loops upon loops | tom
@@ -1563,8 +1539,7 @@ const scrolls = [
 		Fruit of your fruit tree | tom
 		Strictly healthy items | hyacinth
 	`),
-	// ceremony instructions
-	new Scroll("Ceremonisms", `
+	new Scroll("Ceremonisms", "ceremony instructions", `
 		Humming and warring | tom
 		They arrive in many turns | hyacinth
 		Take up a new hobby. You'll have to, eventually | hyacinth
@@ -1646,8 +1621,7 @@ const scrolls = [
 		I refuse to speak any longer for it is getting full | tom
 		You know all my favorite sins | tom
 	`),
-	// disconcerting ones, void/emptiness
-	new Scroll("Splines", `
+	new Scroll("Splines", "disconcerting ones, void/emptiness", `
 		Scream, for they can hear you / Sing, for this is literally a recording studio | hyacinth
 		Splines cannot have hurt you | tom
 		Crucially modified organisms | tom
@@ -1711,8 +1685,7 @@ const scrolls = [
 		I am them, but they don't know that | tom
 		A truly disconcerting comparison | hyacinth
 	`),
-	// instruction, emotion, feeling, slightly disconcerting. good proverbs
-	new Scroll("Winding Respirations", `
+	new Scroll("Winding Respirations", "instruction, emotion, feeling, slightly disconcerting. good proverbs", `
 		Luminance and the ethereal, it flows beneath | tom
 		The undercurrents of our consciousness are blue-green and roiling | molly
 		Don't mask what you can't see | tom
@@ -1763,8 +1736,7 @@ const scrolls = [
 		They draw ever nearer | hyacinth
 		They are listening for recreation | hyacinth
 	`),
-	// disconcerting, death, blood, liturgy
-	new Scroll("Liturgical Lifeblood", `
+	new Scroll("Liturgical Lifeblood", "disconcerting, death, blood, liturgy", `
 		The patchwork is incomplete | tom
 		The guests have been locked | tom
 		If you're worried, then examine the glass, the grass, and the breeze | tom
@@ -1810,8 +1782,7 @@ const scrolls = [
 		Fire to feed them and the children | tom
 		Husks of the soul | hyacinth
 	`),
-	// neptune and their wisdom and wide instruction, water
-	new Scroll("Neptune's Quenches", `
+	new Scroll("Neptune's Quenches", "neptune and their wisdom and wide instruction, water", `
 		Lost in specificity | hyacinth
 		Putting on a shirt the way others wear a soul | hyacinth
 		I had a dream where all my dreams came true | tom
@@ -1855,8 +1826,7 @@ const scrolls = [
 		Undesignated bodies / warm, high, n dry | tom
 		I'll be back soon, in a matter of speaking | molly
 	`),
-	//stones
-	new Scroll("Ossuary's Fingers", `
+	new Scroll("Ossuary's Fingers", "stones", `
 		A touch is not a stone | tom
 		The last step is to bring the stone into the furnace | tom
 		You do not remember the stones | tom
@@ -1879,8 +1849,7 @@ const scrolls = [
 		Sealed salt for use as decorative stone | tom
 		Stones spiraling slowly towards the gate, peaceful and solemn | hyacinth
 	`),
-	// singularity
-	new Scroll("Aplicality", `
+	new Scroll("Aplicality", "singularity", `
 		A single grain of milk | tom
 		An entirety of a bird egg is but a shell | tom
 		They are right, for they come from below | tom
@@ -1914,8 +1883,7 @@ const scrolls = [
 		This road is only subtly different from a trail | wes
 		It's been goin' on since day one | tom
 	`),
-	// sun, cycles, duality
-	new Scroll("Shifting Ties", `
+	new Scroll("Shifting Ties", "sun, cycles, duality", `
 		We keep our gnomes around for the season | tom
 		Look how long that hat is | tom
 		Glasses and glasses of things ever stranger | hyacinth
@@ -1953,8 +1921,7 @@ const scrolls = [
 		Whipped wind and a good feeling | tom
 		The rind of the husk of the crust of the day | hyacinth
 	`),
-	// ...'s and random characters and things that dont make sense
-	new Scroll("Freud the Spinner", `
+	new Scroll("Freud the Spinner", "...'s and random characters and things that dont make sense", `
 		A book is ㅋ | AI
 		I“ʘ I don“x“? Yes | AI
 		Ankh per size but not a length | tom
@@ -2001,8 +1968,7 @@ const scrolls = [
 		Paper: ready. Poets: liiinnnned up. Solution: infallible | tom
 		Personally, it's no(t|w) a decision I would make | tom
 	`),
-	// landscapes, new location
-	new Scroll("Exlareel", `
+	new Scroll("Exlareel", "landscapes, new location", `
 		That was an awful "place". I was there | shannon
 		Oh dear! I'm so sorry you had to see that! ᴠɪᴇᴡ ɪᴛ ᴀɢᴀɪɴ | hyacinth
 		What a time to be Alice | tom
@@ -2044,8 +2010,7 @@ const scrolls = [
 		Endless columns, drowning in vines | hyacinth
 		Nobody's gone beyond the boundary | tom
 	`),
-	// sea, dreams, reality
-	new Scroll("Tidescales", `
+	new Scroll("Tidescales", "sea, dreams, reality", `
 		We, you, they, everyone. All continue | tom
 		Dreams are the reality and what seems is the dream | tom
 		The ships that sail the sea defy the powers that be | tom
@@ -2085,8 +2050,7 @@ const scrolls = [
 		"Conscious" doesn't even begin to describe it | tom
 		We cut ours out of nothing / There is no greater whole | hyacinth
 	`),
-	// chaos, disconcerting, high tier stuff
-	new Scroll("Carnalicy", `
+	new Scroll("Carnalicy", "chaos, disconcerting, high tier stuff", `
 		You will cause chaos if you try and leave | tom
 		Pulled from the jaws of real life | tom / hyacinth
 		Ripped! Just like reality! | tom
@@ -2153,8 +2117,7 @@ const scrolls = [
 		Your heartrate is climbing | hyacinth
 		We've killed it and yet it moves / Again and again, striving to be better and failing as / I am drenched in the blood of what is lost and what I have yet to discover. / The beasts grin and I am befallen with gratitude / I skewer the beast. / For a time left long ago, when the blood did not drench me / And the ˢᵐᶦˡᵉˢ were not as wide as they have become. / The spear I carry is not mine to hold but my pilgrimage has gifted it to me. / I skewer the beast. / It groans and I grasp my hairless head / My age is irrelevant to this plight / For they see my sign and nothing changes / I am unrecognizable, indistinct, unsharpened / I skewer the beast. / And it dies, but it doesn't really die, or does it? Does anything? / It fades, I am blurred, my vision, my form, my thoughts / And god above and below is blind / Running from a fate with insufficient shoes / I trip in the misty, rusty haze / I lay and look into the not-sky / I skewer my internal organs / The weak are sheltered by my sacrifice and will be overcome at…  …my suffering to be ended and theirs begun. / But my spiked existence progresses through chaos, / And the sun grows ever longer / I know not to fear and yet I must, must cleanse the souls of the bloody and bruised, / Splintered and sought / &Beaten and befallen& / You watch me, you observe me, you with your pen and your smile / The hymn they sing continues; with / Knives for fingers and fingers for knives / Growing, out of rhythm out of time, as / Parts of my mind waver, as the space is being filled, growing, growth, grown / Defying the state of this world is for the clean / And yet my tainted form remains unchanged through this pause, this inescapable ruse / I try and leave / You do not / Real life is for those unlike me / And I trudge to the next beast / Mind, body, and bone / No place to call home / Not even my form, my thoughts, forlorn / And #Rebirth# / Ifcarnic ideals &seize& your domain / They stood, solid, stoic, faceless / Hollowed by the realization of what was, is, and always is / Superficial and glimmering / The sand is still caught between your eyelids, under your fingers, in the threads of your soul, timeless, bindless, ever-present constant of this ᶜʳᵘⁿᶜʰᶦⁿᵍ ᵖᵒʳᵗʳᵃʸᵃˡ / Such a blatant lie and we believe it / They smile and see, simply to be / And as the peeling skin of the world is pulled back / The smiles widen as they see / Truly see / And it is done / The sand falls from the bodies / And you rise and they rise and she rises / But it happens all over again / This is not rebirth, this is the pause over and again and the rich moon rises | tom
 	`),
-	// short-mid length, universe, moon, machine
-	new Scroll("Lunar Parchment", `
+	new Scroll("Lunar Parchment", "short-mid length, universe, moon, machine", `
 		Fairnight, anybutton (affectionate) | tom
 		Do not consider the monotonality of the fungus | tom
 		Late onset IQ deficiency | shannon
@@ -2197,8 +2160,7 @@ const scrolls = [
 		They are &whirring into action& | hyacinth
 		Rings for your non-physical appendages | tom			
 	`),
-	// music, writing, art, creation
-	new Scroll("Jeryity", `
+	new Scroll("Jeryity", "music, writing, art, creation", `
 		The music is ever-present. Embrace it or perish | tom
 		We heard that it would end in a museum, but it hasn't yet | tom
 		The pictograms are chipped at the edges | hyacinth
@@ -2260,8 +2222,7 @@ const scrolls = [
 		Drawing the curtains in pen | hyacinth
 		Of meteor and glass / The storms which quickly pass / The humming of the running road, beating swift and fast / / The strumming of my weary soul / Crossing on the lonely fold / Wind and rain and storm / / The fading of my weary self / Sunk and sought and stole / Chasing to a better place; foolishly, I mourn / / Hence my drawn-out shadow grew / Amber, gold, and pale / Pushing on through plateau sands / Land which has since failed / / Sometimes I wonder past the time / A boat without a sail / Sometimes the meaning slips away and / I am lost in the mail | tom
 	`),
-	// confusion, random, less philosophic
-	new Scroll("Hyubert", `
+	new Scroll("Hyubert", "confusion, random, less philosophic", `
 		The cupboards contain boundless hope (bounded of course by the cupboards) | hyacinth
 		The grass is greener on the side closer to the chemical plant. Neon even | hyacinth
 		We like the taste of mystery | hyacinth
@@ -2316,8 +2277,7 @@ const scrolls = [
 		Do you need some rainbows as backups for today? | molly
 		A penumbra of chit-chat hovered above his head | molly		
 	`),
-	// people, foolish things
-	new Scroll("Fools", `
+	new Scroll("Fools", "people, foolish things", `
 		He was like a discarded story: hiding in recycling bins and full of terrible ideas | hyacinth
 		A delirium gives justification for its abrupt greeting | tom
 		Mackenzie: good gods, good humans, good stories, good people, good music | AI
@@ -2380,8 +2340,7 @@ const scrolls = [
 		They can ask &themselves& to do things | wes
 		I haven't mentioned it | tom
 	`),
-	// shapes, geometry, form
-	new Scroll("Meilothon", `
+	new Scroll("Meilothon", "shapes, geometry, form", `
 		Non-Euclidean geometry uses the romantic solids | hyacinth
 		Folding, folding, folding. When will it's form repeat? | hyacinth
 		Perfect squares are impossible in this realm / We believe it is due to the makeup of matter | tom
@@ -2441,8 +2400,7 @@ const scrolls = [
 		Or... and hear me out... a triangle | tom
 		                                  Why?/                          When the sun/         sinks below the horizon, and/ • all we have known fades to oblivion, •/Why? why does the future always  Why?/As they      beckon us towards     Why do/rise and begin    Demise    we think that/their celebration,  •  our consciousness/why do they think   will be consecutive/they are no longer   or infinite? It never/with us? Spirits all   ends, but it does /         think they are   pause from time/             one with the  to time, of/                            Dead  course/                                       • | hyacinth
 	`),
-	// government, electronics (ock - la - swah)
-	new Scroll("Oklacois", `
+	new Scroll("Oklacois", "government, electronics (ock - la - swah)", `
 		Don't fear the establishment* | hyacinth
 		Just a switch on a circuit board | tom
 		Computers aren't electronic, but will become electronic once you know what you're looking for | tom
@@ -2484,8 +2442,7 @@ const scrolls = [
 		I know their actions, not themselves | tom
 		Blame nobody, expect nothing, and serve the motherf*****s / Lord knows they need it | lewis
 	`),
-	// definitions
-	new Scroll("Dictatics", `
+	new Scroll("Dictatics", "definitions", `
 		Anagrams (\\\\&ˈanəˌgrams& \\\\): In order to get a deeper understanding of mathematics and to grasp the world of philosophy, here is a list of most important art | AI
 		Moderation (\\\\&ˌmädəˈrāSH(ə)n& \\\\): An effective anti-productivity mechanism | hyacinth
 		Netches (\\\\&nɛtʃz& \\\\): A shallow corner, a human can only descend about six in a lifetime but others can do much more | tom
@@ -2517,8 +2474,7 @@ const scrolls = [
 		Inspiration Rod (\\\\&ˌinspəˈrāSHən räd& \\\\): A long cylinder made of steel used to increase the chance of inspiration striking at a specific location | hyacinth
 		The lil' guy (\\\\&T͟Hə lɪl ɡī& \\\\): The specific and abstract of the Hund | hyacinth
 	`),
-	// zoest
-	new Scroll("Umlauts", `
+	new Scroll("Umlauts", "zoest", `
 		Window pains: baguettes made of glass | hyacinth / zoë
 		The given is in the pudding | zoë
 		Throw back your head and scream | zoë
