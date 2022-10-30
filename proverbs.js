@@ -470,7 +470,7 @@ const scrolls = [
 		Barnacles: discuss. | molly
 		Barnacles, discuss! | tom / molly
 		O'erhead, the cuttlefish flying south for the winter... | molly
-		Spoon-feed the cats for optimal maturation | wesley
+		A escassez de palavras para descrever certas vivências e emoções é… sufocante, talvez? | gabi
 		The dodo bird had always believed he had plot protection | molly
 		Toast: truth or a good story? | molly
 		The platypi left for a night on the town, and returned with opposable thumbs | molly
@@ -984,7 +984,7 @@ const scrolls = [
 		The tall grass in the field obscures your destination | hyacinth
 		Her legs were as long as a redwood, and her head looked as if it might touch the clouds | mayzie
 		Mildly unhappy people flood the offices | hyacinth
-		They're on the mountain | tom
+		Memórias / Aquilo pelo qual me constituo / Sou simplesmente tais memórias / Sou puramente uma memória / / (E, quem sabe, um pouco de saudade) | gabi
 		Surreal and unusual, referencing things not from our world | hyacinth
 		Untethered to your soul, you roam ever-farther | hyacinth
 		Gaps in expensive objects | hyacinth
@@ -1317,7 +1317,7 @@ const scrolls = [
 		Ordering chicken 65 à la carte | tom
 		SUN for 150. AAN for 80. MOON for 10 | tom 
 		A collection of -7 items | hyacinth
-		Forty several cans of chili | wesley	
+		Dilute the absolute | tom
 		Increasing numbers, mildly | hyacinth
 		The sum of constitution, if you will | hyacinth
 		The bag is incidental to the items inside the bag | molly
@@ -1935,7 +1935,7 @@ const scrolls = [
 		Still looking for the center of balance / Averaging the component parts hasn't worked since I was a kid... | tom / hyacinth
 		You knew what I was going to do | hyacinth
 		Slightly off-kilter diction where you thought you'd see advice | hyacinth
-		Nothing will fit on your shoulders | wesley
+		Somos todos seres cujos átomos são lembranças - irónico, não? | gabi
 		WOW! You have a SUN | tom
 		The sky is creative, despite the sun | tom
 		Despite all we'd done, the sun rose again | tom
