@@ -1916,7 +1916,7 @@ const scrolls = [
 		Sun and soul / Reflecting the sea / Waiting in time / For powers to be | tom
 		Hanging by your last strings, you rise. / A flower does not grow to be cut / A book is not written to be burned / You stand / Not to get your strings cut / but to put things ri... | tom
 		She's the creator of this intrepid and lonely homestead | tom
-		A handful of mysteries add that little bit extra to this universe | tom
+		A handful of mysteries adds that little bit extra to this universe | tom
 		Your eyes / You look / They stutter / You collapse | tom
 		Whipped wind and a good feeling | tom
 		The rind of the husk of the crust of the day | hyacinth
