@@ -1916,7 +1916,7 @@ const scrolls = [
 		Sun and soul / Reflecting the sea / Waiting in time / For powers to be | tom
 		Hanging by your last strings, you rise. / A flower does not grow to be cut / A book is not written to be burned / You stand / Not to get your strings cut / but to put things ri... | tom
 		She's the creator of this intrepid and lonely homestead | tom
-		A handful of mysteries add that little bit extra to this universe | tom
+		A handful of mysteries adds that little bit extra to this universe | tom
 		Your eyes / You look / They stutter / You collapse | tom
 		Whipped wind and a good feeling | tom
 		The rind of the husk of the crust of the day | hyacinth
@@ -2448,7 +2448,7 @@ const scrolls = [
 		Netches (\\\\&nɛtʃz& \\\\): A shallow corner, a human can only descend about six in a lifetime but others can do much more | tom
 		Aplosery (\\\\&æploʊsəri& \\\\): Knowledge gained through metaphysical or spiritual extrasensory input | tom
 		Aplosiatic (\\\\&æploʊsiætɪk& \\\\): One who is detached from reality | One who gains experience\\/input from extrasensory sources | tom
-		Lelipatheim (\\\\&lɛˈləˌpæθiɛm& \\\\): The state of experiencing a large number of conflicting emotions at the same moment, typically in some balance | tom
+		Lelipathiem (\\\\&lɛˈləˌpæθiɛm& \\\\): The state of experiencing a large number of conflicting emotions at the same moment, typically in some balance | tom
 		Halymist (\\\\&hæləmɪst& \\\\): One who sees reality as drastically worse than it is, but is optimistic about it | tom
 		Kiplim (\\\\&ˈkɪpˌlɪm& \\\\): An easily snapping rope | tom
 		Ribbery (\\\\&rib(ə)rē& \\\\): An addition of bones | A facility for the harvesting of bones | tom
