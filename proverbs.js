@@ -198,7 +198,7 @@ const scrolls = [
 		The dappled light upon the ground reminds me of the distance | hyacinth
 		My consciousness glints in the autumn light | hyacinth
 		They were too committed to symmetry and thus missed balance | hyacinth
-		Wherever we may be found, wherever we may see day next, just know we *were looking for them* | hyacinth
+		Wherever we may be found, wherever we may see day next, just know we &were looking for them& | hyacinth
 		A torrent of thoughts shall drown us all, in the end | hyacinth
 		Things are, in fact, as they seem | hyacinth
 		What's it like to be &alive& alive? | wes
