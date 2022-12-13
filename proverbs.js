@@ -480,7 +480,7 @@ const scrolls = [
 		A simple, everyday, all-consuming life routine | tom / AI
 		Good insanity is necessary as it will leave no room for bad insanity | tom
 		Insanity is just the eye of the storm | tom
-		A crescendo on conscious always precedes madness | tom
+		A crescendo of consciousness always precedes madness | tom
 		Cynicism is futile | tom
 		Manners in a state of anarchy | hyacinth
 		So I've made up my mind now | tom
@@ -955,7 +955,7 @@ const scrolls = [
 		You rarely recognize the things closest or furthest from you | hyacinth
 		You rarely recognize anything | hyacinth
 		We could just apply a grayscale filter to our memories and it would have the same effect | hyacinth
-		The combination of incredible cold, dry air must have worked just right | tom
+		The combination of incredibly cold, dry air must have worked just right | tom
 		An empty pit to fill the lack of emotion | tom
 		Divorce papers filed in an amber room | hyacinth
 		And the paladin stared across the grassland and across your soul | tom
