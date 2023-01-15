@@ -198,7 +198,7 @@ const scrolls = [
 		The dappled light upon the ground reminds me of the distance | hyacinth
 		My consciousness glints in the autumn light | hyacinth
 		They were too committed to symmetry and thus missed balance | hyacinth
-		Wherever we may be found, wherever we may see day next, just know we *were looking for them* | hyacinth
+		Wherever we may be found, wherever we may see day next, just know we &were looking for them& | hyacinth
 		A torrent of thoughts shall drown us all, in the end | hyacinth
 		Things are, in fact, as they seem | hyacinth
 		What's it like to be &alive& alive? | wes
@@ -464,7 +464,7 @@ const scrolls = [
 		Barnacles: discuss. | molly
 		Barnacles, discuss! | tom / molly
 		O'erhead, the cuttlefish flying south for the winter... | molly
-		Spoon-feed the cats for optimal maturation | wesley
+		A escassez de palavras para descrever certas vivências e emoções é… sufocante, talvez? | gabi
 		The dodo bird had always believed he had plot protection | molly
 		Toast: truth or a good story? | molly
 		The platypi left for a night on the town, and returned with opposable thumbs | molly
@@ -480,7 +480,7 @@ const scrolls = [
 		A simple, everyday, all-consuming life routine | tom / AI
 		Good insanity is necessary as it will leave no room for bad insanity | tom
 		Insanity is just the eye of the storm | tom
-		A crescendo on conscious always precedes madness | tom
+		A crescendo of consciousness always precedes madness | tom
 		Cynicism is futile | tom
 		Manners in a state of anarchy | hyacinth
 		So I've made up my mind now | tom
@@ -955,7 +955,7 @@ const scrolls = [
 		You rarely recognize the things closest or furthest from you | hyacinth
 		You rarely recognize anything | hyacinth
 		We could just apply a grayscale filter to our memories and it would have the same effect | hyacinth
-		The combination of incredible cold, dry air must have worked just right | tom
+		The combination of incredibly cold, dry air must have worked just right | tom
 		An empty pit to fill the lack of emotion | tom
 		Divorce papers filed in an amber room | hyacinth
 		And the paladin stared across the grassland and across your soul | tom
@@ -969,7 +969,7 @@ const scrolls = [
 		The tall grass in the field obscures your destination | hyacinth
 		Her legs were as long as a redwood, and her head looked as if it might touch the clouds | mayzie
 		Mildly unhappy people flood the offices | hyacinth
-		They're on the mountain | tom
+		Memórias / Aquilo pelo qual me constituo / Sou simplesmente tais memórias / Sou puramente uma memória / / (E, quem sabe, um pouco de saudade) | gabi
 		Surreal and unusual, referencing things not from our world | hyacinth
 		Untethered to your soul, you roam ever-farther | hyacinth
 		Gaps in expensive objects | hyacinth
@@ -1297,7 +1297,7 @@ const scrolls = [
 		Ordering chicken 65 à la carte | tom
 		SUN for 150. AAN for 80. MOON for 10 | tom 
 		A collection of -7 items | hyacinth
-		Forty several cans of chili | wesley	
+		Dilute the absolute | tom
 		Increasing numbers, mildly | hyacinth
 		The sum of constitution, if you will | hyacinth
 		The bag is incidental to the items inside the bag | molly
@@ -1903,7 +1903,7 @@ const scrolls = [
 		Still looking for the center of balance / Averaging the component parts hasn't worked since I was a kid... | tom / hyacinth
 		You knew what I was going to do | hyacinth
 		Slightly off-kilter diction where you thought you'd see advice | hyacinth
-		Nothing will fit on your shoulders | wesley
+		Somos todos seres cujos átomos são lembranças - irónico, não? | gabi
 		WOW! You have a SUN | tom
 		The sky is creative, despite the sun | tom
 		Despite all we'd done, the sun rose again | tom
@@ -1916,7 +1916,7 @@ const scrolls = [
 		Sun and soul / Reflecting the sea / Waiting in time / For powers to be | tom
 		Hanging by your last strings, you rise. / A flower does not grow to be cut / A book is not written to be burned / You stand / Not to get your strings cut / but to put things ri... | tom
 		She's the creator of this intrepid and lonely homestead | tom
-		A handful of mysteries add that little bit extra to this universe | tom
+		A handful of mysteries adds that little bit extra to this universe | tom
 		Your eyes / You look / They stutter / You collapse | tom
 		Whipped wind and a good feeling | tom
 		The rind of the husk of the crust of the day | hyacinth
@@ -2448,7 +2448,7 @@ const scrolls = [
 		Netches (\\\\&nɛtʃz& \\\\): A shallow corner, a human can only descend about six in a lifetime but others can do much more | tom
 		Aplosery (\\\\&æploʊsəri& \\\\): Knowledge gained through metaphysical or spiritual extrasensory input | tom
 		Aplosiatic (\\\\&æploʊsiætɪk& \\\\): One who is detached from reality | One who gains experience\\/input from extrasensory sources | tom
-		Lelipatheim (\\\\&lɛˈləˌpæθiɛm& \\\\): The state of experiencing a large number of conflicting emotions at the same moment, typically in some balance | tom
+		Lelipathiem (\\\\&lɛˈləˌpæθiɛm& \\\\): The state of experiencing a large number of conflicting emotions at the same moment, typically in some balance | tom
 		Halymist (\\\\&hæləmɪst& \\\\): One who sees reality as drastically worse than it is, but is optimistic about it | tom
 		Kiplim (\\\\&ˈkɪpˌlɪm& \\\\): An easily snapping rope | tom
 		Ribbery (\\\\&rib(ə)rē& \\\\): An addition of bones | A facility for the harvesting of bones | tom

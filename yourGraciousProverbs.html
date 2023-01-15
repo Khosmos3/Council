@@ -103,33 +103,48 @@
 			transition: opacity .6s, background-color .2s, width .6s, color .2s;
 		}
 
-		#suggest {
-			width: 7vw;
+		#suggest, #togglePronounce {
 			height: 2vw;
+			width: 7vw;
 			background-color: #410304;
+			display: block;
 			position: absolute;
 			color: rgba(65, 3, 4, 0);
-			margin-top: 12vw;
-			margin-left: 3vw;
 			opacity: .43;
 			transition: opacity .6s, width .6s, color .2s;
 			border: 3px solid #410304;
 			text-align: center;
 			font-size: 1.3vw;
 			font-family: Quintessential, serif;
+			cursor: pointer;
 		}
 
-		#suggest:hover {
+		#suggest {
+			top: 12vw;
+			left: 3vw;	
+		}
+
+		#suggest:hover, #togglePronounce:hover {
 			opacity: 1;
 			background-color: #410304;
 			color: #F6E9D8;
 			transition: opacity .6s, background-color .2s, width .6s, color 1s;
 		}
 
-		#suggest:active {
+		#suggest:active, #togglePronounce:active {
 			background-color: #F6E9D8;
 			color: #410304;
 			transition: opacity .6s, background-color .2s, width .6s, color .2s;
+		}
+
+		#togglePronounce {
+			left: 3vw;
+			top: 15vw;
+		}
+		
+		#togglePronounce.pronouncing {
+			background-color: #F6E9D8;
+			border-color: #F6E9D8;
 		}
 	</style>
 </head>
@@ -147,6 +162,7 @@
 				<span id="suggest-span">Propound</span>
 			</div>
 		</a>
+		<span onclick="togglePronunciation()" id="togglePronounce">Prounounce</span>
 	</div>
 	<div id="n">
 		<div id="paper"></div>
@@ -172,6 +188,21 @@
 		document.getElementById("evil").scrollIntoView();
 	}
 
+	function say(text) {
+		const u = new SpeechSynthesisUtterance(text);
+		u.voice = speechSynthesis.getVoices()[5];
+		speechSynthesis.speak(u);
+	}
+
+	addEventListener("beforeunload", () => speechSynthesis.cancel());
+
+	let pronounce = false;
+	function togglePronunciation() {
+		pronounce = !pronounce;
+		document.getElementById("togglePronounce").classList.toggle("pronouncing");
+		if (!pronounce) speechSynthesis.cancel();
+	}
+
 	function canvasPrint({
 		parent,
 		text,
@@ -181,6 +212,7 @@
 		fontSize = parseInt(getComputedStyle(parent).fontSize),
 		fontFamily = getComputedStyle(parent).fontFamily
 	}) {
+		if (pronounce) say(text);
 
 		function packText(str, getCharWidth, maxWidth) {
 			function getStringWidth(string) {
@@ -189,6 +221,7 @@
 					.map(char => getCharWidth(char))
 					.reduce((a, b) => a + b, 0);
 			}
+
 			return str
 				.split("\n")
 				.map(line => {
