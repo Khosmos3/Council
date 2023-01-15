@@ -189,7 +189,7 @@ class Scroll {
 }
 
 const scrolls = [
-	new Scroll("Onter", "uncatergorized proverbs	", `
+	new Scroll("Onter", "uncatergorized proverbs", `
 		&Maybe we'll prune them sometime / Maybe they'll grow& | hyacinth
 	`),
 	new Scroll("Illuminating", "actual kinda philosophy thats more clear and just very high tier stuff | from now on will require a consensus between 2 prophets to add to", `

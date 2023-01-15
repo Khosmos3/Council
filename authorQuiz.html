@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Author Quiz</title>
+	<script src="proverbs.js"></script>
+	<style>
+		* {
+			box-sizing: border-box;
+			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+		}
+		
+		#wrapper {
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+		}
+		
+		#score-display {
+			font-size: 8vmin;	
+			margin-bottom: 8vmin;
+		}
+		
+		#proverb, #proverb * {
+			font-size: 6vmin !important;	
+		}
+		
+		#author {
+			margin-top: 8vmin;
+			font-size: 10vmin;
+			border: none;
+			border-bottom: 1px black solid;
+			outline: none;
+		}
+
+	</style>
+</head>
+<body>
+	<div id="wrapper">
+		<div id="score-display"><span id="score">100</span>% Correct</div>
+		<div id="proverb"></div>
+		<input id="author" type="text">
+	</div>
+
+	<script>
+		try {
+			let correct = 0;
+			let total = 0;
+
+			let proverb;
+
+			function nextQuestion() {
+				proverb = choose(allProverbs);
+				const { text, format } = extractFormatting(proverb.text);
+				document.getElementById("proverb").innerHTML = getFormattedHTML(text, format);
+
+			}
+
+			const author = document.getElementById("author");
+			author.onkeydown = e => {
+				if (e.key === "Enter") {
+					if (proverb.authors.includes(author.value.toLowerCase()))
+						correct++;
+					total++;
+					document.getElementById("score").innerText = `${correct}/${total}, ${Math.round(correct / total * 100)}`;
+					author.value = "";
+					nextQuestion();
+				}
+			}
+			document.getElementById("author").focus();
+
+			nextQuestion();
+		} catch (err) {
+			alert(err.stack);	
+		}
+	</script>
+</body>
