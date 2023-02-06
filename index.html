@@ -166,6 +166,13 @@
 			color: #5b2e04;
 			transition: opacity .6s, background-color .2s, width .6s, color .2s;
 		}
+
+		.rune {
+			aspect-ratio: 1/1;
+			height: 1em;
+			filter: blur(1px);
+		}
+
 	</style>
 </head>
 
@@ -173,12 +180,12 @@
 	<div id="runes" class="runes"></div>
 	<div id="runes2" class="runes"></div>
 	<div id="bar">
-		<a href="https://www.soupnight.space/yourGraciousProverbs.html">
+		<a href="./yourGraciousProverbs.html">
 			<div id="side">
 				<span id="span">Proverbs</span>
 			</div>
 		</a>
-		<a href="https://www.soupnight.space/councilEmotions.html">
+		<a href="./councilEmotions.html">
 			<div id="side2">
 				<span id="span2">Emotions</span>
 			</div>
@@ -197,8 +204,8 @@
 	setInterval(function () {
 		document.getElementById("logo").src = frame ? "logos/logo1.svg" : "logos/logo2.svg";
 		frame = !frame;
-	},
-		3600)
+	}, 3600);
+
 	let subtitlesCommon = [
 		"Soup Night",
 		"This life, a boon",
@@ -221,15 +228,21 @@
 		"Surrealist"
 	];
 
-	let runeAlphabet = "ᚠᚡᚢᚤᚥᚦᚧᚨᚩᚬᚭᚮᛴᚯᚰᚱᚲᚳᚴᚵᚶ.ᛱᚷᚹᛩᚺᚻᚼᚽᚾᚿᛀᛁᛂᛵᛃᛄᛅᛆᛇᛈᛕᛉᛊᛋᛪᛍᛎᛲᛏᛐᛑᛒᛓᛔᛖᛶᛗᛘᛙᛚᛛᛜᛝᛞᛟᛳᚪᛷᚫᛸᚣᛠᛣᚸᛤᛡᛢᛥᛦᛧ                         ";
-	let r1;
-	let r2;
+	const runeCount = 18;
+	// let runeAlphabet = "ᚠᚡᚢᚤᚥᚦᚧᚨᚩᚬᚭᚮᛴᚯᚰᚱᚲᚳᚴᚵᚶ.ᛱᚷᚹᛩᚺᚻᚼᚽᚾᚿᛀᛁᛂᛵᛃᛄᛅᛆᛇᛈᛕᛉᛊᛋᛪᛍᛎᛲᛏᛐᛑᛒᛓᛔᛖᛶᛗᛘᛙᛚᛛᛜᛝᛞᛟᛳᚪᛷᚫᛸᚣᛠᛣᚸᛤᛡᛢᛥᛦᛧ                         ";
+	let r1 = "";
+	let r2 = "";
+
+	const randomRune = () => {
+		const number = randInt(1, runeCount);
+		return `<img class="rune" src="runes/Runes-${"0".repeat(runeCount.toString().length - number.toString().length)}${number}.svg"></img>`;
+	};
 
 	for(i = 0; i < 100; i++){
-		r1 += runeAlphabet.charAt(randInt(0, runeAlphabet.length));
+		r1 += randomRune();//runeAlphabet[randInt(0, runeAlphabet.length)];
 	}
 	for(i = 0; i < 100; i++){
-		r2 += runeAlphabet.charAt(randInt(0, runeAlphabet.length));
+		r2 += randomRune();//runeAlphabet[randInt(0, runeAlphabet.length)];
 	}
 
 	get("runes").innerHTML = r1

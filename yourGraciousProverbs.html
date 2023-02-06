@@ -22,7 +22,14 @@
 	<style>
 		* {
 			margin: 0;
+			box-sizing: border-box;
 			font-family: "Quintessential";
+			transition-timing-function: ease-in-out;
+		}
+
+		:root {
+			--button-delay: 0.25s;
+			--collection-delay: 0.3s;
 		}
 
 		body {
@@ -32,142 +39,208 @@
 			font-family: "Quintessential";
 		}
 
-		#bar {
-			width: 13%;
-			height: 100%;
-			position: fixed;
-			background-color: currentColor;
+		#wrapper {
+			display: flex;
+			flex-direction: row;
 		}
 
-		#n {
+		#bar {
+			width: 13vw;
+			height: 100vh;
+			background-color: currentColor;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			padding: 1vw;
+		}
+
+		#mainArea {
 			overflow: auto;
-			width: calc(100vw - 20% - 15%);
+			width: 100%;
 			height: 100vh;
 			text-align: left;
-			position: absolute;
 			/* bottom: 54%; */
 			font-family: "Quintessential";
-			left: 20%;
-			padding-right: 15%;
 			line-height: 1;
 			scroll-behavior: smooth;
+			position: relative;
+		}
+
+		#collection {
+			transform: translateY(-100vh) scaleY(0);
+			pointer-events: none;
+			transition: transform var(--collection-delay);
+			overflow: hidden;
+		}
+
+		.collection-visible #collection {
+			transform: translateY(0) scaleY(1);
+			pointer-events: all;
+			overflow: auto;
 		}
 
 		#paper {
-			padding-top: 20%;
-			padding-bottom: 30%;
+			transform: scaleY(1);
+			transition: transform var(--collection-delay), height var(--collection-delay);
 		}
 
-		#paper .proverb {
-			margin-bottom: 1em;
-			display: block;
+		.collection-visible #paper {
+			transform: scaleY(0);
+			height: 0;
 		}
 
-		#side {
-			width: 7vw;
-			height: 7vw;
-			background-color: #410304;
-			position: absolute;
-			color: rgba(65, 3, 4, 0);
-			margin-top: 3vw;
-			margin-left: 3vw;
-			opacity: .43;
-			transition: opacity .6s, width .6s, color .2s;
-			border: 3px solid #410304;
-			text-align: center;
-			font-size: 3vw;
-			font-family: Quintessential, serif;
-		}
-
-		#span {
-			margin-top: 1vw;
-			display: block;
-		}
-
-		#side:hover:after {
-			display: block;
-			white-space: nowrap;
-		}
-
-		#side:hover {
-			opacity: 1;
-			background-color: #410304;
-			width: 17vw;
-			color: #F6E9D8;
-			transition: opacity .6s, background-color .2s, width .6s, color 1s;
-		}
-
-		#side:active {
+		#paper, #collection {
 			background-color: #F6E9D8;
-			color: #410304;
-			transition: opacity .6s, background-color .2s, width .6s, color .2s;
+			padding-top: 10vh;
+			padding-bottom: 30vh;
+			padding-left: 7vw;
+			padding-right: 15vw;
 		}
 
-		#suggest, #togglePronounce {
-			height: 2vw;
-			width: 7vw;
-			background-color: #410304;
-			display: block;
+		#paperWrapper, #collection {
 			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+		}
+
+		#collectionTitle {
+			font-weight: bold;
+			margin-bottom: 1em;
+		}
+
+		.proverb {
+			margin-bottom: 1em;
+			position: relative;
+		}
+
+		#collection .proverb {
+			font-size: 0.75em;
+		} 
+
+		.proverb, .proverb * {
+			font-family: "Quintessential" !important;
+		}
+
+		.proverb * {
+			font-size: inherit !important;
+		}
+
+		.proverb.favorite::before {
+			content: "❤️";
+			font-size: 3vw;
+		}
+
+		.proverb::before {
+			content: "♡";
+			font-size: 6vw;
+			font-weight: normal;
+			position: absolute;
+			top: 50%;
+			left: 0;
+			transform: translate(-120%, -50%);
+			opacity: 0;
+			transition: opacity 0.3s;
+		}
+
+		.proverb:hover::before, #collection .proverb:not(.favorite)::before {
+			opacity: 0.5;
+		}
+
+
+		#homeButton, .button {
+			background: #410304;
+			text-decoration: none;
 			color: rgba(65, 3, 4, 0);
-			opacity: .43;
-			transition: opacity .6s, width .6s, color .2s;
-			border: 3px solid #410304;
+			transition: color var(--button-delay), background var(--button-delay);
 			text-align: center;
-			font-size: 1.3vw;
-			font-family: Quintessential, serif;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: center;
+			margin: 1vw;
+			position: relative;	
+			width: 9vw;
 			cursor: pointer;
 		}
 
-		#suggest {
-			top: 12vw;
-			left: 3vw;	
-		}
-
-		#suggest:hover, #togglePronounce:hover {
-			opacity: 1;
-			background-color: #410304;
-			color: #F6E9D8;
-			transition: opacity .6s, background-color .2s, width .6s, color 1s;
-		}
-
-		#suggest:active, #togglePronounce:active {
-			background-color: #F6E9D8;
-			color: #410304;
-			transition: opacity .6s, background-color .2s, width .6s, color .2s;
-		}
-
-		#togglePronounce {
-			left: 3vw;
-			top: 15vw;
-			display: none;
+		#homeButton:hover, .button:hover {
+			color: #F6E9D8;			
 		}
 		
-		#togglePronounce.pronouncing {
-			background-color: #F6E9D8;
-			border-color: #F6E9D8;
+		#homeButton:active, .button:active {
+			background: #F6E9D8;
+			color: #410304;
+
+			border: 0.2vw #410304 solid;
+		}
+
+		#homeButton::before {
+			content: "";
+			display: block;
+			position: absolute;
+			width: 90%;
+			height: 90%;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%) rotate(0deg);
+			opacity: 1;
+			background-image: url(./logos/Cover.svg);
+			background-size: cover;
+			transition: opacity var(--button-delay), filter var(--button-delay), transform var(--button-delay);
+			filter: blur(0.5px);
+		}
+
+		#homeButton:hover::before {
+			opacity: 0;
+			filter: blur(5px);
+			transform: translate(-50%, -50%) rotate(0deg);
+		}
+
+		#homeButton {
+			width: 9vw;
+			height: 9vw;
+			font-size: 3vw;
+			
+		}
+		
+		.button {
+			font-size: 1.1vw;
+			height: 2em;
+			padding: 0.5em 1em;
+		}
+
+		#statsButton {
+			margin-top: auto;
+		}
+
+		#statsButton:not(:hover) {
+			background: currentColor;
 		}
 	</style>
 </head>
 
 <body id="body">
-	<div id="bar">
-		<a href="https://soupnight.space">
-			<div id="side">
-				<span id="span">Home</span>
+	<div id="wrapper">
+		<div id="bar">
+			<a id="homeButton" href="./index.html">
+				Home
+			</a>
+			<a href="https://docs.google.com/forms/d/e/1FAIpQLSdpb8y4vaLeV6Eyk9WdsCjNRBALelec0sLwc7QNAtM-VnT-yA/viewform?usp=sf_link"
+				target="_blank" id="suggestButton" class="button">
+				Propound ✍️
+			</a>
+			<a class="button" id="collectionButton" onclick="toggleCollection()">Collection 📕</a>
+			<a class="button" id="statsButton" onclick="statSession()">Statistics 🧮</a>
+		</div>
+		<div id="mainArea">
+			<div id="paperWrapper">
+				<div id="paper"></div>
+				<div id="footer"></div>
 			</div>
-		</a>
-		<a href="https://docs.google.com/forms/d/e/1FAIpQLSdpb8y4vaLeV6Eyk9WdsCjNRBALelec0sLwc7QNAtM-VnT-yA/viewform?usp=sf_link"
-			target="_blank">
-			<div id="suggest">
-				<span id="suggest-span">Propound</span>
-			</div>
-		</a>
-		<span onclick="togglePronunciation()" id="togglePronounce">Prounounce</span>
-	</div>
-	<div id="n">
-		<div id="paper"></div>
-		<div id="evil"></div>
+			<div id="collection"></div>
+		</div>
 	</div>
 </body>
 <script>
@@ -185,27 +258,67 @@
 	const DISPLAY_TIME = 3200;
 	const SLEEP = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-	function fix() {
-		document.getElementById("evil").scrollIntoView();
+	const lsKey = "favoriteProverbs";
+	const favoriteProverbs = new Set(JSON.parse(localStorage[lsKey] || "[]"));
+
+	function addFavoriteProverb(printableText) {
+		favoriteProverbs.add(printableText);
+		localStorage[lsKey] = JSON.stringify([...favoriteProverbs]);
+	}
+	
+	function removeFavoriteProverb(printableText) {
+		favoriteProverbs.delete(printableText);
+		localStorage[lsKey] = JSON.stringify([...favoriteProverbs]);
 	}
 
-	function say(text) {
-		const u = new SpeechSynthesisUtterance(text);
-		u.voice = speechSynthesis.getVoices()[5];
-		speechSynthesis.speak(u);
+	const visibleProverbs = [];
+
+	const mainArea = document.getElementById("mainArea");
+	const collectionButton = document.getElementById("collectionButton");
+	let collectionVisible = false;
+	function toggleCollection() {
+		collectionVisible = !collectionVisible;
+		collectionButton.innerText = collectionVisible ? "Collection 📖" : "Collection 📕";
+		if (collectionVisible) {
+			collection.innerHTML = "";
+			document.body.classList.add("collection-visible");
+			const collectionTitle = document.createElement("div");
+			collectionTitle.innerText = "Intrepid Notebook";
+			collectionTitle.id = "collectionTitle";
+			collection.appendChild(collectionTitle);
+			for (const printableText of favoriteProverbs) {
+				const wrapper = document.createElement("div");
+				wrapper.className = "favorite proverb";
+				wrapper.onclick = () => {
+					wrapper.classList.toggle("favorite");
+					if (wrapper.classList.contains("favorite"))
+						addFavoriteProverb(printableText);
+					else removeFavoriteProverb(printableText);
+				}
+				const { text, format } = extractFormatting(printableText);
+				wrapper.innerHTML = getFormattedHTML(text, format);
+				collection.appendChild(wrapper);
+			}
+			mainArea.scrollTop = 0;
+		} else {
+			for (const proverb of visibleProverbs) {
+				if (favoriteProverbs.has(proverb.printableText))
+					proverb.element.classList.add("favorite");
+				else proverb.element.classList.remove("favorite");
+			}
+			document.body.classList.remove("collection-visible");
+		}
+	}
+
+	function fix() {
+		document.getElementById("footer").scrollIntoView();
 	}
 
 	addEventListener("beforeunload", () => speechSynthesis.cancel());
 
-	let pronounce = false;
-	function togglePronunciation() {
-		pronounce = !pronounce;
-		document.getElementById("togglePronounce").classList.toggle("pronouncing");
-		if (!pronounce) speechSynthesis.cancel();
-	}
-
 	function canvasPrint({
 		parent,
+		sourceText,
 		text,
 		format = [],
 		padding = 3,
@@ -213,7 +326,6 @@
 		fontSize = parseInt(getComputedStyle(parent).fontSize),
 		fontFamily = getComputedStyle(parent).fontFamily
 	}) {
-		if (pronounce) say(text);
 
 		function packText(str, getCharWidth, maxWidth) {
 			function getStringWidth(string) {
@@ -253,9 +365,22 @@
 		}
 
 		// setup
+		const proverbWrapper = document.createElement("div");
+		proverbWrapper.className = "proverb"
+		if (favoriteProverbs.has(sourceText))
+			proverbWrapper.classList.add("favorite");
+		parent.appendChild(proverbWrapper);
+		proverbWrapper.onclick = () => {
+			proverbWrapper.classList.toggle("favorite");
+			if (proverbWrapper.classList.contains("favorite"))
+				addFavoriteProverb(sourceText);
+			else removeFavoriteProverb(sourceText);
+		};
+
+		visibleProverbs.push({ element: proverbWrapper, printableText: sourceText });
+		
 		const canvas = document.createElement("canvas");
-		canvas.className = "proverb";
-		parent.appendChild(canvas);
+		proverbWrapper.appendChild(canvas);
 
 		const c = canvas.getContext("2d");
 		setState(c);
@@ -326,21 +451,27 @@
 				if (offset < PIXELS_PER_CHAR * (renderedText.length + 1 /* fade buffer */)) {
 					requestAnimationFrame(animate);
 				} else {
-					setTimeout(() => {
+					const observer = new IntersectionObserver((entries, observer) => {
+						const [{ isIntersecting }] = entries;
+						if (isIntersecting) return;
 						// convert to normal element
 
 						const imposter = document.createElement("div");
-						imposter.className = "proverb";
-
+						
 						imposter.style.whiteSpace = "pre";
 						imposter.style.padding = padding + "px";
 						imposter.style.transform = `translateY(0.5 * ${fontSize}px)`;
+						imposter.style.height = canvas.style.height;
 
 						imposter.innerHTML = getFormattedHTML(text, format, fontSize + "px", fontFamily);
-
-						canvas.insertAdjacentElement("afterend", imposter);
-						canvas.remove();
-					}, 20000);
+						
+						proverbWrapper.innerHTML = "";
+						proverbWrapper.appendChild(imposter);
+					}, {
+						root: mainArea,
+						threshold: 0
+					});
+					observer.observe(canvas);
 
 					resolve();
 				}
@@ -356,7 +487,7 @@
 		index,
 		proverb
 	}) {
-		let input = proverb.text;
+		let input = proverb.printableText;
 
 		betterSeed = 0;
 		let num = randInt(1, 25);
@@ -367,6 +498,7 @@
 
 		const donePrinting = canvasPrint({
 			parent: document.getElementById("paper"),
+			sourceText: input,
 			text,
 			format,
 			padding: 10,
@@ -414,7 +546,7 @@
 
 	function statSession() {
 		while (true) {
-			const text = prompt("expression?");
+			const text = prompt("Expression? ('quit' to leave)");
 			if (text === "quit") break;
 			alert(eval(text));
 		}
@@ -436,7 +568,7 @@
 			Date.now();
 			await SLEEP(1000)
 			while (true) {
-				await outputToScreen(proverb());
+				if (!collectionVisible) await outputToScreen(proverb());
 				await SLEEP(DISPLAY_TIME);
 			}
 		} catch (e) { alert(e.stack) }

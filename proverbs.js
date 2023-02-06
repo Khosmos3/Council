@@ -118,7 +118,7 @@ function getFormattedHTML(text, format, fontSize = "16px", fontFamily = "Arial")
 
 class Proverb {
 	constructor(line) {
-		line = line.trim();
+		// line = line.trim();
 		const index = line.lastIndexOf("|");
 		if (index === -1) {
 			this.text = line;
@@ -133,11 +133,15 @@ class Proverb {
 				.map(author => author.trim());
 		}
 
+		this.printableText = "";
 		this.length = 1;
 		let escaped = false;
 		for (let i = 0; i < this.text.length; i++) {
 			const char = this.text[i];
-			if (char == "/" && !escaped) this.length++;
+			if (char == "/" && !escaped) {
+				this.length++;
+				this.printableText += "\n";
+			} else this.printableText += this.text[i]; 
 			escaped = char === "\\" && !escaped;
 		}
 	}
