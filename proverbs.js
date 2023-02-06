@@ -114,8 +114,6 @@ function getFormattedHTML(text, format, fontSize = "16px", fontFamily = "Arial")
 	return out;
 }
 
-
-
 class Proverb {
 	constructor(line) {
 		// line = line.trim();
@@ -133,17 +131,9 @@ class Proverb {
 				.map(author => author.trim());
 		}
 
-		this.printableText = "";
-		this.length = 1;
-		let escaped = false;
-		for (let i = 0; i < this.text.length; i++) {
-			const char = this.text[i];
-			if (char == "/" && !escaped) {
-				this.length++;
-				this.printableText += "\n";
-			} else this.printableText += this.text[i]; 
-			escaped = char === "\\" && !escaped;
-		}
+		const lines = this.text.split(" / ");
+		this.printableText = lines.join("\n");
+		this.length = lines.length;
 	}
 }
 
@@ -2402,7 +2392,7 @@ const scrolls = [
 		Spherical life on a spherical world | tom
 		Kaleidoscope, oh sweet swirling geometric mandala, stand still | anna
 		Or... and hear me out... a triangle | tom
-		                                  Why?/                          When the sun/         sinks below the horizon, and/ • all we have known fades to oblivion, •/Why? why does the future always  Why?/As they      beckon us towards     Why do/rise and begin    Demise    we think that/their celebration,  •  our consciousness/why do they think   will be consecutive/they are no longer   or infinite? It never/with us? Spirits all   ends, but it does /         think they are   pause from time/             one with the  to time, of/                            Dead  course/                                       • | hyacinth
+		                                  Why? /                           When the sun /          sinks below the horizon, and /  • all we have known fades to oblivion, • / Why? why does the future always  Why? / As they      beckon us towards     Why do / rise and begin    Demise    we think that / their celebration,  •  our consciousness / why do they think   will be consecutive / they are no longer   or infinite? It never / with us? Spirits all   ends, but it does  /          think they are   pause from time /              one with the  to time, of /                             Dead  course /                                        • | hyacinth
 	`),
 	new Scroll("Oklacois", "government, electronics (ock - la - swah)", `
 		Don't fear the establishment* | hyacinth
