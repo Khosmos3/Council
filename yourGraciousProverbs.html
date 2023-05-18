@@ -417,7 +417,7 @@
 		return new Promise(resolve => {
 
 			function animate(now) {
-				c.clearRect(0, 0, canvas.width, canvas.height);
+				c.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
 				const offset = (performance.now() - startTime) * speed;
 
