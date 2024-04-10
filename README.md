@@ -6,4 +6,4 @@ The way to "use" this is to simply visit the website and bathe in the glory.
 
 This project is coded in HTML, CSS, and Javascript.
 
-Special thanks to Elkwizard (Henry) for help on this project
+Special thanks to Elkwizard (H) for help on this project
